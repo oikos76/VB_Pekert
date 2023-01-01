@@ -1,0 +1,958 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DDAE1915-9EBC-4A8D-A23B-C61A2D735E05}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Pekerti_Root.My.MyApplication</StartupObject>
+    <RootNamespace>Pekerti_Root</RootNamespace>
+    <AssemblyName>Pekerti</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT220214_1\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>Pekerti</ProductName>
+    <PublisherName>Pekerti</PublisherName>
+    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Pekerti.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Pekerti.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>FA065BB12B77FDA209EC7146EFF84171B8F3F148</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GL_Project_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ShoppingCart.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="CrystalDecisions.ReportAppServer" />
+    <Import Include="CrystalDecisions.Windows.Forms" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Class.vb" />
+    <Compile Include="Crypto.vb" />
+    <Compile Include="Form_DPBContoh.Designer.vb">
+      <DependentUpon>Form_DPBContoh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DPBContoh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_GdPraLHP.Designer.vb">
+      <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_GdPraLHP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_JenisBox.Designer.vb">
+      <DependentUpon>Form_JenisBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_JenisBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KatalogSample.Designer.vb">
+      <DependentUpon>Form_KatalogSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KatalogSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifImportir.Designer.vb">
+      <DependentUpon>Form_KodifImportir.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifImportir.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPwd.Designer.vb">
+      <DependentUpon>FormPwd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPwd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Backup.Designer.vb">
+      <DependentUpon>Form_Backup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Backup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_BackupDb.Designer.vb">
+      <DependentUpon>Form_BackupDb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_BackupDb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_BackupRestore.Designer.vb">
+      <DependentUpon>Form_BackupRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_BackupRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Barang_Foto.Designer.vb">
+      <DependentUpon>Form_Barang_Foto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Barang_Foto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Cetak.Designer.vb">
+      <DependentUpon>Form_Cetak.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Cetak.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CetakLaporan.Designer.vb">
+      <DependentUpon>Form_CetakLaporan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CetakLaporan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CetakStruk.Designer.vb">
+      <DependentUpon>Form_CetakStruk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CetakStruk.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CompanySetup.designer.vb">
+      <DependentUpon>Form_CompanySetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CompanySetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ConnectionSetting.designer.vb">
+      <DependentUpon>Form_ConnectionSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ConnectionSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Daftar.Designer.vb">
+      <DependentUpon>Form_Daftar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Daftar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_DaftarBarang.designer.vb">
+      <DependentUpon>Form_DaftarBarang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DaftarBarang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_GiroCair.Designer.vb">
+      <DependentUpon>Form_GiroCair.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_GiroCair.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_HitungStock.Designer.vb">
+      <DependentUpon>Form_HitungStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_HitungStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KasirAG.designer.vb">
+      <DependentUpon>Form_KasirAG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KasirAG.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Kasir_Bayar.designer.vb">
+      <DependentUpon>Form_Kasir_Bayar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Kasir_Bayar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_MetodePengiriman.Designer.vb">
+      <DependentUpon>Form_MetodePengiriman.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_MetodePengiriman.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_PO.Designer.vb">
+      <DependentUpon>Form_PO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_PO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Report.designer.vb">
+      <DependentUpon>Form_Report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Kasir_Edit.designer.vb">
+      <DependentUpon>Form_Kasir_Edit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Kasir_Edit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifBahanBaku.Designer.vb">
+      <DependentUpon>Form_KodifBahanBaku.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifBahanBaku.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifDaerah.Designer.vb">
+      <DependentUpon>Form_KodifDaerah.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifDaerah.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifFungsi.Designer.vb">
+      <DependentUpon>Form_KodifFungsi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifFungsi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifNegara.Designer.vb">
+      <DependentUpon>Form_KodifNegara.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifNegara.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifPerajin.Designer.vb">
+      <DependentUpon>Form_KodifPerajin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifPerajin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifProduk.Designer.vb">
+      <DependentUpon>Form_KodifProduk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifProduk.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodifProduk_Image.Designer.vb">
+      <DependentUpon>Form_KodifProduk_Image.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodifProduk_Image.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KoreksiStock.designer.vb">
+      <DependentUpon>Form_KoreksiStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KoreksiStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Login.designer.vb">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_LoginMenu.Designer.vb">
+      <DependentUpon>Form_LoginMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_LoginMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_MToko.designer.vb">
+      <DependentUpon>Form_MToko.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_MToko.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SettingFolderFoto.Designer.vb">
+      <DependentUpon>Form_SettingFolderFoto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SettingFolderFoto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Pembelian.designer.vb">
+      <DependentUpon>Form_Pembelian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Pembelian.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Penjualan.designer.vb">
+      <DependentUpon>Form_Penjualan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Penjualan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SP.Designer.vb">
+      <DependentUpon>Form_SP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SP_Contoh.Designer.vb">
+      <DependentUpon>Form_SP_Contoh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SP_Contoh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_User.Designer.vb">
+      <DependentUpon>Form_User.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_User.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_UserAkses.Designer.vb">
+      <DependentUpon>Form_UserAkses.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UserAkses.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_UserChangePassword.designer.vb">
+      <DependentUpon>Form_UserChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UserChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMenuUtama.designer.vb">
+      <DependentUpon>FrmMenuUtama.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMenuUtama.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Report\Rpt_KatalogProduk_InInd.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KatalogProduk_InInd.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_KatalogProduk_InInd_OLD.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KatalogProduk_InInd_OLD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_KodifBahanBaku.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KodifBahanBaku.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_KodifDaerah.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KodifDaerah.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_KodifFungsi.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KodifFungsi.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_KodifNegara.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KodifNegara.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_KodifProduk.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KodifProduk.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Rpt_KodeProduk.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_KodeProduk.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Terbilang.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form_DPBContoh.resx">
+      <DependentUpon>Form_DPBContoh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_GdPraLHP.resx">
+      <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_JenisBox.resx">
+      <DependentUpon>Form_JenisBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KatalogSample.resx">
+      <DependentUpon>Form_KatalogSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifImportir.resx">
+      <DependentUpon>Form_KodifImportir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPwd.resx">
+      <DependentUpon>FormPwd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Backup.resx">
+      <DependentUpon>Form_Backup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_BackupDb.resx">
+      <DependentUpon>Form_BackupDb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_BackupRestore.resx">
+      <DependentUpon>Form_BackupRestore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Barang_Foto.resx">
+      <DependentUpon>Form_Barang_Foto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Cetak.resx">
+      <DependentUpon>Form_Cetak.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CetakLaporan.resx">
+      <DependentUpon>Form_CetakLaporan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CetakStruk.resx">
+      <DependentUpon>Form_CetakStruk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_CompanySetup.resx">
+      <DependentUpon>Form_CompanySetup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ConnectionSetting.resx">
+      <DependentUpon>Form_ConnectionSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Daftar.resx">
+      <DependentUpon>Form_Daftar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_DaftarBarang.resx">
+      <DependentUpon>Form_DaftarBarang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_GiroCair.resx">
+      <DependentUpon>Form_GiroCair.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_HitungStock.resx">
+      <DependentUpon>Form_HitungStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KasirAG.resx">
+      <DependentUpon>Form_KasirAG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Kasir_Bayar.resx">
+      <DependentUpon>Form_Kasir_Bayar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_MetodePengiriman.resx">
+      <DependentUpon>Form_MetodePengiriman.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_PO.resx">
+      <DependentUpon>Form_PO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Report.resx">
+      <DependentUpon>Form_Report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Kasir_Edit.resx">
+      <DependentUpon>Form_Kasir_Edit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifBahanBaku.resx">
+      <DependentUpon>Form_KodifBahanBaku.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifDaerah.resx">
+      <DependentUpon>Form_KodifDaerah.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifFungsi.resx">
+      <DependentUpon>Form_KodifFungsi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifNegara.resx">
+      <DependentUpon>Form_KodifNegara.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifPerajin.resx">
+      <DependentUpon>Form_KodifPerajin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifProduk.resx">
+      <DependentUpon>Form_KodifProduk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodifProduk_Image.resx">
+      <DependentUpon>Form_KodifProduk_Image.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KoreksiStock.resx">
+      <DependentUpon>Form_KoreksiStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Login.resx">
+      <DependentUpon>Form_Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_LoginMenu.resx">
+      <DependentUpon>Form_LoginMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_MToko.resx">
+      <DependentUpon>Form_MToko.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SettingFolderFoto.resx">
+      <DependentUpon>Form_SettingFolderFoto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Pembelian.resx">
+      <DependentUpon>Form_Pembelian.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Penjualan.resx">
+      <DependentUpon>Form_Penjualan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SP.resx">
+      <DependentUpon>Form_SP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SP_Contoh.resx">
+      <DependentUpon>Form_SP_Contoh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_User.resx">
+      <DependentUpon>Form_User.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_UserAkses.resx">
+      <DependentUpon>Form_UserAkses.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_UserChangePassword.resx">
+      <DependentUpon>Form_UserChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMenuUtama.resx">
+      <DependentUpon>FrmMenuUtama.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KatalogProduk_InInd.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KatalogProduk_InInd.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KatalogProduk_InInd_OLD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KatalogProduk_InInd_OLD.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KodifBahanBaku.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KodifBahanBaku.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KodifDaerah.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KodifDaerah.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KodifFungsi.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KodifFungsi.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KodifNegara.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KodifNegara.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_KodifProduk.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KodifProduk.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rpt_KodeProduk.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_KodeProduk.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="CrystalDecisions.CrystalReports.Engine">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.ClientDoc">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CommLayer">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CommonControls">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CommonObjectModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.Controllers">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.CubeDefModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.DataDefModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.DataSetConversion">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.ObjectFactory">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.Prompting">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.ReportDefModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportAppServer.XmlSerialize">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.ReportSource">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.Shared">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="CrystalDecisions.Windows.Forms">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="FlashControlV71">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="log4net">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.Common">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.DataVisualization">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.ProcessingObjectModel">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.WinForms">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="MySql.Data">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="ShockwaveFlashObjects">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="stdole">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-print-direct-icon.png" />
+    <None Include="Resources\Actions-go-previous-view-icon.png" />
+    <Content Include="ShoppingCart.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
