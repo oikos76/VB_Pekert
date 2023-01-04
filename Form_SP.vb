@@ -1299,6 +1299,14 @@ ErrMSG:
         NoPO.ReadOnly = True
     End Sub
 
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+
+    End Sub
+
+    Private Sub btnTop_Click(sender As Object, e As EventArgs) Handles btnTop.Click
+
+    End Sub
+
     Private Sub ShipmentDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShipmentDate.KeyPress
         If e.KeyChar = Chr(13) Then
             Kode_Perajin.Focus()

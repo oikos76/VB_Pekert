@@ -22,32 +22,28 @@ Partial Class Form_PO
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_PO))
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.NilaiPesan = New System.Windows.Forms.TextBox()
-        Me.QTYPesan = New System.Windows.Forms.TextBox()
-        Me.QTYMacam = New System.Windows.Forms.TextBox()
-        Me.tKodeBrg = New System.Windows.Forms.TextBox()
+        Me.JumTotal = New System.Windows.Forms.TextBox()
+        Me.JQTY = New System.Windows.Forms.TextBox()
+        Me.JumMacam = New System.Windows.Forms.TextBox()
         Me.tPO = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label_11 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Cari = New System.Windows.Forms.Label()
-        Me.tSP = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.DGView2 = New System.Windows.Forms.DataGridView()
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.StatusPO = New System.Windows.Forms.TextBox()
         Me.CatatanProduk = New System.Windows.Forms.TextBox()
@@ -61,13 +57,16 @@ Partial Class Form_PO
         Me.TabPageDaftar_ = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DGView = New System.Windows.Forms.DataGridView()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LocGmb1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.idRecord = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.cmdRiwayatHarga = New System.Windows.Forms.Button()
+        Me.cmdClosePO = New System.Windows.Forms.Button()
         Me.cmdPenambahanKode = New System.Windows.Forms.Button()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
         Me.cmdPrint = New System.Windows.Forms.Button()
@@ -75,6 +74,7 @@ Partial Class Form_PO
         Me.btnNext = New System.Windows.Forms.Button()
         Me.btnPrev = New System.Windows.Forms.Button()
         Me.btnTop = New System.Windows.Forms.Button()
+        Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.PanelEntry = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -105,19 +105,17 @@ Partial Class Form_PO
         Me.LabelNoPO = New System.Windows.Forms.Label()
         Me.Nopo = New System.Windows.Forms.TextBox()
         Me.PanelPicture = New System.Windows.Forms.Panel()
-        Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdHapus = New System.Windows.Forms.Button()
         Me.cmdTambah = New System.Windows.Forms.Button()
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.cmdRiwayatHarga = New System.Windows.Forms.Button()
+        Me.cmdAnalisaHarga = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.DGView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,65 +132,22 @@ Partial Class Form_PO
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.ForeColor = System.Drawing.Color.DarkBlue
-        Me.Label13.Location = New System.Drawing.Point(8, 50)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(40, 16)
-        Me.Label13.TabIndex = 182
-        Me.Label13.Text = "Cari"
-        '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.Label16)
-        Me.Panel5.Controls.Add(Me.Label13)
-        Me.Panel5.Controls.Add(Me.Label12)
         Me.Panel5.Controls.Add(Me.Button1)
-        Me.Panel5.Controls.Add(Me.NilaiPesan)
-        Me.Panel5.Controls.Add(Me.QTYPesan)
-        Me.Panel5.Controls.Add(Me.QTYMacam)
-        Me.Panel5.Controls.Add(Me.tKodeBrg)
+        Me.Panel5.Controls.Add(Me.JumTotal)
+        Me.Panel5.Controls.Add(Me.JQTY)
+        Me.Panel5.Controls.Add(Me.JumMacam)
         Me.Panel5.Controls.Add(Me.tPO)
         Me.Panel5.Controls.Add(Me.Label10)
         Me.Panel5.Controls.Add(Me.Label_11)
         Me.Panel5.Controls.Add(Me.Label4)
-        Me.Panel5.Controls.Add(Me.Label7)
         Me.Panel5.Controls.Add(Me.Label3)
-        Me.Panel5.Controls.Add(Me.Cari)
-        Me.Panel5.Controls.Add(Me.tSP)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(728, 0)
+        Me.Panel5.Location = New System.Drawing.Point(694, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(260, 282)
+        Me.Panel5.Size = New System.Drawing.Size(304, 282)
         Me.Panel5.TabIndex = 10
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.ForeColor = System.Drawing.Color.DarkBlue
-        Me.Label16.Location = New System.Drawing.Point(8, 91)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(40, 16)
-        Me.Label16.TabIndex = 183
-        Me.Label16.Text = "Cari"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.Color.DarkBlue
-        Me.Label12.Location = New System.Drawing.Point(8, 6)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(40, 16)
-        Me.Label12.TabIndex = 181
-        Me.Label12.Text = "Cari"
         '
         'Button1
         '
@@ -201,62 +156,52 @@ Partial Class Form_PO
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button1.Location = New System.Drawing.Point(0, 254)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(260, 28)
+        Me.Button1.Size = New System.Drawing.Size(304, 28)
         Me.Button1.TabIndex = 180
-        Me.Button1.Text = "Daftar SP yang belum di Pra LHP"
+        Me.Button1.Text = "Daftar PO yang belum di buat SP"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'NilaiPesan
+        'JumTotal
         '
-        Me.NilaiPesan.BackColor = System.Drawing.SystemColors.Window
-        Me.NilaiPesan.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NilaiPesan.Location = New System.Drawing.Point(51, 246)
-        Me.NilaiPesan.Margin = New System.Windows.Forms.Padding(4)
-        Me.NilaiPesan.Name = "NilaiPesan"
-        Me.NilaiPesan.ReadOnly = True
-        Me.NilaiPesan.Size = New System.Drawing.Size(165, 22)
-        Me.NilaiPesan.TabIndex = 60
-        Me.NilaiPesan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.JumTotal.BackColor = System.Drawing.SystemColors.Window
+        Me.JumTotal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JumTotal.Location = New System.Drawing.Point(51, 186)
+        Me.JumTotal.Margin = New System.Windows.Forms.Padding(4)
+        Me.JumTotal.Name = "JumTotal"
+        Me.JumTotal.ReadOnly = True
+        Me.JumTotal.Size = New System.Drawing.Size(165, 22)
+        Me.JumTotal.TabIndex = 60
+        Me.JumTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'QTYPesan
+        'JQTY
         '
-        Me.QTYPesan.BackColor = System.Drawing.SystemColors.Window
-        Me.QTYPesan.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.QTYPesan.Location = New System.Drawing.Point(51, 202)
-        Me.QTYPesan.Margin = New System.Windows.Forms.Padding(4)
-        Me.QTYPesan.Name = "QTYPesan"
-        Me.QTYPesan.ReadOnly = True
-        Me.QTYPesan.Size = New System.Drawing.Size(165, 22)
-        Me.QTYPesan.TabIndex = 59
-        Me.QTYPesan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.JQTY.BackColor = System.Drawing.SystemColors.Window
+        Me.JQTY.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JQTY.Location = New System.Drawing.Point(51, 142)
+        Me.JQTY.Margin = New System.Windows.Forms.Padding(4)
+        Me.JQTY.Name = "JQTY"
+        Me.JQTY.ReadOnly = True
+        Me.JQTY.Size = New System.Drawing.Size(165, 22)
+        Me.JQTY.TabIndex = 59
+        Me.JQTY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'QTYMacam
+        'JumMacam
         '
-        Me.QTYMacam.BackColor = System.Drawing.SystemColors.Window
-        Me.QTYMacam.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.QTYMacam.Location = New System.Drawing.Point(51, 158)
-        Me.QTYMacam.Margin = New System.Windows.Forms.Padding(4)
-        Me.QTYMacam.Name = "QTYMacam"
-        Me.QTYMacam.ReadOnly = True
-        Me.QTYMacam.Size = New System.Drawing.Size(165, 22)
-        Me.QTYMacam.TabIndex = 58
-        Me.QTYMacam.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'tKodeBrg
-        '
-        Me.tKodeBrg.BackColor = System.Drawing.SystemColors.Window
-        Me.tKodeBrg.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tKodeBrg.Location = New System.Drawing.Point(51, 109)
-        Me.tKodeBrg.Margin = New System.Windows.Forms.Padding(4)
-        Me.tKodeBrg.Name = "tKodeBrg"
-        Me.tKodeBrg.Size = New System.Drawing.Size(165, 22)
-        Me.tKodeBrg.TabIndex = 57
+        Me.JumMacam.BackColor = System.Drawing.SystemColors.Window
+        Me.JumMacam.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JumMacam.Location = New System.Drawing.Point(51, 98)
+        Me.JumMacam.Margin = New System.Windows.Forms.Padding(4)
+        Me.JumMacam.Name = "JumMacam"
+        Me.JumMacam.ReadOnly = True
+        Me.JumMacam.Size = New System.Drawing.Size(165, 22)
+        Me.JumMacam.TabIndex = 58
+        Me.JumMacam.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tPO
         '
         Me.tPO.BackColor = System.Drawing.SystemColors.Window
         Me.tPO.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tPO.Location = New System.Drawing.Point(51, 67)
+        Me.tPO.Location = New System.Drawing.Point(51, 43)
         Me.tPO.Margin = New System.Windows.Forms.Padding(4)
         Me.tPO.Name = "tPO"
         Me.tPO.Size = New System.Drawing.Size(165, 22)
@@ -266,7 +211,7 @@ Partial Class Form_PO
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(8, 226)
+        Me.Label10.Location = New System.Drawing.Point(8, 166)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(224, 16)
@@ -277,7 +222,7 @@ Partial Class Form_PO
         '
         Me.Label_11.AutoSize = True
         Me.Label_11.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_11.Location = New System.Drawing.Point(8, 183)
+        Me.Label_11.Location = New System.Drawing.Point(8, 123)
         Me.Label_11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label_11.Name = "Label_11"
         Me.Label_11.Size = New System.Drawing.Size(208, 16)
@@ -288,55 +233,23 @@ Partial Class Form_PO
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(8, 139)
+        Me.Label4.Location = New System.Drawing.Point(8, 79)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(232, 16)
         Me.Label4.TabIndex = 53
         Me.Label4.Text = "Jumlah/Macam Kode di Pesan :"
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(8, 91)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(248, 16)
-        Me.Label7.TabIndex = 52
-        Me.Label7.Text = "Cari Berdasarkan Kode Produk :"
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(8, 48)
+        Me.Label3.Location = New System.Drawing.Point(8, 24)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(208, 16)
         Me.Label3.TabIndex = 51
         Me.Label3.Text = "Cari Berdasarkan No. PO :"
-        '
-        'Cari
-        '
-        Me.Cari.AutoSize = True
-        Me.Cari.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cari.Location = New System.Drawing.Point(8, 6)
-        Me.Cari.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Cari.Name = "Cari"
-        Me.Cari.Size = New System.Drawing.Size(208, 16)
-        Me.Cari.TabIndex = 48
-        Me.Cari.Text = "Cari Berdasarkan No. SP :"
-        '
-        'tSP
-        '
-        Me.tSP.BackColor = System.Drawing.SystemColors.Window
-        Me.tSP.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tSP.Location = New System.Drawing.Point(51, 24)
-        Me.tSP.Margin = New System.Windows.Forms.Padding(4)
-        Me.tSP.Name = "tSP"
-        Me.tSP.Size = New System.Drawing.Size(165, 22)
-        Me.tSP.TabIndex = 50
         '
         'Panel3
         '
@@ -345,7 +258,7 @@ Partial Class Form_PO
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 247)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(988, 282)
+        Me.Panel3.Size = New System.Drawing.Size(998, 282)
         Me.Panel3.TabIndex = 158
         '
         'DGView2
@@ -354,7 +267,7 @@ Partial Class Form_PO
         Me.DGView2.AllowUserToDeleteRows = False
         Me.DGView2.AllowUserToOrderColumns = True
         Me.DGView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column1, Me.Column2, Me.Column3})
+        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column1, Me.Column2, Me.Column3, Me.Column6, Me.Column7})
         Me.DGView2.Dock = System.Windows.Forms.DockStyle.Left
         Me.DGView2.Location = New System.Drawing.Point(0, 0)
         Me.DGView2.Margin = New System.Windows.Forms.Padding(4)
@@ -362,7 +275,7 @@ Partial Class Form_PO
         Me.DGView2.ReadOnly = True
         Me.DGView2.RowHeadersVisible = False
         Me.DGView2.RowTemplate.ReadOnly = True
-        Me.DGView2.Size = New System.Drawing.Size(728, 282)
+        Me.DGView2.Size = New System.Drawing.Size(694, 282)
         Me.DGView2.TabIndex = 9
         '
         'Column14
@@ -382,8 +295,8 @@ Partial Class Form_PO
         '
         'Column2
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column2.HeaderText = "Jumlah "
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -391,12 +304,27 @@ Partial Class Form_PO
         '
         'Column3
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column3.HeaderText = "FOB Buyer"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         Me.Column3.Width = 120
+        '
+        'Column6
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Column6.HeaderText = "FOB Umum"
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'Column7
+        '
+        Me.Column7.HeaderText = "Perajin"
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        Me.Column7.Width = 200
         '
         'Label26
         '
@@ -516,7 +444,7 @@ Partial Class Form_PO
         Me.TabPageDaftar_.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPageDaftar_.Name = "TabPageDaftar_"
         Me.TabPageDaftar_.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPageDaftar_.Size = New System.Drawing.Size(996, 533)
+        Me.TabPageDaftar_.Size = New System.Drawing.Size(1006, 533)
         Me.TabPageDaftar_.TabIndex = 0
         Me.TabPageDaftar_.Text = "Daftar PO"
         Me.TabPageDaftar_.UseVisualStyleBackColor = True
@@ -528,7 +456,7 @@ Partial Class Form_PO
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(988, 243)
+        Me.Panel2.Size = New System.Drawing.Size(998, 243)
         Me.Panel2.TabIndex = 157
         '
         'DGView
@@ -545,8 +473,29 @@ Partial Class Form_PO
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
         Me.DGView.RowTemplate.ReadOnly = True
-        Me.DGView.Size = New System.Drawing.Size(986, 241)
+        Me.DGView.Size = New System.Drawing.Size(996, 241)
         Me.DGView.TabIndex = 156
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "No. PO"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Width = 120
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Tgl PO"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Width = 120
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Importir"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 400
         '
         'Label25
         '
@@ -606,24 +555,24 @@ Partial Class Form_PO
         Me.Label5.TabIndex = 269
         Me.Label5.Text = "Kode Buyer         :"
         '
-        'cmdRiwayatHarga
+        'cmdClosePO
         '
-        Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(597, 3)
-        Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
-        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 28)
-        Me.cmdRiwayatHarga.TabIndex = 5
-        Me.cmdRiwayatHarga.Text = "&Menutup PO ini"
-        Me.cmdRiwayatHarga.UseVisualStyleBackColor = True
+        Me.cmdClosePO.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdClosePO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdClosePO.Location = New System.Drawing.Point(710, 3)
+        Me.cmdClosePO.Name = "cmdClosePO"
+        Me.cmdClosePO.Size = New System.Drawing.Size(89, 28)
+        Me.cmdClosePO.TabIndex = 5
+        Me.cmdClosePO.Text = "&Menutup PO ini"
+        Me.cmdClosePO.UseVisualStyleBackColor = True
         '
         'cmdPenambahanKode
         '
         Me.cmdPenambahanKode.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPenambahanKode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdPenambahanKode.Location = New System.Drawing.Point(420, 3)
+        Me.cmdPenambahanKode.Location = New System.Drawing.Point(310, 3)
         Me.cmdPenambahanKode.Name = "cmdPenambahanKode"
-        Me.cmdPenambahanKode.Size = New System.Drawing.Size(171, 28)
+        Me.cmdPenambahanKode.Size = New System.Drawing.Size(168, 28)
         Me.cmdPenambahanKode.TabIndex = 6
         Me.cmdPenambahanKode.Text = "&Penambahan Kode Untuk PO ini"
         Me.cmdPenambahanKode.UseVisualStyleBackColor = True
@@ -636,7 +585,7 @@ Partial Class Form_PO
         Me.PanelNavigate.Controls.Add(Me.btnPrev)
         Me.PanelNavigate.Controls.Add(Me.btnTop)
         Me.PanelNavigate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelNavigate.Location = New System.Drawing.Point(702, 0)
+        Me.PanelNavigate.Location = New System.Drawing.Point(712, 0)
         Me.PanelNavigate.Name = "PanelNavigate"
         Me.PanelNavigate.Size = New System.Drawing.Size(193, 31)
         Me.PanelNavigate.TabIndex = 62
@@ -691,6 +640,20 @@ Partial Class Form_PO
         Me.btnTop.TabIndex = 0
         Me.btnTop.UseVisualStyleBackColor = True
         '
+        'cmdSimpan
+        '
+        Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Right
+        Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
+        Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdSimpan.Location = New System.Drawing.Point(905, 0)
+        Me.cmdSimpan.Name = "cmdSimpan"
+        Me.cmdSimpan.Size = New System.Drawing.Size(89, 31)
+        Me.cmdSimpan.TabIndex = 7
+        Me.cmdSimpan.Text = "&Simpan"
+        Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdSimpan.UseVisualStyleBackColor = True
+        Me.cmdSimpan.Visible = False
+        '
         'PanelEntry
         '
         Me.PanelEntry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -739,7 +702,7 @@ Partial Class Form_PO
         Me.PanelEntry.Location = New System.Drawing.Point(0, 0)
         Me.PanelEntry.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelEntry.Name = "PanelEntry"
-        Me.PanelEntry.Size = New System.Drawing.Size(986, 523)
+        Me.PanelEntry.Size = New System.Drawing.Size(996, 523)
         Me.PanelEntry.TabIndex = 174
         '
         'Label11
@@ -1042,25 +1005,11 @@ Partial Class Form_PO
         Me.PanelPicture.Size = New System.Drawing.Size(295, 295)
         Me.PanelPicture.TabIndex = 187
         '
-        'cmdSimpan
-        '
-        Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Right
-        Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
-        Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.Location = New System.Drawing.Point(895, 0)
-        Me.cmdSimpan.Name = "cmdSimpan"
-        Me.cmdSimpan.Size = New System.Drawing.Size(89, 31)
-        Me.cmdSimpan.TabIndex = 7
-        Me.cmdSimpan.Text = "&Simpan"
-        Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdSimpan.UseVisualStyleBackColor = True
-        Me.cmdSimpan.Visible = False
-        '
         'cmdEdit
         '
         Me.cmdEdit.Image = CType(resources.GetObject("cmdEdit.Image"), System.Drawing.Image)
         Me.cmdEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdEdit.Location = New System.Drawing.Point(88, 3)
+        Me.cmdEdit.Location = New System.Drawing.Point(78, 3)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(77, 28)
         Me.cmdEdit.TabIndex = 1
@@ -1072,7 +1021,7 @@ Partial Class Form_PO
         '
         Me.cmdHapus.Image = CType(resources.GetObject("cmdHapus.Image"), System.Drawing.Image)
         Me.cmdHapus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdHapus.Location = New System.Drawing.Point(171, 3)
+        Me.cmdHapus.Location = New System.Drawing.Point(155, 3)
         Me.cmdHapus.Name = "cmdHapus"
         Me.cmdHapus.Size = New System.Drawing.Size(77, 28)
         Me.cmdHapus.TabIndex = 2
@@ -1084,7 +1033,7 @@ Partial Class Form_PO
         '
         Me.cmdTambah.Image = CType(resources.GetObject("cmdTambah.Image"), System.Drawing.Image)
         Me.cmdTambah.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdTambah.Location = New System.Drawing.Point(5, 3)
+        Me.cmdTambah.Location = New System.Drawing.Point(1, 3)
         Me.cmdTambah.Name = "cmdTambah"
         Me.cmdTambah.Size = New System.Drawing.Size(77, 28)
         Me.cmdTambah.TabIndex = 0
@@ -1094,11 +1043,12 @@ Partial Class Form_PO
         '
         'cmdBatal
         '
+        Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
         Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdBatal.Location = New System.Drawing.Point(337, 3)
+        Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
         Me.cmdBatal.Name = "cmdBatal"
-        Me.cmdBatal.Size = New System.Drawing.Size(77, 28)
+        Me.cmdBatal.Size = New System.Drawing.Size(77, 31)
         Me.cmdBatal.TabIndex = 4
         Me.cmdBatal.Text = "&Batal"
         Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1109,7 +1059,7 @@ Partial Class Form_PO
         '
         Me.cmdExit.Image = CType(resources.GetObject("cmdExit.Image"), System.Drawing.Image)
         Me.cmdExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdExit.Location = New System.Drawing.Point(254, 3)
+        Me.cmdExit.Location = New System.Drawing.Point(232, 3)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(77, 28)
         Me.cmdExit.TabIndex = 3
@@ -1121,20 +1071,44 @@ Partial Class Form_PO
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.cmdRiwayatHarga)
+        Me.Panel4.Controls.Add(Me.cmdClosePO)
+        Me.Panel4.Controls.Add(Me.cmdAnalisaHarga)
         Me.Panel4.Controls.Add(Me.cmdPenambahanKode)
         Me.Panel4.Controls.Add(Me.PanelNavigate)
-        Me.Panel4.Controls.Add(Me.cmdSimpan)
         Me.Panel4.Controls.Add(Me.cmdEdit)
         Me.Panel4.Controls.Add(Me.cmdHapus)
         Me.Panel4.Controls.Add(Me.cmdTambah)
-        Me.Panel4.Controls.Add(Me.cmdBatal)
         Me.Panel4.Controls.Add(Me.cmdExit)
+        Me.Panel4.Controls.Add(Me.cmdSimpan)
+        Me.Panel4.Controls.Add(Me.cmdBatal)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 490)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(986, 33)
+        Me.Panel4.Size = New System.Drawing.Size(996, 33)
         Me.Panel4.TabIndex = 146
+        '
+        'cmdRiwayatHarga
+        '
+        Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(622, 3)
+        Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
+        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(87, 28)
+        Me.cmdRiwayatHarga.TabIndex = 8
+        Me.cmdRiwayatHarga.Text = "&Riwayat Harga"
+        Me.cmdRiwayatHarga.UseVisualStyleBackColor = True
+        '
+        'cmdAnalisaHarga
+        '
+        Me.cmdAnalisaHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdAnalisaHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdAnalisaHarga.Location = New System.Drawing.Point(479, 3)
+        Me.cmdAnalisaHarga.Name = "cmdAnalisaHarga"
+        Me.cmdAnalisaHarga.Size = New System.Drawing.Size(143, 28)
+        Me.cmdAnalisaHarga.TabIndex = 7
+        Me.cmdAnalisaHarga.Text = "&Analisa Harga (Rugi Laba)"
+        Me.cmdAnalisaHarga.UseVisualStyleBackColor = True
         '
         'Panel1
         '
@@ -1146,7 +1120,7 @@ Partial Class Form_PO
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(988, 525)
+        Me.Panel1.Size = New System.Drawing.Size(998, 525)
         Me.Panel1.TabIndex = 145
         '
         'TabPageFormEntry_
@@ -1158,7 +1132,7 @@ Partial Class Form_PO
         Me.TabPageFormEntry_.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPageFormEntry_.Name = "TabPageFormEntry_"
         Me.TabPageFormEntry_.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPageFormEntry_.Size = New System.Drawing.Size(996, 533)
+        Me.TabPageFormEntry_.Size = New System.Drawing.Size(1006, 533)
         Me.TabPageFormEntry_.TabIndex = 1
         Me.TabPageFormEntry_.Text = "Purchasing Order"
         Me.TabPageFormEntry_.UseVisualStyleBackColor = True
@@ -1173,35 +1147,14 @@ Partial Class Form_PO
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1004, 561)
+        Me.TabControl1.Size = New System.Drawing.Size(1014, 561)
         Me.TabControl1.TabIndex = 68
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "No. PO"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 120
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Tgl PO"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Width = 120
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Importir"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 400
         '
         'Form_PO
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1004, 561)
+        Me.ClientSize = New System.Drawing.Size(1014, 561)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Form_PO"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1227,24 +1180,16 @@ Partial Class Form_PO
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents Label13 As Label
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label12 As Label
     Friend WithEvents Button1 As Button
-    Friend WithEvents NilaiPesan As TextBox
-    Friend WithEvents QTYPesan As TextBox
-    Friend WithEvents QTYMacam As TextBox
-    Friend WithEvents tKodeBrg As TextBox
+    Friend WithEvents JumTotal As TextBox
+    Friend WithEvents JQTY As TextBox
+    Friend WithEvents JumMacam As TextBox
     Friend WithEvents tPO As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Label_11 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Cari As Label
-    Friend WithEvents tSP As TextBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents DGView2 As DataGridView
     Friend WithEvents Label26 As Label
@@ -1266,7 +1211,7 @@ Partial Class Form_PO
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents idRecord As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents cmdRiwayatHarga As Button
+    Friend WithEvents cmdClosePO As Button
     Friend WithEvents cmdPenambahanKode As Button
     Friend WithEvents PanelNavigate As Panel
     Friend WithEvents cmdPrint As Button
@@ -1308,10 +1253,6 @@ Partial Class Form_PO
     Friend WithEvents Perajin As TextBox
     Friend WithEvents Kode_Perajin As TextBox
     Friend WithEvents Label22 As Label
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents PesanKode As Label
     Friend WithEvents FOBTerakhir As Label
     Friend WithEvents chk3Digit As CheckBox
@@ -1321,4 +1262,12 @@ Partial Class Form_PO
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents cmdRiwayatHarga As Button
+    Friend WithEvents cmdAnalisaHarga As Button
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
 End Class
