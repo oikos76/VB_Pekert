@@ -490,31 +490,33 @@ Public Class ClsKoneksi
     End Function
 
     Public Function TglIndo(sTgl As String) As String
+        Dim hasil As String = ""
         If Mid(sTgl, 4, 2) = "01" Then
-            TglIndo = Left(sTgl, 2) + " Januari " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Januari " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "02" Then
-            TglIndo = Left(sTgl, 2) + " Februari " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Februari " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "03" Then
-            TglIndo = Left(sTgl, 2) + " Maret " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Maret " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "04" Then
             TglIndo = Left(sTgl, 2) + " April " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "05" Then
-            TglIndo = Left(sTgl, 2) + " Mei " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Mei " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "06" Then
-            TglIndo = Left(sTgl, 2) + " Juni " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Juni " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "07" Then
-            TglIndo = Left(sTgl, 2) + " Juli " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Juli " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "08" Then
-            TglIndo = Left(sTgl, 2) + " Agustus " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Agustus " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "09" Then
-            TglIndo = Left(sTgl, 2) + " September " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " September " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "10" Then
-            TglIndo = Left(sTgl, 2) + " Oktober " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Oktober " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "11" Then
-            TglIndo = Left(sTgl, 2) + " Nopember " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Nopember " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "12" Then
-            TglIndo = Left(sTgl, 2) + " Desember " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " Desember " + Right(sTgl, 4)
         End If
+        TglIndo = hasil
     End Function
     Public Function FindKodeProdukPO_SP(Cari As String, tNoPO As String) As String
         Dim RSD As New DataTable, mKondisi As String

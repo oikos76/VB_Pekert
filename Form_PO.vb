@@ -14,7 +14,7 @@ Public Class Form_PO
     Private CN As SqlConnection
     Private Cmd As SqlCommand
     Private DA As SqlDataAdapter
-
+    Protected Ds As DataSet
     Private Sub cmbMataUang_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMataUang.SelectedIndexChanged
         MataUang.Text = cmbMataUang.Text
         Label11.Visible = True
@@ -33,8 +33,6 @@ Public Class Form_PO
             PembagiEuro.Visible = False
         End If
     End Sub
-
-    Protected Ds As DataSet
 
     Private Sub Jumlah_TextChanged(sender As Object, e As EventArgs) Handles Jumlah.TextChanged
         If Trim(Jumlah.Text) = "" Then Jumlah.Text = 0
@@ -914,7 +912,6 @@ Public Class Form_PO
 
     Private Sub cmdAnalisaHarga_Click(sender As Object, e As EventArgs) Handles cmdAnalisaHarga.Click
         Const xlCenter = -4108
-
         cmdAnalisaHarga.Enabled = False
         Dim excel As New Microsoft.Office.Interop.Excel.Application
         Dim Proses As New ClsKoneksi
@@ -1053,7 +1050,7 @@ Public Class Form_PO
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
         If idRecord.Text = "" Then
-            MsgBox("SP yang akan di edit belum di pilih!", vbCritical, ".:ERROR!")
+            MsgBox("PO yang akan di edit belum di pilih!", vbCritical, ".:ERROR!")
             Exit Sub
         End If
         LAdd = False
@@ -1121,22 +1118,6 @@ Public Class Form_PO
         DGView.AlternatingRowsDefaultCellStyle.BackColor = Color.White
         DGView.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        'With Me.LstPO.RowTemplate
-        '    .Height = 30
-        '    .MinimumHeight = 30
-        'End With
-        'LstPO.CellBorderStyle = DataGridViewCellBorderStyle.Raised
-        'lstPO.BackgroundColor = Color.LightGray
-        'lstPO.DefaultCellStyle.SelectionBackColor = Color.LightSeaGreen
-        'lstPO.DefaultCellStyle.SelectionForeColor = Color.White
-        'LstPO.DefaultCellStyle.WrapMode = DataGridViewTriState.[True]
-        ''lstPO.SelectionMode = DataGridViewSelectionMode.FullRowSelect        'DGView.AllowUserToResizeColumns = False
-        'LstPO.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        'lstPO.RowsDefaultCellStyle.BackColor = Color.LightCyan      'LightGoldenrodYellow
-        'LstPO.AlternatingRowsDefaultCellStyle.BackColor = Color.White
-        'LstPO.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
-
-
         With Me.DGView2.RowTemplate
             .Height = 35
             .MinimumHeight = 30
@@ -1186,10 +1167,10 @@ Public Class Form_PO
             tKodeProduk = ""
         End If
         Call IsiPO(tIdRec)
-        tTambah = Proses.UserAksesTombol(UserID, "31_SURAT_PESANAN", "baru")
-        tEdit = Proses.UserAksesTombol(UserID, "31_SURAT_PESANAN", "edit")
-        tHapus = Proses.UserAksesTombol(UserID, "31_SURAT_PESANAN", "hapus")
-        tLaporan = Proses.UserAksesTombol(UserID, "31_SURAT_PESANAN", "laporan")
+        tTambah = Proses.UserAksesTombol(UserID, "44_PURCHASE_ORDER", "baru")
+        tEdit = Proses.UserAksesTombol(UserID, "44_PURCHASE_ORDER", "edit")
+        tHapus = Proses.UserAksesTombol(UserID, "44_PURCHASE_ORDER", "hapus")
+        tLaporan = Proses.UserAksesTombol(UserID, "44_PURCHASE_ORDER", "laporan")
         Me.Cursor = Cursors.Default
         DaftarPO("")
         AturTombol(True)

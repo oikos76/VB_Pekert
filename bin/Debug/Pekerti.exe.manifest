@@ -295,14 +295,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pekerti.exe" size="5431296">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pekerti.exe" size="5714432">
       <assemblyIdentity name="Pekerti" version="22.2.14.1" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Bl4h+hH5rhxKsd8KeKTUczkfyXk=</dsig:DigestValue>
+        <dsig:DigestValue>K5qtmxrf48IXTIIBKM2KYhluBns=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

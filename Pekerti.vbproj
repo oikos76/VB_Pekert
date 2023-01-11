@@ -108,6 +108,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>.\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word1">
+      <HintPath>.\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
@@ -274,6 +278,18 @@
       <DependentUpon>Form_MetodePengiriman.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_MetodePengiriman.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_PI.Designer.vb">
+      <DependentUpon>Form_PI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_PI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_PIBiayaTambahan.Designer.vb">
+      <DependentUpon>Form_PIBiayaTambahan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_PIBiayaTambahan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_PO.Designer.vb">
@@ -471,10 +487,22 @@
       <DependentUpon>Rpt_KodifProduk.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Rpt_KodeProduk.vb">
+    <Compile Include="Report\Rpt_KodeProduk.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Rpt_KodeProduk.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_PI.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_PI.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_P_OLD.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_P_OLD.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Terbilang.vb" />
@@ -546,6 +574,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_MetodePengiriman.resx">
       <DependentUpon>Form_MetodePengiriman.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_PI.resx">
+      <DependentUpon>Form_PI.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_PIBiayaTambahan.resx">
+      <DependentUpon>Form_PIBiayaTambahan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PO.resx">
       <DependentUpon>Form_PO.vb</DependentUpon>
@@ -651,9 +686,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_KodifProduk.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rpt_KodeProduk.rpt">
+    <EmbeddedResource Include="Report\Rpt_KodeProduk.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_KodeProduk.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_PI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_PI.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_P_OLD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_P_OLD.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -947,6 +990,26 @@
     <None Include="Resources\Actions-document-print-direct-icon.png" />
     <None Include="Resources\Actions-go-previous-view-icon.png" />
     <Content Include="ShoppingCart.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

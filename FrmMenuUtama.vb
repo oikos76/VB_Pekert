@@ -500,6 +500,11 @@ Public Class FrmMenuUtama
         Form_PO.MdiParent = Me
         Form_PO.Show()
     End Sub
+
+    Private Sub _45ProformaInvoice_Click(sender As Object, e As EventArgs) Handles _45ProformaInvoice.Click
+        Form_PI.MdiParent = Me
+        Form_PI.Show()
+    End Sub
 End Class
 
 
