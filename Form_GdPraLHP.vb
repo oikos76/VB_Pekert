@@ -438,10 +438,10 @@ Public Class Form_GdPraLHP
                 Proses.ExecuteNonQuery(MsgSQL)
             Next (a)
         End If
-        tTambah = Proses.UserAksesTombol(UserID, "25_KODIF_PRODUK", "baru")
-        tEdit = Proses.UserAksesTombol(UserID, "25_KODIF_PRODUK", "edit")
-        tHapus = Proses.UserAksesTombol(UserID, "25_KODIF_PRODUK", "hapus")
-        tLaporan = Proses.UserAksesTombol(UserID, "25_KODIF_PRODUK", "laporan")
+        tTambah = Proses.UserAksesTombol(UserID, "51_PRA_LHP", "baru")
+        tEdit = Proses.UserAksesTombol(UserID, "51_PRA_LHP", "edit")
+        tHapus = Proses.UserAksesTombol(UserID, "51_PRA_LHP", "hapus")
+        tLaporan = Proses.UserAksesTombol(UserID, "51_PRA_LHP", "laporan")
         AturTombol(True)
         Me.Cursor = Cursors.Default
         DaftarPraLHP()

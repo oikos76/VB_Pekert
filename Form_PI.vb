@@ -1213,6 +1213,17 @@ Public Class Form_PI
         btnWord.Enabled = True
     End Sub
 
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Form_KodifProduk_Image.PictureBox1.Image = Nothing
+        Form_KodifProduk_Image.LocGmb1.Text = LocGmb1.Text
+        Form_KodifProduk_Image.ShowFoto(LocGmb1.Text)
+        Form_KodifProduk_Image.ShowDialog()
+    End Sub
+
+    Private Sub cmdTambahanBiayaPI_Click(sender As Object, e As EventArgs) Handles cmdTambahanBiayaPI.Click
+        Form_PIBiayaTambahan.ShowDialog()
+    End Sub
+
     Private Sub Nopo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Nopo.KeyPress
         Dim RSN1 As New DataTable, RSN2 As New DataTable
         If e.KeyChar = Chr(13) Then

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="IPServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">IT-EK0\SQLEXPRESS</Value>
+      <Value Profile="(Default)">PEKERTISERVER\SQLEXPRESS</Value>
     </Setting>
     <Setting Name="UserID" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
@@ -21,7 +21,7 @@
       <Value Profile="(Default)">belum di pilih !</Value>
     </Setting>
     <Setting Name="ip_server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">IT-EK0\SQLEXPRESS / 192.168.0.8</Value>
+      <Value Profile="(Default)">IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS</Value>
     </Setting>
     <Setting Name="KodeGLPiutangPerajin" Type="System.String" Scope="User">
       <Value Profile="(Default)">10.10.15.01</Value>

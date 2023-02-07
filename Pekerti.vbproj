@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT220214_1\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT230206\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationRevision>31</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -85,7 +85,7 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ShoppingCart.ico</ApplicationIcon>
+    <ApplicationIcon>Apps.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
@@ -170,6 +170,12 @@
       <DependentUpon>Form_KatalogSample.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_KatalogSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KodeProdukBuyer.Designer.vb">
+      <DependentUpon>Form_KodeProdukBuyer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KodeProdukBuyer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_KodifImportir.Designer.vb">
@@ -519,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_KatalogSample.resx">
       <DependentUpon>Form_KatalogSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KodeProdukBuyer.resx">
+      <DependentUpon>Form_KodeProdukBuyer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_KodifImportir.resx">
       <DependentUpon>Form_KodifImportir.vb</DependentUpon>
@@ -989,6 +998,7 @@
   <ItemGroup>
     <None Include="Resources\Actions-document-print-direct-icon.png" />
     <None Include="Resources\Actions-go-previous-view-icon.png" />
+    <Content Include="Apps.ico" />
     <Content Include="ShoppingCart.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -430,48 +430,56 @@ Partial Class FrmMenuUtama
         '
         '_21KodifikasiBahanBaku
         '
+        Me._21KodifikasiBahanBaku.Image = CType(resources.GetObject("_21KodifikasiBahanBaku.Image"), System.Drawing.Image)
         Me._21KodifikasiBahanBaku.Name = "_21KodifikasiBahanBaku"
         Me._21KodifikasiBahanBaku.Size = New System.Drawing.Size(212, 22)
         Me._21KodifikasiBahanBaku.Text = "Kodifikasi Bahan Baku"
         '
         '_22KodifikasiFungsiProduk
         '
+        Me._22KodifikasiFungsiProduk.Image = CType(resources.GetObject("_22KodifikasiFungsiProduk.Image"), System.Drawing.Image)
         Me._22KodifikasiFungsiProduk.Name = "_22KodifikasiFungsiProduk"
         Me._22KodifikasiFungsiProduk.Size = New System.Drawing.Size(212, 22)
         Me._22KodifikasiFungsiProduk.Text = "Kodifikasi Fungsi Produk"
         '
         '_23KodifikasiDaerah
         '
+        Me._23KodifikasiDaerah.Image = CType(resources.GetObject("_23KodifikasiDaerah.Image"), System.Drawing.Image)
         Me._23KodifikasiDaerah.Name = "_23KodifikasiDaerah"
         Me._23KodifikasiDaerah.Size = New System.Drawing.Size(212, 22)
         Me._23KodifikasiDaerah.Text = "Kodifikasi Daerah"
         '
         '_24KodifikasiPerajin
         '
+        Me._24KodifikasiPerajin.Image = CType(resources.GetObject("_24KodifikasiPerajin.Image"), System.Drawing.Image)
         Me._24KodifikasiPerajin.Name = "_24KodifikasiPerajin"
         Me._24KodifikasiPerajin.Size = New System.Drawing.Size(212, 22)
         Me._24KodifikasiPerajin.Text = "Kodifikasi Perajin"
         '
         '_25KodifikasiProduk
         '
+        Me._25KodifikasiProduk.Image = CType(resources.GetObject("_25KodifikasiProduk.Image"), System.Drawing.Image)
         Me._25KodifikasiProduk.Name = "_25KodifikasiProduk"
         Me._25KodifikasiProduk.Size = New System.Drawing.Size(212, 22)
         Me._25KodifikasiProduk.Text = "Kodifikasi Produk"
         '
         '_26SPDenganKode
         '
+        Me._26SPDenganKode.Image = CType(resources.GetObject("_26SPDenganKode.Image"), System.Drawing.Image)
         Me._26SPDenganKode.Name = "_26SPDenganKode"
         Me._26SPDenganKode.Size = New System.Drawing.Size(212, 22)
         Me._26SPDenganKode.Text = "SP dengan Kode"
         '
         '_27DaftarPenerimaanBarang
         '
+        Me._27DaftarPenerimaanBarang.Image = CType(resources.GetObject("_27DaftarPenerimaanBarang.Image"), System.Drawing.Image)
         Me._27DaftarPenerimaanBarang.Name = "_27DaftarPenerimaanBarang"
         Me._27DaftarPenerimaanBarang.Size = New System.Drawing.Size(212, 22)
         Me._27DaftarPenerimaanBarang.Text = "Daftar Penerimaan Barang"
         '
         '_28Katalog
         '
+        Me._28Katalog.Image = CType(resources.GetObject("_28Katalog.Image"), System.Drawing.Image)
         Me._28Katalog.Name = "_28Katalog"
         Me._28Katalog.Size = New System.Drawing.Size(212, 22)
         Me._28Katalog.Text = "Katalog"
@@ -485,6 +493,7 @@ Partial Class FrmMenuUtama
         '
         '_31SuratPesanan
         '
+        Me._31SuratPesanan.Image = CType(resources.GetObject("_31SuratPesanan.Image"), System.Drawing.Image)
         Me._31SuratPesanan.Name = "_31SuratPesanan"
         Me._31SuratPesanan.Size = New System.Drawing.Size(245, 22)
         Me._31SuratPesanan.Text = "Surat Pesanan"
@@ -510,30 +519,35 @@ Partial Class FrmMenuUtama
         '
         '_41KodifikasiNegara
         '
+        Me._41KodifikasiNegara.Image = CType(resources.GetObject("_41KodifikasiNegara.Image"), System.Drawing.Image)
         Me._41KodifikasiNegara.Name = "_41KodifikasiNegara"
         Me._41KodifikasiNegara.Size = New System.Drawing.Size(196, 22)
         Me._41KodifikasiNegara.Text = "Kodifikasi Negara"
         '
         '_42KodifikasiImportir
         '
+        Me._42KodifikasiImportir.Image = CType(resources.GetObject("_42KodifikasiImportir.Image"), System.Drawing.Image)
         Me._42KodifikasiImportir.Name = "_42KodifikasiImportir"
         Me._42KodifikasiImportir.Size = New System.Drawing.Size(196, 22)
         Me._42KodifikasiImportir.Text = "Kodifikasi Importir"
         '
         '_43KodeProdukBuyer
         '
+        Me._43KodeProdukBuyer.Image = CType(resources.GetObject("_43KodeProdukBuyer.Image"), System.Drawing.Image)
         Me._43KodeProdukBuyer.Name = "_43KodeProdukBuyer"
         Me._43KodeProdukBuyer.Size = New System.Drawing.Size(196, 22)
         Me._43KodeProdukBuyer.Text = "Kode Produk Buyer"
         '
         '_44PurchasingOrder
         '
+        Me._44PurchasingOrder.Image = CType(resources.GetObject("_44PurchasingOrder.Image"), System.Drawing.Image)
         Me._44PurchasingOrder.Name = "_44PurchasingOrder"
         Me._44PurchasingOrder.Size = New System.Drawing.Size(196, 22)
         Me._44PurchasingOrder.Text = "Purchasing Order (PO)"
         '
         '_45ProformaInvoice
         '
+        Me._45ProformaInvoice.Image = CType(resources.GetObject("_45ProformaInvoice.Image"), System.Drawing.Image)
         Me._45ProformaInvoice.Name = "_45ProformaInvoice"
         Me._45ProformaInvoice.Size = New System.Drawing.Size(196, 22)
         Me._45ProformaInvoice.Text = "Proforma Invoice (PI)"
@@ -553,6 +567,7 @@ Partial Class FrmMenuUtama
         '
         '_51PraLHP
         '
+        Me._51PraLHP.Image = CType(resources.GetObject("_51PraLHP.Image"), System.Drawing.Image)
         Me._51PraLHP.Name = "_51PraLHP"
         Me._51PraLHP.Size = New System.Drawing.Size(249, 22)
         Me._51PraLHP.Text = "Pra LHP"

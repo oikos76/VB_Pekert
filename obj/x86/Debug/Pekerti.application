@@ -7,14 +7,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Pekerti.exe.manifest" size="20760">
+    <dependentAssembly dependencyType="install" codebase="Pekerti.exe.manifest" size="21120">
       <assemblyIdentity name="Pekerti.exe" version="20.21.1.30" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>24coRxtDZLTU+tGa6WgspHQRSIo=</dsig:DigestValue>
+        <dsig:DigestValue>m0HKOsoffLEmq7Ii4ev27ZBOykk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

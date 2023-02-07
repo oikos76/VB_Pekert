@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("PEKERTISERVER\SQLEXPRESS")>  _
         Public Property IPServer() As String
             Get
                 Return CType(Me("IPServer"),String)
@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS / 192.168.0.8")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS")>  _
         Public Property ip_server() As String
             Get
                 Return CType(Me("ip_server"),String)

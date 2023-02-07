@@ -323,16 +323,16 @@ Public Class Form_KodifProduk
             End If
         End If
         Dim dbCek As String
-        SQL = "Select kodeproduk, deskripsi, bahan_ind, namaindonesia
-          From m_KodeProduk inner join m_KodeBahan on m_KodeProduk.kode_bahan = m_KodeBahan.KodeBahan
-         Where NamaIndonesia <> bahan_ind "
-        dbCek = Proses.ExecuteSingleStrQuery(SQL)
-        If dbCek <> "" Then
-            SQL = " UPDATE M_KODEPRODUK
-                SET BAHAN_IND = NAMAINDONESIA
-                FROM m_KodeProduk INNER JOIN m_KodeBahan on m_KodeProduk.kode_bahan = m_KodeBahan.KodeBahan "
-            Proses.ExecuteNonQuery(SQL)
-        End If
+        'SQL = "Select kodeproduk, deskripsi, bahan_ind, namaindonesia
+        '  From m_KodeProduk inner join m_KodeBahan on m_KodeProduk.kode_bahan = m_KodeBahan.KodeBahan
+        ' Where NamaIndonesia <> bahan_ind "
+        'dbCek = Proses.ExecuteSingleStrQuery(SQL)
+        'If dbCek <> "" Then
+        '    SQL = " UPDATE M_KODEPRODUK
+        '        SET BAHAN_IND = NAMAINDONESIA
+        '        FROM m_KodeProduk INNER JOIN m_KodeBahan on m_KodeProduk.kode_bahan = m_KodeBahan.KodeBahan "
+        '    ' Proses.ExecuteNonQuery(SQL)
+        'End If
     End Sub
 
     Private Sub KodeCari_TextChanged(sender As Object, e As EventArgs) Handles KodeCari.TextChanged
