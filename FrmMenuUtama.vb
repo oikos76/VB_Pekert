@@ -506,24 +506,21 @@ Public Class FrmMenuUtama
         Form_PI.Show()
     End Sub
 
-    Private Sub DaftarPenerimaanBarangDPBToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DaftarPenerimaanBarangDPBToolStripMenuItem.Click
 
-    End Sub
 
-    Private Sub _46PembayaranDariBuyer_Click(sender As Object, e As EventArgs) Handles _46PembayaranDariBuyer.Click
-
-    End Sub
-
-    Private Sub DraftPackingLIstDPLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DraftPackingLIstDPLToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub LaporanHasilPemeriksaanLHPToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LaporanHasilPemeriksaanLHPToolStripMenuItem.Click
-
-    End Sub
 
     Private Sub _43KodeProdukBuyer_Click(sender As Object, e As EventArgs) Handles _43KodeProdukBuyer.Click
         Form_KodeProdukBuyer.ShowDialog()
+    End Sub
+
+    Private Sub _32DPB_Click(sender As Object, e As EventArgs) Handles _32DPB.Click
+        Form_DPB.MdiParent = Me
+        Form_DPB.Show()
+    End Sub
+
+    Private Sub _52LHP_Click(sender As Object, e As EventArgs) Handles _52LHP.Click
+        Form_Gd_LHP.MdiParent = Me
+        Form_Gd_LHP.Show()
     End Sub
 End Class
 

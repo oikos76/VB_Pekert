@@ -25,11 +25,33 @@
             With tblData.Columns(0)
                 For a = 0 To tblData.Rows.Count - 1
                     Application.DoEvents()
-                    DGView.Rows.Add(.Table.Rows(a) !IDRec,
-                    .Table.Rows(a) !Nama,
-                    .Table.Rows(a) !alamat1,
-                    .Table.Rows(a) !Kota,
-                    .Table.Rows(a) !phone)
+                    DGView.Rows.Add(.Table.Rows(a)!IDRec,
+                    .Table.Rows(a)!Nama,
+                    .Table.Rows(a)!alamat1,
+                    .Table.Rows(a)!Kota,
+                    .Table.Rows(a)!phone)
+                Next (a)
+            End With
+        ElseIf Me.Text = "Daftar LHP" Then
+            DGView.Columns(0).HeaderText = "IDREC"
+            DGView.Columns(0).Width = 1
+            DGView.Columns(1).HeaderText = "No Pra LHP"
+            DGView.Columns(1).Width = 100
+            DGView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DGView.Columns(2).HeaderText = "Perajin"
+            DGView.Columns(2).Width = 100
+            DGView.Columns(3).HeaderText = "Tgl PI"
+            DGView.Columns(4).HeaderText = "No PO"
+            DGView.Columns(5).HeaderText = "tGL PO"
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a)!IDREC,
+                    Format(.Table.Rows(a)!HargaFOB, "###,##0.00") +
+                                    Microsoft.VisualBasic.Right(Space(5) + .Table.Rows(a)!MataUang, 5),
+                    .Table.Rows(a)!NoPI, Format(.Table.Rows(a)!TGLPI, "dd-MM-yyyy"),
+                    .Table.Rows(a)!NoPO, Format(.Table.Rows(a)!TGLPo, "dd-MM-yyyy"))
+
                 Next (a)
             End With
         ElseIf Me.Text = "Riwayat Harga" Then

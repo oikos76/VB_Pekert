@@ -1307,6 +1307,29 @@ ErrMSG:
 
     End Sub
 
+    Private Sub cmdPenambahanKode_Click(sender As Object, e As EventArgs) Handles cmdPenambahanKode.Click
+        If Trim(NoSP.Text) = "" Then
+            MsgBox("No SP masih kosong!", vbCritical, ".:ERROR!")
+            Exit Sub
+        End If
+        LTambahKode = True
+        AturTombol(False)
+        Produk.Text = ""
+        Kode_Produk.Text = ""
+        KodePerajin.Text = ""
+        Jumlah.Text = ""
+        Kode_Perajin.ReadOnly = True
+        Perajin.ReadOnly = True
+        HargaBeliRp.Text = 0
+        HargaBeliUS.Text = 0
+        NilaiKurs.Text = 0
+        CatatanSP.Text = ""
+        CatatanProduk.Text = ""
+        LocGmb1.Text = ""
+        ShowFoto("")
+        Kode_Produk.Focus()
+    End Sub
+
     Private Sub ShipmentDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShipmentDate.KeyPress
         If e.KeyChar = Chr(13) Then
             Kode_Perajin.Focus()

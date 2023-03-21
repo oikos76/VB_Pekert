@@ -77,7 +77,7 @@ Partial Class FrmMenuUtama
         Me._28Katalog = New System.Windows.Forms.ToolStripMenuItem()
         Me._13BagianPembelian = New System.Windows.Forms.ToolStripMenuItem()
         Me._31SuratPesanan = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DaftarPenerimaanBarangDPBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._32DPB = New System.Windows.Forms.ToolStripMenuItem()
         Me.PengajuanUangMukaPerajinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me._14BagianPemasaran = New System.Windows.Forms.ToolStripMenuItem()
         Me._41KodifikasiNegara = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,7 +88,7 @@ Partial Class FrmMenuUtama
         Me._46PembayaranDariBuyer = New System.Windows.Forms.ToolStripMenuItem()
         Me._15BagianGudang = New System.Windows.Forms.ToolStripMenuItem()
         Me._51PraLHP = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LaporanHasilPemeriksaanLHPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._52LHP = New System.Windows.Forms.ToolStripMenuItem()
         Me.DraftPackingLIstDPLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me._54JenisBox = New System.Windows.Forms.ToolStripMenuItem()
         Me.PackingListInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -486,7 +486,7 @@ Partial Class FrmMenuUtama
         '
         '_13BagianPembelian
         '
-        Me._13BagianPembelian.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._31SuratPesanan, Me.DaftarPenerimaanBarangDPBToolStripMenuItem, Me.PengajuanUangMukaPerajinToolStripMenuItem})
+        Me._13BagianPembelian.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._31SuratPesanan, Me._32DPB, Me.PengajuanUangMukaPerajinToolStripMenuItem})
         Me._13BagianPembelian.Name = "_13BagianPembelian"
         Me._13BagianPembelian.Size = New System.Drawing.Size(114, 26)
         Me._13BagianPembelian.Text = "Bagian Pembelian"
@@ -498,11 +498,11 @@ Partial Class FrmMenuUtama
         Me._31SuratPesanan.Size = New System.Drawing.Size(245, 22)
         Me._31SuratPesanan.Text = "Surat Pesanan"
         '
-        'DaftarPenerimaanBarangDPBToolStripMenuItem
+        '_32DPB
         '
-        Me.DaftarPenerimaanBarangDPBToolStripMenuItem.Name = "DaftarPenerimaanBarangDPBToolStripMenuItem"
-        Me.DaftarPenerimaanBarangDPBToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
-        Me.DaftarPenerimaanBarangDPBToolStripMenuItem.Text = "Daftar Penerimaan Barang / DPB"
+        Me._32DPB.Name = "_32DPB"
+        Me._32DPB.Size = New System.Drawing.Size(245, 22)
+        Me._32DPB.Text = "Daftar Penerimaan Barang / DPB"
         '
         'PengajuanUangMukaPerajinToolStripMenuItem
         '
@@ -560,7 +560,7 @@ Partial Class FrmMenuUtama
         '
         '_15BagianGudang
         '
-        Me._15BagianGudang.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._51PraLHP, Me.LaporanHasilPemeriksaanLHPToolStripMenuItem, Me.DraftPackingLIstDPLToolStripMenuItem, Me._54JenisBox, Me.PackingListInvoiceToolStripMenuItem, Me.MetodePengirimanToolStripMenuItem, Me.ReturBarangToolStripMenuItem})
+        Me._15BagianGudang.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._51PraLHP, Me._52LHP, Me.DraftPackingLIstDPLToolStripMenuItem, Me._54JenisBox, Me.PackingListInvoiceToolStripMenuItem, Me.MetodePengirimanToolStripMenuItem, Me.ReturBarangToolStripMenuItem})
         Me._15BagianGudang.Name = "_15BagianGudang"
         Me._15BagianGudang.Size = New System.Drawing.Size(100, 26)
         Me._15BagianGudang.Text = "Bagian Gudang"
@@ -572,11 +572,11 @@ Partial Class FrmMenuUtama
         Me._51PraLHP.Size = New System.Drawing.Size(249, 22)
         Me._51PraLHP.Text = "Pra LHP"
         '
-        'LaporanHasilPemeriksaanLHPToolStripMenuItem
+        '_52LHP
         '
-        Me.LaporanHasilPemeriksaanLHPToolStripMenuItem.Name = "LaporanHasilPemeriksaanLHPToolStripMenuItem"
-        Me.LaporanHasilPemeriksaanLHPToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.LaporanHasilPemeriksaanLHPToolStripMenuItem.Text = "Laporan Hasil Pemeriksaan (LHP)"
+        Me._52LHP.Name = "_52LHP"
+        Me._52LHP.Size = New System.Drawing.Size(249, 22)
+        Me._52LHP.Text = "Laporan Hasil Pemeriksaan (LHP)"
         '
         'DraftPackingLIstDPLToolStripMenuItem
         '
@@ -882,7 +882,7 @@ Partial Class FrmMenuUtama
     Friend WithEvents _28Katalog As ToolStripMenuItem
     Friend WithEvents _13BagianPembelian As ToolStripMenuItem
     Friend WithEvents _31SuratPesanan As ToolStripMenuItem
-    Friend WithEvents DaftarPenerimaanBarangDPBToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _32DPB As ToolStripMenuItem
     Friend WithEvents PengajuanUangMukaPerajinToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents _14BagianPemasaran As ToolStripMenuItem
     Friend WithEvents _41KodifikasiNegara As ToolStripMenuItem
@@ -893,7 +893,7 @@ Partial Class FrmMenuUtama
     Friend WithEvents _46PembayaranDariBuyer As ToolStripMenuItem
     Friend WithEvents _15BagianGudang As ToolStripMenuItem
     Friend WithEvents _51PraLHP As ToolStripMenuItem
-    Friend WithEvents LaporanHasilPemeriksaanLHPToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _52LHP As ToolStripMenuItem
     Friend WithEvents DraftPackingLIstDPLToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents _54JenisBox As ToolStripMenuItem
     Friend WithEvents PackingListInvoiceToolStripMenuItem As ToolStripMenuItem

@@ -23,9 +23,9 @@ Partial Class Form_DPBContoh
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_DPBContoh))
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -143,7 +143,6 @@ Partial Class Form_DPBContoh
         'PanelEntry
         '
         Me.PanelEntry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelEntry.Controls.Add(Me.PanelProduk)
         Me.PanelEntry.Controls.Add(Me.NoSP)
         Me.PanelEntry.Controls.Add(Me.IDRecord)
         Me.PanelEntry.Controls.Add(Me.PanelPicture)
@@ -157,6 +156,7 @@ Partial Class Form_DPBContoh
         Me.PanelEntry.Controls.Add(Me.nodpb)
         Me.PanelEntry.Controls.Add(Me.Perajin)
         Me.PanelEntry.Controls.Add(Me.Label4)
+        Me.PanelEntry.Controls.Add(Me.PanelProduk)
         Me.PanelEntry.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEntry.Location = New System.Drawing.Point(0, 0)
         Me.PanelEntry.Margin = New System.Windows.Forms.Padding(4)
@@ -640,8 +640,8 @@ Partial Class Form_DPBContoh
         '
         'Column2
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column2.HeaderText = "Jumlah"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -649,8 +649,8 @@ Partial Class Form_DPBContoh
         '
         'Column3
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column3.HeaderText = "Harga Beli"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -658,8 +658,8 @@ Partial Class Form_DPBContoh
         '
         'Column9
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column9.HeaderText = "Ongkir"
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True

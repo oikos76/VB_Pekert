@@ -108,10 +108,13 @@ C:\me\VS_SanDisk\Pekerti\bin\Debug\Microsoft.ReportViewer.Common.dll
 C:\me\VS_SanDisk\Pekerti\bin\Debug\Microsoft.ReportViewer.WinForms.dll
 C:\me\VS_SanDisk\Pekerti\bin\Debug\Microsoft.ReportViewer.WinForms.xml
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbproj.ResolveComReference.cache
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_DPB.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_DPBContoh.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GdPraLHP.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Gd_LHP.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_JenisBox.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KatalogSample.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KodeProdukBuyer.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KodifImportir.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.FormPwd.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Backup.resources
@@ -131,6 +134,7 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KasirAG.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Kasir_Bayar.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_MetodePengiriman.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_PI.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_PIBiayaTambahan.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_PO.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Report.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Kasir_Edit.resources
@@ -162,5 +166,3 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.exe
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.xml
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.pdb
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.cache
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_PIBiayaTambahan.resources
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KodeProdukBuyer.resources

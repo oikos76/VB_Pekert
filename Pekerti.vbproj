@@ -148,6 +148,12 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Class.vb" />
     <Compile Include="Crypto.vb" />
+    <Compile Include="Form_DPB.Designer.vb">
+      <DependentUpon>Form_DPB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DPB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_DPBContoh.Designer.vb">
       <DependentUpon>Form_DPBContoh.vb</DependentUpon>
     </Compile>
@@ -158,6 +164,12 @@
       <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_GdPraLHP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Gd_LHP.Designer.vb">
+      <DependentUpon>Form_Gd_LHP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Gd_LHP.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_JenisBox.Designer.vb">
@@ -514,11 +526,17 @@
     <Compile Include="Terbilang.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_DPB.resx">
+      <DependentUpon>Form_DPB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_DPBContoh.resx">
       <DependentUpon>Form_DPBContoh.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_GdPraLHP.resx">
       <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Gd_LHP.resx">
+      <DependentUpon>Form_Gd_LHP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_JenisBox.resx">
       <DependentUpon>Form_JenisBox.vb</DependentUpon>
@@ -712,6 +730,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
