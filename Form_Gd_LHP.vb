@@ -226,31 +226,16 @@ Public Class Form_Gd_LHP
     End Sub
 
     Private Sub cmdTambah_Click(sender As Object, e As EventArgs) Handles cmdTambah.Click
-        If Trim(NoLHP.Text) = "" Then
-            MsgBox("No LHP masih kosong!", vbCritical, ".:ERROR!")
-            NoLHP.Focus()
-            Exit Sub
-        End If
-        LTambahKode = True
-        LAdd = False
+
+        LAdd = True
         LEdit = False
         AturTombol(False)
-        Produk.Text = ""
-        Kode_Produk.Text = ""
-        Produk.Text = ""
-        HargaBeli.Text = ""
-        JumlahPack.Text = ""
-        Kirim.Text = ""
-        JumlahHitung.Text = ""
-        JumlahBaik.Text = ""
-        JumlahRetur.Text = ""
-        Keterangan.Text = ""
-        '    Pemeriksa.Text = ""
-        '    tglMulaiPeriksa.Value = Date
-        '    TglSelesaiPeriksa.Value = Date
-        '    Koordinator.Text = ""
-        AlasanDiTolak.Text = ""
-        Kode_Produk.Focus()
+        ClearTextBoxes()
+        oJumBaik = 0
+        NoLHP.Text = Proses.MaxYNoUrut("NoLHP", "t_LHP", "LHP")
+        NoPraLHP.Focus()
+        NoLHP.ReadOnly = True
+
     End Sub
 
     Private Sub NoLHP_TextChanged(sender As Object, e As EventArgs) Handles NoLHP.TextChanged
@@ -330,6 +315,18 @@ Public Class Form_Gd_LHP
         DGView2.RowsDefaultCellStyle.BackColor = Color.LightCyan      'LightGoldenrodYellow
         DGView2.AlternatingRowsDefaultCellStyle.BackColor = Color.White
     End Sub
+
+    Private Sub cmdBatal_Click(sender As Object, e As EventArgs) Handles cmdBatal.Click
+        LAdd = False
+        LEdit = False
+        LTambahKode = False
+        AturTombol(True)
+    End Sub
+
+    Private Sub cmdExit_Click(sender As Object, e As EventArgs) Handles cmdExit.Click
+        Me.Close()
+    End Sub
+
     Private Sub Form_Gd_LHP_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim MsgSQL As String
         LAdd = False
@@ -342,8 +339,8 @@ Public Class Form_Gd_LHP
         MsgSQL = "Select KoordinatorLHP, pemeriksa From M_Company "
         rs05 = Proses.ExecuteQuery(MsgSQL)
         If rs05.Rows.Count <> 0 Then
-            lKoordinator = rs05.Rows(0)!KoordinatorLHP
-            lPemeriksa = rs05.Rows(0)!Pemeriksa
+            lKoordinator = rs05.Rows(0) !KoordinatorLHP
+            lPemeriksa = rs05.Rows(0) !Pemeriksa
         End If
 
         tTambah = Proses.UserAksesTombol(UserID, "52_LHP", "baru")
