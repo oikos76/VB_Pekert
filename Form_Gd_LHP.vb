@@ -448,6 +448,12 @@ Public Class Form_Gd_LHP
         End If
     End Sub
 
+    Private Sub Kode_Importir_TextChanged(sender As Object, e As EventArgs) Handles Kode_Importir.TextChanged
+        If Len(Kode_Importir.Text) < 1 Then
+            Importir.Text = ""
+        End If
+    End Sub
+
     Private Sub btnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
         Dim MsgSQL As String, RSNav As New DataTable
         MsgSQL = "SELECT top 1 IDrec From T_LHP " &
@@ -457,7 +463,7 @@ Public Class Form_Gd_LHP
         "ORDER BY tgllhp desc, IDRec desc "
         RSNav = Proses.ExecuteQuery(MsgSQL)
         If RSNav.Rows.Count <> 0 Then
-            Call ISILHP(RSNav.Rows(0)!IdRec)
+            Call ISILHP(RSNav.Rows(0) !IdRec)
         End If
     End Sub
 
@@ -525,15 +531,18 @@ Public Class Form_Gd_LHP
     End Sub
 
     Private Sub NoPraLHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoPraLHP.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+        e.KeyChar = UCase(e.KeyChar)
         If e.KeyChar = Chr(13) Then
             Dim rsn1 As New DataTable, rsn2 As New DataTable
             MsgSQL = "Select NoPraLHP, Kode_Perajin, NamaPerajin " &
-            " From T_PraLHP " &
-            "Where NoPraLHP = '" & NoPraLHP.Text & "' "
+                " From T_PraLHP " &
+                "Where NoPraLHP = '" & NoPraLHP.Text & "' "
             rsn1 = Proses.ExecuteQuery(MsgSQL)
             If rsn1.Rows.Count <> 0 Then
-                Kode_Perajin.Text = rsn1.Rows(0)!Kode_Perajin
-                Perajin.Text = rsn1.Rows(0)!NamaPerajin
+                Kode_Perajin.Text = rsn1.Rows(0) !Kode_Perajin
+                Perajin.Text = rsn1.Rows(0) !NamaPerajin
+                Kode_Produk.Focus()
             Else
                 NoPraLHP.Text = FindPraLHP(NoPraLHP.Text)
                 MsgSQL = "Select NoPraLHP, Kode_Perajin, NamaPerajin " &
@@ -541,8 +550,9 @@ Public Class Form_Gd_LHP
                     "Where NoPraLHP = '" & NoPraLHP.Text & "' "
                 rsn2 = Proses.ExecuteQuery(MsgSQL)
                 If rsn2.Rows.Count <> 0 Then
-                    Kode_Perajin.Text = rsn2.Rows(0)!Kode_Perajin
-                    Perajin.Text = rsn2.Rows(0)!NamaPerajin
+                    Kode_Perajin.Text = rsn2.Rows(0) !Kode_Perajin
+                    Perajin.Text = rsn2.Rows(0) !NamaPerajin
+                    Kode_Produk.Focus()
                 Else
                     MsgBox("NO Pra LHP tidak boleh kosong!", vbCritical, ".:ERROR!")
                     NoPraLHP.Focus()
@@ -553,6 +563,64 @@ Public Class Form_Gd_LHP
             If LAdd Or LEdit Or LTambahKode Then Kode_Produk.Focus()
         End If
     End Sub
+    Public Function FindKodeProdukPraLHP(Cari As String, tNoPraLHP As String) As String
+        Dim RSD As New ADODB.Recordset, mKondisi As String
+        Dim MsgSQL As String, Lst As ListItem
+        If Trim(Cari) = "" Then
+            mKondisi = ""
+        Else
+            mKondisi = "And Produk like '%" & Trim(Cari) & "%' "
+        End If
+
+        MsgSQL = "Select NoPraLHP, Importir, NoSP, TglTerima, " &
+        "HargaBeli, Produk, Kode_Produk " &
+        " From T_PraLHP " &
+        "Where AktifYN = 'Y' " &
+        " " & mKondisi & " " &
+        " And NoPraLHP = '" & tNoPraLHP & "' order by idrec "
+        RSD.Open MsgSQL, ConnSQL, adOpenForwardOnly, adLockReadOnly
+    'Frm_Browse
+        Frm_Browse.lstView.ListItems.Clear
+        Frm_Browse.lstView.Visible = False
+        Frm_Browse.lstView.ColumnHeaders(1).Text = "KodeProduk + SP"
+        Frm_Browse.lstView.ColumnHeaders(1).Width = 1
+        Frm_Browse.lstView.ColumnHeaders(2).Text = "Kode Produk"
+        Frm_Browse.lstView.ColumnHeaders(2).Width = 1750
+        Frm_Browse.lstView.ColumnHeaders(3).Text = "Produk"
+        Frm_Browse.lstView.ColumnHeaders(4).Text = "Tgl Terima"
+        Frm_Browse.lstView.ColumnHeaders(4).Width = 1750
+        Frm_Browse.lstView.ColumnHeaders(5).Text = "NoSP"
+        Frm_Browse.lstView.ColumnHeaders(6).Text = "NoPraLHP"
+        Frm_Browse.lstView.ColumnHeaders(7).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(8).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(9).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(10).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(11).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(12).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(13).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(14).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(15).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(16).Text = ""
+        Frm_Browse.lstView.ColumnHeaders(17).Text = ""
+
+        Do While Not RSD.EOF
+            DoEvents
+        Set Lst = Frm_Browse.lstView.ListItems.Add(, , left(RSD!Kode_Produk & Space(25), 25) & Right(Space(25) & RSD!NoSP, 25))
+        Lst.SubItems(1) = RSD!Kode_Produk
+            Lst.SubItems(2) = RSD!Produk
+            Lst.SubItems(3) = Format(RSD!tglTerima, "dd-MM-YYYY")
+            Lst.SubItems(4) = RSD!NoSP
+            Lst.SubItems(5) = RSD!NoPraLHP
+            RSD.MoveNext
+        Loop
+        RSD.Close
+    Set RSD = Nothing
+    Frm_Browse.lstView.Visible = True
+        Frm_Browse.WindowState = vbNormal
+        Frm_Browse.Show 1
+    FindKodeProdukPraLHP = Trim(Right(Frm_Browse.Tag, 50))
+    End Function
+
 
     Public Function FindPraLHP(Cari As String) As String
         Dim RSD As New DataTable, mKondisi As String
@@ -570,7 +638,7 @@ Public Class Form_Gd_LHP
         "Order By TGLPRALHP Desc, NoPraLHP Desc "
 
         Form_Daftar.txtQuery.Text = MsgSQL
-        Form_Daftar.Text = "Daftar LHP"
+        Form_Daftar.Text = "Daftar Pra LHP"
         Form_Daftar.ShowDialog()
 
 
@@ -584,6 +652,153 @@ Public Class Form_Gd_LHP
 
         FindPraLHP = Trim(FrmMenuUtama.TSKeterangan.Text)
     End Function
+
+    Private Sub Kode_Produk_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Kode_Produk.KeyPress
+        Dim RSI As New DataTable, RSK As New DataTable
+        Dim tKode As String
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+        e.KeyChar = UCase(e.KeyChar)
+        If e.KeyChar = Chr(13) Then
+            MsgSQL = "Select * From T_PraLHP " &
+                "Where Kode_Produk = '" & Kode_Produk.Text & "' " &
+                " And AktifYN = 'Y' " &
+                " And NoPraLHP = '" & NoPraLHP.Text & "' " &
+                " And noSP = '" & NoSP.Text & "' "
+            RSI = Proses.ExecuteQuery(MsgSQL)
+            If RSI.Rows.Count <> 0 Then
+                If CekLHP(NoSP.Text, Kode_Produk.Text) Then
+                    MsgBox(Kode_Produk.Text + " Sudah pernah di input di no LHP ini!", vbCritical, ".:Double Input!")
+                    Kode_Produk.Focus()
+                    Exit Sub
+                End If
+                Kode_Perajin.Text = RSI.Rows(0) !Kode_Perajin
+                Perajin.Text = RSI.Rows(0) !NamaPerajin
+                NoSP.Text = RSI.Rows(0) !NoSP
+                NoPO.Text = RSI.Rows(0) !NoPO
+                Kode_Importir.Text = RSI.Rows(0) !Kode_Importir
+                Importir.Text = RSI.Rows(0) !Importir
+                Kargo.Text = RSI.Rows(0) !Kargo
+                tglTerima.Value = RSI.Rows(0) !tglTerima
+                JumlahKoli.Text = RSI.Rows(0) !JumlahKoli
+                JumlahPack.Text = RSI.Rows(0) !JumlahPack
+                Kirim.Text = RSI.Rows(0) !Kirim
+                HargaBeli.Text = Format(RSI.Rows(0) !HargaBeli, "###,##0")
+                Kode_Produk.Text = RSI.Rows(0) !Kode_Produk
+                Produk.Text = Replace(RSI.Rows(0) !Produk, "'", "`")
+                NoSPB.Text = RSI.Rows(0) !SuratPengantar
+                IsiJumlahProduk
+            Else
+                tKode = FindKodeProdukPraLHP(Kode_Produk.Text, NoPraLHP.Text)
+                Kode_Produk.Text = Trim(Microsoft.VisualBasic.Left(tKode, 25))
+                NoSP.Text = Trim(Microsoft.VisualBasic.Right(tKode, 25))
+                If CekLHP(NoSP.Text, Kode_Produk.Text) Then
+                    MsgBox(Kode_Produk.Text + " Sudah pernah di input di no LHP ini!", vbCritical, ".:Double Input!")
+                    Kode_Produk.Focus()
+                    Exit Sub
+                End If
+
+                If Trim(Kode_Produk.Text) <> "" Then
+                    MsgSQL = "Select * From T_PraLHP " &
+                        "Where Kode_Produk = '" & Kode_Produk.Text & "' " &
+                        " And AktifYN = 'Y' " &
+                        " And NoPraLHP = '" & NoPraLHP.Text & "' " &
+                        " And noSP = '" & NoSP.Text & "' "
+                    RSK = Proses.ExecuteQuery(MsgSQL)
+                    If RSK.Rows.Count <> 0 Then
+                        Kode_Perajin.Text = RSK.Rows(0) !Kode_Perajin
+                        Perajin.Text = RSK.Rows(0) !NamaPerajin
+                        NoSP.Text = RSK.Rows(0) !NoSP
+                        NoPO.Text = RSK.Rows(0) !NoPO
+                        Kode_Importir.Text = RSK.Rows(0) !Kode_Importir
+                        Importir.Text = RSK.Rows(0) !Importir
+                        Kargo.Text = RSK.Rows(0) !Kargo
+                        tglTerima.Value = RSK.Rows(0) !tglTerima
+                        JumlahKoli.Text = RSK.Rows(0) !JumlahKoli
+                        JumlahPack.Text = RSK.Rows(0) !JumlahPack
+                        Kirim.Text = RSK.Rows(0) !Kirim
+                        HargaBeli.Text = Format(RSK.Rows(0) !HargaBeli, "###,##0")
+                        Kode_Produk.Text = RSK.Rows(0) !Kode_Produk
+                        Produk.Text = Replace(RSK.Rows(0) !Produk, "'", "`")
+                        NoSPB.Text = RSK.Rows(0) !SuratPengantar
+                        IsiJumlahProduk
+                    End If
+                End If
+            End If
+            Proses.CloseConn()
+
+            If LAdd Or LEdit Or LTambahKode Then
+                If Trim(Kode_Produk.Text) = "" Or Trim(Produk.Text) = "" Then
+                    Kode_Produk.Focus()
+                ElseIf Trim(Kode_Produk.Text) <> "" Or Trim(Produk.Text) <> "" Then
+                    JumlahHitung.Focus()
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub IsiJumlahProduk()
+        Dim RSK As New DataTable, MsgSQL As String
+        'FrmJumlah.Visible = True
+        Dim jSP As Double = 0, jKirim As Double = 0, jKurang As Double = 0, JKrgSP As Double = 0
+        MsgSQL = "Select isnull(Jumlah,0) Jumlah From t_PraLHP " &
+            "Where NoPraLHP = '" & NoPraLHP.Text & "' " &
+            "  and AktifYN = 'Y' And NoSP = '" & NoSP.Text & "' " &
+            "  and Kode_produk = '" & Kode_Produk.Text & "' "
+        RSK = Proses.ExecuteQuery(MsgSQL)
+        If RSK.Rows.Count <> 0 Then
+            jSP = RSK.Rows(0) !Jumlah
+            JumlahHitung.Text = Format(jSP, "###,##0")
+        End If
+        MsgSQL = "Select Sum(JumlahBaik) JB From T_LHP " &
+            "Where Kode_Produk = '" & Kode_Produk.Text & "' " &
+            " And NoSP = '" & NoSP.Text & "' and nolhp = '" & NoLHP.Text & "' " &
+            " And AktifYN = 'Y' "
+        RSK = Proses.ExecuteQuery(MsgSQL)
+        If RSK.Rows.Count <> 0 Then
+            jKirim = RSK.Rows(0) !jb
+            jKurang = jSP - jKirim
+            JumlahBaik.Text = Format(jKirim, "###,##0")
+            JumlahRetur.Text = Format(jKurang, "###,##0")
+        Else
+            JKirim = 0
+            jKurang = 0
+            JumlahBaik.Text = 0
+            JumlahRetur.Text = 0
+        End If
+
+        MsgSQL = "Select isnull(Sum(JumlahBaik),0) JB From T_LHP " &
+            "Where Kode_Produk = '" & Kode_Produk.Text & "' " &
+            " And NoSP = '" & NoSP.Text & "' " &
+            " And AktifYN = 'Y' "
+        RSK = Proses.ExecuteQuery(MsgSQL)
+        If RSK.Rows.Count <> 0 Then
+            JumlahBaik.Text = RSK.Rows(0) !jb
+            JKrgSP = jSP - RSK.Rows(0) !jb
+        Else
+            JumlahBaik.Text = 0
+            JKrgSP = 0
+        End If
+        JumlahRetur.Text = Format(jkrgsp, "###,##0")
+        Proses.CloseConn()
+    End Sub
+
+    Private Function CekLHP(tNoSP As String, tKodeProduk As String) As Boolean
+        Dim MsgSQL As String, RSCek As New DataTable
+        MsgSQL = "Select * " &
+            "From t_LHP " &
+            "Where Kode_Produk = '" & tKodeProduk & "' " &
+            "  And NoSP = '" & tNoSP & "' " &
+            "  And NoLHP = '" & NoLHP.Text & "' " &
+            "  And AktifYN = 'Y' "
+        RSCek = Proses.ExecuteQuery(MsgSQL)
+        If RSCek.Rows.Count <> 0 Then
+            CekLHP = True
+        Else
+            CekLHP = False
+        End If
+        Proses.CloseConn()
+    End Function
+
 
 End Class
 
