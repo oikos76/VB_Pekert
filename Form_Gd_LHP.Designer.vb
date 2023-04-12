@@ -22,9 +22,9 @@ Partial Class Form_Gd_LHP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Gd_LHP))
         Me.Importir = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
@@ -115,6 +115,8 @@ Partial Class Form_Gd_LHP
         Me.PanelInfo = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.PanelPicture = New System.Windows.Forms.Panel()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
         Me.TglMasukGudang = New System.Windows.Forms.DateTimePicker()
         Me.PanelGambar = New System.Windows.Forms.Panel()
         Me.tglTerima = New System.Windows.Forms.DateTimePicker()
@@ -183,31 +185,37 @@ Partial Class Form_Gd_LHP
         '
         'Importir
         '
+        Me.Importir.BackColor = System.Drawing.SystemColors.Window
         Me.Importir.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Importir.Location = New System.Drawing.Point(184, 130)
         Me.Importir.Margin = New System.Windows.Forms.Padding(4)
         Me.Importir.MaxLength = 4
         Me.Importir.Name = "Importir"
+        Me.Importir.ReadOnly = True
         Me.Importir.Size = New System.Drawing.Size(208, 22)
         Me.Importir.TabIndex = 4
         '
         'Perajin
         '
+        Me.Perajin.BackColor = System.Drawing.SystemColors.Window
         Me.Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Perajin.Location = New System.Drawing.Point(184, 33)
         Me.Perajin.Margin = New System.Windows.Forms.Padding(4)
         Me.Perajin.MaxLength = 4
         Me.Perajin.Name = "Perajin"
+        Me.Perajin.ReadOnly = True
         Me.Perajin.Size = New System.Drawing.Size(208, 22)
         Me.Perajin.TabIndex = 1
         '
         'JumlahKoli
         '
+        Me.JumlahKoli.BackColor = System.Drawing.SystemColors.Window
         Me.JumlahKoli.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JumlahKoli.Location = New System.Drawing.Point(138, 232)
         Me.JumlahKoli.Margin = New System.Windows.Forms.Padding(4)
         Me.JumlahKoli.MaxLength = 4
         Me.JumlahKoli.Name = "JumlahKoli"
+        Me.JumlahKoli.ReadOnly = True
         Me.JumlahKoli.Size = New System.Drawing.Size(72, 22)
         Me.JumlahKoli.TabIndex = 6
         '
@@ -218,25 +226,30 @@ Partial Class Form_Gd_LHP
         Me.Kode_Importir.Location = New System.Drawing.Point(138, 130)
         Me.Kode_Importir.Margin = New System.Windows.Forms.Padding(4)
         Me.Kode_Importir.Name = "Kode_Importir"
+        Me.Kode_Importir.ReadOnly = True
         Me.Kode_Importir.Size = New System.Drawing.Size(44, 22)
         Me.Kode_Importir.TabIndex = 3
         '
         'NoPO
         '
+        Me.NoPO.BackColor = System.Drawing.SystemColors.Window
         Me.NoPO.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoPO.Location = New System.Drawing.Point(138, 106)
         Me.NoPO.Margin = New System.Windows.Forms.Padding(4)
         Me.NoPO.MaxLength = 4
         Me.NoPO.Name = "NoPO"
+        Me.NoPO.ReadOnly = True
         Me.NoPO.Size = New System.Drawing.Size(151, 22)
         Me.NoPO.TabIndex = 2
         '
         'Kode_Perajin
         '
+        Me.Kode_Perajin.BackColor = System.Drawing.SystemColors.Window
         Me.Kode_Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Kode_Perajin.Location = New System.Drawing.Point(138, 33)
         Me.Kode_Perajin.Margin = New System.Windows.Forms.Padding(4)
         Me.Kode_Perajin.Name = "Kode_Perajin"
+        Me.Kode_Perajin.ReadOnly = True
         Me.Kode_Perajin.Size = New System.Drawing.Size(44, 22)
         Me.Kode_Perajin.TabIndex = 0
         '
@@ -244,7 +257,7 @@ Partial Class Form_Gd_LHP
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(10, 231)
+        Me.Label19.Location = New System.Drawing.Point(10, 235)
         Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(120, 16)
@@ -302,15 +315,18 @@ Partial Class Form_Gd_LHP
         Me.Koordinator.Location = New System.Drawing.Point(256, 338)
         Me.Koordinator.Margin = New System.Windows.Forms.Padding(4)
         Me.Koordinator.Name = "Koordinator"
+        Me.Koordinator.ReadOnly = True
         Me.Koordinator.Size = New System.Drawing.Size(151, 22)
         Me.Koordinator.TabIndex = 12
         '
         'JumlahHitung
         '
+        Me.JumlahHitung.BackColor = System.Drawing.SystemColors.Window
         Me.JumlahHitung.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JumlahHitung.Location = New System.Drawing.Point(256, 193)
         Me.JumlahHitung.Margin = New System.Windows.Forms.Padding(4)
         Me.JumlahHitung.Name = "JumlahHitung"
+        Me.JumlahHitung.ReadOnly = True
         Me.JumlahHitung.Size = New System.Drawing.Size(151, 22)
         Me.JumlahHitung.TabIndex = 2
         '
@@ -346,7 +362,7 @@ Partial Class Form_Gd_LHP
         'LocGmb1
         '
         Me.LocGmb1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.LocGmb1.Location = New System.Drawing.Point(0, 223)
+        Me.LocGmb1.Location = New System.Drawing.Point(0, 227)
         Me.LocGmb1.Name = "LocGmb1"
         Me.LocGmb1.Size = New System.Drawing.Size(224, 20)
         Me.LocGmb1.TabIndex = 3
@@ -359,16 +375,18 @@ Partial Class Form_Gd_LHP
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(224, 243)
+        Me.PictureBox1.Size = New System.Drawing.Size(224, 227)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
         'NoPraLHP
         '
+        Me.NoPraLHP.BackColor = System.Drawing.SystemColors.Window
         Me.NoPraLHP.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoPraLHP.Location = New System.Drawing.Point(146, 28)
         Me.NoPraLHP.Margin = New System.Windows.Forms.Padding(4)
         Me.NoPraLHP.Name = "NoPraLHP"
+        Me.NoPraLHP.ReadOnly = True
         Me.NoPraLHP.Size = New System.Drawing.Size(151, 22)
         Me.NoPraLHP.TabIndex = 0
         '
@@ -439,8 +457,8 @@ Partial Class Form_Gd_LHP
         '
         'Column2
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column2.HeaderText = "Jumlah "
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -448,8 +466,8 @@ Partial Class Form_Gd_LHP
         '
         'Column3
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column3.HeaderText = "FOB Buyer"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -457,8 +475,8 @@ Partial Class Form_Gd_LHP
         '
         'Column6
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column6.HeaderText = "FOB Umum"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -968,6 +986,7 @@ Partial Class Form_Gd_LHP
         Me.Kirim.Location = New System.Drawing.Point(146, 169)
         Me.Kirim.Margin = New System.Windows.Forms.Padding(4)
         Me.Kirim.Name = "Kirim"
+        Me.Kirim.ReadOnly = True
         Me.Kirim.Size = New System.Drawing.Size(151, 22)
         Me.Kirim.TabIndex = 8
         '
@@ -995,12 +1014,14 @@ Partial Class Form_Gd_LHP
         '
         'Keterangan
         '
+        Me.Keterangan.BackColor = System.Drawing.SystemColors.Window
         Me.Keterangan.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Keterangan.Location = New System.Drawing.Point(51, 459)
         Me.Keterangan.Margin = New System.Windows.Forms.Padding(4)
         Me.Keterangan.Multiline = True
         Me.Keterangan.Name = "Keterangan"
-        Me.Keterangan.Size = New System.Drawing.Size(431, 45)
+        Me.Keterangan.ReadOnly = True
+        Me.Keterangan.Size = New System.Drawing.Size(507, 45)
         Me.Keterangan.TabIndex = 14
         '
         'LabelNoPO
@@ -1141,6 +1162,8 @@ Partial Class Form_Gd_LHP
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.PanelPicture)
+        Me.Panel5.Controls.Add(Me.Panel9)
+        Me.Panel5.Controls.Add(Me.Panel7)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel5.Location = New System.Drawing.Point(0, 258)
         Me.Panel5.Name = "Panel5"
@@ -1149,14 +1172,29 @@ Partial Class Form_Gd_LHP
         '
         'PanelPicture
         '
-        Me.PanelPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PanelPicture.Controls.Add(Me.LocGmb1)
         Me.PanelPicture.Controls.Add(Me.PictureBox1)
-        Me.PanelPicture.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelPicture.Location = New System.Drawing.Point(180, 0)
+        Me.PanelPicture.Controls.Add(Me.LocGmb1)
+        Me.PanelPicture.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelPicture.Location = New System.Drawing.Point(92, 0)
         Me.PanelPicture.Name = "PanelPicture"
-        Me.PanelPicture.Size = New System.Drawing.Size(228, 247)
-        Me.PanelPicture.TabIndex = 0
+        Me.PanelPicture.Size = New System.Drawing.Size(224, 247)
+        Me.PanelPicture.TabIndex = 3
+        '
+        'Panel9
+        '
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel9.Location = New System.Drawing.Point(316, 0)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(92, 247)
+        Me.Panel9.TabIndex = 2
+        '
+        'Panel7
+        '
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel7.Location = New System.Drawing.Point(0, 0)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(92, 247)
+        Me.Panel7.TabIndex = 1
         '
         'TglMasukGudang
         '
@@ -1201,10 +1239,12 @@ Partial Class Form_Gd_LHP
         '
         'Kargo
         '
+        Me.Kargo.BackColor = System.Drawing.SystemColors.Window
         Me.Kargo.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Kargo.Location = New System.Drawing.Point(138, 155)
         Me.Kargo.Margin = New System.Windows.Forms.Padding(4)
         Me.Kargo.Name = "Kargo"
+        Me.Kargo.ReadOnly = True
         Me.Kargo.Size = New System.Drawing.Size(151, 22)
         Me.Kargo.TabIndex = 217
         '
@@ -1232,10 +1272,12 @@ Partial Class Form_Gd_LHP
         '
         'NoSPB
         '
+        Me.NoSPB.BackColor = System.Drawing.SystemColors.Window
         Me.NoSPB.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoSPB.Location = New System.Drawing.Point(138, 81)
         Me.NoSPB.Margin = New System.Windows.Forms.Padding(4)
         Me.NoSPB.Name = "NoSPB"
+        Me.NoSPB.ReadOnly = True
         Me.NoSPB.Size = New System.Drawing.Size(151, 22)
         Me.NoSPB.TabIndex = 215
         '
@@ -1252,10 +1294,12 @@ Partial Class Form_Gd_LHP
         '
         'NoSP
         '
+        Me.NoSP.BackColor = System.Drawing.SystemColors.Window
         Me.NoSP.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoSP.Location = New System.Drawing.Point(138, 57)
         Me.NoSP.Margin = New System.Windows.Forms.Padding(4)
         Me.NoSP.Name = "NoSP"
+        Me.NoSP.ReadOnly = True
         Me.NoSP.Size = New System.Drawing.Size(151, 22)
         Me.NoSP.TabIndex = 213
         '
@@ -1305,19 +1349,23 @@ Partial Class Form_Gd_LHP
         '
         'Kode_Produk
         '
+        Me.Kode_Produk.BackColor = System.Drawing.SystemColors.Window
         Me.Kode_Produk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Kode_Produk.Location = New System.Drawing.Point(146, 51)
         Me.Kode_Produk.Margin = New System.Windows.Forms.Padding(4)
         Me.Kode_Produk.Name = "Kode_Produk"
+        Me.Kode_Produk.ReadOnly = True
         Me.Kode_Produk.Size = New System.Drawing.Size(151, 22)
         Me.Kode_Produk.TabIndex = 4
         '
         'Pemeriksa
         '
+        Me.Pemeriksa.BackColor = System.Drawing.SystemColors.Window
         Me.Pemeriksa.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Pemeriksa.Location = New System.Drawing.Point(256, 262)
         Me.Pemeriksa.Margin = New System.Windows.Forms.Padding(4)
         Me.Pemeriksa.Name = "Pemeriksa"
+        Me.Pemeriksa.ReadOnly = True
         Me.Pemeriksa.Size = New System.Drawing.Size(151, 22)
         Me.Pemeriksa.TabIndex = 10
         '
@@ -1367,21 +1415,25 @@ Partial Class Form_Gd_LHP
         '
         'AlasanDiTolak
         '
+        Me.AlasanDiTolak.BackColor = System.Drawing.SystemColors.Window
         Me.AlasanDiTolak.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AlasanDiTolak.Location = New System.Drawing.Point(51, 383)
         Me.AlasanDiTolak.Margin = New System.Windows.Forms.Padding(4)
         Me.AlasanDiTolak.Multiline = True
         Me.AlasanDiTolak.Name = "AlasanDiTolak"
-        Me.AlasanDiTolak.Size = New System.Drawing.Size(431, 53)
+        Me.AlasanDiTolak.ReadOnly = True
+        Me.AlasanDiTolak.Size = New System.Drawing.Size(507, 53)
         Me.AlasanDiTolak.TabIndex = 13
         '
         'JumlahPack
         '
+        Me.JumlahPack.BackColor = System.Drawing.SystemColors.Window
         Me.JumlahPack.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JumlahPack.Location = New System.Drawing.Point(146, 146)
         Me.JumlahPack.Margin = New System.Windows.Forms.Padding(4)
         Me.JumlahPack.MaxLength = 4
         Me.JumlahPack.Name = "JumlahPack"
+        Me.JumlahPack.ReadOnly = True
         Me.JumlahPack.Size = New System.Drawing.Size(151, 22)
         Me.JumlahPack.TabIndex = 7
         '
@@ -1409,10 +1461,12 @@ Partial Class Form_Gd_LHP
         '
         'JumlahRetur
         '
+        Me.JumlahRetur.BackColor = System.Drawing.SystemColors.Window
         Me.JumlahRetur.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JumlahRetur.Location = New System.Drawing.Point(256, 239)
         Me.JumlahRetur.Margin = New System.Windows.Forms.Padding(4)
         Me.JumlahRetur.Name = "JumlahRetur"
+        Me.JumlahRetur.ReadOnly = True
         Me.JumlahRetur.Size = New System.Drawing.Size(151, 22)
         Me.JumlahRetur.TabIndex = 3
         '
@@ -1482,11 +1536,12 @@ Partial Class Form_Gd_LHP
         '
         'cmdBatal
         '
+        Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
         Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdBatal.Location = New System.Drawing.Point(337, 3)
+        Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
         Me.cmdBatal.Name = "cmdBatal"
-        Me.cmdBatal.Size = New System.Drawing.Size(77, 28)
+        Me.cmdBatal.Size = New System.Drawing.Size(77, 34)
         Me.cmdBatal.TabIndex = 4
         Me.cmdBatal.Text = "&Batal"
         Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1581,10 +1636,12 @@ Partial Class Form_Gd_LHP
         '
         'JumlahBaik
         '
+        Me.JumlahBaik.BackColor = System.Drawing.SystemColors.Window
         Me.JumlahBaik.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JumlahBaik.Location = New System.Drawing.Point(256, 216)
         Me.JumlahBaik.Margin = New System.Windows.Forms.Padding(4)
         Me.JumlahBaik.Name = "JumlahBaik"
+        Me.JumlahBaik.ReadOnly = True
         Me.JumlahBaik.Size = New System.Drawing.Size(151, 22)
         Me.JumlahBaik.TabIndex = 217
         '
@@ -1612,10 +1669,12 @@ Partial Class Form_Gd_LHP
         '
         'NoLHP
         '
+        Me.NoLHP.BackColor = System.Drawing.SystemColors.Window
         Me.NoLHP.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoLHP.Location = New System.Drawing.Point(146, 5)
         Me.NoLHP.Margin = New System.Windows.Forms.Padding(4)
         Me.NoLHP.Name = "NoLHP"
+        Me.NoLHP.ReadOnly = True
         Me.NoLHP.Size = New System.Drawing.Size(151, 22)
         Me.NoLHP.TabIndex = 213
         '
@@ -1654,12 +1713,14 @@ Partial Class Form_Gd_LHP
         '
         'Produk
         '
+        Me.Produk.BackColor = System.Drawing.SystemColors.Window
         Me.Produk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Produk.Location = New System.Drawing.Point(146, 74)
         Me.Produk.Margin = New System.Windows.Forms.Padding(4)
         Me.Produk.Multiline = True
         Me.Produk.Name = "Produk"
-        Me.Produk.Size = New System.Drawing.Size(336, 47)
+        Me.Produk.ReadOnly = True
+        Me.Produk.Size = New System.Drawing.Size(412, 47)
         Me.Produk.TabIndex = 5
         '
         'TabPageFormEntry_
@@ -1796,7 +1857,6 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Label11 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents PanelGambar As Panel
-    Friend WithEvents PanelPicture As Panel
     Friend WithEvents Label22 As Label
     Friend WithEvents NoSPB As TextBox
     Friend WithEvents Label20 As Label
@@ -1860,4 +1920,7 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Panel3 As Panel
+    Friend WithEvents PanelPicture As Panel
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents Panel7 As Panel
 End Class

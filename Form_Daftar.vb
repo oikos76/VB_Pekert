@@ -47,6 +47,32 @@
                                     .Table.Rows(a) !NamaPerajin)
                 Next (a)
             End With
+        ElseIf Me.Text = "Daftar Produk Pra LHP" Then
+            DGView.Columns(0).HeaderText = "KodeProduk + SP"
+            DGView.Columns(0).Width = 1
+            DGView.Columns(1).HeaderText = "Kode Produk"
+            DGView.Columns(1).Width = 150
+            DGView.Columns(2).HeaderText = "Produk"
+            DGView.Columns(2).Width = 250
+            DGView.Columns(3).HeaderText = "Tgl Terima"
+            DGView.Columns(3).Width = 150
+            DGView.Columns(4).HeaderText = "No.SP"
+            DGView.Columns(4).Width = 150
+            DGView.Columns(5).HeaderText = "No.PraLHP"
+            DGView.Columns(5).Width = 150
+            Me.Cursor = Cursors.WaitCursor
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(Microsoft.VisualBasic.Left(.Table.Rows(a) !Kode_Produk & Space(25), 25) & Microsoft.VisualBasic.Right(Space(25) & .Table.Rows(a) !NoSP, 25),
+                                    .Table.Rows(a) !Kode_Produk,
+                                    .Table.Rows(a) !Produk,
+                                    Format(.Table.Rows(a) !tglTerima, "dd-MM-yyyy"),
+                                    .Table.Rows(a) !NoSP,
+                                    .Table.Rows(a) !NoPraLHP)
+                Next (a)
+            End With
+            Me.Cursor = Cursors.Default
         ElseIf Me.Text = "Riwayat Harga" Then
             DGView.Columns(0).HeaderText = "IDREC"
             DGView.Columns(0).Width = 1

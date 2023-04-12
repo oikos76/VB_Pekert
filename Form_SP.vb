@@ -1330,6 +1330,14 @@ ErrMSG:
         Kode_Produk.Focus()
     End Sub
 
+    Private Sub TglKirimPerajin_ValueChanged(sender As Object, e As EventArgs) Handles TglKirimPerajin.ValueChanged
+
+    End Sub
+
+    Private Sub TglMasukGudang_ValueChanged(sender As Object, e As EventArgs) Handles TglMasukGudang.ValueChanged
+
+    End Sub
+
     Private Sub ShipmentDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShipmentDate.KeyPress
         If e.KeyChar = Chr(13) Then
             Kode_Perajin.Focus()
@@ -1352,17 +1360,17 @@ ErrMSG:
         ElseIf e.KeyChar = ","c Then
             e.KeyChar = ","c
         ElseIf e.KeyChar = "." Then
-            If Jumlah.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
+            If HargaBeliRp.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
                 e.Handled = True
                 Beep()
             End If
         ElseIf e.KeyChar = Chr(13) Then
-            If IsNumeric(Jumlah.Text) Then
+            If IsNumeric(HargaBeliRp.Text) Then
                 Dim temp As Double = HargaBeliRp.Text
                 HargaBeliRp.Text = Format(temp, "###,##0.00")
                 HargaBeliRp.SelectionStart = HargaBeliRp.TextLength
             Else
-                Jumlah.Text = 0
+                HargaBeliRp.Text = 0
             End If
             If LAdd Or LEdit Then HargaBeliUS.Focus()
         Else
