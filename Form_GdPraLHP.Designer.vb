@@ -683,6 +683,7 @@ Partial Class Form_GdPraLHP
         Me.StatusSP.Size = New System.Drawing.Size(75, 25)
         Me.StatusSP.TabIndex = 191
         Me.StatusSP.Text = "123456789012345"
+        Me.StatusSP.Visible = False
         '
         'IDRecord
         '

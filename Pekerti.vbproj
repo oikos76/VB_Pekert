@@ -160,6 +160,12 @@
     <Compile Include="Form_DPBContoh.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_Export2Excel.Designer.vb">
+      <DependentUpon>Form_Export2Excel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Export2Excel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_GdPraLHP.Designer.vb">
       <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
     </Compile>
@@ -170,6 +176,12 @@
       <DependentUpon>Form_Gd_LHP.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_Gd_LHP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Hapus.Designer.vb">
+      <DependentUpon>Form_Hapus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Hapus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_JenisBox.Designer.vb">
@@ -424,6 +436,12 @@
     <Compile Include="Form_SP_Contoh.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_UangMuka.Designer.vb">
+      <DependentUpon>Form_UangMuka.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UangMuka.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_User.Designer.vb">
       <DependentUpon>Form_User.vb</DependentUpon>
     </Compile>
@@ -462,6 +480,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Report\Rpt_DPB.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_DPB.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Rpt_KatalogProduk_InInd.vb">
       <AutoGen>True</AutoGen>
@@ -523,6 +547,12 @@
       <DependentUpon>Rpt_P_OLD.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Rpt_SP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_SP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Terbilang.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -532,11 +562,17 @@
     <EmbeddedResource Include="Form_DPBContoh.resx">
       <DependentUpon>Form_DPBContoh.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Export2Excel.resx">
+      <DependentUpon>Form_Export2Excel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_GdPraLHP.resx">
       <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Gd_LHP.resx">
       <DependentUpon>Form_Gd_LHP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Hapus.resx">
+      <DependentUpon>Form_Hapus.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_JenisBox.resx">
       <DependentUpon>Form_JenisBox.vb</DependentUpon>
@@ -666,6 +702,9 @@
     <EmbeddedResource Include="Form_SP_Contoh.resx">
       <DependentUpon>Form_SP_Contoh.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_UangMuka.resx">
+      <DependentUpon>Form_UangMuka.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_User.resx">
       <DependentUpon>Form_User.vb</DependentUpon>
     </EmbeddedResource>
@@ -684,6 +723,10 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_DPB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DPB.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_KatalogProduk_InInd.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -725,12 +768,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_P_OLD.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_SP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_SP.vb</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

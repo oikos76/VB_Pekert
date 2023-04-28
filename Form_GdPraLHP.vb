@@ -52,6 +52,7 @@ Public Class Form_GdPraLHP
         MsgSQL = "Select Top 1 * From T_PraLHP " &
             "Where IDRec > '" & IDRecord.Text & "' " &
             " And NoSP = '" & NoSP.Text & "' and aktifYN = 'Y' " &
+            " And NoPraLHP = '" & NoPraLHP.Text & "' " &
             "Order By IdRec "
         Rs = Proses.ExecuteQuery(MsgSQL)
         If Rs.Rows.Count <> 0 Then
@@ -408,15 +409,16 @@ Public Class Form_GdPraLHP
         ClearTextBoxes()
         Dim MsgSQL As String, Rs As New DataTable
         Dim tIdRec As String
-        MsgSQL = "Select Top 1 * From t_SPContoh " &
+        MsgSQL = "Select Top 1 * From t_PraLHP " &
             "where AktifYN = 'Y' " &
-            "Order By tglSP Desc, IdRec desc "
+            "Order By TglPraLHP Desc, IdRec desc "
         Rs = Proses.ExecuteQuery(MsgSQL)
         If Rs.Rows.Count <> 0 Then
             tIdRec = Rs.Rows(0) !IDRec
         Else
             tIdRec = ""
         End If
+        IDRecord.Text = tIdRec
         Call IsiPraLHP()
         Me.Cursor = Cursors.WaitCursor
         If Format(Now, "YYMMDD") < "131231" Then
@@ -750,8 +752,8 @@ Public Class Form_GdPraLHP
         Dim tIdRec As String
         If NoSP.Text = "" Then Exit Sub
         MsgSQL = "Select Top 1 * From t_PraLHP " &
-            "Where NoSP = '" & NoSP.Text & "' " &
-            "  And aktifYN = 'Y' " &
+            "Where aktifYN = 'Y' " &
+            " And NoPraLHP = '" & NoPraLHP.Text & "' " &
             "Order By TglPraLHP, IdRec  "
         Rs = Proses.ExecuteQuery(MsgSQL)
         If Rs.Rows.Count <> 0 Then
@@ -769,6 +771,7 @@ Public Class Form_GdPraLHP
         MsgSQL = "Select Top 1 * From t_PraLHP " &
             "Where NoSP = '" & NoSP.Text & "' " &
             " And IDRec < '" & IDRecord.Text & "' " &
+            " And NoPraLHP = '" & NoPraLHP.Text & "' " &
             " And aktifYN = 'Y' " &
             "Order By IdRec Desc "
         Rs = Proses.ExecuteQuery(MsgSQL)
@@ -786,8 +789,8 @@ Public Class Form_GdPraLHP
         Dim tIdRec As String
         If NoSP.Text = "" Then Exit Sub
         MsgSQL = "Select Top 1 * From t_PraLHP " &
-            "Where NoSP = '" & NoSP.Text & "' " &
-            "  And aktifYN = 'Y' " &
+            "Where aktifYN = 'Y' " &
+            " And NoPraLHP = '" & NoPraLHP.Text & "' " &
             "Order By TglPraLHP Desc, IdRec Desc  "
         Rs = Proses.ExecuteQuery(MsgSQL)
         If Rs.Rows.Count <> 0 Then
@@ -800,31 +803,43 @@ Public Class Form_GdPraLHP
     End Sub
 
     Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
-        Dim MsgSQL As String
         If Trim(IDRecord.Text) = "" Then
             MsgBox("Data yang akan di hapus belum di pilih!", vbCritical, ".:Empty Data!")
             Exit Sub
         End If
-        If MsgBox("Apakah anda yakin hapus record ini?", vbYesNo + vbInformation) = vbYes Then
-            MsgSQL = "Update t_PraLHP SET  " &
-                " AktifYN = 'N', " &
-                "  UserID = '" & UserID & "', " &
-                " LastUPD = GetDate(), " &
-                " TransferYN = 'N'  " &
-                "Where IDRec = '" & IDRecord.Text & "' "
-            Proses.ExecuteNonQuery(MsgSQL)
-            Dim rs As New DataTable
-            MsgSQL = "Select Top 1 * From t_PraLHP " &
-                "Where IDRec > '" & IDRecord.Text & "' " &
-                " And NoSP = '" & NoSP.Text & "' and aktifYN = 'Y' " &
-                "Order By IdRec "
-            rs = Proses.ExecuteQuery(MsgSQL)
-            If rs.Rows.Count <> 0 Then
-                btnNext_Click(sender, e)
-            Else
-                btnTop_Click(sender, e)
-            End If
-        End If
+        Form_Hapus.Left = Me.Left
+        Form_Hapus.Top = Me.Top
+        Form_Hapus.tIDSebagian.Text = IDRecord.Text
+        Form_Hapus.tIDSemua.Text = NoPraLHP.Text
+        Form_Hapus.Text = "Hapus Pra LHP"
+        Form_Hapus.ShowDialog()
+        ClearTextBoxes()
+        DaftarPraLHP()
+        'Dim MsgSQL As String
+        'If Trim(IDRecord.Text) = "" Then
+        '    MsgBox("Data yang akan di hapus belum di pilih!", vbCritical, ".:Empty Data!")
+        '    Exit Sub
+        'End If
+        'If MsgBox("Apakah anda yakin hapus record ini?", vbYesNo + vbInformation) = vbYes Then
+        '    MsgSQL = "Update t_PraLHP SET  " &
+        '        " AktifYN = 'N', " &
+        '        "  UserID = '" & UserID & "', " &
+        '        " LastUPD = GetDate(), " &
+        '        " TransferYN = 'N'  " &
+        '        "Where IDRec = '" & IDRecord.Text & "' "
+        '    Proses.ExecuteNonQuery(MsgSQL)
+        '    Dim rs As New DataTable
+        '    MsgSQL = "Select Top 1 * From t_PraLHP " &
+        '        "Where IDRec > '" & IDRecord.Text & "' " &
+        '        " And NoSP = '" & NoSP.Text & "' and aktifYN = 'Y' " &
+        '        "Order By IdRec "
+        '    rs = Proses.ExecuteQuery(MsgSQL)
+        '    If rs.Rows.Count <> 0 Then
+        '        btnNext_Click(sender, e)
+        '    Else
+        '        btnTop_Click(sender, e)
+        '    End If
+        'End If
     End Sub
 
     Private Sub DGView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView2.CellContentClick

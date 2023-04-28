@@ -32,6 +32,23 @@
                     .Table.Rows(a) !phone)
                 Next (a)
             End With
+        ElseIf Me.Text = "Daftar LHP" Then
+            DGView.Columns(0).HeaderText = "No LHP"
+            DGView.Columns(0).Width = 150
+            DGView.Columns(1).HeaderText = "Perajin"
+            DGView.Columns(1).Width = 200
+            DGView.Columns(2).HeaderText = "Tgl.LHP "
+            DGView.Columns(2).Width = 120
+            DGView.Columns(3).HeaderText = " "
+            DGView.Columns(4).HeaderText = " "
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !NoLHP,
+                                    .Table.Rows(a) !NamaPerajin,
+                                    Format(.Table.Rows(a) !TglLHP, "dd-MM-yyyy"))
+                Next (a)
+            End With
         ElseIf Me.Text = "Daftar Pra LHP" Then
             DGView.Columns(0).HeaderText = "No Pra LHP"
             DGView.Columns(0).Width = 150
@@ -95,7 +112,26 @@
 
                 Next (a)
             End With
-
+        ElseIf Me.Text = "Daftar DPB" Then
+            DGView.Columns(0).HeaderText = "No DPB"
+            DGView.Columns(0).Width = 130
+            DGView.Columns(1).HeaderText = "Tgl DPB"
+            DGView.Columns(1).Width = 125
+            DGView.Columns(2).HeaderText = "No. SP"
+            DGView.Columns(2).Width = 130
+            DGView.Columns(3).HeaderText = "No.LHP "
+            DGView.Columns(3).Width = 130
+            DGView.Columns(4).HeaderText = "Perajin "
+            DGView.Columns(4).Width = 150
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !nodpb,
+                                    Format(.Table.Rows(a) !TglDPB, "dd-MM-yyyy"),
+                                    .Table.Rows(a) !NoSP, .Table.Rows(a) !NoLHP,
+                                    .Table.Rows(a) !Perajin)
+                Next (a)
+            End With
         ElseIf Me.Text = "Daftar Toko" Then
             DGView.Columns(0).HeaderText = "Id Toko"
             DGView.Columns(0).Width = 80
@@ -626,6 +662,13 @@
                 "Where AktifYN = 'Y' " &
                 "  And ( KodeProduk Like '%" & tCari.Text & "%' or Deskripsi Like '%" & tCari.Text & "%') " &
                 "Order By Deskripsi "
+            ElseIf Me.Text = "Daftar LHP" Then
+                txtQuery.Text = "Select NoLHP, a.NamaPerajin, a.TglLHP " &
+                " From T_LHP a  " &
+                "Where a.AktifYN = 'Y' " &
+                "And NoLHP Like '%" & Trim(tCari.Text) & "%' " &
+                "Group By NoLHP, a.NamaPerajin, a.TglLHP " &
+                "Order By a.tglLHP desc, NoLHP Desc "
             Else
                 MsgBox("Code Program untuk pencarian " & Me.Text & " Belum ada ! :" & Me.Text)
                 DGView.DataSource = tblData

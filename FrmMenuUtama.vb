@@ -522,6 +522,11 @@ Public Class FrmMenuUtama
         Form_Gd_LHP.MdiParent = Me
         Form_Gd_LHP.Show()
     End Sub
+
+    Private Sub _33PengajuanUangMukaPerajin_Click(sender As Object, e As EventArgs) Handles _33PengajuanUangMukaPerajin.Click
+        Form_UangMuka.MdiParent = Me
+        Form_UangMuka.Show()
+    End Sub
 End Class
 
 

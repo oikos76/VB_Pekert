@@ -498,7 +498,7 @@ Public Class ClsKoneksi
         ElseIf Mid(sTgl, 4, 2) = "03" Then
             hasil = Left(sTgl, 2) + " Maret " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "04" Then
-            TglIndo = Left(sTgl, 2) + " April " + Right(sTgl, 4)
+            hasil = Left(sTgl, 2) + " April " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "05" Then
             hasil = Left(sTgl, 2) + " Mei " + Right(sTgl, 4)
         ElseIf Mid(sTgl, 4, 2) = "06" Then
@@ -541,40 +541,5 @@ Public Class ClsKoneksi
         Form_Daftar.ShowDialog()
         tKodeProduk = FrmMenuUtama.TSKeterangan.Text
         FindKodeProdukPO_SP = tKodeProduk
-
-        'Frm_Browse.lstView.ListItems.Clear
-        'Frm_Browse.lstView.Visible = False
-        'Frm_Browse.lstView.ColumnHeaders(1).Text = "Kode Produk"
-        'Frm_Browse.lstView.ColumnHeaders(1).Width = 1750
-        'Frm_Browse.lstView.ColumnHeaders(2).Text = "Produk"
-        'Frm_Browse.lstView.ColumnHeaders(3).Text = "Importir"
-        'Frm_Browse.lstView.ColumnHeaders(4).Text = "NoPO"
-        'Frm_Browse.lstView.ColumnHeaders(5).Text = "Jumlah PO"
-        'Frm_Browse.lstView.ColumnHeaders(5).Alignment = lvwColumnRight
-        'Frm_Browse.lstView.ColumnHeaders(6).Text = "jml yg belum di SP"
-        'Frm_Browse.lstView.ColumnHeaders(6).Alignment = lvwColumnRight
-        'Do While Not RSD.EOF
-        '    DoEvents
-        '    QTYSP = RSD!Jumlah - QTYProdukSP(RSD!Kode_Produk, RSD!NoPO)
-        '    If RSD!Kode_Produk = "0284-20-3076" Then
-        '        Debug.Print RSD!Kode_Produk
-        '    End If
-        '    If QTYSP <> 0 Then
-        '    Set Lst = Frm_Browse.lstView.ListItems.Add(, , RSD!Kode_Produk)
-        '    Lst.SubItems(1) = RSD!Deskripsi
-        '        Lst.SubItems(2) = RSD!Nama
-        '        Lst.SubItems(3) = RSD!NoPO
-
-        '        Lst.SubItems(4) = Format(RSD!Jumlah, "###,##0")
-        '        Lst.SubItems(5) = Format(QTYSP, "###,##0")
-        '    End If
-        '    RSD.MoveNext
-        'Loop
-        'RSD.Close
-        'Set RSD = Nothing
-        'Frm_Browse.lstView.Visible = True
-        'Frm_Browse.WindowState = vbNormal
-        'Frm_Browse.Show 1
-        'FindKodeProdukPO = Trim(Right(Frm_Browse.Tag, 20))
     End Function
 End Class

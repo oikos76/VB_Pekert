@@ -796,6 +796,7 @@ ErrMSG:
         Dim MsgSQL As String, rsc As New DataTable, Pernyataan As String
         Dim TCetak As String, tSQL As String, mPO As String, mRevisi As String
         Dim terbilang As String = "", tb As New Terbilang
+
         If Trim(NoSP.Text) = "" Then
             MsgBox("No SP yang akan di cetak belum di pilih!", vbCritical, ".:ERROR!")
             Exit Sub
@@ -812,39 +813,46 @@ ErrMSG:
                     mRevisi = "REVISI"
                 Else
                     mRevisi = ""
+                    StatusSP.Text = ""
                 End If
             End If
         End If
         Me.Cursor = Cursors.WaitCursor
-        MsgSQL = "Select isnull(Sum(t_SP.Jumlah * t_SP.HargaBeliRP),0) JValue " &
-        "From Pekerti.dbo.t_SP  " &
-        "Where t_SP.AktifYN = 'Y' " &
-        "  And t_SP.NoSP = '" & NoSP.Text & "' "
-        rsc = Proses.ExecuteQuery(MsgSQL)
+        mRevisi = StatusSP.Text
+        Proses.OpenConn(CN)
+        dttable = New DataTable
 
+        MsgSQL = "Select isnull(Sum(t_SP.Jumlah * t_SP.HargaBeliRP),0) JValue " &
+            "From Pekerti.dbo.t_SP  " &
+            "Where t_SP.AktifYN = 'Y' " &
+            "  And t_SP.NoSP = '" & NoSP.Text & "' "
+        rsc = Proses.ExecuteQuery(MsgSQL)
         If rsc.Rows.Count <> 0 Then
             terbilang = " " & tb.Terbilang(CDbl(IIf(rsc.Rows(0) !jvalue, 0, rsc.Rows(0) !jvalue))) & " "
+            terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !jvalue)) & " "
         End If
         Proses.CloseConn()
         TCetak = "Jakarta, " & Proses.TglIndo(Format(TglSP.Value, "dd-MM-yyyy"))
         MsgSQL = "SELECT t_SP.IDRec, t_SP.NoSP, t_SP.NoPO, t_SP.Kode_Perajin, " &
-            "t_SP.Perajin, t_SP.KodeProduk, t_SP.Produk, t_SP.KodePerajin, " &
-            "t_SP.Jumlah, t_SP.HargaBeliRP, t_SP.CatatanSP, m_KodeProduk.Panjang, " &
-            "m_KodeProduk.Lebar, m_KodeProduk.Tinggi " &
-            "FROM Pekerti.dbo.t_SP t_SP INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
+            "     t_SP.Perajin, t_SP.KodeProduk, t_SP.Produk, t_SP.KodePerajin, " &
+            "     t_SP.Jumlah, t_SP.HargaBeliRP, t_SP.CatatanSP, m_KodeProduk.Panjang, " &
+            "     m_KodeProduk.Lebar, m_KodeProduk.Tinggi,  m_KodeProduk.diameter, " &
+            "     m_KodeProduk.tebal, m_KodeProduk.Satuan, m_KodeProduk.KodePerajin2, " &
+            "     t_SP.Importir, CatatanProduk, CatatanTambahan, CatatanSP " &
+            "FROM Pekerti.dbo.t_SP t_SP INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk On " &
             "   t_SP.KodeProduk = m_KodeProduk.KodeProduk  " &
             "Where t_SP.AktifYN = 'Y' " &
             "  And t_SP.NoSP = '" & NoSP.Text & "' " &
             "ORDER BY t_SP.IDRec, t_SP.NoPO ASC "
+
         If optTPO.Checked = True Then
             mPO = ""
         Else
             mPO = " untuk PO No. " & Trim(NoPO.Text) & " "
         End If
         Pernyataan = "Setelah menerima dan mempelajari Surat Pesanan No. " & NoSP.Text &
-        " tertanggal " & Proses.TglIndo(Format(TglSP.Value, "dd-MM-yyyy")) &
-        mPO & ", dengan ini kami menyatakan " &
-        " kesanggupan untuk memenuhi pesanan tersebut sesuai dengan syarat atau kondisi seperti terinci pada lembar SP ini. "
+                " tertanggal " & Proses.TglIndo(Format(TglSP.Value, "dd-MM-yyyy")) & " " & mPO & ", dengan ini kami menyatakan " &
+                " kesanggupan untuk memenuhi pesanan tersebut sesuai dengan syarat atau kondisi seperti terinci pada lembar SP ini. "
         If Len(Pernyataan) > 254 Then
             Pernyataan = Replace(Pernyataan, Proses.TglIndo(Format(TglSP.Value, "dd-MM-yyyy")), Format(TglSP.Value, "dd-MM-yyyy"))
         End If
@@ -853,25 +861,25 @@ ErrMSG:
         tSQL = "Update T_SP Set Pernyataan = '" & Trim(Microsoft.VisualBasic.Left(Pernyataan, 254)) & "' " &
             "Where NoSP = '" & NoSP.Text & "' "
         Proses.ExecuteNonQuery(tSQL)
-        DTadapter = New SqlDataAdapter(SQL, CN)
-        'terbilang = "# " + tb.Terbilang(CDbl(Total.Text)) + " Rupiah #"
+
+        DTadapter = New SqlDataAdapter(MsgSQL, CN)
         Try
             DTadapter.Fill(dttable)
             'RPT belum di convert !!!
-            If Proses.UserAksesMenu(UserID, "SP_CETAK") Then
-                If MsgBox("Mau pakai tanda tangan?", vbYesNo + vbInformation, ".:Signature!") = vbYes Then
-                    ' objRep = New Rpt_sptt.rpt
-                Else
-                    ' objRep = New Rpt_sp.rpt
-                End If
-            Else
-                ' objRep = New Rpt_sp.rpt
-            End If
+            'If Proses.UserAksesMenu(UserID, "SP_CETAK") Then
+            '    If MsgBox("Mau pakai tanda tangan?", vbYesNo + vbInformation, ".:Signature!") = vbYes Then
+            '        ' objRep = New Rpt_sptt.rpt
+            '    Else
+            '        ' objRep = New Rpt_sp.rpt
+            '    End If
+            'Else
+            objRep = New Rpt_SP
+            'End If
             objRep.SetDataSource(dttable)
+            objRep.SetParameterValue("MRevisi", mRevisi)
             objRep.SetParameterValue("terbilang", terbilang)
-            objRep.SetParameterValue("userid", UserID)
-            objRep.SetParameterValue("toko", FrmMenuUtama.CompCode.Text)
-
+            objRep.SetParameterValue("tglCetak", TCetak)
+            objRep.SetParameterValue("pernyataan2", pernyataan2)
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep

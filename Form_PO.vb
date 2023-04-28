@@ -1061,6 +1061,10 @@ Public Class Form_PO
         Jumlah.Focus()
     End Sub
 
+    Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+
+    End Sub
+
     Private Function OrderProduk(KodeProduk As String) As String
         Dim MsgSQL As String, rsc As New DataTable, oMataUang As String = ""
         MsgSQL = "Select Count(IDRec) JumRec " &

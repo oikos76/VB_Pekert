@@ -1224,6 +1224,10 @@ Public Class Form_PI
         Form_PIBiayaTambahan.ShowDialog()
     End Sub
 
+    Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+
+    End Sub
+
     Private Sub Nopo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Nopo.KeyPress
         Dim RSN1 As New DataTable, RSN2 As New DataTable
         If e.KeyChar = Chr(13) Then

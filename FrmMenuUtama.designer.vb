@@ -78,7 +78,7 @@ Partial Class FrmMenuUtama
         Me._13BagianPembelian = New System.Windows.Forms.ToolStripMenuItem()
         Me._31SuratPesanan = New System.Windows.Forms.ToolStripMenuItem()
         Me._32DPB = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PengajuanUangMukaPerajinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._33PengajuanUangMukaPerajin = New System.Windows.Forms.ToolStripMenuItem()
         Me._14BagianPemasaran = New System.Windows.Forms.ToolStripMenuItem()
         Me._41KodifikasiNegara = New System.Windows.Forms.ToolStripMenuItem()
         Me._42KodifikasiImportir = New System.Windows.Forms.ToolStripMenuItem()
@@ -486,7 +486,7 @@ Partial Class FrmMenuUtama
         '
         '_13BagianPembelian
         '
-        Me._13BagianPembelian.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._31SuratPesanan, Me._32DPB, Me.PengajuanUangMukaPerajinToolStripMenuItem})
+        Me._13BagianPembelian.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._31SuratPesanan, Me._32DPB, Me._33PengajuanUangMukaPerajin})
         Me._13BagianPembelian.Name = "_13BagianPembelian"
         Me._13BagianPembelian.Size = New System.Drawing.Size(114, 26)
         Me._13BagianPembelian.Text = "Bagian Pembelian"
@@ -500,15 +500,17 @@ Partial Class FrmMenuUtama
         '
         '_32DPB
         '
+        Me._32DPB.Image = CType(resources.GetObject("_32DPB.Image"), System.Drawing.Image)
         Me._32DPB.Name = "_32DPB"
         Me._32DPB.Size = New System.Drawing.Size(245, 22)
         Me._32DPB.Text = "Daftar Penerimaan Barang / DPB"
         '
-        'PengajuanUangMukaPerajinToolStripMenuItem
+        '_33PengajuanUangMukaPerajin
         '
-        Me.PengajuanUangMukaPerajinToolStripMenuItem.Name = "PengajuanUangMukaPerajinToolStripMenuItem"
-        Me.PengajuanUangMukaPerajinToolStripMenuItem.Size = New System.Drawing.Size(245, 22)
-        Me.PengajuanUangMukaPerajinToolStripMenuItem.Text = "Pengajuan Uang Muka Perajin"
+        Me._33PengajuanUangMukaPerajin.Image = CType(resources.GetObject("_33PengajuanUangMukaPerajin.Image"), System.Drawing.Image)
+        Me._33PengajuanUangMukaPerajin.Name = "_33PengajuanUangMukaPerajin"
+        Me._33PengajuanUangMukaPerajin.Size = New System.Drawing.Size(245, 22)
+        Me._33PengajuanUangMukaPerajin.Text = "Pengajuan Uang Muka Perajin"
         '
         '_14BagianPemasaran
         '
@@ -574,6 +576,7 @@ Partial Class FrmMenuUtama
         '
         '_52LHP
         '
+        Me._52LHP.Image = CType(resources.GetObject("_52LHP.Image"), System.Drawing.Image)
         Me._52LHP.Name = "_52LHP"
         Me._52LHP.Size = New System.Drawing.Size(249, 22)
         Me._52LHP.Text = "Laporan Hasil Pemeriksaan (LHP)"
@@ -586,6 +589,7 @@ Partial Class FrmMenuUtama
         '
         '_54JenisBox
         '
+        Me._54JenisBox.Image = CType(resources.GetObject("_54JenisBox.Image"), System.Drawing.Image)
         Me._54JenisBox.Name = "_54JenisBox"
         Me._54JenisBox.Size = New System.Drawing.Size(249, 22)
         Me._54JenisBox.Text = "Jenis Box"
@@ -598,6 +602,7 @@ Partial Class FrmMenuUtama
         '
         'MetodePengirimanToolStripMenuItem
         '
+        Me.MetodePengirimanToolStripMenuItem.Image = CType(resources.GetObject("MetodePengirimanToolStripMenuItem.Image"), System.Drawing.Image)
         Me.MetodePengirimanToolStripMenuItem.Name = "MetodePengirimanToolStripMenuItem"
         Me.MetodePengirimanToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.MetodePengirimanToolStripMenuItem.Text = "Metode Pengiriman"
@@ -883,7 +888,7 @@ Partial Class FrmMenuUtama
     Friend WithEvents _13BagianPembelian As ToolStripMenuItem
     Friend WithEvents _31SuratPesanan As ToolStripMenuItem
     Friend WithEvents _32DPB As ToolStripMenuItem
-    Friend WithEvents PengajuanUangMukaPerajinToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _33PengajuanUangMukaPerajin As ToolStripMenuItem
     Friend WithEvents _14BagianPemasaran As ToolStripMenuItem
     Friend WithEvents _41KodifikasiNegara As ToolStripMenuItem
     Friend WithEvents _42KodifikasiImportir As ToolStripMenuItem

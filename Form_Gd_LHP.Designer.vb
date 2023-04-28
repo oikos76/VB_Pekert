@@ -22,9 +22,11 @@ Partial Class Form_Gd_LHP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Gd_LHP))
         Me.Importir = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
@@ -55,11 +57,11 @@ Partial Class Form_Gd_LHP
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PanelPencarian = New System.Windows.Forms.Panel()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Label43 = New System.Windows.Forms.Label()
-        Me.Label44 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label32 = New System.Windows.Forms.Label()
@@ -68,17 +70,11 @@ Partial Class Form_Gd_LHP
         Me.tNoPO = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.tKodeBrg = New System.Windows.Forms.TextBox()
-        Me.Label38 = New System.Windows.Forms.Label()
         Me.tNoSP = New System.Windows.Forms.TextBox()
-        Me.Label37 = New System.Windows.Forms.Label()
         Me.tNoPraLHP = New System.Windows.Forms.TextBox()
-        Me.Label36 = New System.Windows.Forms.Label()
         Me.Label42 = New System.Windows.Forms.Label()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
         Me.Label40 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.Label41 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.tNOLHP = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -99,6 +95,7 @@ Partial Class Form_Gd_LHP
         Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kirim = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.tglMulaiPeriksa = New System.Windows.Forms.DateTimePicker()
@@ -163,6 +160,7 @@ Partial Class Form_Gd_LHP
         Me.Produk = New System.Windows.Forms.TextBox()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.cmdExcel = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageDaftar_.SuspendLayout()
         Me.PanelDaftarLHP.SuspendLayout()
@@ -429,7 +427,7 @@ Partial Class Form_Gd_LHP
         Me.DGView2.AllowUserToDeleteRows = False
         Me.DGView2.AllowUserToOrderColumns = True
         Me.DGView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column1, Me.Column2, Me.Column3, Me.Column6, Me.Column7})
+        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column1, Me.Column2, Me.Column3, Me.Column6, Me.Column7, Me.Column5, Me.Column15, Me.Column16})
         Me.DGView2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGView2.Location = New System.Drawing.Point(0, 0)
         Me.DGView2.Margin = New System.Windows.Forms.Padding(4)
@@ -457,36 +455,56 @@ Partial Class Form_Gd_LHP
         '
         'Column2
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Column2.HeaderText = "Jumlah "
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column2.HeaderText = "Jumlah Pack"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
-        Me.Column2.Width = 120
         '
         'Column3
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Column3.HeaderText = "FOB Buyer"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Column3.HeaderText = "Kirim"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
-        Me.Column3.Width = 120
         '
         'Column6
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Column6.HeaderText = "FOB Umum"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Column6.HeaderText = "Jml.Hitung"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        Me.Column7.HeaderText = "Perajin"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Column7.HeaderText = "Jml.Baik"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
-        Me.Column7.Width = 200
+        '
+        'Column5
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Column5.HeaderText = "Jml.Tolak"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        '
+        'Column15
+        '
+        Me.Column15.HeaderText = "Alasan di tolak"
+        Me.Column15.Name = "Column15"
+        Me.Column15.ReadOnly = True
+        Me.Column15.Width = 180
+        '
+        'Column16
+        '
+        Me.Column16.HeaderText = "No.SP"
+        Me.Column16.Name = "Column16"
+        Me.Column16.ReadOnly = True
         '
         'Panel6
         '
@@ -508,9 +526,6 @@ Partial Class Form_Gd_LHP
         '
         'PanelPencarian
         '
-        Me.PanelPencarian.Controls.Add(Me.Label45)
-        Me.PanelPencarian.Controls.Add(Me.Label43)
-        Me.PanelPencarian.Controls.Add(Me.Label44)
         Me.PanelPencarian.Controls.Add(Me.Label33)
         Me.PanelPencarian.Controls.Add(Me.Label34)
         Me.PanelPencarian.Controls.Add(Me.Label32)
@@ -519,17 +534,11 @@ Partial Class Form_Gd_LHP
         Me.PanelPencarian.Controls.Add(Me.tNoPO)
         Me.PanelPencarian.Controls.Add(Me.Label39)
         Me.PanelPencarian.Controls.Add(Me.tKodeBrg)
-        Me.PanelPencarian.Controls.Add(Me.Label38)
         Me.PanelPencarian.Controls.Add(Me.tNoSP)
-        Me.PanelPencarian.Controls.Add(Me.Label37)
         Me.PanelPencarian.Controls.Add(Me.tNoPraLHP)
-        Me.PanelPencarian.Controls.Add(Me.Label36)
         Me.PanelPencarian.Controls.Add(Me.Label42)
-        Me.PanelPencarian.Controls.Add(Me.TextBox10)
         Me.PanelPencarian.Controls.Add(Me.Label40)
-        Me.PanelPencarian.Controls.Add(Me.TextBox9)
         Me.PanelPencarian.Controls.Add(Me.Label41)
-        Me.PanelPencarian.Controls.Add(Me.TextBox8)
         Me.PanelPencarian.Controls.Add(Me.tNOLHP)
         Me.PanelPencarian.Controls.Add(Me.Label35)
         Me.PanelPencarian.Dock = System.Windows.Forms.DockStyle.Right
@@ -537,39 +546,6 @@ Partial Class Form_Gd_LHP
         Me.PanelPencarian.Name = "PanelPencarian"
         Me.PanelPencarian.Size = New System.Drawing.Size(304, 254)
         Me.PanelPencarian.TabIndex = 63
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(168, 222)
-        Me.Label45.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(12, 16)
-        Me.Label45.TabIndex = 77
-        Me.Label45.Text = ":"
-        '
-        'Label43
-        '
-        Me.Label43.AutoSize = True
-        Me.Label43.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label43.Location = New System.Drawing.Point(168, 192)
-        Me.Label43.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(12, 16)
-        Me.Label43.TabIndex = 76
-        Me.Label43.Text = ":"
-        '
-        'Label44
-        '
-        Me.Label44.AutoSize = True
-        Me.Label44.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label44.Location = New System.Drawing.Point(168, 162)
-        Me.Label44.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(12, 16)
-        Me.Label44.TabIndex = 75
-        Me.Label44.Text = ":"
         '
         'Label33
         '
@@ -657,17 +633,6 @@ Partial Class Form_Gd_LHP
         Me.tKodeBrg.Size = New System.Drawing.Size(108, 22)
         Me.tKodeBrg.TabIndex = 69
         '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.Location = New System.Drawing.Point(9, 162)
-        Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(150, 16)
-        Me.Label38.TabIndex = 53
-        Me.Label38.Text = "Jumlah/Macam Kode di Pesan"
-        '
         'tNoSP
         '
         Me.tNoSP.BackColor = System.Drawing.SystemColors.Window
@@ -678,17 +643,6 @@ Partial Class Form_Gd_LHP
         Me.tNoSP.Size = New System.Drawing.Size(108, 22)
         Me.tNoSP.TabIndex = 68
         '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(9, 192)
-        Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(121, 16)
-        Me.Label37.TabIndex = 54
-        Me.Label37.Text = "Total Kuantitas Pesanan"
-        '
         'tNoPraLHP
         '
         Me.tNoPraLHP.BackColor = System.Drawing.SystemColors.Window
@@ -698,17 +652,6 @@ Partial Class Form_Gd_LHP
         Me.tNoPraLHP.Name = "tNoPraLHP"
         Me.tNoPraLHP.Size = New System.Drawing.Size(108, 22)
         Me.tNoPraLHP.TabIndex = 67
-        '
-        'Label36
-        '
-        Me.Label36.AutoSize = True
-        Me.Label36.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(9, 222)
-        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(130, 16)
-        Me.Label36.TabIndex = 55
-        Me.Label36.Text = "Total Nilai Pesanan (Rp.) "
         '
         'Label42
         '
@@ -721,18 +664,6 @@ Partial Class Form_Gd_LHP
         Me.Label42.TabIndex = 66
         Me.Label42.Text = "Cari Berdasarkan Kode Barang"
         '
-        'TextBox10
-        '
-        Me.TextBox10.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox10.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox10.Location = New System.Drawing.Point(184, 160)
-        Me.TextBox10.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.ReadOnly = True
-        Me.TextBox10.Size = New System.Drawing.Size(108, 22)
-        Me.TextBox10.TabIndex = 58
-        Me.TextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Label40
         '
         Me.Label40.AutoSize = True
@@ -744,18 +675,6 @@ Partial Class Form_Gd_LHP
         Me.Label40.TabIndex = 65
         Me.Label40.Text = "Cari Berdasarkan No. S P"
         '
-        'TextBox9
-        '
-        Me.TextBox9.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox9.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox9.Location = New System.Drawing.Point(184, 190)
-        Me.TextBox9.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.ReadOnly = True
-        Me.TextBox9.Size = New System.Drawing.Size(106, 22)
-        Me.TextBox9.TabIndex = 59
-        Me.TextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Label41
         '
         Me.Label41.AutoSize = True
@@ -766,18 +685,6 @@ Partial Class Form_Gd_LHP
         Me.Label41.Size = New System.Drawing.Size(156, 16)
         Me.Label41.TabIndex = 64
         Me.Label41.Text = "Cari Berdasarkan No. Pra LHP"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox8.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(184, 220)
-        Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.ReadOnly = True
-        Me.TextBox8.Size = New System.Drawing.Size(104, 22)
-        Me.TextBox8.TabIndex = 60
-        Me.TextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tNOLHP
         '
@@ -919,7 +826,7 @@ Partial Class Form_Gd_LHP
         Me.DGView.AllowUserToDeleteRows = False
         Me.DGView.AllowUserToOrderColumns = True
         Me.DGView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column8, Me.Column4})
+        Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column8, Me.Column4, Me.Column17})
         Me.DGView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGView.Location = New System.Drawing.Point(0, 0)
         Me.DGView.Margin = New System.Windows.Forms.Padding(4)
@@ -978,6 +885,12 @@ Partial Class Form_Gd_LHP
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
         Me.Column4.Width = 290
+        '
+        'Column17
+        '
+        Me.Column17.HeaderText = "No. SP"
+        Me.Column17.Name = "Column17"
+        Me.Column17.ReadOnly = True
         '
         'Kirim
         '
@@ -1472,37 +1385,40 @@ Partial Class Form_Gd_LHP
         '
         'cmdRiwayatHarga
         '
+        Me.cmdRiwayatHarga.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(426, 3)
+        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(405, 0)
         Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
-        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 28)
+        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 34)
         Me.cmdRiwayatHarga.TabIndex = 5
         Me.cmdRiwayatHarga.Text = "&Riwayat Harga"
         Me.cmdRiwayatHarga.UseVisualStyleBackColor = True
         '
         'cmdPenambahanKode
         '
+        Me.cmdPenambahanKode.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdPenambahanKode.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPenambahanKode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdPenambahanKode.Location = New System.Drawing.Point(525, 3)
+        Me.cmdPenambahanKode.Location = New System.Drawing.Point(498, 0)
         Me.cmdPenambahanKode.Name = "cmdPenambahanKode"
-        Me.cmdPenambahanKode.Size = New System.Drawing.Size(171, 28)
+        Me.cmdPenambahanKode.Size = New System.Drawing.Size(171, 34)
         Me.cmdPenambahanKode.TabIndex = 6
         Me.cmdPenambahanKode.Text = "&Penambahan Kode Untuk SP ini"
         Me.cmdPenambahanKode.UseVisualStyleBackColor = True
         '
         'PanelNavigate
         '
+        Me.PanelNavigate.Controls.Add(Me.cmdExcel)
         Me.PanelNavigate.Controls.Add(Me.cmdPrint)
         Me.PanelNavigate.Controls.Add(Me.btnButtom)
         Me.PanelNavigate.Controls.Add(Me.btnNext)
         Me.PanelNavigate.Controls.Add(Me.btnPrev)
         Me.PanelNavigate.Controls.Add(Me.btnTop)
         Me.PanelNavigate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelNavigate.Location = New System.Drawing.Point(702, 0)
+        Me.PanelNavigate.Location = New System.Drawing.Point(669, 0)
         Me.PanelNavigate.Name = "PanelNavigate"
-        Me.PanelNavigate.Size = New System.Drawing.Size(193, 34)
+        Me.PanelNavigate.Size = New System.Drawing.Size(226, 34)
         Me.PanelNavigate.TabIndex = 62
         '
         'cmdPrint
@@ -1750,6 +1666,16 @@ Partial Class Form_Gd_LHP
         Me.TabControl1.Size = New System.Drawing.Size(1004, 581)
         Me.TabControl1.TabIndex = 67
         '
+        'cmdExcel
+        '
+        Me.cmdExcel.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdExcel.Image = CType(resources.GetObject("cmdExcel.Image"), System.Drawing.Image)
+        Me.cmdExcel.Location = New System.Drawing.Point(190, 0)
+        Me.cmdExcel.Name = "cmdExcel"
+        Me.cmdExcel.Size = New System.Drawing.Size(38, 34)
+        Me.cmdExcel.TabIndex = 5
+        Me.cmdExcel.UseVisualStyleBackColor = True
+        '
         'Form_Gd_LHP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1880,12 +1806,6 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Label27 As Label
     Friend WithEvents Label28 As Label
     Friend WithEvents DGView2 As DataGridView
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents PanelPencarian As Panel
     Friend WithEvents tNoSP As TextBox
     Friend WithEvents tNoPraLHP As TextBox
@@ -1894,24 +1814,28 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Label41 As Label
     Friend WithEvents tNOLHP As TextBox
     Friend WithEvents Label35 As Label
-    Friend WithEvents TextBox8 As TextBox
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents TextBox10 As TextBox
-    Friend WithEvents Label36 As Label
-    Friend WithEvents Label37 As Label
-    Friend WithEvents Label38 As Label
     Friend WithEvents Label39 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label29 As Label
     Friend WithEvents tKodeBrg As TextBox
-    Friend WithEvents Label45 As Label
-    Friend WithEvents Label43 As Label
-    Friend WithEvents Label44 As Label
     Friend WithEvents Label33 As Label
     Friend WithEvents Label34 As Label
     Friend WithEvents Label32 As Label
     Friend WithEvents Label31 As Label
     Friend WithEvents Label30 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents PanelPicture As Panel
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column15 As DataGridViewTextBoxColumn
+    Friend WithEvents Column16 As DataGridViewTextBoxColumn
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
@@ -1919,8 +1843,6 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents PanelPicture As Panel
-    Friend WithEvents Panel9 As Panel
-    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Column17 As DataGridViewTextBoxColumn
+    Friend WithEvents cmdExcel As Button
 End Class

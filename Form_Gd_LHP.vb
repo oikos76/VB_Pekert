@@ -3,6 +3,9 @@ Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.IO
+Imports System.Data.OleDb
+Imports Microsoft.Office.Interop
+
 Public Class Form_Gd_LHP
     Protected Dt As DataTable
     Dim FotoLoc As String = My.Settings.path_foto
@@ -90,6 +93,7 @@ Public Class Form_Gd_LHP
             JumlahPack.Text = 0
             Kirim.Text = 0
             HargaBeli.Text = 0
+            ShowFoto("")
         ElseIf Len(Kode_Produk.Text) = 4 Then
             Kode_Produk.Text = Kode_Produk.Text + "-"
             Kode_Produk.SelectionStart = Len(Trim(Kode_Produk.Text)) + 1
@@ -344,8 +348,8 @@ Public Class Form_Gd_LHP
     End Sub
     Private Sub SetDataGrid()
         With Me.DGView.RowTemplate
-            .Height = 35
-            .MinimumHeight = 30
+            .Height = 33
+            .MinimumHeight = 33
         End With
         DGView.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         DGView.BackgroundColor = Color.LightGray
@@ -356,9 +360,10 @@ Public Class Form_Gd_LHP
         DGView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGView.RowsDefaultCellStyle.BackColor = Color.LightCyan      'LightGoldenrodYellow
         DGView.AlternatingRowsDefaultCellStyle.BackColor = Color.White
+        DGView.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
         With Me.DGView2.RowTemplate
-            .Height = 35
-            .MinimumHeight = 30
+            .Height = 33
+            .MinimumHeight = 33
         End With
         DGView2.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         DGView2.BackgroundColor = Color.LightGray
@@ -369,6 +374,7 @@ Public Class Form_Gd_LHP
         DGView2.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGView2.RowsDefaultCellStyle.BackColor = Color.LightCyan      'LightGoldenrodYellow
         DGView2.AlternatingRowsDefaultCellStyle.BackColor = Color.White
+        DGView2.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Private Sub cmdBatal_Click(sender As Object, e As EventArgs) Handles cmdBatal.Click
@@ -397,7 +403,18 @@ Public Class Form_Gd_LHP
             lKoordinator = rs05.Rows(0) !KoordinatorLHP
             lPemeriksa = rs05.Rows(0) !Pemeriksa
         End If
-
+        Dim Rs As New DataTable
+        Dim tIdRec As String
+        MsgSQL = "Select Top 1 * From t_LHP " &
+            "where AktifYN = 'Y' " &
+            "Order By TglLHP Desc, IdRec desc "
+        Rs = Proses.ExecuteQuery(MsgSQL)
+        If Rs.Rows.Count <> 0 Then
+            tIdRec = Rs.Rows(0) !IDRec
+        Else
+            tIdRec = ""
+        End If
+        Call ISILHP(tIdRec)
         tTambah = Proses.UserAksesTombol(UserID, "52_LHP", "baru")
         tEdit = Proses.UserAksesTombol(UserID, "52_LHP", "edit")
         tHapus = Proses.UserAksesTombol(UserID, "52_LHP", "hapus")
@@ -429,7 +446,7 @@ Public Class Form_Gd_LHP
             mKondisi = " and Kode_Produk like '%" & tKodeBrg.Text & "%' "
         End If
         MsgSQL = "Select NoLHP, TglLHP, NamaPerajin, max(NoPraLHP) NoPraLHP, " &
-            "max(NoSPB) NoSPB, max(NoPO) NoPO, max(Importir) Importir " &
+            "max(NoSPB) NoSPB, max(NoPO) NoPO, max(Importir) Importir, max(nosp) nosp " &
             "From T_LHP " &
             "Where Year(tglLHP) >= (year(getdate())-2) " &
             "  and aktifYN = 'Y' " & mKondisi & " " &
@@ -438,55 +455,62 @@ Public Class Form_Gd_LHP
         rsdaftar = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To rsdaftar.Rows.Count - 1
             Application.DoEvents()
-            DGView.Rows.Add(rsdaftar.Rows(a)!NoLHP,
-                   Format(rsdaftar.Rows(a)!TglLHP, "dd-MM-yyyy"),
-                   rsdaftar.Rows(a)!NamaPerajin,
-                   rsdaftar.Rows(a)!NoPraLHP,
-                   rsdaftar.Rows(a)!NoSPB,
-                   rsdaftar.Rows(a)!NoPO,
-                   rsdaftar.Rows(a)!Importir)
+            DGView.Rows.Add(rsdaftar.Rows(a) !NoLHP,
+                   Format(rsdaftar.Rows(a) !TglLHP, "dd-MM-yyyy"),
+                   rsdaftar.Rows(a) !NamaPerajin,
+                   rsdaftar.Rows(a) !NoPraLHP,
+                   rsdaftar.Rows(a) !NoSPB,
+                   rsdaftar.Rows(a) !NoPO,
+                   rsdaftar.Rows(a) !Importir,
+                   rsdaftar.Rows(a) !NoSP)
         Next a
         Me.Cursor = Cursors.Default
         DGView.Visible = True
     End Sub
 
-    Private Sub ISILHP(IdRec As String)
+    Private Sub IsiLHP(IdRec As String)
         Dim MsgSQL As String, RSP As New DataTable
         MsgSQL = "select * " &
-        " From T_LHP " &
-        "Where  IDRec = '" & IdRec & "' " &
-        " AND AktifYN = 'Y'"
+            " From T_LHP " &
+            "Where  IDRec = '" & IdRec & "' " &
+            " AND AktifYN = 'Y'"
         RSP = Proses.ExecuteQuery(MsgSQL)
         If RSP.Rows.Count <> 0 Then
-            IDRecord.Text = RSP.Rows(0)!IdRec
-            NoLHP.Text = RSP.Rows(0)!NoLHP
-            NoPraLHP.Text = RSP.Rows(0)!NoPraLHP
-            TglLHP.Value = RSP.Rows(0)!TglLHP
-            Kode_Produk.Text = RSP.Rows(0)!Kode_Produk
-            Produk.Text = RSP.Rows(0)!Produk
+            IDRecord.Text = RSP.Rows(0) !IdRec
+            NoLHP.Text = RSP.Rows(0) !NoLHP
+            NoPraLHP.Text = RSP.Rows(0) !NoPraLHP
+            TglLHP.Value = RSP.Rows(0) !TglLHP
+            Kode_Produk.Text = RSP.Rows(0) !Kode_Produk
+            Produk.Text = RSP.Rows(0) !Produk
             HargaBeli.Text = Format(RSP.Rows(0) !HargaBeli, "###,##0")
-            JumlahPack.Text = RSP.Rows(0)!JumlahPack
-            Kirim.Text = RSP.Rows(0)!Kirim
-            JumlahHitung.Text = RSP.Rows(0)!JumlahHitung
-            JumlahBaik.Text = RSP.Rows(0)!JumlahBaik
-            JumlahRetur.Text = RSP.Rows(0)!JumlahTolak
-            Pemeriksa.Text = RSP.Rows(0)!Pemeriksa
-            tglMulaiPeriksa.Value = RSP.Rows(0)!tglMulaiPeriksa
-            TglSelesaiPeriksa.Value = RSP.Rows(0)!TglSelesaiPeriksa
-            Koordinator.Text = RSP.Rows(0)!Koordinator
-            AlasanDiTolak.Text = RSP.Rows(0)!AlasanDiTolak
-            Keterangan.Text = RSP.Rows(0)!Keterangan
-            Perajin.Text = RSP.Rows(0)!NamaPerajin
-            Kode_Perajin.Text = RSP.Rows(0)!KodePerajin
-            NoSP.Text = RSP.Rows(0)!NoSP
-            NoSPB.Text = RSP.Rows(0)!NoSPB
-            NoPO.Text = RSP.Rows(0)!NoPO
-            Kode_Importir.Text = RSP.Rows(0)!Kode_Importir
-            Importir.Text = RSP.Rows(0)!Importir
-            Kargo.Text = RSP.Rows(0)!Kargo
-            tglTerima.Value = RSP.Rows(0)!tglTerima
-            TglMasukGudang.Value = RSP.Rows(0)!TglMasukGudang
-            JumlahKoli.Text = RSP.Rows(0)!JumlahKoli
+            JumlahPack.Text = RSP.Rows(0) !JumlahPack
+            Kirim.Text = RSP.Rows(0) !Kirim
+            JumlahHitung.Text = RSP.Rows(0) !JumlahHitung
+            JumlahBaik.Text = RSP.Rows(0) !JumlahBaik
+            JumlahRetur.Text = RSP.Rows(0) !JumlahTolak
+            Pemeriksa.Text = RSP.Rows(0) !Pemeriksa
+            tglMulaiPeriksa.Value = RSP.Rows(0) !tglMulaiPeriksa
+            TglSelesaiPeriksa.Value = RSP.Rows(0) !TglSelesaiPeriksa
+            Koordinator.Text = RSP.Rows(0) !Koordinator
+            AlasanDiTolak.Text = RSP.Rows(0) !AlasanDiTolak
+            Keterangan.Text = RSP.Rows(0) !Keterangan
+            Perajin.Text = RSP.Rows(0) !NamaPerajin
+            Kode_Perajin.Text = RSP.Rows(0) !KodePerajin
+            NoSP.Text = RSP.Rows(0) !NoSP
+            NoSPB.Text = RSP.Rows(0) !NoSPB
+            NoPO.Text = RSP.Rows(0) !NoPO
+            Kode_Importir.Text = RSP.Rows(0) !Kode_Importir
+            Importir.Text = RSP.Rows(0) !Importir
+            Kargo.Text = RSP.Rows(0) !Kargo
+            tglTerima.Value = RSP.Rows(0) !tglTerima
+            TglMasukGudang.Value = RSP.Rows(0) !TglMasukGudang
+            JumlahKoli.Text = RSP.Rows(0) !JumlahKoli
+            LocGmb1.Text = Trim(Kode_Produk.Text) + ".jpg"
+            If Trim(Dir(FotoLoc + "\" + Trim(LocGmb1.Text))) = "" Or Trim(LocGmb1.Text) = "" Then
+                ShowFoto("")
+            Else
+                ShowFoto(LocGmb1.Text)
+            End If
         End If
         Proses.CloseConn()
     End Sub
@@ -567,7 +591,8 @@ Public Class Form_Gd_LHP
         RSL = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To RSL.Rows.Count - 1
             Application.DoEvents()
-            DGView2.Rows.Add(RSL.Rows(a) !Kode_Produk,
+            DGView2.Rows.Add(RSL.Rows(a) !idrec,
+                   RSL.Rows(a) !Kode_Produk,
                    Format(RSL.Rows(a) !JumlahPack, "###,##0"),
                    Format(RSL.Rows(a) !Kirim, "###,##0"),
                    Format(RSL.Rows(a) !JumlahHitung, "###,##0"),
@@ -576,7 +601,6 @@ Public Class Form_Gd_LHP
                    RSL.Rows(a) !AlasanDiTolak,
                    RSL.Rows(a) !NoSP)
         Next a
-
         DGView2.Visible = True
         If DGView2.Rows.Count <> 0 Then
             DGView2_CellClick(sender, e)
@@ -589,18 +613,8 @@ Public Class Form_Gd_LHP
 
     Private Sub DGView2_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView2.CellClick
         If DGView2.Rows.Count = 0 Then Exit Sub
-        NoLHP.Text = DGView.Rows(DGView.CurrentCell.RowIndex).Cells(0).Value
-        MsgSQL = "select idrec " &
-            " From T_LHP " &
-            "Where  nolhp = '" & NoLHP.Text & "' " &
-            " AND AktifYN = 'Y' " &
-            "ORDER by idrec "
-        IDRecord.Text = Proses.ExecuteSingleStrQuery(MsgSQL)
+        IDRecord.Text = DGView2.Rows(DGView2.CurrentCell.RowIndex).Cells(0).Value
         ISILHP(IDRecord.Text)
-    End Sub
-
-    Private Sub Koordinator_TextChanged(sender As Object, e As EventArgs) Handles Koordinator.TextChanged
-
     End Sub
 
     Private Sub NoLHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoLHP.KeyPress
@@ -672,30 +686,6 @@ Public Class Form_Gd_LHP
             " " & mKondisi & " " &
             " And NoPraLHP = '" & tNoPraLHP & "' " &
             "order by idrec "
-        'Frm_Browse.lstView.ListItems.Clear
-        'Frm_Browse.lstView.Visible = False
-        'Frm_Browse.lstView.ColumnHeaders(1).Text = "KodeProduk + SP"
-        'Frm_Browse.lstView.ColumnHeaders(1).Width = 1
-        'Frm_Browse.lstView.ColumnHeaders(2).Text = "Kode Produk"
-        'Frm_Browse.lstView.ColumnHeaders(2).Width = 1750
-        'Frm_Browse.lstView.ColumnHeaders(3).Text = "Produk"
-        'Frm_Browse.lstView.ColumnHeaders(4).Text = ""
-        'Frm_Browse.lstView.ColumnHeaders(4).Width = 1750
-        'Frm_Browse.lstView.ColumnHeaders(5).Text = ""
-        'Frm_Browse.lstView.ColumnHeaders(6).Text = "NoPraLHP"
-
-
-        'Do While Not RSD.EOF
-        '    DoEvents
-        'Set Lst = Frm_Browse.lstView.ListItems.Add(, , left(RSD!Kode_Produk & Space(25), 25) & Right(Space(25) & RSD!NoSP, 25))
-        'Lst.SubItems(1) = RSD!Kode_Produk
-        '    Lst.SubItems(2) = RSD!Produk
-        '    Lst.SubItems(3) = Format(RSD!tglTerima, "dd-MM-YYYY")
-        '    Lst.SubItems(4) = RSD!NoSP
-        '    Lst.SubItems(5) = RSD!NoPraLHP
-        '    RSD.MoveNext
-        'Loop
-
 
         Form_Daftar.txtQuery.Text = MsgSQL
         Form_Daftar.Text = "Daftar Produk Pra LHP"
@@ -815,12 +805,6 @@ Public Class Form_Gd_LHP
                 ShowFoto(LocGmb1.Text)
             End If
 
-            LocGmb1.Text = Trim(Kode_Produk.Text) + ".jpg"
-            If Trim(Dir(FotoLoc + "\" + Trim(LocGmb1.Text))) = "" Or Trim(LocGmb1.Text) = "" Then
-                ShowFoto("")
-            Else
-                ShowFoto(LocGmb1.Text)
-            End If
             If LAdd Or LEdit Or LTambahKode Then
                 If Trim(Kode_Produk.Text) = "" Or Trim(Produk.Text) = "" Then
                     Kode_Produk.Focus()
@@ -930,7 +914,18 @@ Public Class Form_Gd_LHP
     End Sub
 
     Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
-
+        If Trim(IDRecord.Text) = "" Then
+            MsgBox("Data yang akan di hapus belum di pilih!", vbCritical, ".:Empty Data!")
+            Exit Sub
+        End If
+        Form_Hapus.Left = Me.Left
+        Form_Hapus.Top = Me.Top
+        Form_Hapus.tIDSebagian.Text = IDRecord.Text
+        Form_Hapus.tIDSemua.Text = NoLHP.Text
+        Form_Hapus.Text = "Hapus LHP"
+        Form_Hapus.ShowDialog()
+        ClearTextBoxes()
+        DaftarLHP()
     End Sub
 
     Private Sub JumlahBaik_TextChanged(sender As Object, e As EventArgs) Handles JumlahBaik.TextChanged
@@ -1151,16 +1146,28 @@ Public Class Form_Gd_LHP
         End If
     End Sub
 
+    Private Sub tNoPO_TextChanged(sender As Object, e As EventArgs) Handles tNoPO.TextChanged
+
+    End Sub
+
     Private Sub tglMulaiPeriksa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tglMulaiPeriksa.KeyPress
         If e.KeyChar = Chr(13) Then
             TglSelesaiPeriksa.Focus()
         End If
     End Sub
 
+    Private Sub tNOLHP_TextChanged(sender As Object, e As EventArgs) Handles tNOLHP.TextChanged
+
+    End Sub
+
     Private Sub TglSelesaiPeriksa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TglSelesaiPeriksa.KeyPress
         If e.KeyChar = Chr(13) Then
             Koordinator.Focus()
         End If
+    End Sub
+
+    Private Sub tNoPraLHP_TextChanged(sender As Object, e As EventArgs) Handles tNoPraLHP.TextChanged
+
     End Sub
 
     Private Sub NoPraLHP_GotFocus(sender As Object, e As EventArgs) Handles NoPraLHP.GotFocus
@@ -1170,6 +1177,10 @@ Public Class Form_Gd_LHP
         End With
     End Sub
 
+    Private Sub tNoSP_TextChanged(sender As Object, e As EventArgs) Handles tNoSP.TextChanged
+
+    End Sub
+
     Private Sub Kode_Produk_GotFocus(sender As Object, e As EventArgs) Handles Kode_Produk.GotFocus
         With Kode_Produk
             .SelectionStart = 0
@@ -1177,11 +1188,23 @@ Public Class Form_Gd_LHP
         End With
     End Sub
 
+    Private Sub tKodeBrg_TextChanged(sender As Object, e As EventArgs) Handles tKodeBrg.TextChanged
+
+    End Sub
+
     Private Sub JumlahHitung_GotFocus(sender As Object, e As EventArgs) Handles JumlahHitung.GotFocus
         With JumlahHitung
             .SelectionStart = 0
             .SelectionLength = .TextLength
         End With
+    End Sub
+
+    Private Sub cmdExcel_Click(sender As Object, e As EventArgs) Handles cmdExcel.Click
+        PanelNavigate.Enabled = False
+        Form_Export2Excel.JenisTR.Text = "LHP"
+        Form_Export2Excel.idRec.Text = NoLHP.Text
+        Form_Export2Excel.ShowDialog()
+        PanelNavigate.Enabled = True
     End Sub
 
     Private Sub JumlahBaik_GotFocus(sender As Object, e As EventArgs) Handles JumlahBaik.GotFocus
@@ -1224,6 +1247,56 @@ Public Class Form_Gd_LHP
             .SelectionStart = 0
             .SelectionLength = .TextLength
         End With
+    End Sub
+
+    Private Sub tNoPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNoPO.KeyPress
+        If e.KeyChar = Chr(13) Then
+            tNOLHP.Text = ""
+            tNoPraLHP.Text = ""
+            tNoSP.Text = ""
+            tKodeBrg.Text = ""
+            DaftarLHP()
+        End If
+    End Sub
+
+    Private Sub tNOLHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNOLHP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            tNoPO.Text = ""
+            tNoPraLHP.Text = ""
+            tNoSP.Text = ""
+            tKodeBrg.Text = ""
+            DaftarLHP()
+        End If
+    End Sub
+
+    Private Sub tNoPraLHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNoPraLHP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            tNoPO.Text = ""
+            tNOLHP.Text = ""
+            tNoSP.Text = ""
+            tKodeBrg.Text = ""
+            DaftarLHP()
+        End If
+    End Sub
+
+    Private Sub tNoSP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNoSP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            tNoPO.Text = ""
+            tNOLHP.Text = ""
+            tNoPraLHP.Text = ""
+            tKodeBrg.Text = ""
+            DaftarLHP()
+        End If
+    End Sub
+
+    Private Sub tKodeBrg_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tKodeBrg.KeyPress
+        If e.KeyChar = Chr(13) Then
+            tNoPO.Text = ""
+            tNOLHP.Text = ""
+            tNoPraLHP.Text = ""
+            tKodeBrg.Text = ""
+            DaftarLHP()
+        End If
     End Sub
 End Class
 
