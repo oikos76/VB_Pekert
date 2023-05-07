@@ -570,10 +570,6 @@ Public Class Form_Gd_LHP
         End If
     End Sub
 
-    Private Sub Keterangan_TextChanged(sender As Object, e As EventArgs) Handles Keterangan.TextChanged
-
-
-    End Sub
 
     Private Sub DGView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellClick
         Dim MsgSQL As String, tCari As String

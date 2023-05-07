@@ -583,6 +583,7 @@ Partial Class FrmMenuUtama
         '
         'DraftPackingLIstDPLToolStripMenuItem
         '
+        Me.DraftPackingLIstDPLToolStripMenuItem.Image = CType(resources.GetObject("DraftPackingLIstDPLToolStripMenuItem.Image"), System.Drawing.Image)
         Me.DraftPackingLIstDPLToolStripMenuItem.Name = "DraftPackingLIstDPLToolStripMenuItem"
         Me.DraftPackingLIstDPLToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.DraftPackingLIstDPLToolStripMenuItem.Text = "Draft Packing LIst (DPL)"

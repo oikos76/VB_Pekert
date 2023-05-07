@@ -169,3 +169,4 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.ca
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Hapus.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Export2Excel.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_UangMuka.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GD_DPL.resources

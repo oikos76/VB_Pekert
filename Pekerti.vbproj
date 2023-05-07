@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT230206\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT230503\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>31</ApplicationRevision>
+    <ApplicationRevision>32</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -170,6 +170,12 @@
       <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_GdPraLHP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_GD_DPL.Designer.vb">
+      <DependentUpon>Form_GD_DPL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_GD_DPL.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_Gd_LHP.Designer.vb">
@@ -487,6 +493,24 @@
       <DependentUpon>Rpt_DPB.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Rpt_DPL.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_DPL.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_DPLDaftarTotalJumlahProduk.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_DPLDaftarTotalJumlahProduk.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_DPL_DaftarIsi.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_DPL_DaftarIsi.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\Rpt_KatalogProduk_InInd.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -567,6 +591,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_GdPraLHP.resx">
       <DependentUpon>Form_GdPraLHP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_GD_DPL.resx">
+      <DependentUpon>Form_GD_DPL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Gd_LHP.resx">
       <DependentUpon>Form_Gd_LHP.vb</DependentUpon>
@@ -727,6 +754,18 @@
     <EmbeddedResource Include="Report\Rpt_DPB.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_DPB.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_DPL.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DPL.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_DPLDaftarTotalJumlahProduk.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DPLDaftarTotalJumlahProduk.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_DPL_DaftarIsi.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DPL_DaftarIsi.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_KatalogProduk_InInd.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

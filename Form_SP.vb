@@ -1008,7 +1008,7 @@ ErrMSG:
                 Form_Daftar.ShowDialog()
                 NoPO.Text = FrmMenuUtama.TSKeterangan.Text
                 SQL = "SELECT nopo, kodeimportir, m_KodeImportir.Nama Importir " &
-                    "FROM t_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
+                    " FROM t_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "WHERE nopo = '" & NoPO.Text & "' AND t_PO.aktifYN = 'Y' "
                 dbpo = Proses.ExecuteQuery(SQL)
                 If dbpo.Rows.Count <> 0 Then
@@ -1023,7 +1023,6 @@ ErrMSG:
                     Importir.Text = ""
                     NoPO.Focus()
                 End If
-
             End If
         End If
     End Sub
@@ -1343,6 +1342,10 @@ ErrMSG:
     End Sub
 
     Private Sub TglMasukGudang_ValueChanged(sender As Object, e As EventArgs) Handles TglMasukGudang.ValueChanged
+
+    End Sub
+
+    Private Sub NoSP_TextChanged(sender As Object, e As EventArgs) Handles NoSP.TextChanged
 
     End Sub
 

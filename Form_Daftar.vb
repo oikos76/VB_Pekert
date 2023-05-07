@@ -64,6 +64,33 @@
                                     .Table.Rows(a) !NamaPerajin)
                 Next (a)
             End With
+        ElseIf Me.Text = "Daftar Produk DPL" Then
+            DGView.Columns(0).HeaderText = "KodeProduk"
+            DGView.Columns(0).Width = 150
+            DGView.Columns(1).HeaderText = "Kode Buyer"
+            DGView.Columns(1).Width = 150
+            DGView.Columns(2).HeaderText = "Produk"
+            DGView.Columns(2).Width = 250
+            DGView.Columns(3).HeaderText = "Importir"
+            DGView.Columns(3).Width = 150
+            DGView.Columns(4).HeaderText = "No.PO"
+            DGView.Columns(4).Width = 150
+            DGView.Columns(5).HeaderText = "Jumlah PO"
+            DGView.Columns(5).Width = 150
+            DGView.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Me.Cursor = Cursors.WaitCursor
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !Kode_Produk,
+                                    .Table.Rows(a) !Kode_Buyer,
+                                    .Table.Rows(a) !Deskripsi,
+                                    .Table.Rows(a) !Nama,
+                                    .Table.Rows(a) !NoPO,
+                                    Format(.Table.Rows(a) !Jumlah, "###,##0"))
+                Next (a)
+            End With
+            Me.Cursor = Cursors.Default
         ElseIf Me.Text = "Daftar Produk Pra LHP" Then
             DGView.Columns(0).HeaderText = "KodeProduk + SP"
             DGView.Columns(0).Width = 1
@@ -331,10 +358,10 @@
                                     .Table.Rows(a) !Perajin)
                 Next (a)
             End With
-        ElseIf Trim(Me.Text) = "Daftar PO" Then
-            DGView.Columns(0).HeaderText = "nopo"
+        ElseIf Trim(Me.Text) = "Daftar PO" Or Trim(Me.Text) = "Daftar PO-DPL" Then
+            DGView.Columns(0).HeaderText = "No. PO"
             DGView.Columns(0).Width = 100
-            DGView.Columns(1).HeaderText = "importir"
+            DGView.Columns(1).HeaderText = "Importir"
             DGView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             DGView.Columns(1).Width = 250
             DGView.Columns(2).HeaderText = "Kode Importir"
