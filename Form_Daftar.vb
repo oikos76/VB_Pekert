@@ -32,6 +32,25 @@
                     .Table.Rows(a) !phone)
                 Next (a)
             End With
+        ElseIf Me.Text = "Daftar DPL" Then
+            DGView.Columns(0).HeaderText = "No DPL"
+            DGView.Columns(0).Width = 150
+            DGView.Columns(1).HeaderText = "Tgl DPL"
+            DGView.Columns(1).Width = 140
+            DGView.Columns(2).HeaderText = "No PO "
+            DGView.Columns(2).Width = 150
+            DGView.Columns(3).HeaderText = "Importir"
+            DGView.Columns(3).Width = 200
+            DGView.Columns(4).HeaderText = " "
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !NoDPL,
+                                    Format(.Table.Rows(a) !TglDPL, "dd-MM-yyyy"),
+                                    .Table.Rows(a) !NoPO,
+                                    .Table.Rows(a) !Importir)
+                Next (a)
+            End With
         ElseIf Me.Text = "Daftar LHP" Then
             DGView.Columns(0).HeaderText = "No LHP"
             DGView.Columns(0).Width = 150
@@ -600,6 +619,7 @@
 
     Private Sub tCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tCari.KeyPress
         If e.KeyChar = Chr(13) Then
+            Dim mKondisi As String = ""
             If Trim(Me.Text) = "Daftar Barang" Then
                 Dim kodetoko As String = Mid(FrmMenuUtama.Kode_Toko.Text, 4, 2)
                 txtQuery.Text = "Select * t " &
@@ -689,6 +709,21 @@
                 "Where AktifYN = 'Y' " &
                 "  And ( KodeProduk Like '%" & tCari.Text & "%' or Deskripsi Like '%" & tCari.Text & "%') " &
                 "Order By Deskripsi "
+            ElseIf Me.Text = "Daftar DPL" Then
+                If Trim(tCari.Text) <> "" Then
+                    mKondisi = "  And T_DPL.NoDPL like '%" & Trim(tCari.Text) & "%' "
+                Else
+                    mKondisi = ""
+                End If
+                txtQuery.Text = "Select Distinct NoDPL, tglDPL, max(T_DPL.NoPO) NOPO, T_DPL.Importir, RIGHT(T_DPL.NoDPL,2) + LEFT(T_DPL.NoDPL,3)  " &
+                    " From t_DPL INNER JOIN t_PO ON t_DPL.NoPO = t_PO.NoPO AND t_DPL.KodeProduk = t_PO.Kode_Produk INNER JOIN " &
+                    "      t_PI ON t_PO.NoPO = t_PI.NoPO AND t_PO.Kode_Produk = t_PI.Kode_Produk " &
+                    "Where T_DPL.AktifYN = 'Y' " & mKondisi & " " &
+                    "Group By NoDPL, TglDPL, T_DPL.Importir, RIGHT(T_DPL.NoDPL,2) + LEFT(T_DPL.NoDPL,3)   " &
+                    "Order By TGLDPL DESC "
+
+
+
             ElseIf Me.Text = "Daftar LHP" Then
                 txtQuery.Text = "Select NoLHP, a.NamaPerajin, a.TglLHP " &
                 " From T_LHP a  " &

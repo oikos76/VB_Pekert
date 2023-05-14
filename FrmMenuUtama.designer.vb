@@ -89,9 +89,9 @@ Partial Class FrmMenuUtama
         Me._15BagianGudang = New System.Windows.Forms.ToolStripMenuItem()
         Me._51PraLHP = New System.Windows.Forms.ToolStripMenuItem()
         Me._52LHP = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DraftPackingLIstDPLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._53DraftPackingListDPL = New System.Windows.Forms.ToolStripMenuItem()
         Me._54JenisBox = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PackingListInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._55PackingListInvoice = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetodePengirimanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReturBarangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me._16Monitoring = New System.Windows.Forms.ToolStripMenuItem()
@@ -562,7 +562,7 @@ Partial Class FrmMenuUtama
         '
         '_15BagianGudang
         '
-        Me._15BagianGudang.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._51PraLHP, Me._52LHP, Me.DraftPackingLIstDPLToolStripMenuItem, Me._54JenisBox, Me.PackingListInvoiceToolStripMenuItem, Me.MetodePengirimanToolStripMenuItem, Me.ReturBarangToolStripMenuItem})
+        Me._15BagianGudang.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._51PraLHP, Me._52LHP, Me._53DraftPackingListDPL, Me._54JenisBox, Me._55PackingListInvoice, Me.MetodePengirimanToolStripMenuItem, Me.ReturBarangToolStripMenuItem})
         Me._15BagianGudang.Name = "_15BagianGudang"
         Me._15BagianGudang.Size = New System.Drawing.Size(100, 26)
         Me._15BagianGudang.Text = "Bagian Gudang"
@@ -581,12 +581,12 @@ Partial Class FrmMenuUtama
         Me._52LHP.Size = New System.Drawing.Size(249, 22)
         Me._52LHP.Text = "Laporan Hasil Pemeriksaan (LHP)"
         '
-        'DraftPackingLIstDPLToolStripMenuItem
+        '_53DraftPackingListDPL
         '
-        Me.DraftPackingLIstDPLToolStripMenuItem.Image = CType(resources.GetObject("DraftPackingLIstDPLToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.DraftPackingLIstDPLToolStripMenuItem.Name = "DraftPackingLIstDPLToolStripMenuItem"
-        Me.DraftPackingLIstDPLToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.DraftPackingLIstDPLToolStripMenuItem.Text = "Draft Packing LIst (DPL)"
+        Me._53DraftPackingListDPL.Image = CType(resources.GetObject("_53DraftPackingListDPL.Image"), System.Drawing.Image)
+        Me._53DraftPackingListDPL.Name = "_53DraftPackingListDPL"
+        Me._53DraftPackingListDPL.Size = New System.Drawing.Size(249, 22)
+        Me._53DraftPackingListDPL.Text = "Draft Packing List (DPL)"
         '
         '_54JenisBox
         '
@@ -595,11 +595,11 @@ Partial Class FrmMenuUtama
         Me._54JenisBox.Size = New System.Drawing.Size(249, 22)
         Me._54JenisBox.Text = "Jenis Box"
         '
-        'PackingListInvoiceToolStripMenuItem
+        '_55PackingListInvoice
         '
-        Me.PackingListInvoiceToolStripMenuItem.Name = "PackingListInvoiceToolStripMenuItem"
-        Me.PackingListInvoiceToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.PackingListInvoiceToolStripMenuItem.Text = "PackingList && Invoice"
+        Me._55PackingListInvoice.Name = "_55PackingListInvoice"
+        Me._55PackingListInvoice.Size = New System.Drawing.Size(249, 22)
+        Me._55PackingListInvoice.Text = "PackingList && Invoice"
         '
         'MetodePengirimanToolStripMenuItem
         '
@@ -900,9 +900,9 @@ Partial Class FrmMenuUtama
     Friend WithEvents _15BagianGudang As ToolStripMenuItem
     Friend WithEvents _51PraLHP As ToolStripMenuItem
     Friend WithEvents _52LHP As ToolStripMenuItem
-    Friend WithEvents DraftPackingLIstDPLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _53DraftPackingListDPL As ToolStripMenuItem
     Friend WithEvents _54JenisBox As ToolStripMenuItem
-    Friend WithEvents PackingListInvoiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _55PackingListInvoice As ToolStripMenuItem
     Friend WithEvents MetodePengirimanToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReturBarangToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents _16Monitoring As ToolStripMenuItem

@@ -29,9 +29,232 @@ Public Class Form_Export2Excel
             ProsesDPB()
         ElseIf JenisTR.Text = "LHP" Then
             ProsesLHP()
+        ElseIf JenisTR.Text = "PL_PackingList" Then
+            ProsesPacking_List()
+        ElseIf JenisTR.Text = "PL_Invoice" Then
+            ProsesPackingList_Invoice()
         End If
         PanelTombol.Enabled = True
     End Sub
+    Private Sub ProsesPacking_List()
+        Dim dbTable As New Data.DataTable
+        Dim oExcel As Excel.Application
+        Dim oBook As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        oExcel = CreateObject("Excel.Application")
+        oBook = oExcel.Workbooks.Add(Type.Missing)
+        oSheet = oBook.Worksheets(1)
+
+        oSheet.Cells(4, 2) = "Packing List No " + idRec.Text
+        oSheet.Range("B4:B4").Font.Bold = True
+        oSheet.Cells(6, 1) = "Box No."
+        oSheet.Cells(6, 2) = "Our Code"
+        oSheet.Cells(6, 3) = "Your Code"
+        oSheet.Cells(6, 4) = "Description"
+        oSheet.Cells(6, 5) = "QTY"
+        oSheet.Cells(6, 6) = "Material"
+
+        Cursor = Cursors.WaitCursor
+        Dim NoUrut As Integer = 1, i As Integer = 8, tQTY As Double = 0,
+            mTglPL As Date, mNoPO As String = "", NoBoks As String = "", boxes As String = ""
+
+        MsgSQL = "SELECT t_PackingList.NoBoks1, t_PackingList.NoBoks2, " &
+            "t_PackingList.JumlahBoks, t_PackingList.JumlahTiapBoks,  " &
+            "t_PackingList.NoPI, t_PackingList.Kode_Produk, t_PackingList.QtyTiapBoks,  " &
+            "t_PackingList.NoPO, t_PackingList.KodePImportir, m_KodeProduk.descript,  " &
+            "m_KodeBahan.NamaInggris, m_KodeImportir.Nama, m_KodeImportir.Alamat, tglpl, " &
+            "t_PackingList.NoPackingList, t_PackingList.HargaFOB,  t_PackingList.CatatanPL " &
+            "FROM Pekerti.dbo.t_PackingList t_PackingList " &
+            "   INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+            "   t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
+            "   INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON  " &
+            "   t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+            "   INNER JOIN Pekerti.dbo.m_KodeBahan m_KodeBahan ON  " &
+            "m_KodeProduk.Kode_Bahan = m_KodeBahan.KodeBahan  " &
+            "Where t_PackingList.NoPackingList = '" & idRec.Text & "' " &
+            "Order By right('0000000000'+noboks1,10), right('0000000000' + noboks2, 10), idrec  "
+        dbTable = Proses.ExecuteQuery(MsgSQL)
+
+        If dbTable.Rows.Count <> 0 Then
+            oSheet.Cells(1, 1) = dbTable.Rows(0) !Nama
+            oSheet.Cells(2, 1) = dbTable.Rows(0) !Alamat.Replace(vbCrLf, "")
+            oSheet.Range("A1:F1").Merge()
+            oSheet.Range("A2:F2").Merge()
+            oSheet.Range("A1:F2").Font.Bold = True
+            mTglPL = dbTable.Rows(0) !TglPL
+        End If
+
+        Cursor = Cursors.WaitCursor
+        For a = 0 To dbTable.Rows.Count - 1
+
+            If mNoPO <> dbTable.Rows(a) !NoPO Then
+                oSheet.Cells(i, 2) = "No. PO : " + IIf(dbTable.Rows(a) !NoPO = "", "PEKERTI", dbTable.Rows(a) !NoPO)
+                i = i + 1
+            End If
+
+            If boxes <> Trim(Str(dbTable.Rows(a) !JumlahBoks)) Then
+                boxes = IIf(dbTable.Rows(a) !JumlahBoks = 1, "",
+                    "(" + Format(dbTable.Rows(a) !JumlahBoks, "##0") +
+                    " boxes / " + Format(dbTable.Rows(a) !JumlahTiapBoks, "##0") + " pcs each)")
+                If boxes <> "" Then
+                    oSheet.Cells(i, 1) = boxes
+                    i = i + 1
+                End If
+            End If
+            NoBoks = Trim(dbTable.Rows(a) !NoBoks1) + " - " + Trim(dbTable.Rows(a) !NoBoks2)
+            oSheet.Cells(i, 1) = "'" + NoBoks
+            oSheet.Cells(i, 2) = dbTable.Rows(a) !Kode_Produk
+            oSheet.Cells(i, 3) = dbTable.Rows(a) !KodePImportir
+            oSheet.Cells(i, 4) = dbTable.Rows(a) !Descript
+            oSheet.Cells(i, 5) = Format(dbTable.Rows(a) !JumlahBoks * dbTable.Rows(a) !JumlahTiapBoks, "###,##0.00")
+            oSheet.Cells(i, 6) = dbTable.Rows(a) !NamaInggris
+            tQTY = tQTY + (dbTable.Rows(a) !JumlahBoks * dbTable.Rows(a) !JumlahTiapBoks)
+            mNoPO = dbTable.Rows(a) !NoPO
+            i += 1
+        Next (a)
+
+        i = i + 2
+        oSheet.Cells(i, 4) = "Total :"
+        oSheet.Cells(i, 4).HorizontalAlignment = Excel.Constants.xlRight
+        oSheet.Cells(i, 5) = Format(tQTY, "###,##0")
+        i = i + 2
+        oSheet.Cells(i, 6) = "Jakarta, " & Format(mTglPL, "dd MMMM yyyy")
+        'Dim mRange As String = "E" + Format(i, "##0") + ":F" + Format(i, "##0")
+        'oSheet.Range(mRange).Merge()
+        i = i + 6
+        oSheet.Cells(i, 6) = "RUDIONO"
+        i = i + 1
+        oSheet.Cells(i, 6) = "EXPORT DEPT"
+
+        Dim fileName As String = locFile.Text & "\PL_" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
+        'oSheet.Range("A1:L3").Font.Bold = True
+        'oSheet.Range("A1:D1").Merge()
+        oSheet.Columns.AutoFit()
+        oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+
+        'Release the objects
+        ReleaseObject(oSheet)
+        oBook.Close(False, Type.Missing, Type.Missing)
+        ReleaseObject(oBook)
+        oExcel.Quit()
+        ReleaseObject(oExcel)
+        MsgBox("File Berhasil di simpan di : " & fileName, vbInformation + vbOKOnly, ".:Information ")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ProsesPackingList_Invoice()
+        Dim dbTable As New Data.DataTable
+        Dim oExcel As Excel.Application
+        Dim oBook As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        oExcel = CreateObject("Excel.Application")
+        oBook = oExcel.Workbooks.Add(Type.Missing)
+        oSheet = oBook.Worksheets(1)
+        Dim tTotal As Double = 0
+        MsgSQL = "Select Sum (JumlahBoks * JumlahTiapBoks * HargaFOB) SubTotal " &
+            " From t_PackingList " &
+            "Where t_PackingList.NoPackingList = '" & idRec.Text & "' "
+        tTotal = Proses.ExecuteSingleDblQuery(MsgSQL)
+
+        oSheet.Cells(4, 2) = "Packing List No " + idRec.Text
+        oSheet.Range("B4:B4").Font.Bold = True
+
+        oSheet.Cells(6, 1) = "No."
+        oSheet.Cells(6, 2) = "Our Code"
+        oSheet.Cells(6, 3) = "Your Code"
+        oSheet.Cells(6, 4) = "Description"
+        oSheet.Cells(6, 5) = "QTY"
+        oSheet.Cells(6, 6) = "FOB Price (USD)"
+        oSheet.Cells(7, 6) = "Unit"
+        oSheet.Cells(7, 7) = "Total"
+        oSheet.Range("F6:G6").Merge()
+        oSheet.Cells(6, 6).HorizontalAlignment = Excel.Constants.xlCenter
+        Cursor = Cursors.WaitCursor
+
+        Dim NoUrut As Integer = 1, i As Integer = 8, tQTY As Double = 0, mSubTot As Double = 0,
+            mTglPL As Date, mNoPO As String = "", NoBoks As String = "", boxes As String = ""
+
+        MsgSQL = "SELECT Kode_Produk, NoPO, KodePImportir, Descript, t_PackingList.HargaFOB, " &
+            " Sum(t_PackingList.JumlahBoks * t_PackingList.JumlahTiapBoks) as QTY, " &
+            " Sum(t_PackingList.HargaFOB * t_PackingList.JumlahBoks * t_PackingList.JumlahTiapBoks) as SubTot, " &
+            " m_KodeImportir.Nama, m_KodeImportir.Alamat, TglPL " &
+            "FROM Pekerti.dbo.t_PackingList t_PackingList INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+            "     t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
+            "     INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+            "Where t_PackingList.NoPackingList = '" & idRec.Text & "' " &
+            "Group By t_PackingList.NoPO, t_PackingList.FotoLoc, t_PackingList.Kode_Produk, HargaFOB, " &
+            "         KodePImportir, Descript,  m_KodeImportir.Nama, m_KodeImportir.Alamat, TglPL  " &
+            "Order By t_PackingList.NoPO, t_PackingList.FotoLoc, t_PackingList.Kode_Produk "
+
+        dbTable = Proses.ExecuteQuery(MsgSQL)
+        If dbTable.Rows.Count <> 0 Then
+            oSheet.Cells(1, 1) = dbTable.Rows(0) !Nama
+            oSheet.Cells(2, 1) = dbTable.Rows(0) !Alamat.Replace(vbCrLf, "")
+            oSheet.Range("A1:F1").Merge()
+            oSheet.Range("A2:F2").Merge()
+            oSheet.Range("A1:F2").Font.Bold = True
+            mTglPL = dbTable.Rows(0) !TglPL
+        End If
+
+        Cursor = Cursors.WaitCursor
+        For a = 0 To dbTable.Rows.Count - 1
+            If mNoPO <> dbTable.Rows(a) !NoPO Then
+                If mNoPO <> "" Then
+                    oSheet.Cells(i, 6) = "Sub Total PO No : " & mNoPO & " : "
+                    oSheet.Cells(i, 7) = Format(mSubTot, "###,##0.00")
+                    i = i + 1
+                End If
+                oSheet.Cells(i, 2) = "No. PO : " + IIf(dbTable.Rows(a) !NoPO = "", "PEKERTI", dbTable.Rows(a) !NoPO)
+                i = i + 1
+                mSubTot = 0
+            End If
+
+            oSheet.Cells(i, 1) = Format(NoUrut, "###,##0")
+            oSheet.Cells(i, 2) = dbTable.Rows(a) !Kode_Produk
+            oSheet.Cells(i, 3) = dbTable.Rows(a) !KodePImportir
+            oSheet.Cells(i, 4) = dbTable.Rows(a) !Descript
+            oSheet.Cells(i, 5) = Format(dbTable.Rows(a) !qty, "###,##0.00")
+            oSheet.Cells(i, 6) = Format(dbTable.Rows(a) !HargaFOB, "###,##0.00")
+            oSheet.Cells(i, 7) = Format(dbTable.Rows(a) !SubTot, "###,##0.00")
+            mSubTot = mSubTot + dbTable.Rows(a) !SubTot
+            mNoPO = dbTable.Rows(a) !NoPO
+            If a = dbTable.Rows.Count - 1 Then
+                i += 1
+                oSheet.Cells(i, 6) = "Sub Total PO No : " & mNoPO & " : "
+                oSheet.Cells(i, 6).HorizontalAlignment = Excel.Constants.xlRight
+                oSheet.Cells(i, 7) = Format(mSubTot, "###,##0.00")
+            End If
+            i += 1
+            NoUrut += 1
+        Next (a)
+
+        i = i + 2
+        oSheet.Cells(i, 4) = "Total :"
+        oSheet.Cells(i, 4).HorizontalAlignment = Excel.Constants.xlRight
+        oSheet.Cells(i, 5) = Format(tTotal, "###,##0")
+        i = i + 2
+        oSheet.Cells(i, 6) = "Jakarta, " & Format(mTglPL, "dd MMMM yyyy")
+        i = i + 6
+        oSheet.Cells(i, 6) = "RUDIONO"
+        i = i + 1
+        oSheet.Cells(i, 6) = "EXPORT DEPT"
+
+        Dim fileName As String = locFile.Text & "\PLi_" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
+        'oSheet.Range("A1:L3").Font.Bold = True
+        'oSheet.Range("A1:D1").Merge()
+        oSheet.Columns.AutoFit()
+        oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+
+        'Release the objects
+        ReleaseObject(oSheet)
+        oBook.Close(False, Type.Missing, Type.Missing)
+        ReleaseObject(oBook)
+        oExcel.Quit()
+        ReleaseObject(oExcel)
+        MsgBox("File Berhasil di simpan di : " & fileName, vbInformation + vbOKOnly, ".:Information ")
+        Cursor = Cursors.Default
+    End Sub
+
     Private Sub ProsesDPB()
         Dim dbTable As New Data.DataTable
         Dim oExcel As Excel.Application

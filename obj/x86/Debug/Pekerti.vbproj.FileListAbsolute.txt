@@ -110,8 +110,12 @@ C:\me\VS_SanDisk\Pekerti\bin\Debug\Microsoft.ReportViewer.WinForms.xml
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbproj.ResolveComReference.cache
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_DPB.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_DPBContoh.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Export2Excel.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GdPraLHP.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GD_DPL.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Gd_LHP.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GD_PackingListInvoice.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Hapus.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_JenisBox.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KatalogSample.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KodeProdukBuyer.resources
@@ -154,6 +158,7 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Pembelian.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Penjualan.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_SP.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_SP_Contoh.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_UangMuka.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_User.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_UserAkses.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_UserChangePassword.resources
@@ -166,7 +171,3 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.exe
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.xml
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.pdb
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.cache
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Hapus.resources
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_Export2Excel.resources
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_UangMuka.resources
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GD_DPL.resources

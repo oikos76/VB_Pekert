@@ -22,11 +22,11 @@ Partial Class Form_Gd_LHP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Gd_LHP))
         Me.Importir = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
@@ -142,6 +142,7 @@ Partial Class Form_Gd_LHP
         Me.cmdRiwayatHarga = New System.Windows.Forms.Button()
         Me.cmdPenambahanKode = New System.Windows.Forms.Button()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
+        Me.cmdExcel = New System.Windows.Forms.Button()
         Me.cmdPrint = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmdBatal = New System.Windows.Forms.Button()
@@ -160,7 +161,6 @@ Partial Class Form_Gd_LHP
         Me.Produk = New System.Windows.Forms.TextBox()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.cmdExcel = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageDaftar_.SuspendLayout()
         Me.PanelDaftarLHP.SuspendLayout()
@@ -455,40 +455,40 @@ Partial Class Form_Gd_LHP
         '
         'Column2
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle11
         Me.Column2.HeaderText = "Jumlah Pack"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column3.HeaderText = "Kirim"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle13
         Me.Column6.HeaderText = "Jml.Hitung"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle14
         Me.Column7.HeaderText = "Jml.Baik"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle15
         Me.Column5.HeaderText = "Jml.Tolak"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -1388,7 +1388,7 @@ Partial Class Form_Gd_LHP
         Me.cmdRiwayatHarga.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(405, 0)
+        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(398, 0)
         Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
         Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 34)
         Me.cmdRiwayatHarga.TabIndex = 5
@@ -1400,11 +1400,11 @@ Partial Class Form_Gd_LHP
         Me.cmdPenambahanKode.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdPenambahanKode.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPenambahanKode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdPenambahanKode.Location = New System.Drawing.Point(498, 0)
+        Me.cmdPenambahanKode.Location = New System.Drawing.Point(491, 0)
         Me.cmdPenambahanKode.Name = "cmdPenambahanKode"
-        Me.cmdPenambahanKode.Size = New System.Drawing.Size(171, 34)
+        Me.cmdPenambahanKode.Size = New System.Drawing.Size(178, 34)
         Me.cmdPenambahanKode.TabIndex = 6
-        Me.cmdPenambahanKode.Text = "&Penambahan Kode Untuk SP ini"
+        Me.cmdPenambahanKode.Text = "&Penambahan Kode Untuk LHP ini"
         Me.cmdPenambahanKode.UseVisualStyleBackColor = True
         '
         'PanelNavigate
@@ -1420,6 +1420,16 @@ Partial Class Form_Gd_LHP
         Me.PanelNavigate.Name = "PanelNavigate"
         Me.PanelNavigate.Size = New System.Drawing.Size(226, 34)
         Me.PanelNavigate.TabIndex = 62
+        '
+        'cmdExcel
+        '
+        Me.cmdExcel.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdExcel.Image = CType(resources.GetObject("cmdExcel.Image"), System.Drawing.Image)
+        Me.cmdExcel.Location = New System.Drawing.Point(190, 0)
+        Me.cmdExcel.Name = "cmdExcel"
+        Me.cmdExcel.Size = New System.Drawing.Size(38, 34)
+        Me.cmdExcel.TabIndex = 5
+        Me.cmdExcel.UseVisualStyleBackColor = True
         '
         'cmdPrint
         '
@@ -1440,9 +1450,9 @@ Partial Class Form_Gd_LHP
         Me.Panel4.Controls.Add(Me.cmdSimpan)
         Me.Panel4.Controls.Add(Me.cmdEdit)
         Me.Panel4.Controls.Add(Me.cmdHapus)
+        Me.Panel4.Controls.Add(Me.cmdExit)
         Me.Panel4.Controls.Add(Me.cmdTambah)
         Me.Panel4.Controls.Add(Me.cmdBatal)
-        Me.Panel4.Controls.Add(Me.cmdExit)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 507)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
@@ -1665,16 +1675,6 @@ Partial Class Form_Gd_LHP
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1004, 581)
         Me.TabControl1.TabIndex = 67
-        '
-        'cmdExcel
-        '
-        Me.cmdExcel.Dock = System.Windows.Forms.DockStyle.Left
-        Me.cmdExcel.Image = CType(resources.GetObject("cmdExcel.Image"), System.Drawing.Image)
-        Me.cmdExcel.Location = New System.Drawing.Point(190, 0)
-        Me.cmdExcel.Name = "cmdExcel"
-        Me.cmdExcel.Size = New System.Drawing.Size(38, 34)
-        Me.cmdExcel.TabIndex = 5
-        Me.cmdExcel.UseVisualStyleBackColor = True
         '
         'Form_Gd_LHP
         '

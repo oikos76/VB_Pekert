@@ -528,9 +528,16 @@ Public Class FrmMenuUtama
         Form_UangMuka.Show()
     End Sub
 
-    Private Sub DraftPackingLIstDPLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DraftPackingLIstDPLToolStripMenuItem.Click
+
+
+    Private Sub _53DraftPackingListDPL_Click(sender As Object, e As EventArgs) Handles _53DraftPackingListDPL.Click
         Form_GD_DPL.MdiParent = Me
         Form_GD_DPL.Show()
+    End Sub
+
+    Private Sub _55PackingListInvoice_Click(sender As Object, e As EventArgs) Handles _55PackingListInvoice.Click
+        Form_GD_PackingListInvoice.MdiParent = Me
+        Form_GD_PackingListInvoice.Show()
     End Sub
 End Class
 

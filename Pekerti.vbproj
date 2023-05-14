@@ -184,6 +184,12 @@
     <Compile Include="Form_Gd_LHP.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_GD_PackingListInvoice.Designer.vb">
+      <DependentUpon>Form_GD_PackingListInvoice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_GD_PackingListInvoice.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_Hapus.Designer.vb">
       <DependentUpon>Form_Hapus.vb</DependentUpon>
     </Compile>
@@ -597,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Gd_LHP.resx">
       <DependentUpon>Form_Gd_LHP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_GD_PackingListInvoice.resx">
+      <DependentUpon>Form_GD_PackingListInvoice.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Hapus.resx">
       <DependentUpon>Form_Hapus.vb</DependentUpon>
