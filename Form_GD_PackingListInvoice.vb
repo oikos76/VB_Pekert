@@ -14,6 +14,9 @@ Public Class Form_GD_PackingListInvoice
         tTambah As Boolean, tEdit As Boolean, tHapus As Boolean, tLaporan As Boolean
     Dim Proses As New ClsKoneksi
     Dim dbTable As DataTable, UserID As String, SQL As String, MsgSQL As String
+    Private CN As SqlConnection
+    Private Cmd As SqlCommand
+    Private DA As SqlDataAdapter
 
     Private Function CekPI() As Boolean
         Dim Rs As New DataTable, rs03 As New DataTable,
@@ -51,7 +54,7 @@ Public Class Form_GD_PackingListInvoice
 
             If CekPI Then
                 MsgBox("Tidak bisa simpan, ada  PI yang bermasalah di harga/kode produk" & vbCrLf &
-                    "Catat kode produk, PI yg bermasalah tadi!", vbCritical + vbInformation, ".:Warning!")
+                    "Catat kode produk, PI yg bermasalah tadi!", vbCritical + vbOKOnly, ".:Warning!")
                 Exit Sub
             End If
 
@@ -90,7 +93,7 @@ Public Class Form_GD_PackingListInvoice
                     HargaFOB.Text = RS05.Rows(0) !HargaFOB
                 Else
                     MsgBox("PO NO : " & Rs.Rows(i) !NoPO &
-                           " Kode Produk : " & Rs.Rows(i) !KodeProduk & " di PI tidak ada!" & vbCrLf & "Harga FOB NOL!!", vbCritical + vbOK, ".:Warning!")
+                           " Kode Produk : " & Rs.Rows(i) !KodeProduk & " di PI tidak ada!" & vbCrLf & "Harga FOB NOL!!", vbCritical + vbOKOnly, ".:Warning!")
                     HargaFOB.Text = 0
                 End If
                 IDRec.Text = Proses.MaxNoUrut("IDRec", "t_PackingList", Format(TglPL.Value, "MM"))
@@ -188,10 +191,6 @@ Public Class Form_GD_PackingListInvoice
         If LAdd Or LEdit Then TglKapal.Focus()
     End Sub
 
-    Private Sub DGView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView2.CellContentClick
-
-    End Sub
-
     Private Sub DaftarDPL(Cari As String)
         Dim NoDPL As String = "", RS04 As New DataTable,
             mKondisi As String, MsgSQL As String
@@ -242,13 +241,116 @@ Public Class Form_GD_PackingListInvoice
             Kode_Importir.Text = RS04.Rows(0) !KodeImportir
             Importir.Text = RS04.Rows(0) !Importir
             cmbMataUang.Text = RS04.Rows(0) !MataUang
-            'SQL = "SELECT nama FROM m_KodeImportir " &
-            '    "WHERE kodeImportir = '" & Kode_Importir.Text & "' " &
-            '    " AND aktifYN = 'Y' "
-            'Importir.Text = Proses.ExecuteSingleStrQuery(SQL)
         End If
         NoPackingList.Text = Proses.MaxYNoUrut("NoPackingList", "t_PackingList", Format(TglPL.Value, "MM"))
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable
+
+        Dim MsgSQL As String, TCetak As String, rsc As New DataTable
+        Dim terbilang As String = "", tb As New Terbilang
+
+        If Opt_PackingList.Checked = False And Opt_Invoice.Checked = False Then
+            MsgBox("Jenis Packing list yang akan di cetak belom di pilih !", vbCritical + vbOKOnly, ".:Warning !")
+            Exit Sub
+        End If
+        Me.Cursor = Cursors.WaitCursor
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+
+        MsgSQL = "Select isnull(Sum(JumlahBoks * JumlahTiapBoks * HargaFOB), 0) SubTotal " &
+            " From t_PackingList " &
+            "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' "
+        rsc = Proses.ExecuteQuery(MsgSQL)
+        If rsc.Rows.Count <> 0 Then
+            terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !SubTotal)) & " "
+        End If
+        Proses.CloseConn()
+        TCetak = "Jakarta, " & Proses.TglIndo(Format(TglPL.Value, "dd MMNN yyyy"))
+
+
+        If Opt_PackingList.Checked = True Then
+            MsgSQL = "SELECT t_PackingList.NoBoks1, t_PackingList.NoBoks2, " &
+                "t_PackingList.JumlahBoks, t_PackingList.JumlahTiapBoks,  " &
+                "t_PackingList.NoPI, t_PackingList.Kode_Produk, t_PackingList.QtyTiapBoks,  " &
+                "t_PackingList.NoPO, t_PackingList.KodePImportir, m_KodeProduk.descript,  " &
+                "m_KodeBahan.NamaInggris, NoPackingList, CatatanPL, m_KodeImportir.Nama, m_KodeImportir.Alamat   " &
+                "FROM Pekerti.dbo.t_PackingList t_PackingList " &
+                "   INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+                "   t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
+                "   INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON  " &
+                "   t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+                "   INNER JOIN Pekerti.dbo.m_KodeBahan m_KodeBahan ON  " &
+                "m_KodeProduk.Kode_Bahan = m_KodeBahan.KodeBahan  " &
+                "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' " &
+                "  And t_PackingList.aktifYN = 'Y' " &
+                "Order By right('0000000000'+noboks1,10), right('0000000000' + noboks2, 10), idrec  "
+        ElseIf Opt_Invoice.Checked = True Then
+            MsgSQL = "select t_PI.IdRec as IDPI, t_PackingList.IdRec as IDPL, " &
+                    "t_PackingList.Kode_Produk, NoPackingList " &
+                    " From t_PI inner join t_PackingList on t_PackingList.NoPI = t_PI.NoPI " &
+                    "     And t_PI.Kode_Produk = t_PackingList.Kode_produk " &
+                    "Where t_PackingList.NoPI = '" & NoPI.Text & "' " &
+                    "  and NoPackingList = '" & NoPackingList.Text & "' " &
+                    "  and T_PackingList.AktifYN = 'Y' " &
+                    "  and t_PI.AktifYN = 'Y' " &
+                    "Order By t_PI.IdRec "
+            rsc = Proses.ExecuteQuery(MsgSQL)
+            For i = 0 To rsc.Rows.Count - 1
+                Application.DoEvents()
+                MsgSQL = "Update T_PackingList Set FotoLoc = '" & rsc.Rows(i) !idpi & "' " &
+                        "Where IdRec = '" & rsc.Rows(i) !idpl & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next i
+
+            MsgSQL = "SELECT t_PackingList.NoPackingList, t_PackingList.NoPI, t_PackingList.Kode_Produk, " &
+                "     t_PackingList.QtyTiapBoks, t_PackingList.HargaFOB, t_PackingList.KodePImportir, " &
+                "     t_PackingList.CatatanPL, m_KodeProduk.Descript, t_PackingList.NoPO, " &
+                "     t_PackingList.jumlahboks, t_PackingList.JumlahTiapBoks, m_KodeImportir.Nama, m_KodeImportir.Alamat " &
+                "FROM Pekerti.dbo.t_PackingList t_PackingList INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+                "     t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
+                "     INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+                "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' " &
+                "  And t_PackingList.aktifYN = 'Y' " &
+                "Order By t_PackingList.NoPO, t_PackingList.FotoLoc, t_PackingList.Kode_Produk, right('0000000000'+noboks1,10), right('0000000000' + noboks2, 10) "
+        End If
+        DTadapter = New SqlDataAdapter(MsgSQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            If Opt_PackingList.Checked Then
+                objRep = New Rpt_PackingList
+            ElseIf Opt_Invoice.Checked = True Then
+                objRep = New Rpt_PackingList_INV
+                'objRep.SetDataSource(dttable)
+                'objRep.SetParameterValue("terbilang", terbilang)
+            End If
+            objRep.SetDataSource(dttable)
+            objRep.SetParameterValue("TANGGAL", TCetak)
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub tNoPO_TextChanged(sender As Object, e As EventArgs) Handles tNoPO.TextChanged
+
     End Sub
 
     Private Sub cmdBatal_Click(sender As Object, e As EventArgs) Handles cmdBatal.Click
@@ -258,9 +360,88 @@ Public Class Form_GD_PackingListInvoice
         AturTombol(True)
     End Sub
 
-    'Private CN As SqlConnection
-    'Private Cmd As SqlCommand
-    'Private DA As SqlDataAdapter
+    Private Sub btnTop_Click(sender As Object, e As EventArgs) Handles btnTop.Click
+
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
+            "Where AktifYN = 'Y' " &
+            " And NoPackingList = '" & NoPackingList.Text & "' " &
+            "ORDER BY tglpl, IDRec "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            tNoPO.Text = ""
+            tKodeBrg.Text = ""
+            IDRec.Text = RSNav.Rows(0) !IdRec
+            Call IsiPL(IDRec.Text)
+        End If
+
+    End Sub
+
+    Private Sub btnButtom_Click(sender As Object, e As EventArgs) Handles btnButtom.Click
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
+            "Where AktifYN = 'Y' " &
+            " And NoPackingList = '" & NoPackingList.Text & "' " &
+            "ORDER BY tglpl DESC, IDRec DESC "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            tNoPO.Text = ""
+            tKodeBrg.Text = ""
+            IDRec.Text = RSNav.Rows(0) !IdRec
+            Call IsiPL(IDRec.Text)
+        End If
+    End Sub
+
+    Private Sub btnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
+            "Where AktifYN = 'Y' " &
+            "  And IDRec < '" & IDRec.Text & "' " &
+            "  And NOPACKINGLIST = '" & NoPackingList.Text & "' " &
+            "ORDER BY tglpl desc, IDRec desc "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            tNoPO.Text = ""
+            tKodeBrg.Text = ""
+            IDRec.Text = RSNav.Rows(0) !IdRec
+            Call IsiPL(IDRec.Text)
+        End If
+    End Sub
+
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
+            "Where AktifYN = 'Y' " &
+            "  And IDRec > '" & IDRec.Text & "' " &
+            "  And NOPACKINGLIST = '" & NoPackingList.Text & "' " &
+            "ORDER BY tglpl, IDRec  "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            tNoPO.Text = ""
+            tKodeBrg.Text = ""
+            IDRec.Text = RSNav.Rows(0) !IdRec
+            Call IsiPL(IDRec.Text)
+        End If
+    End Sub
+
+    Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
+        If MsgBox("Hapus data ini?", vbCritical + vbYesNo, "Confirm!") = vbYes Then
+            MsgSQL = "Delete t_PackingList Where NoPackingList = '" & Trim(NoPackingList.Text) & "' "
+            Proses.ExecuteNonQuery(MsgSQL)
+            ClearTextBoxes()
+        End If
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        If Trim(IDRec.Text) = "" Then
+            MsgBox("Data yang akan di edit belum di pilih!", vbCritical, ".:Empty Data!")
+            Exit Sub
+        End If
+        LAdd = False
+        LEdit = True
+        LTambahKode = False
+        AturTombol(False)
+    End Sub
 
     Private Sub Form_GD_PackingListInvoice_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim MsgSQL As String
@@ -369,7 +550,6 @@ Public Class Form_GD_PackingListInvoice
         Else
             cmdHapus.Visible = tAktif
         End If
-        cmdPenambahanKode.Visible = tAktif
         cmdBatal.Visible = Not tAktif
         PanelNavigate.Visible = tAktif
         cmdExit.Visible = tAktif
@@ -550,5 +730,11 @@ Public Class Form_GD_PackingListInvoice
         If DGView2.Rows.Count = 0 Then Exit Sub
         IDRec.Text = DGView2.Rows(DGView2.CurrentCell.RowIndex).Cells(0).Value
         IsiPL(IDRec.Text)
+    End Sub
+
+    Private Sub tNoPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNoPO.KeyPress
+        If e.KeyChar = Chr(13) Then
+            DaftarPL()
+        End If
     End Sub
 End Class

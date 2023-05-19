@@ -865,16 +865,7 @@ ErrMSG:
         DTadapter = New SqlDataAdapter(MsgSQL, CN)
         Try
             DTadapter.Fill(dttable)
-            'RPT belum di convert !!!
-            'If Proses.UserAksesMenu(UserID, "SP_CETAK") Then
-            '    If MsgBox("Mau pakai tanda tangan?", vbYesNo + vbInformation, ".:Signature!") = vbYes Then
-            '        ' objRep = New Rpt_sptt.rpt
-            '    Else
-            '        ' objRep = New Rpt_sp.rpt
-            '    End If
-            'Else
             objRep = New Rpt_SP
-            'End If
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("MRevisi", mRevisi)
             objRep.SetParameterValue("terbilang", terbilang)
@@ -887,7 +878,6 @@ ErrMSG:
             Form_Report.CrystalReportViewer1.ShowPrintButton = False
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
-
             dttable.Dispose()
             DTadapter.Dispose()
             Proses.CloseConn(CN)
@@ -896,35 +886,6 @@ ErrMSG:
             Me.Cursor = Cursors.Default
             MessageBox.Show(ex.Message, "Error")
         End Try
-        'With CrIns
-        '    .Reset
-        '    .LogOnServer "PDSODBC.DLL", "DBPEKERTI", "PEKERTI", Usr, PWD
-        'If UserRights(UserID, "SP_CETAK") Then
-        '        If MsgBox("Mau pakai tanda tangan?", vbYesNo + vbInformation, ".:Signature!") = vbYes Then
-        '            .ReportFileName = Left(RptLoc, Len(Trim(RptLoc)) - 1) & "\Rpt_sptt.rpt"
-        '        Else
-        '            .ReportFileName = Left(RptLoc, Len(Trim(RptLoc)) - 1) & "\Rpt_sp.rpt"
-        '        End If
-        '    Else
-        '        .ReportFileName = Left(RptLoc, Len(Trim(RptLoc)) - 1) & "\Rpt_sp.rpt"
-        '    End If
-        '    .Formulas(1) = "terbilang = '" & Terbilang & "' "
-        '    .Formulas(2) = "Pernyataan = '" & Left(Pernyataan, 254) & "' "
-        '    .Formulas(3) = "Pernyataan2 = '" & pernyataan2 & "' "
-        '    .Formulas(4) = "TglCetak = '" & TCetak & "' "
-        '    .Formulas(5) = "MRevisi = '" & mRevisi & "' "
-        '    .SQLQuery = MsgSQL
-        '    .WindowState = crptMaximized
-        '    .WindowShowGroupTree = False
-        '    .WindowShowSearchBtn = True
-        '    .WindowShowCloseBtn = True
-        '    .WindowShowNavigationCtls = True
-        '    .WindowShowProgressCtls = True
-        '    .WindowShowPrintSetupBtn = True
-        '    .WindowShowPrintBtn = True
-        '    .WindowAllowDrillDown = True
-        '    .Action = 1
-        'End With
         Me.Cursor = Cursors.Default
     End Sub
 

@@ -23,11 +23,11 @@ Partial Class Form_GD_PackingListInvoice
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GD_PackingListInvoice))
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -121,7 +121,6 @@ Partial Class Form_GD_PackingListInvoice
         Me.Opt_Invoice = New System.Windows.Forms.RadioButton()
         Me.btnExcel = New System.Windows.Forms.Button()
         Me.Panel_Tombol = New System.Windows.Forms.Panel()
-        Me.cmdPenambahanKode = New System.Windows.Forms.Button()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
         Me.cmdPrint = New System.Windows.Forms.Button()
         Me.btnButtom = New System.Windows.Forms.Button()
@@ -328,8 +327,8 @@ Partial Class Form_GD_PackingListInvoice
         '
         'Column11
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column11.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column11.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column11.HeaderText = "Boks Awal"
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
@@ -337,8 +336,8 @@ Partial Class Form_GD_PackingListInvoice
         '
         'Column10
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column10.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column10.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column10.HeaderText = "Boks Akhir"
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
@@ -346,8 +345,8 @@ Partial Class Form_GD_PackingListInvoice
         '
         'Column2
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column2.HeaderText = "Jumlah Boks"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -355,8 +354,8 @@ Partial Class Form_GD_PackingListInvoice
         '
         'Column3
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column3.HeaderText = "Jumlah Kode ini Tiap Boks"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -378,8 +377,8 @@ Partial Class Form_GD_PackingListInvoice
         '
         'Column13
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle10
         Me.Column13.HeaderText = "Harga FOB"
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
@@ -1178,7 +1177,6 @@ Partial Class Form_GD_PackingListInvoice
         'Panel_Tombol
         '
         Me.Panel_Tombol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel_Tombol.Controls.Add(Me.cmdPenambahanKode)
         Me.Panel_Tombol.Controls.Add(Me.PanelNavigate)
         Me.Panel_Tombol.Controls.Add(Me.cmdSimpan)
         Me.Panel_Tombol.Controls.Add(Me.cmdBatal)
@@ -1191,18 +1189,6 @@ Partial Class Form_GD_PackingListInvoice
         Me.Panel_Tombol.Name = "Panel_Tombol"
         Me.Panel_Tombol.Size = New System.Drawing.Size(1003, 29)
         Me.Panel_Tombol.TabIndex = 107
-        '
-        'cmdPenambahanKode
-        '
-        Me.cmdPenambahanKode.Dock = System.Windows.Forms.DockStyle.Right
-        Me.cmdPenambahanKode.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPenambahanKode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdPenambahanKode.Location = New System.Drawing.Point(545, 0)
-        Me.cmdPenambahanKode.Name = "cmdPenambahanKode"
-        Me.cmdPenambahanKode.Size = New System.Drawing.Size(178, 27)
-        Me.cmdPenambahanKode.TabIndex = 64
-        Me.cmdPenambahanKode.Text = "&Penambahan Kode Untuk PL ini"
-        Me.cmdPenambahanKode.UseVisualStyleBackColor = True
         '
         'PanelNavigate
         '
@@ -1481,7 +1467,6 @@ Partial Class Form_GD_PackingListInvoice
     Friend WithEvents Opt_PackingList As RadioButton
     Friend WithEvents Opt_Invoice As RadioButton
     Friend WithEvents btnExcel As Button
-    Friend WithEvents cmdPenambahanKode As Button
     Friend WithEvents PanelNavigate As Panel
     Friend WithEvents cmdPrint As Button
     Friend WithEvents btnButtom As Button

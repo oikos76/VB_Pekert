@@ -597,6 +597,7 @@ Partial Class FrmMenuUtama
         '
         '_55PackingListInvoice
         '
+        Me._55PackingListInvoice.Image = CType(resources.GetObject("_55PackingListInvoice.Image"), System.Drawing.Image)
         Me._55PackingListInvoice.Name = "_55PackingListInvoice"
         Me._55PackingListInvoice.Size = New System.Drawing.Size(249, 22)
         Me._55PackingListInvoice.Text = "PackingList && Invoice"

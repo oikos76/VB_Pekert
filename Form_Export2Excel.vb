@@ -228,10 +228,10 @@ Public Class Form_Export2Excel
             NoUrut += 1
         Next (a)
 
-        i = i + 2
-        oSheet.Cells(i, 4) = "Total :"
-        oSheet.Cells(i, 4).HorizontalAlignment = Excel.Constants.xlRight
-        oSheet.Cells(i, 5) = Format(tTotal, "###,##0")
+        i = i + 1
+        oSheet.Cells(i, 6) = "Total :"
+        oSheet.Cells(i, 6).HorizontalAlignment = Excel.Constants.xlRight
+        oSheet.Cells(i, 7) = Format(tTotal, "###,##0")
         i = i + 2
         oSheet.Cells(i, 6) = "Jakarta, " & Format(mTglPL, "dd MMMM yyyy")
         i = i + 6
