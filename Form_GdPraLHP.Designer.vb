@@ -327,11 +327,12 @@ Partial Class Form_GdPraLHP
         '
         'cmdBatal
         '
+        Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
         Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdBatal.Location = New System.Drawing.Point(337, 3)
+        Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
         Me.cmdBatal.Name = "cmdBatal"
-        Me.cmdBatal.Size = New System.Drawing.Size(77, 28)
+        Me.cmdBatal.Size = New System.Drawing.Size(77, 34)
         Me.cmdBatal.TabIndex = 4
         Me.cmdBatal.Text = "&Batal"
         Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight

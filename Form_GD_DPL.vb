@@ -465,6 +465,7 @@ Public Class Form_GD_DPL
         Next
         Netto.Text = 0
         Bruto.Text = 0
+        VolContainer.Text = 0
         ShipmentDate.Value = Now
         optDPL.Checked = False
         optDaftarIsi.Checked = False
@@ -523,6 +524,7 @@ Public Class Form_GD_DPL
             idRec.Text = ""
         End If
         Call Isi_DPL()
+        optDPL.Checked = True
         tTambah = Proses.UserAksesTombol(UserID, "53_DPL", "baru")
         tEdit = Proses.UserAksesTombol(UserID, "53_DPL", "edit")
         tHapus = Proses.UserAksesTombol(UserID, "53_DPL", "hapus")
@@ -652,12 +654,19 @@ Public Class Form_GD_DPL
             Exit Sub
         End If
         TotalJumlahBoksDPL.Text = JumProduk(NoDPL.Text)
+        If trim(cmbJenisBox.Text) = "" Then
+            MsgBox("Jenis Box belum di pilih !", vbCritical + vbOKOnly, ".:Error !")
+            cmbJenisBox.Select()
+            cmbJenisBox.Focus()
+            Exit Sub
+        End If
         If LAdd Then
             NoDPL.Text = Proses.MaxYNoUrut("NoDPL", "t_DPL", "DPL")
         End If
         If LAdd Or LTambahKode Then
             idRec.Text = MaxNoUrutDPL("IDRec", "t_DPL", "DPL", Format(Now, "yyMM"))
             If VolContainer.Text = "" Then VolContainer.Text = 0
+            ' Error disini request by marno !
             If TotalVolumeBoks.Text = "" Then
                 TotalVolumeBoks.Text = 0
                 MsgBox("Total Volume Boks Salah!", vbOKOnly + vbCritical, ".:data tidak boleh kosong!")
@@ -804,6 +813,8 @@ Public Class Form_GD_DPL
             Dim temp As Double = NoBoks.Text
             NoBoks.Text = Format(temp, "###,##0")
             NoBoks.SelectionStart = NoBoks.TextLength
+            If NoBoks2.Text = "" Then NoBoks2.Text = 0
+            JumlahBoks.Text = (NoBoks2.Text * 1) - (NoBoks.Text * 1) + 1
         Else
             NoBoks.Text = 0
         End If
@@ -1262,6 +1273,30 @@ Public Class Form_GD_DPL
         End If
     End Sub
 
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        If Trim(idRec.Text) = "" Then
+            MsgBox("Data yang akan di edit belum di pilih!", vbCritical + vbOKOnly, "Warning!")
+            Exit Sub
+        Else
+            ' IsiKodeProduk(KodeProduk.Text)
+        End If
+        LAdd = False
+        LEdit = True
+        AturTombol(False)
+        LTambahKode = False
+        cmdSimpan.Visible = tEdit
+
+        '---------------
+        'If Trim(IdRec.Text) = "" Then
+        '    MsgBox "Data yang akan di edit belum di pilih!", vbCritical, ".:Empty Data!"
+        'Exit Sub
+        'End If
+        'LAdd = False
+        'LEdit = True
+        'LTambahKode = False
+        'DisableTombol
+    End Sub
+
     Private Sub NoBoks2_GotFocus(sender As Object, e As EventArgs) Handles NoBoks2.GotFocus
         With NoBoks2
             .SelectionStart = 0
@@ -1275,6 +1310,8 @@ Public Class Form_GD_DPL
             Dim temp As Double = NoBoks2.Text
             NoBoks2.Text = Format(temp, "###,##0")
             NoBoks2.SelectionStart = NoBoks2.TextLength
+            If NoBoks.Text = "" Then NoBoks.Text = 0
+            JumlahBoks.Text = (NoBoks2.Text * 1) - (NoBoks.Text * 1) + 1
         Else
             NoBoks2.Text = 0
         End If
@@ -1427,6 +1464,13 @@ Public Class Form_GD_DPL
 
     Private Sub tCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tCari.KeyPress
         If e.KeyChar = Chr(13) Then
+            DaftarDPL()
+        End If
+    End Sub
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
             DaftarDPL()
         End If
     End Sub

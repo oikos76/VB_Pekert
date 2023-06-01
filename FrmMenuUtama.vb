@@ -49,11 +49,23 @@ Public Class FrmMenuUtama
         _28Katalog.Visible = Proses.UserAksesMenu(UserID, "28_KATALOG_CONTOH")
 
         _31SuratPesanan.Visible = Proses.UserAksesMenu(UserID, "31_SURAT_PESANAN")
+        _32DPB.Visible = Proses.UserAksesMenu(UserID, "32_DPB")
+        _33PengajuanUangMukaPerajin.Visible = Proses.UserAksesMenu(UserID, "33_UANG_MUKA_PERAJIN")
 
         _41KodifikasiNegara.Visible = Proses.UserAksesMenu(UserID, "41_KODIF_NEGARA")
         _42KodifikasiImportir.Visible = Proses.UserAksesMenu(UserID, "42_KODIF_IMPORTIR")
+        _43KodeProdukBuyer.Visible = Proses.UserAksesMenu(UserID, "43_KODIF_PRODUK_BUYER")
+        _44PurchasingOrder.Visible = Proses.UserAksesMenu(UserID, "44_PURCHASE_ORDER")
+        _45ProformaInvoice.Visible = Proses.UserAksesMenu(UserID, "45_PROFORMA_INVOICE")
 
-        _41KodifikasiNegara.Visible = Proses.UserAksesMenu(UserID, "41_KODIF_NEGARA")
+        _51PraLHP.Visible = Proses.UserAksesMenu(UserID, "51_PRA_LHP")
+        _52LHP.Visible = Proses.UserAksesMenu(UserID, "52_LHP")
+        _53DraftPackingListDPL.Visible = Proses.UserAksesMenu(UserID, "53_DPL")
+        _54JenisBox.Visible = Proses.UserAksesMenu(UserID, "54_JENIS_BOX")
+        _55PackingListInvoice.Visible = Proses.UserAksesMenu(UserID, "55_PACKING_LIST_INV")
+        _56MetodePengiriman.Visible = Proses.UserAksesMenu(UserID, "56_METODE_PENGIRIMAN")
+        _57ReturBarang.Visible = Proses.UserAksesMenu(UserID, "57_RETUR")
+
 
         If (UCase(UserID) = "EKO_K" Or UCase(UserID) = "ADMIN") Then
             _18Utility.Visible = True
@@ -472,13 +484,6 @@ Public Class FrmMenuUtama
         Form_KatalogSample.Show()
     End Sub
 
-    Private Sub MetodePengirimanToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MetodePengirimanToolStripMenuItem.Click
-        Form_MetodePengiriman.MdiParent = Me
-        Form_MetodePengiriman.Show()
-    End Sub
-
-
-
     Private Sub _51PraLHP_Click(sender As Object, e As EventArgs) Handles _51PraLHP.Click
         Form_GdPraLHP.MdiParent = Me
         Form_GdPraLHP.Show()
@@ -505,9 +510,6 @@ Public Class FrmMenuUtama
         Form_PI.MdiParent = Me
         Form_PI.Show()
     End Sub
-
-
-
 
     Private Sub _43KodeProdukBuyer_Click(sender As Object, e As EventArgs) Handles _43KodeProdukBuyer.Click
         Form_KodeProdukBuyer.ShowDialog()
@@ -538,6 +540,26 @@ Public Class FrmMenuUtama
     Private Sub _55PackingListInvoice_Click(sender As Object, e As EventArgs) Handles _55PackingListInvoice.Click
         Form_GD_PackingListInvoice.MdiParent = Me
         Form_GD_PackingListInvoice.Show()
+    End Sub
+
+    Private Sub _57ReturBarang_Click(sender As Object, e As EventArgs) Handles _57ReturBarang.Click
+        Form_GD_Retur.MdiParent = Me
+        Form_GD_Retur.Show()
+    End Sub
+
+    Private Sub _56MetodePengiriman_Click(sender As Object, e As EventArgs) Handles _56MetodePengiriman.Click
+        Form_MetodePengiriman.MdiParent = Me
+        Form_MetodePengiriman.Show()
+    End Sub
+
+    Private Sub _101JurnalUmum_Click(sender As Object, e As EventArgs) Handles _101JurnalUmum.Click
+        Form_KeuJurnalUmum.MdiParent = Me
+        Form_KeuJurnalUmum.Show()
+    End Sub
+
+    Private Sub _105KodeGL_Click(sender As Object, e As EventArgs) Handles _105KodeGL.Click
+        Form_KeuKodeGL.MdiParent = Me
+        Form_KeuKodeGL.Show()
     End Sub
 End Class
 

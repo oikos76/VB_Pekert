@@ -22,11 +22,11 @@ Partial Class Form_Gd_LHP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Gd_LHP))
         Me.Importir = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
@@ -145,8 +145,8 @@ Partial Class Form_Gd_LHP
         Me.cmdExcel = New System.Windows.Forms.Button()
         Me.cmdPrint = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
+        Me.cmdBatal = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelEntry = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -455,40 +455,40 @@ Partial Class Form_Gd_LHP
         '
         'Column2
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column2.HeaderText = "Jumlah Pack"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column3.HeaderText = "Kirim"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column6.HeaderText = "Jml.Hitung"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column7.HeaderText = "Jml.Baik"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column5.HeaderText = "Jml.Tolak"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -1460,6 +1460,18 @@ Partial Class Form_Gd_LHP
         Me.Panel4.Size = New System.Drawing.Size(986, 36)
         Me.Panel4.TabIndex = 146
         '
+        'cmdExit
+        '
+        Me.cmdExit.Image = CType(resources.GetObject("cmdExit.Image"), System.Drawing.Image)
+        Me.cmdExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdExit.Location = New System.Drawing.Point(254, 3)
+        Me.cmdExit.Name = "cmdExit"
+        Me.cmdExit.Size = New System.Drawing.Size(77, 28)
+        Me.cmdExit.TabIndex = 3
+        Me.cmdExit.Text = "E&xit"
+        Me.cmdExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdExit.UseVisualStyleBackColor = True
+        '
         'cmdBatal
         '
         Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
@@ -1473,18 +1485,6 @@ Partial Class Form_Gd_LHP
         Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdBatal.UseVisualStyleBackColor = True
         Me.cmdBatal.Visible = False
-        '
-        'cmdExit
-        '
-        Me.cmdExit.Image = CType(resources.GetObject("cmdExit.Image"), System.Drawing.Image)
-        Me.cmdExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdExit.Location = New System.Drawing.Point(254, 3)
-        Me.cmdExit.Name = "cmdExit"
-        Me.cmdExit.Size = New System.Drawing.Size(77, 28)
-        Me.cmdExit.TabIndex = 3
-        Me.cmdExit.Text = "E&xit"
-        Me.cmdExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdExit.UseVisualStyleBackColor = True
         '
         'Panel1
         '

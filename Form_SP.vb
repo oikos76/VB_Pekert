@@ -378,8 +378,8 @@ Public Class Form_SP
     End Sub
     Private Sub SetDataGrid()
         With Me.DGView.RowTemplate
-            .Height = 30
-            .MinimumHeight = 30
+            .Height = 33
+            .MinimumHeight = 33
         End With
         DGView.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         DGView.BackgroundColor = Color.LightGray
@@ -393,8 +393,8 @@ Public Class Form_SP
         DGView.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
 
         With Me.LstPO.RowTemplate
-            .Height = 30
-            .MinimumHeight = 30
+            .Height = 33
+            .MinimumHeight = 33
         End With
         LstPO.CellBorderStyle = DataGridViewCellBorderStyle.Raised
         lstPO.BackgroundColor = Color.LightGray
@@ -476,18 +476,18 @@ Public Class Form_SP
         AturTombol(True)
     End Sub
 
-    Private Sub DGView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellContentClick
-
-    End Sub
 
     Private Sub IsiSP(tIdRec As String, tKodeProduk As String)
-        Dim rsc As New DataTable
+        Dim rsc As New DataTable, mKondisi As String = ""
+        If tKodeProduk <> "" Then
+            mKondisi = "  And KodeProduk = '" & tKodeProduk & "' "
+        End If
         On Error GoTo ErrMSG
         MsgSQL = "SELECT * " &
             " FROM t_SP " &
             "Where AktifYN = 'Y' " &
             "  And IDRec = '" & tIdRec & "' " &
-            "  And KodeProduk = '" & tKodeProduk & "'  "
+            " " & mKondisi & " "
         rsc = Proses.ExecuteQuery(MsgSQL)
         If rsc.Rows.Count <> 0 Then
             optTPO.Checked = IIf(rsc.Rows(0) !tPO = True, 1, 0)
@@ -573,13 +573,18 @@ ErrMSG:
         For a = 0 To RS05.Rows.Count - 1
             Application.DoEvents()
             DGView.Rows.Add(RS05.Rows(a) !NoSP,
-                Format(RS05.Rows(a) !TglSP, "dd-MM-yyyy"),
+                RS05.Rows(a) !TglSP,
                 RS05.Rows(a) !Perajin,
                 RS05.Rows(a) !NoPO,
                 RS05.Rows(a) !Importir,
-                Format(RS05.Rows(a) !ShipmentDate, "dd-MM-yyyy"),
-                Format(RS05.Rows(a) !TglMasukGudang, "dd-MM-yyyy"))
+                RS05.Rows(a) !ShipmentDate,
+                RS05.Rows(a) !TglMasukGudang)
         Next (a)
+        If DGView.Rows.Count <> 0 Then
+            DGView.Columns(1).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
+            DGView.Columns(5).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
+            DGView.Columns(6).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
+        End If
         DGView.Visible = True
     End Sub
 
@@ -828,7 +833,7 @@ ErrMSG:
             "  And t_SP.NoSP = '" & NoSP.Text & "' "
         rsc = Proses.ExecuteQuery(MsgSQL)
         If rsc.Rows.Count <> 0 Then
-            terbilang = " " & tb.Terbilang(CDbl(IIf(rsc.Rows(0) !jvalue, 0, rsc.Rows(0) !jvalue))) & " "
+            'terbilang = " " & tb.Terbilang(CDbl(IIf(rsc.Rows(0) !jvalue, 0, rsc.Rows(0) !jvalue))) & " "
             terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !jvalue)) & " "
         End If
         Proses.CloseConn()
@@ -1268,11 +1273,26 @@ ErrMSG:
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "Select Top 1 * From T_SP " &
+            "Where IDRec > '" & idRecord.Text & "' " &
+            " And NoSP = '" & NoSP.Text & "' and aktifYN = 'Y' " &
+            "Order By IdRec "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            Call IsiSP(RSNav.Rows(0) !IdRec, "")
+        End If
     End Sub
 
     Private Sub btnTop_Click(sender As Object, e As EventArgs) Handles btnTop.Click
-
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "Select Top 1 * From T_SP " &
+            " where NoSP = '" & NoSP.Text & "' and aktifYN = 'Y'  " &
+            "Order By TglSP, IdRec  "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            Call IsiSP(RSNav.Rows(0) !IdRec, "")
+        End If
     End Sub
 
     Private Sub cmdPenambahanKode_Click(sender As Object, e As EventArgs) Handles cmdPenambahanKode.Click
@@ -1307,7 +1327,69 @@ ErrMSG:
     End Sub
 
     Private Sub NoSP_TextChanged(sender As Object, e As EventArgs) Handles NoSP.TextChanged
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "SELECT top 1 IDrec From T_SP " &
+            "Where AktifYN = 'Y' " &
+            "  And NoSP = '" & NoSP.Text & "' " &
+            "ORDER BY IDRec "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            Call IsiSP(RSNav.Rows(0) !IdRec, "")
+        End If
+    End Sub
 
+    Private Sub btnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "Select Top 1 * From T_SP " &
+            "Where NoSP = '" & NoSP.Text & "' and aktifYN = 'Y' " &
+            " And IDRec < '" & idRecord.Text & "' " &
+            "Order By IdRec Desc "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            Call IsiSP(RSNav.Rows(0) !IdRec, "")
+        End If
+    End Sub
+
+    Private Sub btnButtom_Click(sender As Object, e As EventArgs) Handles btnButtom.Click
+        Dim MsgSQL As String, RSNav As New DataTable
+        MsgSQL = "SELECT top 1 IDrec From T_SP " &
+            "Where AktifYN = 'Y' " &
+            "  And NoSP = '" & NoSP.Text & "' " &
+            "Order By tglSP Desc, IdRec desc "
+        RSNav = Proses.ExecuteQuery(MsgSQL)
+        If RSNav.Rows.Count <> 0 Then
+            Call IsiSP(RSNav.Rows(0) !IdRec, "")
+        End If
+    End Sub
+
+    Private Sub btnSP_Belom_PraLHP_Click(sender As Object, e As EventArgs) Handles btnSP_Belom_PraLHP.Click
+        Dim MsgSQL As String, RS05 As New DataTable
+        Dim mKondisi As String = ""
+        DGView.Rows.Clear()
+        DGView2.Rows.Clear()
+        DGView.Visible = False
+        QTYMacam.Text = ""
+        QTYPesan.Text = ""
+        NilaiPesan.Text = ""
+
+        MsgSQL = "Select Distinct NoSP, TglSP, NoPO, Importir, " &
+            "Perajin, ShipmentDate " &
+            "From t_SP " &
+            "Where AktifYN = 'Y' " &
+            " And NoSP Not IN (Select NoSP From t_PraLHP " &
+            "                   Where t_PraLHP.NoSP =  t_SP.NoSP) "
+        RS05 = Proses.ExecuteQuery(MsgSQL)
+        For a = 0 To RS05.Rows.Count - 1
+            Application.DoEvents()
+            DGView.Rows.Add(RS05.Rows(a) !NoSP,
+                Format(RS05.Rows(a) !TglSP, "dd-MM-yyyy"),
+                RS05.Rows(a) !Perajin,
+                RS05.Rows(a) !NoPO,
+                RS05.Rows(a) !Importir,
+                Format(RS05.Rows(a) !ShipmentDate, "dd-MM-yyyy"),
+                Format(RS05.Rows(a) !TglMasukGudang, "dd-MM-yyyy"))
+        Next (a)
+        DGView.Visible = True
     End Sub
 
     Private Sub ShipmentDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ShipmentDate.KeyPress
@@ -1465,4 +1547,10 @@ ErrMSG:
         Proses.CloseConn()
     End Function
 
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            DaftarSP("")
+        End If
+    End Sub
 End Class

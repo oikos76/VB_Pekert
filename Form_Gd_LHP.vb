@@ -138,7 +138,11 @@ Public Class Form_Gd_LHP
             JumlahBaik.Focus()
             Exit Sub
         End If
-
+        If Trim(JumlahBaik.Text) = "0" Then
+            MsgBox("Jumlah baik nya kenapa nol ya ?", vbCritical + vbOKOnly, ".:Warning !")
+            JumlahBaik.Focus()
+            Exit Sub
+        End If
         If LAdd Then
             MsgSQL = "Select * From t_LHP " &
                 "Where NoLHP = '" & NoLHP.Text & "' " &
@@ -226,6 +230,7 @@ Public Class Form_Gd_LHP
         Next
         tglMulaiPeriksa.Value = Now
         TglSelesaiPeriksa.Value = Now
+        TglLHP.Value = Now
         Koordinator.Text = lKoordinator
         Pemeriksa.Text = lPemeriksa
         ShowFoto("")
@@ -268,7 +273,9 @@ Public Class Form_Gd_LHP
 
     Private Sub NoPraLHP_TextChanged(sender As Object, e As EventArgs) Handles NoPraLHP.TextChanged
         If Len(Trim(NoPraLHP.Text)) < 1 Then
+            Dim oNoLHP As String = NoLHP.Text
             ClearTextBoxes()
+            NoLHP.Text = oNoLHP
             'Kode_Produk.Text = ""
             'Produk.Text = ""
             'Kode_Perajin.Text = ""
@@ -926,11 +933,20 @@ Public Class Form_Gd_LHP
 
     Private Sub JumlahBaik_TextChanged(sender As Object, e As EventArgs) Handles JumlahBaik.TextChanged
         If Trim(JumlahBaik.Text) = "" Then JumlahBaik.Text = 0
+        If Trim(JumlahHitung.Text) = "" Then JumlahHitung.Text = 0
         If IsNumeric(JumlahBaik.Text) Then
             Dim temp As Double = JumlahBaik.Text
             JumlahBaik.SelectionStart = JumlahBaik.TextLength
+            JumlahRetur.Text = Format(Trim(JumlahHitung.Text) * 1 - Trim(JumlahBaik.Text) * 1, "###,##0")
         Else
+            If Trim(JumlahHitung.Text) = "" Then JumlahHitung.Text = 0
             JumlahBaik.Text = 0
+        End If
+        If Trim(JumlahBaik.Text) = 0 Then
+            With JumlahBaik
+                .SelectionStart = 0
+                .SelectionLength = .TextLength
+            End With
         End If
     End Sub
 
@@ -1045,6 +1061,7 @@ Public Class Form_Gd_LHP
                 Dim temp As Double = JumlahRetur.Text
                 JumlahRetur.Text = Format(temp, "###,##0")
                 JumlahRetur.SelectionStart = JumlahRetur.TextLength
+
             Else
                 JumlahRetur.Text = 0
             End If
@@ -1217,6 +1234,10 @@ Public Class Form_Gd_LHP
         End With
     End Sub
 
+    Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        cetakLHP
+    End Sub
+
     Private Sub Pemeriksa_GotFocus(sender As Object, e As EventArgs) Handles Pemeriksa.GotFocus
         With Pemeriksa
             .SelectionStart = 0
@@ -1293,6 +1314,114 @@ Public Class Form_Gd_LHP
             tKodeBrg.Text = ""
             DaftarLHP()
         End If
+    End Sub
+
+    Private Sub JumlahBaik_LostFocus(sender As Object, e As EventArgs) Handles JumlahBaik.LostFocus
+        If JumlahBaik.Text = "" Then JumlahBaik.Text = 0
+        If JumlahHitung.Text = "" Then JumlahHitung.Text = 0
+        If Trim(JumlahBaik.Text) * 1 > Trim(JumlahHitung.Text) * 1 Then
+            MsgBox("Jumlah Lulus Periksa Lebih Besar dari Jumlah Hitung", vbCritical, ".:Imposible!")
+            JumlahBaik.Focus()
+            Exit Sub
+        Else
+            JumlahRetur.Text = Format(Trim(JumlahHitung.Text) * 1 - Trim(JumlahBaik.Text) * 1, "###,##0")
+        End If
+    End Sub
+
+    Private Sub JumlahRetur_LostFocus(sender As Object, e As EventArgs) Handles JumlahRetur.LostFocus
+        If Trim(JumlahBaik.Text) = "" Then JumlahBaik.Text = 0
+        If Trim(JumlahHitung.Text) = "" Then JumlahHitung.Text = 0
+        If Trim(JumlahRetur.Text) = "" Then JumlahRetur.Text = 0
+
+        If IsNumeric(JumlahRetur.Text) Then
+            Dim temp As Double = JumlahRetur.Text
+            JumlahBaik.SelectionStart = JumlahBaik.TextLength
+            JumlahBaik.Text = Format(Trim(JumlahHitung.Text) * 1 - Trim(JumlahRetur.Text) * 1, "###,##0")
+        Else
+            JumlahRetur.Text = 0
+        End If
+    End Sub
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            DaftarLHP()
+        End If
+    End Sub
+    Private Sub CetakLHP()
+        Dim dbCek As New DataTable
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable
+        Dim MsgSQL As String, rsc As New DataTable
+        Me.Cursor = Cursors.WaitCursor
+
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+
+        MsgSQL = "SELECT Distinct t_LHP.IDRec, t_LHP.NoLHP, t_LHP.NoPraLHP, t_LHP.Kode_Produk, " &
+            "    t_LHP.Produk, t_LHP.JumlahPack, t_LHP.Kirim, t_LHP.JumlahHitung,  " &
+            "    t_LHP.JumlahBaik, t_LHP.JumlahTolak, t_LHP.Pemeriksa, t_LHP.TglMulaiPeriksa,  " &
+            "    t_LHP.TglSelesaiPeriksa, t_LHP.Koordinator, t_LHP.Keterangan, t_LHP.NoSP,  " &
+            "    t_PraLHP.Kargo, t_PraLHP.SuratPengantar, t_PraLHP.JumlahKoli,  " &
+            "    AlasanDiTolak, T_LHP.TglTerima " &
+            "FROM Pekerti.dbo.t_LHP t_LHP INNER JOIN Pekerti.dbo.t_PraLHP t_PraLHP ON  " &
+            "        t_LHP.NoPraLHP = t_PraLHP.NoPraLHP AND t_LHP.NoSP = t_PraLHP.NoSP AND  " &
+            "        t_LHP.Kode_Produk = t_PraLHP.Kode_Produk " &
+            "Where t_LHP.NoLHP = '" & NoLHP.Text & "' " &
+            "  And t_LHP.AktifYN = 'Y' And t_PraLHP.AktifYN = 'Y' " &
+            "ORDER BY t_LHP.NoSP, t_LHP.IDRec ASC "
+        dbCek = Proses.ExecuteQuery(MsgSQL)
+        If dbCek.Rows.Count = 0 Then
+            MsgBox("No Pra LHP " & NoPraLHP.Text & " tidak ada! (mungkin Pra LHP tsb terhapus)" & vbCrLf &
+                "Silakan cek di Pra LHP!", vbCritical + vbOKOnly, ".:Warning!")
+            NoPraLHP.Focus()
+            Exit Sub
+        End If
+        DTadapter = New SqlDataAdapter(MsgSQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            objRep = New Rpt_LHP
+            objRep.SetDataSource(dttable)
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
+        'RS05.Open MsgSQL, ConnSQL, adOpenForwardOnly, adLockReadOnly '
+        'If RS05.EOF Then
+        '    MsgBox "No Pra LHP " & NoPraLHP.Text & " tidak ada! (mungkin Pra LHP tsb terhapus)" & vbCrLf &
+        '        "Silakan cek di Pra LHP!", vbCritical + vbOKOnly, ".:Warning!"
+        'End If
+        'RS05.Close
+        'With CrINS
+        '    .Reset
+        '    .LogOnServer "PDSODBC.DLL", "DBPEKERTI", "PEKERTI", Usr, PWD
+        '    .ReportFileName = Left(RptLoc, Len(Trim(RptLoc)) - 1) & "\Rpt_LHP.rpt"
+        '    .SQLQuery = MsgSQL
+        '    .WindowState = crptMaximized
+        '    '            .WindowShowGroupTree = True
+        '    .WindowShowSearchBtn = True
+        '    .WindowShowCloseBtn = True
+        '    .WindowShowNavigationCtls = True
+        '    .WindowShowProgressCtls = True
+        '    .WindowShowPrintSetupBtn = True
+        '    .WindowShowPrintBtn = True
+        '    .WindowAllowDrillDown = True
+        '    .Action = 1
+        'End With
     End Sub
 End Class
 

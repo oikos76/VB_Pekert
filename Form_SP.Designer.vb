@@ -23,13 +23,13 @@ Partial Class Form_SP
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_SP))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -124,7 +124,7 @@ Partial Class Form_SP
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSP_Belom_PraLHP = New System.Windows.Forms.Button()
         Me.NilaiPesan = New System.Windows.Forms.TextBox()
         Me.QTYPesan = New System.Windows.Forms.TextBox()
         Me.QTYMacam = New System.Windows.Forms.TextBox()
@@ -541,16 +541,16 @@ Partial Class Form_SP
         '
         'Column17
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column17.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column17.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column17.HeaderText = "Jumlah"
         Me.Column17.Name = "Column17"
         Me.Column17.ReadOnly = True
         '
         'Column18
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column18.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column18.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column18.HeaderText = "Harga Beli (Rp)"
         Me.Column18.Name = "Column18"
         Me.Column18.ReadOnly = True
@@ -1186,7 +1186,7 @@ Partial Class Form_SP
         Me.Panel5.Controls.Add(Me.Label16)
         Me.Panel5.Controls.Add(Me.Label13)
         Me.Panel5.Controls.Add(Me.Label12)
-        Me.Panel5.Controls.Add(Me.Button1)
+        Me.Panel5.Controls.Add(Me.btnSP_Belom_PraLHP)
         Me.Panel5.Controls.Add(Me.NilaiPesan)
         Me.Panel5.Controls.Add(Me.QTYPesan)
         Me.Panel5.Controls.Add(Me.QTYMacam)
@@ -1241,17 +1241,17 @@ Partial Class Form_SP
         Me.Label12.TabIndex = 181
         Me.Label12.Text = "Cari"
         '
-        'Button1
+        'btnSP_Belom_PraLHP
         '
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button1.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 274)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(260, 28)
-        Me.Button1.TabIndex = 180
-        Me.Button1.Text = "Daftar SP yang belum di Pra LHP"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSP_Belom_PraLHP.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.btnSP_Belom_PraLHP.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSP_Belom_PraLHP.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSP_Belom_PraLHP.Location = New System.Drawing.Point(0, 274)
+        Me.btnSP_Belom_PraLHP.Name = "btnSP_Belom_PraLHP"
+        Me.btnSP_Belom_PraLHP.Size = New System.Drawing.Size(260, 28)
+        Me.btnSP_Belom_PraLHP.TabIndex = 180
+        Me.btnSP_Belom_PraLHP.Text = "Daftar SP yang belum di Pra LHP"
+        Me.btnSP_Belom_PraLHP.UseVisualStyleBackColor = True
         '
         'NilaiPesan
         '
@@ -1419,8 +1419,8 @@ Partial Class Form_SP
         '
         'Column2
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle10
         Me.Column2.HeaderText = "Jumlah "
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -1428,8 +1428,8 @@ Partial Class Form_SP
         '
         'Column3
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle11
         Me.Column3.HeaderText = "Harga Beli"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -1437,8 +1437,8 @@ Partial Class Form_SP
         '
         'Column10
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column10.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column10.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column10.HeaderText = "Total"
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
@@ -1446,8 +1446,8 @@ Partial Class Form_SP
         '
         'Column11
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column11.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column11.DefaultCellStyle = DataGridViewCellStyle13
         Me.Column11.HeaderText = "Harga Beli US"
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
@@ -1455,8 +1455,8 @@ Partial Class Form_SP
         '
         'Column9
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle14
         Me.Column9.HeaderText = "Nilai Kurs"
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -1659,7 +1659,7 @@ Partial Class Form_SP
     Friend WithEvents Label4 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSP_Belom_PraLHP As Button
     Friend WithEvents Label16 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label

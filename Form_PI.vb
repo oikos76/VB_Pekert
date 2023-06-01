@@ -52,8 +52,17 @@ Public Class Form_PI
         ClearTextBoxes()
         AturTombol(False)
         Nopo.ReadOnly = False
-        NoPI.Text = Proses.MaxNoUrut("NoPI", "t_PI", Format(Now, "MM"))
+        NoPI.Text = Max_NoUrut("NoPI", "t_PI", Format(Now, "MM"))
     End Sub
+
+    Public Function Max_NoUrut(tField As String, tTable As String, Kode As String) As String
+        Dim MsgSQL As String, RsMax As New DataTable
+        MsgSQL = "Select convert(Char(2), GetDate(), 12) TGL, isnull(Max(left(" & tField & ",3)),0) + 1000001 RecId " &
+        " From " & tTable & " " &
+        "Where Right(" & tField & ",2) = convert(Char(2), GetDate(), 12) And AktifYN = 'Y' "
+        RsMax = Proses.ExecuteQuery(MsgSQL)
+        Max_NoUrut = Microsoft.VisualBasic.Right(RsMax.Rows(0) !recid, 3) + "/" + Kode + "/" + Trim(Str(RsMax.Rows(0) !tGL))
+    End Function
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
         If idRecord.Text = "" Then
@@ -131,7 +140,42 @@ Public Class Form_PI
         cmdExit.Visible = tAktif
         TabPageDaftar_.Enabled = True
         TabPageFormEntry_.Enabled = True
-        Me.Text = "PI"
+        If LAdd Then
+            KodeProduk.Visible = False
+            Produk.Visible = False
+            KodePImportir.Visible = False
+            Jumlah.Visible = False
+            QTYOSO.Visible = False
+            cmbMataUang.Visible = False
+            HargaFOB.Visible = False
+            chk3Digit.Visible = False
+            ShipmentDate.Visible = False
+            PermintaanPO1.Visible = False
+            PermintaanPO2.Visible = False
+            PermintaanPO3.Visible = False
+            Pemenuhan1.Visible = False
+            Pemenuhan2.Visible = False
+        Else
+            KodeProduk.Visible = tAktif
+            Produk.Visible = tAktif
+            KodePImportir.Visible = tAktif
+            Jumlah.Visible = tAktif
+            QTYOSO.Visible = tAktif
+            cmbMataUang.Visible = tAktif
+            HargaFOB.Visible = tAktif
+            chk3Digit.Visible = tAktif
+            ShipmentDate.Visible = tAktif
+            PermintaanPO1.Visible = tAktif
+            PermintaanPO2.Visible = tAktif
+            PermintaanPO3.Visible = tAktif
+            Pemenuhan1.Visible = tAktif
+            Pemenuhan2.Visible = True
+        End If
+
+
+
+
+
     End Sub
     Private Sub ClearTextBoxes(Optional ByVal ctlcol As Control.ControlCollection = Nothing)
         If ctlcol Is Nothing Then ctlcol = Me.Controls
@@ -146,7 +190,7 @@ Public Class Form_PI
         Next
         ShowFoto("")
         tglPO.Value = Now
-        ShipmentDateKode.Value = Now
+        ShipmentDate.Value = Now
         chk3Digit.Checked = False
         FOBOSO.Text = 0
         HargaFOB.Text = 0
@@ -432,7 +476,7 @@ Public Class Form_PI
             Kode_Importir.Text = rsc.Rows(0) !Kode_Importir
             Importir.Text = rsc.Rows(0) !Importir
             tglPO.Value = rsc.Rows(0) !tglPO
-            ShipmentDateKode.Value = rsc.Rows(0) !ShipmentDateKode
+            ShipmentDate.Value = rsc.Rows(0) !ShipmentDateKode
             TglKirim.Value = rsc.Rows(0) !ShipmentDate
             Pelabuhan.Text = rsc.Rows(0) !Pelabuhan
             CatatanPI.Text = rsc.Rows(0) !CatatanPI
@@ -513,6 +557,7 @@ Public Class Form_PI
                     MsgBox("No PO tidak boleh kosong!", vbCritical, ".:ERROR!")
                     Nopo.Focus()
                 End If
+                NoPI.Text = Max_NoUrut("NoPI", "t_PI", Format(Now, "MM"))
                 MsgSQL = "Select t_PO.IDRec, m_KodeProduk.deskripsi, t_PO.Kode_Produk, " &
                     " m_KodeImportir.Nama AS Importir, t_PO.Kode_Importir, t_PO.Kode_Perajin, " &
                     " t_PO.Kode_Buyer, t_PO.Jumlah, t_PO.TglKirim, t_PO.MataUang, t_PO.FOBBuyer, " &
@@ -532,13 +577,12 @@ Public Class Form_PI
                 For a = 0 To RS05.Rows.Count - 1
                     Application.DoEvents()
                     idRecord.Text = Proses.MaxNoUrut("IDRec", "t_PI", "PI")
-                    MsgSQL = "INSERT INTO t_PI(IDRec, NoPI, NoPO, TglPI, " &
-                        "StatusPI, Kode_Importir, Importir, TglPO, ShipmentDate, Pelabuhan, " &
-                        "CaraKirim, Kode_Produk, Produk, Kode_PImport, Jumlah, MataUang, " &
-                        "HargaFOB, Digit3YN, ShipmentDateKode, PermintaanPO1, PermintaanPO2, " &
-                        "PermintaanPO3, Pemenuhan1, Pemenuhan2, AktifYN, UserID, LastUPD, NilaiPI, " &
-                        "UangMuka, KurangBayar, LabelingCost, SpecialPackaging, Fumigation, " &
-                        "Phytosanitary, CatatanPI, QTYOSO, Konversi, FOBOSO) VALUES( '" & idRecord.Text & "',   " &
+                    MsgSQL = "INSERT INTO t_PI(IDRec, NoPI, NoPO, TglPI, StatusPI, Kode_Importir, Importir, " &
+                        "TglPO, ShipmentDate, Pelabuhan, CaraKirim, Kode_Produk, Produk, Kode_PImport, " &
+                        "Jumlah, MataUang, HargaFOB, Digit3YN, ShipmentDateKode, PermintaanPO1, PermintaanPO2, " &
+                        "PermintaanPO3, Pemenuhan1, Pemenuhan2, AktifYN, TransferYN, UserID, LastUPD, " &
+                        "NilaiPI, UangMuka, KurangBayar, LabelingCost, SpecialPackaging, Fumigation, " &
+                        "Phytosanitary, CatatanPI, QTYOSO, Konversi, FOBOSO, IdCompany) VALUES( '" & idRecord.Text & "',   " &
                         "'" & NoPI.Text & "', '" & Nopo.Text & "', '" & Format(tglPI.Value, "yyyy-MM-dd") & "', '', " &
                         "'" & RS05.Rows(0) !Kode_Importir & "', '" & RS05.Rows(0) !Importir & "', '" & RS05.Rows(0) !tglPO & "', " &
                         "'" & Format(TglKirim.Value, "yyyy-MM-dd") & "', '" & Trim(Pelabuhan.Text) & "', " &
@@ -546,11 +590,15 @@ Public Class Form_PI
                         "'" & Trim(Replace(RS05.Rows(0) !Deskripsi, "'", "`")) & "', '" & RS05.Rows(0) !Kode_Buyer & "', " &
                         "" & RS05.Rows(0) !Jumlah & ", '" & RS05.Rows(0) !MataUang & "', " & RS05.Rows(0) !FOBBuyer & ", " &
                         "'" & RS05.Rows(0) !digit3yn & "', '" & Format(TglKirim.Value, "yyyy-MM-dd") & "', " &
-                        "'', '', '', '', '', 'Y', '" & UserID & "', GetDate(), 0, 0, 0, 0, 0, 0, 0, " &
+                        "'', '', '', '', '', 'Y', 'N', '" & UserID & "', GetDate(), 0, 0, 0, 0, 0, 0, 0, " &
                         "'" & Trim(CatatanPI.Text) & "', " & RS05.Rows(0) !Jumlah & ", " & RS05.Rows(0) !PembagiEuro & ", " &
-                        "" & RS05.Rows(0) !FOBBuyer & " )"
+                        "" & RS05.Rows(0) !FOBBuyer & ", 'PEKERTI' )"
                     Proses.ExecuteNonQuery(MsgSQL)
                 Next a
+                LAdd = False
+                LEdit = False
+                LTambahKode = False
+                AturTombol(True)
             ElseIf LUangMuka Then
                 Dim tNilaiPI As Double = 0
                 MsgSQL = "Select Sum(t_PI.Jumlah * t_PI.HargaFOB) JValue " &
@@ -587,7 +635,7 @@ Public Class Form_PI
                 'update by mbak UUk, untuk repot analisa tgl shipment date diambil dari
                 'shipment date per kode
                 MsgSQL = "Update t_PI Set " &
-                    " ShipmentDateKode = '" & Format(ShipmentDateKode.Value, "YYYY-MM-DD") & "', " &
+                    " ShipmentDateKode = '" & Format(ShipmentDate.Value, "YYYY-MM-DD") & "', " &
                     "Kode_Produk = '" & Trim(KodeProduk.Text) & "', " &
                     "     Produk = '" & Trim(Replace(Produk.Text, "'", "`")) & "', " &
                     "Kode_PImport = '" & KodePImportir.Text & "', " &
@@ -682,21 +730,12 @@ Public Class Form_PI
     End Sub
 
     Private Sub Nopo_LostFocus(sender As Object, e As EventArgs) Handles Nopo.LostFocus
-        Dim MsgSQL As String, RSL As New DataTable
-        If LAdd Then
-            On Error Resume Next
-            If Trim(Nopo.Text) = "" Then Exit Sub
-            MsgSQL = "Select Kode_produk From T_PI " &
-                "Where aktifYN = 'Y' " &
-                "  And noPo = '" & Nopo.Text & "' "
-            RSL = Proses.ExecuteQuery(MsgSQL)
-            If RSL.Rows.Count <> 0 Then
-                MsgBox("Maaf, NO PO sudah pernah di buatkan PI", vbCritical, "Double Cek!")
-                Nopo.Focus()
-                Exit Sub
-            End If
-            Proses.CloseConn()
-        End If
+        'Dim MsgSQL As String, RSL As New DataTable
+        'If LAdd Then
+        '    On Error Resume Next
+        '    If Trim(Nopo.Text) = "" Then Exit Sub
+
+        'End If
     End Sub
 
     Private Sub cmdUangMuka_Click(sender As Object, e As EventArgs) Handles cmdUangMuka.Click
@@ -744,7 +783,7 @@ Public Class Form_PI
         oSheet.Cells(4, 1) = "Importir"
         oSheet.Cells(4, 2) = "'" + Importir.Text
         oSheet.Cells(5, 1) = "Shipment Date"
-        oSheet.Cells(5, 2) = " " + Format(ShipmentDateKode.Value, "dd-MM-yyyy")
+        oSheet.Cells(5, 2) = " " + Format(ShipmentDate.Value, "dd-MM-yyyy")
         oSheet.Cells(7, 1) = "No."
         oSheet.Cells(7, 2) = "Code"
         oSheet.Cells(7, 3) = "Description"
@@ -1225,6 +1264,78 @@ Public Class Form_PI
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable, tb As New Terbilang
+        Dim terbilang As String = "", DeliveryDate As String = "", totalPI As Double = 0
+
+        MsgSQL = "Select isNull(Sum(t_PI.Jumlah * t_PI.HargaFOB),0) JValue " &
+            "From Pekerti.dbo.t_PI  " &
+            "Where t_PI.NoPI = '" & NoPI.Text & "' " &
+            "  And T_PI.AktifYn = 'Y' "
+        totalPI = Proses.ExecuteSingleDblQuery(MsgSQL)
+        terbilang = " " & tb.Terbilang(totalPI) & " "
+        DeliveryDate = Format(TglKirim.Value, "dd MMMM yyyy") + " (Leave Indonesia)"
+        Me.Cursor = Cursors.WaitCursor
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+        'MsgSQL = "SELECT t_PI.IDRec, t_PI.NoPI, t_PI.NoPO, t_PI.ShipmentDate, " &
+        '    "t_PI.Pelabuhan, t_PI.Sea, t_PI.Air, t_PI.Kode_Produk, t_PI.Produk, " &
+        '    "t_PI.Kode_PImport, t_PI.Jumlah, t_PI.MataUang, t_PI.HargaFOB, " &
+        '    "m_KodeImportir.Nama, m_KodeImportir.Alamat, m_KodeProduk.Satuan " &
+        '    "FROM  Pekerti.dbo.t_PI t_PI INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
+        '    "    t_PI.Kode_Produk = m_KodeProduk.KodeProduk " &
+        '    " INNER JOIN Pekerti.dbo.m_Company m_Company ON  " &
+        '    "    t_PI.IDCompany = m_Company.IDComp " &
+        '    " INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+        '    "    t_PI.Kode_Importir = m_KodeImportir.KodeImportir " &
+        '    "Where t_PI.NoPI = '" & NoPI.Text & "' " &
+        '    "  And T_PI.AktifYn = 'Y'  " &
+        '    "Order By T_PI.IDRec "
+
+        MsgSQL = "SELECT t_PI.IDRec, t_PI.NoPI, t_PI.NoPO, t_PI.ShipmentDate,  t_PI.CaraKirim,
+            t_PI.Pelabuhan, t_PI.Sea, t_PI.Air, t_PI.Kode_Produk, t_PI.Produk,  
+            t_PI.Kode_PImport, t_PI.Jumlah, t_PI.MataUang, t_PI.HargaFOB,  
+            m_KodeImportir.Nama, m_KodeImportir.Alamat, m_KodeProduk.Satuan  
+            FROM  Pekerti.dbo.t_PI t_PI INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON  
+                t_PI.Kode_Produk = m_KodeProduk.KodeProduk  
+             INNER JOIN Pekerti.dbo.m_Company m_Company ON   
+                t_PI.IDCompany = m_Company.CompCode  
+             INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON  
+                t_PI.Kode_Importir = m_KodeImportir.KodeImportir  
+            Where t_PI.NoPI = '" & NoPI.Text & "'  
+              And T_PI.AktifYn = 'Y'   
+            Order By T_PI.IDRec "
+
+
+        DTadapter = New SqlDataAdapter(MsgSQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            objRep = New Rpt_PI
+            objRep.SetDataSource(dttable)
+            'objRep.SetParameterValue("Terbilang", terbilang)
+            'objRep.SetParameterValue("DeliveryDate", DeliveryDate)
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub DGView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellContentClick
 
     End Sub
 
@@ -1237,7 +1348,7 @@ Public Class Form_PI
                 "  And T_PO.AktifYN = 'Y' "
             RSN1 = Proses.ExecuteQuery(MsgSQL)
             If RSN1.Rows.Count <> 0 Then
-                ShipmentDateKode.Value = RSN1.Rows(0) !tglKirim
+                ShipmentDate.Value = RSN1.Rows(0) !tglKirim
                 TglKirim.Value = RSN1.Rows(0) !tglKirim
                 Kode_Importir.Text = RSN1.Rows(0) !Kode_Importir
                 Importir.Text = RSN1.Rows(0) !Nama
@@ -1260,7 +1371,7 @@ Public Class Form_PI
                     "  And T_PO.AktifYN = 'Y' "
                 RSN2 = Proses.ExecuteQuery(MsgSQL)
                 If RSN2.Rows.Count <> 0 Then
-                    ShipmentDateKode.Value = RSN2.Rows(0) !tglKirim
+                    ShipmentDate.Value = RSN2.Rows(0) !tglKirim
                     TglKirim.Value = RSN2.Rows(0) !tglKirim
                     Kode_Importir.Text = RSN2.Rows(0) !Kode_Importir
                     Importir.Text = RSN2.Rows(0) !Nama
@@ -1411,6 +1522,14 @@ Public Class Form_PI
     Private Sub tNoPI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNoPI.KeyPress
         If e.KeyChar = Chr(13) Then
             DaftarPI(tNoPI.Text)
+        End If
+    End Sub
+
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            DaftarPI("")
         End If
     End Sub
 End Class

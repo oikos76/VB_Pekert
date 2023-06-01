@@ -897,11 +897,7 @@ Public Class Form_KatalogSample
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub TabControl1_MouseClick(sender As Object, e As MouseEventArgs) Handles TabControl1.MouseClick
-        If TabControl1.SelectedIndex.ToString = "1" Then
-            DaftarKatalog()
-        End If
-    End Sub
+
 
     Private Sub DGView2_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView2.CellDoubleClick
         Me.Cursor = Cursors.WaitCursor
@@ -937,6 +933,13 @@ Public Class Form_KatalogSample
             Else
                 ClearTextBoxes()
             End If
+        End If
+    End Sub
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            DaftarKatalog()
         End If
     End Sub
 End Class

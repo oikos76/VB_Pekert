@@ -205,33 +205,67 @@ Public Class Form_GdPraLHP
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
-
-        'MsgSQL = "SELECT t_PraLHP.IDRec, t_PraLHP.NoPraLHP, t_PraLHP.Kargo, " &
-        '"t_PraLHP.Kode_Produk, t_PraLHP.Produk, t_PraLHP.JumlahPack, " &
-        '"t_PraLHP.Kirim, t_PraLHP.TglTerima, t_PraLHP.SuratPengantar, " &
-        '"t_PraLHP.JumlahKoli, t_PraLHP.Keterangan, t_SP.NoSP , " &
-        '"t_SP.KodeImportir, t_SP.Importir, t_SP.Perajin " &
-        '" FROM Pekerti.dbo.t_PraLHP t_PraLHP INNER JOIN Pekerti.dbo.t_SP t_SP ON " &
-        '"      t_PraLHP.NoSP = t_SP.NoSP  AND t_PraLHP.Kode_Produk = t_SP.KodeProduk " &
-        '"Where NoPraLHP = '" & NoPraLHP.Text & "' " &
-        '"  And T_PraLHP.AktifYN = 'Y' and t_SP.AktifYN = 'Y'  order by t_PraLHP.IDRec "
-        'With CrIns
-        '    .Reset
-        '    .LogOnServer "PDSODBC.DLL", "DBPEKERTI", "PEKERTI", Usr, PWD
-        '    .ReportFileName = Left(RptLoc, Len(Trim(RptLoc)) - 1) & "\Rpt_PraLHP.rpt"
-        '    .SQLQuery = MsgSQL
-        '    .WindowState = crptMaximized
-        '    .WindowShowGroupTree = False
-        '    .WindowShowSearchBtn = True
-        '    .WindowShowCloseBtn = True
-        '    .WindowShowNavigationCtls = True
-        '    .WindowShowProgressCtls = True
-        '    .WindowShowPrintSetupBtn = True
-        '    .WindowShowPrintBtn = True
-        '    .WindowAllowDrillDown = True
-        '    .Action = 1
-        'End With
+        CetakPraLHP
     End Sub
+    Private Sub CetakPraLHP()
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable
+        Dim MsgSQL As String, rsc As New DataTable
+        Me.Cursor = Cursors.WaitCursor
+
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+        MsgSQL = "SELECT t_PraLHP.IDRec, t_PraLHP.NoPraLHP, t_PraLHP.Kargo, " &
+            "      t_PraLHP.Kode_Produk, t_PraLHP.Produk, t_PraLHP.JumlahPack, " &
+            "      t_PraLHP.Kirim, t_PraLHP.TglTerima, t_PraLHP.SuratPengantar, " &
+            "      t_PraLHP.JumlahKoli, t_PraLHP.Keterangan, t_SP.NoSP, " &
+            "      t_SP.KodeImportir, t_SP.Importir, t_SP.Perajin, t_PraLHP.Koordinator,  " &
+            "      t_PraLHP.NoPO, t_PraLHP.SpecSP, t_pralhp.InstruksiPacking " &
+            " FROM Pekerti.dbo.t_PraLHP t_PraLHP INNER JOIN Pekerti.dbo.t_SP t_SP ON " &
+            "      t_PraLHP.NoSP = t_SP.NoSP  AND t_PraLHP.Kode_Produk = t_SP.KodeProduk " &
+            "Where NoPraLHP = '" & NoPraLHP.Text & "' " &
+            "  And T_PraLHP.AktifYN = 'Y' and t_SP.AktifYN = 'Y'  order by t_PraLHP.IDRec "
+        DTadapter = New SqlDataAdapter(MsgSQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            objRep = New Rpt_PraLHP
+            objRep.SetDataSource(dttable)
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    'With CrIns
+    '    .Reset
+    '    .LogOnServer "PDSODBC.DLL", "DBPEKERTI", "PEKERTI", Usr, PWD
+    '    .ReportFileName = Left(RptLoc, Len(Trim(RptLoc)) - 1) & "\Rpt_PraLHP.rpt"
+    '    .SQLQuery = MsgSQL
+    '    .WindowState = crptMaximized
+    '    .WindowShowGroupTree = False
+    '    .WindowShowSearchBtn = True
+    '    .WindowShowCloseBtn = True
+    '    .WindowShowNavigationCtls = True
+    '    .WindowShowProgressCtls = True
+    '    .WindowShowPrintSetupBtn = True
+    '    .WindowShowPrintBtn = True
+    '    .WindowAllowDrillDown = True
+    '    .Action = 1
+    'End With 
 
     Private Sub cmdPenambahanKode_Click(sender As Object, e As EventArgs) Handles cmdPenambahanKode.Click
         TambahKode()
@@ -248,17 +282,27 @@ Public Class Form_GdPraLHP
         LEdit = False
 
         AturTombol(False)
-        ClearProduk()
+
+        Produk.Text = ""
+        KodeProduk.Text = ""
+        LocGmb1.Text = ""
+        ShowFoto("")
+        Jumlah.Text = "0"
+        QTYPack.Text = "0"
+        Kirim.Text = "0"
+        Keterangan.Text = ""
+        InstruksiPacking.Text = ""
         KodeProduk.Focus()
+
     End Sub
     Private Sub ClearProduk()
         KodeProduk.Text = ""
         Produk.Text = ""
         Jumlah.Text = "0"
-        QTYPack.Text = ""
-        Kirim.Text = ""
+        QTYPack.Text = "0"
+        Kirim.Text = "0"
         SuratPengantar.Text = ""
-        QtyKoli.Text = ""
+        QtyKoli.Text = "0"
         Keterangan.Text = ""
         InstruksiPacking.Text = ""
         NoPO.Text = ""
@@ -281,7 +325,7 @@ Public Class Form_GdPraLHP
         AturTombol(False)
         cmdSimpan.Visible = tEdit
         NoSP.ReadOnly = False
-        NoPraLHP.ReadOnly = True
+        NoPraLHP.ReadOnly = True  
     End Sub
 
 
@@ -381,7 +425,7 @@ Public Class Form_GdPraLHP
     Private Sub KodeProduk_TextChanged(sender As Object, e As EventArgs) Handles KodeProduk.TextChanged
         If Len(KodeProduk.Text) < 1 Then
             KodeProduk.Text = ""
-            ClearProduk()
+            Produk.Text = ""
         ElseIf Len(KodeProduk.Text) = 4 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
@@ -735,7 +779,7 @@ Public Class Form_GdPraLHP
         ElseIf e.KeyChar = Chr(13) Then
             If IsNumeric(QTYPack.Text) Then
                 Dim temp As Double = QTYPack.Text
-                QTYPack.Text = Format(temp, "###,##0.00")
+                QTYPack.Text = Format(temp, "###,##0")
                 QTYPack.SelectionStart = QTYPack.TextLength
             Else
                 QTYPack.Text = 0
@@ -863,7 +907,7 @@ Public Class Form_GdPraLHP
         ElseIf e.KeyChar = Chr(13) Then
             If IsNumeric(Kirim.Text) Then
                 Dim temp As Double = Kirim.Text
-                Kirim.Text = Format(temp, "###,##0.00")
+                Kirim.Text = Format(temp, "###,##0")
                 Kirim.SelectionStart = Kirim.TextLength
             Else
                 Kirim.Text = 0
@@ -905,7 +949,7 @@ Public Class Form_GdPraLHP
         ElseIf e.KeyChar = Chr(13) Then
             If IsNumeric(QtyKoli.Text) Then
                 Dim temp As Double = QtyKoli.Text
-                QtyKoli.Text = Format(temp, "###,##0.00")
+                QtyKoli.Text = Format(temp, "###,##0")
                 QtyKoli.SelectionStart = QtyKoli.TextLength
             Else
                 QtyKoli.Text = 0
@@ -974,6 +1018,13 @@ Public Class Form_GdPraLHP
         If DGView2.Rows.Count <> 0 Then
             IDRecord.Text = DGView2.Rows(DGView2.CurrentCell.RowIndex).Cells(0).Value
             IsiPraLHP()
+        End If
+    End Sub
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            DaftarPraLHP()
         End If
     End Sub
 End Class

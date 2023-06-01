@@ -55,7 +55,7 @@
             DGView.Columns(0).HeaderText = "No LHP"
             DGView.Columns(0).Width = 150
             DGView.Columns(1).HeaderText = "Perajin"
-            DGView.Columns(1).Width = 200
+            DGView.Columns(1).Width = 250
             DGView.Columns(2).HeaderText = "Tgl.LHP "
             DGView.Columns(2).Width = 120
             DGView.Columns(3).HeaderText = " "
@@ -617,6 +617,10 @@
 
     End Sub
 
+    Private Sub DGView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellContentClick
+
+    End Sub
+
     Private Sub tCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tCari.KeyPress
         If e.KeyChar = Chr(13) Then
             Dim mKondisi As String = ""
@@ -726,11 +730,11 @@
 
             ElseIf Me.Text = "Daftar LHP" Then
                 txtQuery.Text = "Select NoLHP, a.NamaPerajin, a.TglLHP " &
-                " From T_LHP a  " &
-                "Where a.AktifYN = 'Y' " &
-                "And NoLHP Like '%" & Trim(tCari.Text) & "%' " &
-                "Group By NoLHP, a.NamaPerajin, a.TglLHP " &
-                "Order By a.tglLHP desc, NoLHP Desc "
+                    " From T_LHP a  " &
+                    "Where a.AktifYN = 'Y' " &
+                    "And NoLHP Like '%" & Trim(tCari.Text) & "%' " &
+                    "Group By NoLHP, a.NamaPerajin, a.TglLHP " &
+                    "Order By a.tglLHP desc, NoLHP Desc "
             Else
                 MsgBox("Code Program untuk pencarian " & Me.Text & " Belum ada ! :" & Me.Text)
                 DGView.DataSource = tblData

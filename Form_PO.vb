@@ -20,11 +20,11 @@ Public Class Form_PO
         Label11.Visible = True
         PembagiEuro.Visible = True
         If cmbMataUang.Text = "EURO" Then
-            Label_11.Text = "Pembagi Euro : "
+            Label11.Text = "Pembagi Euro : "
             If Trim(PembagiEuro.Text) = "" Then PembagiEuro.Text = 1.375
             If (PembagiEuro.Text * 1) = 0 Then PembagiEuro.Text = 1.375
         ElseIf cmbMataUang.Text = "RP" Then
-            Label_11.Text = "Pengali Rupiah : "
+            Label11.Text = "Pengali Rupiah : "
             If Trim(PembagiEuro.Text) = "" Then PembagiEuro.Text = 9000
             If (PembagiEuro.Text * 1) = 0 Then PembagiEuro.Text = 9000
         Else
@@ -367,7 +367,7 @@ Public Class Form_PO
                 FOBBuyer.Text = tmp
                 If tmp <> 0 Then MsgBox("Nilai FOB Buyer tidak sama dengan FOB yang ada " & Replace(Format(tmp, "###,##0.00"), ".00", ""), vbInformation, ".:Warning!")
             Else
-                FOBBuyer.Text = Format(RS05.Rows(0) !Cur_USD, "###,##0.00)")
+                FOBBuyer.Text = Format(RS05.Rows(0) !Cur_USD, "###,##0.00")
             End If
 
             LocGmb1.Text = RS05.Rows(0) !file_foto
@@ -876,7 +876,7 @@ Public Class Form_PO
         Else
             mKondisi = " And NoPO Like '%" & tCari & "%' "
         End If
-        MsgSQL = "Select distinct NoPO, TglPO, Kode_Importir, m_KodeImportir.Nama " &
+        MsgSQL = "Select distinct NoPO, TglPO, Kode_Importir, m_KodeImportir.Nama  " &
             " From t_PO inner join m_KodeImportir on Kode_Importir = KodeImportir " &
             "Where t_PO.AktifYN = 'Y' " & mKondisi & " " &
             "Order By TglPO desc, NoPO desc "
@@ -884,11 +884,12 @@ Public Class Form_PO
         For a = 0 To RSDaf.Rows.Count - 1
             Application.DoEvents()
             DGView.Rows.Add(RSDaf.Rows(a) !NoPO,
-                Format(RSDaf.Rows(a) !tglPO, "dd-MM-yyyy"),
-                       Microsoft.VisualBasic.Left(RSDaf.Rows(a) !Nama & Space(50), 50) +
+                       RSDaf.Rows(a) !tglPO,
+                       Microsoft.VisualBasic.Left(RSDaf.Rows(a) !Nama & Space(100), 100) +
                             RSDaf.Rows(a) !Kode_Importir)
         Next a
         DGView.Visible = True
+        If DGView.Rows.Count <> 0 Then DGView.Columns(1).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
     End Sub
 
     Private Sub cmdPenambahanKode_Click(sender As Object, e As EventArgs) Handles cmdPenambahanKode.Click
@@ -1061,7 +1062,83 @@ Public Class Form_PO
         Jumlah.Focus()
     End Sub
 
+    Private Sub btnDaftarPOBelumSP_Click(sender As Object, e As EventArgs) Handles btnDaftarPOBelumSP.Click
+        Dim MsgSQL As String, RSDaf As New DataTable
+
+        DGView.Rows.Clear()
+        DGView2.Rows.Clear()
+        DGView.Visible = False
+        MsgSQL = "Select distinct NoPO, TglPO, Kode_Importir, m_KodeImportir.Nama " &
+            " From t_PO inner join m_KodeImportir on Kode_Importir = KodeImportir " &
+            "Where t_PO.AktifYN = 'Y' " &
+            "  And T_PO.NoPO not in  " &
+            "      (Select NoPO From T_SP  " &
+            "        Where t_SP.NOPO = T_PO.NOPO  " &
+            "          and t_SP.AktifYN = 'Y') Order By TglPO desc, NoPO desc "
+        RSDaf = Proses.ExecuteQuery(MsgSQL)
+        For a = 0 To RSDaf.Rows.Count - 1
+            Application.DoEvents()
+            DGView.Rows.Add(RSDaf.Rows(a) !NoPO,
+              Format(RSDaf.Rows(a) !tglPO, "dd-MM-yyyy"),
+                     Microsoft.VisualBasic.Left(RSDaf.Rows(a) !Nama & Space(50), 50) +
+                     RSDaf.Rows(a) !Kode_Importir)
+        Next a
+        DGView.Visible = True
+    End Sub
+
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable, tb As New Terbilang
+        Dim terbilang As String = "", totalPO As Double = 0
+
+
+        MsgSQL = "Select IsNULL(Sum(FOBBuyer * Jumlah), 0) As Total " &
+            " From T_PO " &
+            "Where AktifYN = 'Y'  " &
+            "  And NoPO = '" & Nopo.Text & "' "
+        totalPO = Proses.ExecuteSingleDblQuery(MsgSQL)
+        terbilang = " " & tb.Terbilang(totalPO) & " "
+
+
+        Me.Cursor = Cursors.WaitCursor
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+        MsgSQL = "SELECT t_PO.IDRec, t_PO.NoPO, t_PO.TglPO, " &
+            "t_PO.Kode_Produk, t_PO.Jumlah, t_PO.TglKirim, " &
+            "t_PO.FOBBuyer, m_KodeImportir.Nama, m_KodeProduk.Deskripsi " &
+            "FROM Pekerti.dbo.t_PO t_PO INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
+            "   t_PO.Kode_Produk = m_KodeProduk.KodeProduk " &
+            "   INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+            "   t_PO.Kode_Importir = m_KodeImportir.KodeImportir " &
+            "Where t_PO.AktifYN = 'Y' " &
+            "  And t_PO.NoPO = '" & Nopo.Text & "' " &
+            "ORDER BY t_PO.IDRec ASC "
+        DTadapter = New SqlDataAdapter(MsgSQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            objRep = New Rpt_PurchasingOrder
+            objRep.SetDataSource(dttable)
+            objRep.SetParameterValue("Terbilang", terbilang)
+
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -1115,13 +1192,12 @@ Public Class Form_PO
         DGView.BackgroundColor = Color.LightGray
         DGView.DefaultCellStyle.SelectionBackColor = Color.LightSeaGreen
         DGView.DefaultCellStyle.SelectionForeColor = Color.White
-        DGView.DefaultCellStyle.WrapMode = DataGridViewTriState.[True]
+        ' DGView.DefaultCellStyle.WrapMode = DataGridViewTriState.[True]
         DGView.SelectionMode = DataGridViewSelectionMode.FullRowSelect        'DGView.AllowUserToResizeColumns = False
         DGView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGView.RowsDefaultCellStyle.BackColor = Color.LightCyan      'LightGoldenrodYellow
         DGView.AlternatingRowsDefaultCellStyle.BackColor = Color.White
         DGView.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
-
         With Me.DGView2.RowTemplate
             .Height = 35
             .MinimumHeight = 30
@@ -1244,6 +1320,13 @@ Public Class Form_PO
     Private Sub tPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tPO.KeyPress
         If e.KeyChar = Chr(13) Then
             DaftarPO(Trim(tPO.Text))
+        End If
+    End Sub
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            DaftarPO("")
         End If
     End Sub
 End Class

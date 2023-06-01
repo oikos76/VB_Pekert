@@ -22,12 +22,12 @@ Partial Class Form_PO
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_PO))
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnDaftarPOBelumSP = New System.Windows.Forms.Button()
         Me.JumTotal = New System.Windows.Forms.TextBox()
         Me.JQTY = New System.Windows.Forms.TextBox()
         Me.JumMacam = New System.Windows.Forms.TextBox()
@@ -57,9 +57,6 @@ Partial Class Form_PO
         Me.TabPageDaftar_ = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DGView = New System.Windows.Forms.DataGridView()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LocGmb1 = New System.Windows.Forms.Label()
@@ -116,6 +113,9 @@ Partial Class Form_PO
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.DGView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,7 +134,7 @@ Partial Class Form_PO
         '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.Button1)
+        Me.Panel5.Controls.Add(Me.btnDaftarPOBelumSP)
         Me.Panel5.Controls.Add(Me.JumTotal)
         Me.Panel5.Controls.Add(Me.JQTY)
         Me.Panel5.Controls.Add(Me.JumMacam)
@@ -149,17 +149,17 @@ Partial Class Form_PO
         Me.Panel5.Size = New System.Drawing.Size(304, 282)
         Me.Panel5.TabIndex = 10
         '
-        'Button1
+        'btnDaftarPOBelumSP
         '
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button1.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 254)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(304, 28)
-        Me.Button1.TabIndex = 180
-        Me.Button1.Text = "Daftar PO yang belum di buat SP"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnDaftarPOBelumSP.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.btnDaftarPOBelumSP.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDaftarPOBelumSP.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDaftarPOBelumSP.Location = New System.Drawing.Point(0, 254)
+        Me.btnDaftarPOBelumSP.Name = "btnDaftarPOBelumSP"
+        Me.btnDaftarPOBelumSP.Size = New System.Drawing.Size(304, 28)
+        Me.btnDaftarPOBelumSP.TabIndex = 180
+        Me.btnDaftarPOBelumSP.Text = "Daftar PO yang belum di buat SP"
+        Me.btnDaftarPOBelumSP.UseVisualStyleBackColor = True
         '
         'JumTotal
         '
@@ -295,8 +295,8 @@ Partial Class Form_PO
         '
         'Column2
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column2.HeaderText = "Jumlah "
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -304,8 +304,8 @@ Partial Class Form_PO
         '
         'Column3
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column3.HeaderText = "FOB Buyer"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -313,8 +313,8 @@ Partial Class Form_PO
         '
         'Column6
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column6.HeaderText = "FOB Umum"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -475,27 +475,6 @@ Partial Class Form_PO
         Me.DGView.RowTemplate.ReadOnly = True
         Me.DGView.Size = New System.Drawing.Size(996, 241)
         Me.DGView.TabIndex = 156
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "No. PO"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 120
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Tgl PO"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Width = 120
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Importir"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 400
         '
         'Label25
         '
@@ -1150,6 +1129,27 @@ Partial Class Form_PO
         Me.TabControl1.Size = New System.Drawing.Size(1014, 561)
         Me.TabControl1.TabIndex = 68
         '
+        'Column8
+        '
+        Me.Column8.HeaderText = "No. PO"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Width = 200
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Tgl PO"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Width = 150
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Importir"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 500
+        '
         'Form_PO
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1181,7 +1181,7 @@ Partial Class Form_PO
 
     End Sub
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnDaftarPOBelumSP As Button
     Friend WithEvents JumTotal As TextBox
     Friend WithEvents JQTY As TextBox
     Friend WithEvents JumMacam As TextBox
@@ -1259,9 +1259,6 @@ Partial Class Form_PO
     Friend WithEvents PembagiEuro As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents Label21 As Label
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents cmdRiwayatHarga As Button
     Friend WithEvents cmdAnalisaHarga As Button
     Friend WithEvents Column14 As DataGridViewTextBoxColumn
@@ -1270,4 +1267,7 @@ Partial Class Form_PO
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
 End Class

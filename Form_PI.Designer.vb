@@ -39,7 +39,6 @@ Partial Class Form_PI
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdHapus = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
-        Me.cmdBatal = New System.Windows.Forms.Button()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
         Me.btnWord = New System.Windows.Forms.Button()
         Me.cmdPrint = New System.Windows.Forms.Button()
@@ -49,6 +48,7 @@ Partial Class Form_PI
         Me.btnPrev = New System.Windows.Forms.Button()
         Me.btnTop = New System.Windows.Forms.Button()
         Me.cmdTambah = New System.Windows.Forms.Button()
+        Me.cmdBatal = New System.Windows.Forms.Button()
         Me.PanelEntry = New System.Windows.Forms.Panel()
         Me.PanelTampungan = New System.Windows.Forms.Panel()
         Me.OptAir = New System.Windows.Forms.RadioButton()
@@ -90,7 +90,7 @@ Partial Class Form_PI
         Me.Label29 = New System.Windows.Forms.Label()
         Me.tglPO = New System.Windows.Forms.DateTimePicker()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.ShipmentDateKode = New System.Windows.Forms.DateTimePicker()
+        Me.ShipmentDate = New System.Windows.Forms.DateTimePicker()
         Me.lShipmentDate = New System.Windows.Forms.Label()
         Me.FOBOSO = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -317,20 +317,6 @@ Partial Class Form_PI
         Me.cmdExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdExit.UseVisualStyleBackColor = True
         '
-        'cmdBatal
-        '
-        Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
-        Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
-        Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
-        Me.cmdBatal.Name = "cmdBatal"
-        Me.cmdBatal.Size = New System.Drawing.Size(77, 31)
-        Me.cmdBatal.TabIndex = 4
-        Me.cmdBatal.Text = "&Batal"
-        Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdBatal.UseVisualStyleBackColor = True
-        Me.cmdBatal.Visible = False
-        '
         'PanelNavigate
         '
         Me.PanelNavigate.Controls.Add(Me.btnWord)
@@ -430,6 +416,20 @@ Partial Class Form_PI
         Me.cmdTambah.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdTambah.UseVisualStyleBackColor = True
         '
+        'cmdBatal
+        '
+        Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
+        Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
+        Me.cmdBatal.Name = "cmdBatal"
+        Me.cmdBatal.Size = New System.Drawing.Size(77, 31)
+        Me.cmdBatal.TabIndex = 4
+        Me.cmdBatal.Text = "&Batal"
+        Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdBatal.UseVisualStyleBackColor = True
+        Me.cmdBatal.Visible = False
+        '
         'PanelEntry
         '
         Me.PanelEntry.Controls.Add(Me.PanelTampungan)
@@ -463,7 +463,7 @@ Partial Class Form_PI
         Me.PanelEntry.Controls.Add(Me.Label29)
         Me.PanelEntry.Controls.Add(Me.tglPO)
         Me.PanelEntry.Controls.Add(Me.Label24)
-        Me.PanelEntry.Controls.Add(Me.ShipmentDateKode)
+        Me.PanelEntry.Controls.Add(Me.ShipmentDate)
         Me.PanelEntry.Controls.Add(Me.lShipmentDate)
         Me.PanelEntry.Controls.Add(Me.FOBOSO)
         Me.PanelEntry.Controls.Add(Me.Label6)
@@ -810,7 +810,7 @@ Partial Class Form_PI
         Me.Pelabuhan.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Pelabuhan.Location = New System.Drawing.Point(219, 135)
         Me.Pelabuhan.Margin = New System.Windows.Forms.Padding(4)
-        Me.Pelabuhan.MaxLength = 4
+        Me.Pelabuhan.MaxLength = 100
         Me.Pelabuhan.Name = "Pelabuhan"
         Me.Pelabuhan.Size = New System.Drawing.Size(130, 22)
         Me.Pelabuhan.TabIndex = 303
@@ -913,16 +913,16 @@ Partial Class Form_PI
         Me.Label24.TabIndex = 280
         Me.Label24.Text = "Tanggal PO              :"
         '
-        'ShipmentDateKode
+        'ShipmentDate
         '
-        Me.ShipmentDateKode.CustomFormat = "dd-MM-yyyy"
-        Me.ShipmentDateKode.Font = New System.Drawing.Font("Courier New", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShipmentDateKode.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.ShipmentDateKode.Location = New System.Drawing.Point(219, 318)
-        Me.ShipmentDateKode.Margin = New System.Windows.Forms.Padding(4)
-        Me.ShipmentDateKode.Name = "ShipmentDateKode"
-        Me.ShipmentDateKode.Size = New System.Drawing.Size(130, 24)
-        Me.ShipmentDateKode.TabIndex = 277
+        Me.ShipmentDate.CustomFormat = "dd-MM-yyyy"
+        Me.ShipmentDate.Font = New System.Drawing.Font("Courier New", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShipmentDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.ShipmentDate.Location = New System.Drawing.Point(219, 318)
+        Me.ShipmentDate.Margin = New System.Windows.Forms.Padding(4)
+        Me.ShipmentDate.Name = "ShipmentDate"
+        Me.ShipmentDate.Size = New System.Drawing.Size(130, 24)
+        Me.ShipmentDate.TabIndex = 277
         '
         'lShipmentDate
         '
@@ -1525,7 +1525,7 @@ Partial Class Form_PI
     Friend WithEvents Label29 As Label
     Friend WithEvents tglPO As DateTimePicker
     Friend WithEvents Label24 As Label
-    Friend WithEvents ShipmentDateKode As DateTimePicker
+    Friend WithEvents ShipmentDate As DateTimePicker
     Friend WithEvents lShipmentDate As Label
     Friend WithEvents FOBOSO As TextBox
     Friend WithEvents Label6 As Label

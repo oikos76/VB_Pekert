@@ -47,25 +47,24 @@ Partial Class FrmMenuUtama
         Me.PasswordLoginMenu = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me._11Keuangan = New System.Windows.Forms.ToolStripMenuItem()
-        Me.JurnalUmumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.KasBankKeluarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.KasBankMasukToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InventearisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._101JurnalUmum = New System.Windows.Forms.ToolStripMenuItem()
+        Me._102KasBankKeluar = New System.Windows.Forms.ToolStripMenuItem()
+        Me._103KasBankMasuk = New System.Windows.Forms.ToolStripMenuItem()
+        Me._104Inventearis = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.KodeGLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaldoAKhirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._105KodeGL = New System.Windows.Forms.ToolStripMenuItem()
+        Me._106SaldoAkhir = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.DaftarJurnalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GeneralLedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TrialBalanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LabaRugiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NeracaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProsesAkhirBulanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._107DaftarJurnal = New System.Windows.Forms.ToolStripMenuItem()
+        Me._108GeneralLedger = New System.Windows.Forms.ToolStripMenuItem()
+        Me._109TrialBalance = New System.Windows.Forms.ToolStripMenuItem()
+        Me._110LabaRugi = New System.Windows.Forms.ToolStripMenuItem()
+        Me._111Neraca = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me._112ProsesAkhirBulan = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.PengajuanPotonganPerajinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UangMukaLanjutanPelunasanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._113PengajuanPotonganPerajin = New System.Windows.Forms.ToolStripMenuItem()
+        Me._114UangMukaLanjutanPelunasan = New System.Windows.Forms.ToolStripMenuItem()
         Me._12BagianContoh = New System.Windows.Forms.ToolStripMenuItem()
         Me._21KodifikasiBahanBaku = New System.Windows.Forms.ToolStripMenuItem()
         Me._22KodifikasiFungsiProduk = New System.Windows.Forms.ToolStripMenuItem()
@@ -92,8 +91,8 @@ Partial Class FrmMenuUtama
         Me._53DraftPackingListDPL = New System.Windows.Forms.ToolStripMenuItem()
         Me._54JenisBox = New System.Windows.Forms.ToolStripMenuItem()
         Me._55PackingListInvoice = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MetodePengirimanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReturBarangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._56MetodePengiriman = New System.Windows.Forms.ToolStripMenuItem()
+        Me._57ReturBarang = New System.Windows.Forms.ToolStripMenuItem()
         Me._16Monitoring = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScheduleShipmentDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DaftarSPYangBelumDiPraLHPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -306,120 +305,114 @@ Partial Class FrmMenuUtama
         '
         '_11Keuangan
         '
-        Me._11Keuangan.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.JurnalUmumToolStripMenuItem, Me.KasBankKeluarToolStripMenuItem, Me.KasBankMasukToolStripMenuItem, Me.InventearisToolStripMenuItem, Me.ToolStripSeparator5, Me.KodeGLToolStripMenuItem, Me.SaldoAKhirToolStripMenuItem, Me.ToolStripSeparator6, Me.DaftarJurnalToolStripMenuItem, Me.GeneralLedgerToolStripMenuItem, Me.TrialBalanceToolStripMenuItem, Me.LabaRugiToolStripMenuItem, Me.NeracaToolStripMenuItem, Me.ProsesAkhirBulanToolStripMenuItem, Me.ToolStripSeparator7, Me.ToolStripMenuItem8, Me.ToolStripSeparator8, Me.PengajuanPotonganPerajinToolStripMenuItem, Me.UangMukaLanjutanPelunasanToolStripMenuItem})
+        Me._11Keuangan.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._101JurnalUmum, Me._102KasBankKeluar, Me._103KasBankMasuk, Me._104Inventearis, Me.ToolStripSeparator5, Me._105KodeGL, Me._106SaldoAkhir, Me.ToolStripSeparator6, Me._107DaftarJurnal, Me._108GeneralLedger, Me._109TrialBalance, Me._110LabaRugi, Me._111Neraca, Me.ToolStripSeparator7, Me._112ProsesAkhirBulan, Me.ToolStripSeparator8, Me._113PengajuanPotonganPerajin, Me._114UangMukaLanjutanPelunasan})
         Me._11Keuangan.Name = "_11Keuangan"
         Me._11Keuangan.Size = New System.Drawing.Size(72, 26)
         Me._11Keuangan.Text = "Keuangan"
         '
-        'JurnalUmumToolStripMenuItem
+        '_101JurnalUmum
         '
-        Me.JurnalUmumToolStripMenuItem.Name = "JurnalUmumToolStripMenuItem"
-        Me.JurnalUmumToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.JurnalUmumToolStripMenuItem.Text = "Jurnal Umum"
+        Me._101JurnalUmum.Name = "_101JurnalUmum"
+        Me._101JurnalUmum.Size = New System.Drawing.Size(244, 22)
+        Me._101JurnalUmum.Text = "Jurnal Umum"
         '
-        'KasBankKeluarToolStripMenuItem
+        '_102KasBankKeluar
         '
-        Me.KasBankKeluarToolStripMenuItem.Name = "KasBankKeluarToolStripMenuItem"
-        Me.KasBankKeluarToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.KasBankKeluarToolStripMenuItem.Text = "Kas/Bank Keluar"
+        Me._102KasBankKeluar.Name = "_102KasBankKeluar"
+        Me._102KasBankKeluar.Size = New System.Drawing.Size(244, 22)
+        Me._102KasBankKeluar.Text = "Kas/Bank Keluar"
         '
-        'KasBankMasukToolStripMenuItem
+        '_103KasBankMasuk
         '
-        Me.KasBankMasukToolStripMenuItem.Name = "KasBankMasukToolStripMenuItem"
-        Me.KasBankMasukToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.KasBankMasukToolStripMenuItem.Text = "Kas/Bank Masuk"
+        Me._103KasBankMasuk.Name = "_103KasBankMasuk"
+        Me._103KasBankMasuk.Size = New System.Drawing.Size(244, 22)
+        Me._103KasBankMasuk.Text = "Kas/Bank Masuk"
         '
-        'InventearisToolStripMenuItem
+        '_104Inventearis
         '
-        Me.InventearisToolStripMenuItem.Name = "InventearisToolStripMenuItem"
-        Me.InventearisToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.InventearisToolStripMenuItem.Text = "Inventearis"
+        Me._104Inventearis.Name = "_104Inventearis"
+        Me._104Inventearis.Size = New System.Drawing.Size(244, 22)
+        Me._104Inventearis.Text = "Inventearis"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(241, 6)
         '
-        'KodeGLToolStripMenuItem
+        '_105KodeGL
         '
-        Me.KodeGLToolStripMenuItem.Name = "KodeGLToolStripMenuItem"
-        Me.KodeGLToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.KodeGLToolStripMenuItem.Text = "Kode GL"
+        Me._105KodeGL.Name = "_105KodeGL"
+        Me._105KodeGL.Size = New System.Drawing.Size(244, 22)
+        Me._105KodeGL.Text = "Kode GL"
         '
-        'SaldoAKhirToolStripMenuItem
+        '_106SaldoAkhir
         '
-        Me.SaldoAKhirToolStripMenuItem.Name = "SaldoAKhirToolStripMenuItem"
-        Me.SaldoAKhirToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.SaldoAKhirToolStripMenuItem.Text = "Saldo Akhir"
+        Me._106SaldoAkhir.Name = "_106SaldoAkhir"
+        Me._106SaldoAkhir.Size = New System.Drawing.Size(244, 22)
+        Me._106SaldoAkhir.Text = "Saldo Akhir"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(241, 6)
         '
-        'DaftarJurnalToolStripMenuItem
+        '_107DaftarJurnal
         '
-        Me.DaftarJurnalToolStripMenuItem.Name = "DaftarJurnalToolStripMenuItem"
-        Me.DaftarJurnalToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.DaftarJurnalToolStripMenuItem.Text = "Daftar Jurnal"
+        Me._107DaftarJurnal.Name = "_107DaftarJurnal"
+        Me._107DaftarJurnal.Size = New System.Drawing.Size(244, 22)
+        Me._107DaftarJurnal.Text = "Daftar Jurnal"
         '
-        'GeneralLedgerToolStripMenuItem
+        '_108GeneralLedger
         '
-        Me.GeneralLedgerToolStripMenuItem.Name = "GeneralLedgerToolStripMenuItem"
-        Me.GeneralLedgerToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.GeneralLedgerToolStripMenuItem.Text = "General Ledger"
+        Me._108GeneralLedger.Name = "_108GeneralLedger"
+        Me._108GeneralLedger.Size = New System.Drawing.Size(244, 22)
+        Me._108GeneralLedger.Text = "General Ledger"
         '
-        'TrialBalanceToolStripMenuItem
+        '_109TrialBalance
         '
-        Me.TrialBalanceToolStripMenuItem.Name = "TrialBalanceToolStripMenuItem"
-        Me.TrialBalanceToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.TrialBalanceToolStripMenuItem.Text = "Trial balance"
+        Me._109TrialBalance.Name = "_109TrialBalance"
+        Me._109TrialBalance.Size = New System.Drawing.Size(244, 22)
+        Me._109TrialBalance.Text = "Trial balance"
         '
-        'LabaRugiToolStripMenuItem
+        '_110LabaRugi
         '
-        Me.LabaRugiToolStripMenuItem.Name = "LabaRugiToolStripMenuItem"
-        Me.LabaRugiToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.LabaRugiToolStripMenuItem.Text = "Laba Rugi"
+        Me._110LabaRugi.Name = "_110LabaRugi"
+        Me._110LabaRugi.Size = New System.Drawing.Size(244, 22)
+        Me._110LabaRugi.Text = "Laba Rugi"
         '
-        'NeracaToolStripMenuItem
+        '_111Neraca
         '
-        Me.NeracaToolStripMenuItem.Name = "NeracaToolStripMenuItem"
-        Me.NeracaToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.NeracaToolStripMenuItem.Text = "Neraca"
-        '
-        'ProsesAkhirBulanToolStripMenuItem
-        '
-        Me.ProsesAkhirBulanToolStripMenuItem.Name = "ProsesAkhirBulanToolStripMenuItem"
-        Me.ProsesAkhirBulanToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.ProsesAkhirBulanToolStripMenuItem.Text = "Neraca"
+        Me._111Neraca.Name = "_111Neraca"
+        Me._111Neraca.Size = New System.Drawing.Size(244, 22)
+        Me._111Neraca.Text = "Neraca"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(241, 6)
         '
-        'ToolStripMenuItem8
+        '_112ProsesAkhirBulan
         '
-        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(244, 22)
-        Me.ToolStripMenuItem8.Text = "Proses Akhir Bulan"
+        Me._112ProsesAkhirBulan.Name = "_112ProsesAkhirBulan"
+        Me._112ProsesAkhirBulan.Size = New System.Drawing.Size(244, 22)
+        Me._112ProsesAkhirBulan.Text = "Proses Akhir Bulan"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(241, 6)
         '
-        'PengajuanPotonganPerajinToolStripMenuItem
+        '_113PengajuanPotonganPerajin
         '
-        Me.PengajuanPotonganPerajinToolStripMenuItem.Name = "PengajuanPotonganPerajinToolStripMenuItem"
-        Me.PengajuanPotonganPerajinToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.PengajuanPotonganPerajinToolStripMenuItem.Text = "Pengajuan Potongan Perajin"
+        Me._113PengajuanPotonganPerajin.Name = "_113PengajuanPotonganPerajin"
+        Me._113PengajuanPotonganPerajin.Size = New System.Drawing.Size(244, 22)
+        Me._113PengajuanPotonganPerajin.Text = "Pengajuan Potongan Perajin"
         '
-        'UangMukaLanjutanPelunasanToolStripMenuItem
+        '_114UangMukaLanjutanPelunasan
         '
-        Me.UangMukaLanjutanPelunasanToolStripMenuItem.Name = "UangMukaLanjutanPelunasanToolStripMenuItem"
-        Me.UangMukaLanjutanPelunasanToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
-        Me.UangMukaLanjutanPelunasanToolStripMenuItem.Text = "Uang Muka Lanjutan & Pelunasan"
+        Me._114UangMukaLanjutanPelunasan.Name = "_114UangMukaLanjutanPelunasan"
+        Me._114UangMukaLanjutanPelunasan.Size = New System.Drawing.Size(244, 22)
+        Me._114UangMukaLanjutanPelunasan.Text = "Uang Muka Lanjutan & Pelunasan"
         '
         '_12BagianContoh
         '
@@ -562,7 +555,7 @@ Partial Class FrmMenuUtama
         '
         '_15BagianGudang
         '
-        Me._15BagianGudang.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._51PraLHP, Me._52LHP, Me._53DraftPackingListDPL, Me._54JenisBox, Me._55PackingListInvoice, Me.MetodePengirimanToolStripMenuItem, Me.ReturBarangToolStripMenuItem})
+        Me._15BagianGudang.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._51PraLHP, Me._52LHP, Me._53DraftPackingListDPL, Me._54JenisBox, Me._55PackingListInvoice, Me._56MetodePengiriman, Me._57ReturBarang})
         Me._15BagianGudang.Name = "_15BagianGudang"
         Me._15BagianGudang.Size = New System.Drawing.Size(100, 26)
         Me._15BagianGudang.Text = "Bagian Gudang"
@@ -602,18 +595,19 @@ Partial Class FrmMenuUtama
         Me._55PackingListInvoice.Size = New System.Drawing.Size(249, 22)
         Me._55PackingListInvoice.Text = "PackingList && Invoice"
         '
-        'MetodePengirimanToolStripMenuItem
+        '_56MetodePengiriman
         '
-        Me.MetodePengirimanToolStripMenuItem.Image = CType(resources.GetObject("MetodePengirimanToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.MetodePengirimanToolStripMenuItem.Name = "MetodePengirimanToolStripMenuItem"
-        Me.MetodePengirimanToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.MetodePengirimanToolStripMenuItem.Text = "Metode Pengiriman"
+        Me._56MetodePengiriman.Image = CType(resources.GetObject("_56MetodePengiriman.Image"), System.Drawing.Image)
+        Me._56MetodePengiriman.Name = "_56MetodePengiriman"
+        Me._56MetodePengiriman.Size = New System.Drawing.Size(249, 22)
+        Me._56MetodePengiriman.Text = "Metode Pengiriman"
         '
-        'ReturBarangToolStripMenuItem
+        '_57ReturBarang
         '
-        Me.ReturBarangToolStripMenuItem.Name = "ReturBarangToolStripMenuItem"
-        Me.ReturBarangToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.ReturBarangToolStripMenuItem.Text = "Retur Barang"
+        Me._57ReturBarang.Image = CType(resources.GetObject("_57ReturBarang.Image"), System.Drawing.Image)
+        Me._57ReturBarang.Name = "_57ReturBarang"
+        Me._57ReturBarang.Size = New System.Drawing.Size(249, 22)
+        Me._57ReturBarang.Text = "Retur Barang"
         '
         '_16Monitoring
         '
@@ -859,25 +853,24 @@ Partial Class FrmMenuUtama
     Friend WithEvents AmbilDataDariWaruToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents _11Keuangan As ToolStripMenuItem
-    Friend WithEvents JurnalUmumToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents KasBankKeluarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents KasBankMasukToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents InventearisToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _101JurnalUmum As ToolStripMenuItem
+    Friend WithEvents _102KasBankKeluar As ToolStripMenuItem
+    Friend WithEvents _103KasBankMasuk As ToolStripMenuItem
+    Friend WithEvents _104Inventearis As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
-    Friend WithEvents KodeGLToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SaldoAKhirToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _105KodeGL As ToolStripMenuItem
+    Friend WithEvents _106SaldoAkhir As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
-    Friend WithEvents DaftarJurnalToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GeneralLedgerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TrialBalanceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LabaRugiToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NeracaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ProsesAkhirBulanToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _107DaftarJurnal As ToolStripMenuItem
+    Friend WithEvents _108GeneralLedger As ToolStripMenuItem
+    Friend WithEvents _109TrialBalance As ToolStripMenuItem
+    Friend WithEvents _110LabaRugi As ToolStripMenuItem
+    Friend WithEvents _111Neraca As ToolStripMenuItem
+    Friend WithEvents _112ProsesAkhirBulan As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem8 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
-    Friend WithEvents PengajuanPotonganPerajinToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UangMukaLanjutanPelunasanToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _113PengajuanPotonganPerajin As ToolStripMenuItem
+    Friend WithEvents _114UangMukaLanjutanPelunasan As ToolStripMenuItem
     Friend WithEvents _12BagianContoh As ToolStripMenuItem
     Friend WithEvents _21KodifikasiBahanBaku As ToolStripMenuItem
     Friend WithEvents _22KodifikasiFungsiProduk As ToolStripMenuItem
@@ -904,8 +897,8 @@ Partial Class FrmMenuUtama
     Friend WithEvents _53DraftPackingListDPL As ToolStripMenuItem
     Friend WithEvents _54JenisBox As ToolStripMenuItem
     Friend WithEvents _55PackingListInvoice As ToolStripMenuItem
-    Friend WithEvents MetodePengirimanToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReturBarangToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _56MetodePengiriman As ToolStripMenuItem
+    Friend WithEvents _57ReturBarang As ToolStripMenuItem
     Friend WithEvents _16Monitoring As ToolStripMenuItem
     Friend WithEvents ScheduleShipmentDateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DaftarSPYangBelumDiPraLHPToolStripMenuItem As ToolStripMenuItem

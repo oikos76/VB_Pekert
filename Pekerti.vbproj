@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT230503\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT230529\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationRevision>35</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -190,6 +190,12 @@
     <Compile Include="Form_GD_PackingListInvoice.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_GD_Retur.Designer.vb">
+      <DependentUpon>Form_GD_Retur.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_GD_Retur.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_Hapus.Designer.vb">
       <DependentUpon>Form_Hapus.vb</DependentUpon>
     </Compile>
@@ -206,6 +212,24 @@
       <DependentUpon>Form_KatalogSample.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_KatalogSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KeuJurnalUmum.Designer.vb">
+      <DependentUpon>Form_KeuJurnalUmum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KeuJurnalUmum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KeuKodeGL.Designer.vb">
+      <DependentUpon>Form_KeuKodeGL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KeuKodeGL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_KeuKodeGL_Daftar.Designer.vb">
+      <DependentUpon>Form_KeuKodeGL_Daftar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KeuKodeGL_Daftar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_KodeProdukBuyer.Designer.vb">
@@ -565,6 +589,12 @@
       <DependentUpon>Rpt_KodeProduk.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Rpt_LHP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_LHP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\Rpt_PackingList.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -583,10 +613,28 @@
       <DependentUpon>Rpt_PI.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Rpt_PraLHP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_PraLHP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_PurchasingOrder.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_PurchasingOrder.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\Rpt_P_OLD.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Rpt_P_OLD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_Retur.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_Retur.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Rpt_SP.vb">
@@ -619,6 +667,9 @@
     <EmbeddedResource Include="Form_GD_PackingListInvoice.resx">
       <DependentUpon>Form_GD_PackingListInvoice.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_GD_Retur.resx">
+      <DependentUpon>Form_GD_Retur.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Hapus.resx">
       <DependentUpon>Form_Hapus.vb</DependentUpon>
     </EmbeddedResource>
@@ -627,6 +678,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_KatalogSample.resx">
       <DependentUpon>Form_KatalogSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KeuJurnalUmum.resx">
+      <DependentUpon>Form_KeuJurnalUmum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KeuKodeGL.resx">
+      <DependentUpon>Form_KeuKodeGL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_KeuKodeGL_Daftar.resx">
+      <DependentUpon>Form_KeuKodeGL_Daftar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_KodeProdukBuyer.resx">
       <DependentUpon>Form_KodeProdukBuyer.vb</DependentUpon>
@@ -820,6 +880,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_KodeProduk.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_LHP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_LHP.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_PackingList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_PackingList.vb</LastGenOutput>
@@ -832,9 +896,21 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_PI.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_PraLHP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_PraLHP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_PurchasingOrder.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_PurchasingOrder.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_P_OLD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_P_OLD.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_Retur.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_Retur.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_SP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
