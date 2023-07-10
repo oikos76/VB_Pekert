@@ -313,7 +313,6 @@ Public Class Form_Gd_LHP
         End If
         cmdPenambahanKode.Visible = tAktif
 
-        cmdRiwayatHarga.Visible = tAktif
         cmdBatal.Visible = Not tAktif
         PanelNavigate.Visible = tAktif
         cmdExit.Visible = tAktif
@@ -1250,6 +1249,10 @@ Public Class Form_Gd_LHP
             .SelectionStart = 0
             .SelectionLength = .TextLength
         End With
+    End Sub
+
+    Private Sub cmdRiwayatHarga_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub AlasanDiTolak_GotFocus(sender As Object, e As EventArgs) Handles AlasanDiTolak.GotFocus

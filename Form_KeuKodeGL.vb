@@ -370,7 +370,53 @@ Public Class Form_KeuKodeGL
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        PanelTombol_.Enabled = False
         Form_KeuKodeGL_Daftar.ShowDialog()
+        PanelTombol_.Enabled = True
+    End Sub
+
+    Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
+        Dim MsgSQL As String
+        If MsgBox("Apakah ANDA yakin HAPUS COA ini ?", vbCritical + vbYesNo, ".:Confirm!") = vbYes Then
+            If cmbJenisTabel.Text = "GOLONGAN" Then
+                MsgSQL = "delete m_golongan " &
+                    "where NO_GOL = '" & NoGolongan.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                MsgSQL = "delete m_Kelompok where no_gol = '" & NoGolongan.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                MsgSQL = "delete m_kode where left(no_klp,2) = '" & NoGolongan.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                MsgSQL = "delete m_Subperkiraan where left(no_kode,2) = '" & NoGolongan.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            ElseIf cmbJenisTabel.Text = "KELOMPOK" Then
+                MsgSQL = "delete  m_kelompok " &
+                    "where NO_KLP = '" & NoKelompok.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                MsgSQL = "delete m_kode where NO_KLP = '" & NoKelompok.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                MsgSQL = "delete m_Subperkiraan where left(no_kode,5) = '" & NoKelompok.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            ElseIf cmbJenisTabel.Text = "KODE" Then
+                MsgSQL = "delete m_kode " &
+                    "where NO_KODE = '" & NoKode.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                MsgSQL = "delete m_Subperkiraan where NO_KODE = '" & NoKode.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            ElseIf cmbJenisTabel.Text = "SUB PERKIRAAN" Then
+                MsgSQL = "delete M_SUBPERKIRAAN " &
+                    "WHERE NO_SUB = '" & NoSubPerkiraan.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            ElseIf cmbJenisTabel.Text = "PERKIRAAN" Then
+                MsgSQL = "delete M_PERKIRAAN " &
+                    "WHERE NO_Perkiraan = '" & NoPerkiraan.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            End If
+            ClearTextBoxes()
+        End If
+    End Sub
+
+    Private Sub NoPerkiraan_TextChanged(sender As Object, e As EventArgs) Handles NoPerkiraan.TextChanged
+
     End Sub
 
     Private Sub IsiKelompok()
@@ -520,12 +566,12 @@ Public Class Form_KeuKodeGL
         NamaSubPerkiraan.ReadOnly = tAktif
         NoPerkiraan.ReadOnly = tAktif
         NamaPerkiraan.ReadOnly = tAktif
-
-        cmbNoGolongan.Visible = Not tAktif
-        CmbNoKelompok.Visible = Not tAktif
-        cmbNoKode.Visible = Not tAktif
-        cmbSubPerkiraan.Visible = Not tAktif
-
+        If LAdd Then
+            cmbNoGolongan.Visible = Not tAktif
+            CmbNoKelompok.Visible = Not tAktif
+            cmbNoKode.Visible = Not tAktif
+            cmbSubPerkiraan.Visible = Not tAktif
+        End If
         Me.Text = "Kode GL"
     End Sub
 
@@ -708,12 +754,12 @@ Public Class Form_KeuKodeGL
             Proses.ExecuteNonQuery(MsgSQL)
 
         End If
-        NoGolongan.Enabled = True
-        NamaGolongan.Enabled = True
-        NoKelompok.Enabled = True
-        NamaKelompok.Enabled = True
-        NoKode.Enabled = True
-        NamaKode.Enabled = True
+        'NoGolongan.Enabled = True
+        'NamaGolongan.Enabled = True
+        'NoKelompok.Enabled = True
+        'NamaKelompok.Enabled = True
+        'NoKode.Enabled = True
+        'NamaKode.Enabled = True
         LAdd = False
         LEdit = False
         AturTombol(True)
@@ -750,19 +796,27 @@ Public Class Form_KeuKodeGL
         cmbJenisTabel.SelectedIndex = -1
     End Sub
 
-    Private Sub CmbNoKelompok_Click(sender As Object, e As EventArgs) Handles CmbNoKelompok.Click
-
+    Private Sub NoPerkiraan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoPerkiraan.KeyPress
+        If e.KeyChar = Chr(13) Then
+            NamaPerkiraan.Focus()
+        End If
     End Sub
 
-    Private Sub cmbNoKode_Click(sender As Object, e As EventArgs) Handles cmbNoKode.Click
-
+    Private Sub NoKode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoKode.KeyPress
+        If e.KeyChar = Chr(13) Then
+            NamaKode.Focus()
+        End If
     End Sub
 
-    Private Sub cmbSubPerkiraan_Click(sender As Object, e As EventArgs) Handles cmbSubPerkiraan.Click
-
+    Private Sub NoKelompok_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoKelompok.KeyPress
+        If e.KeyChar = Chr(13) Then
+            NamaKelompok.Focus()
+        End If
     End Sub
 
-    Private Sub cmbNoGolongan_Click(sender As Object, e As EventArgs) Handles cmbNoGolongan.Click
-
+    Private Sub NoGolongan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoGolongan.KeyPress
+        If e.KeyChar = Chr(13) Then
+            NamaGolongan.Focus()
+        End If
     End Sub
 End Class

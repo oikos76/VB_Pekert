@@ -194,7 +194,7 @@ Public Class Form_KodeProdukBuyer
             DGView2.ClearSelection()
             'DGView2.CurrentCell = Nothing
             For Each row As DataGridViewRow In DGView2.Rows
-                If row.Cells.Item("KODEPRODUK_").Value = tCari.Text Then
+                If row.Cells.Item("KODE_BY_IMPORTIR_").Value = tCari.Text Then
                     rowindex = row.Index
                     found = True
                     DGView2.Rows(row.Index).Selected = True

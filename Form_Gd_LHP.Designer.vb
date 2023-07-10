@@ -22,11 +22,11 @@ Partial Class Form_Gd_LHP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Gd_LHP))
         Me.Importir = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
@@ -139,7 +139,6 @@ Partial Class Form_Gd_LHP
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.JumlahRetur = New System.Windows.Forms.TextBox()
-        Me.cmdRiwayatHarga = New System.Windows.Forms.Button()
         Me.cmdPenambahanKode = New System.Windows.Forms.Button()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
         Me.cmdExcel = New System.Windows.Forms.Button()
@@ -455,40 +454,40 @@ Partial Class Form_Gd_LHP
         '
         'Column2
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column2.HeaderText = "Jumlah Pack"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column3.HeaderText = "Kirim"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column6.HeaderText = "Jml.Hitung"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column7.HeaderText = "Jml.Baik"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle10
         Me.Column5.HeaderText = "Jml.Tolak"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -1383,18 +1382,6 @@ Partial Class Form_Gd_LHP
         Me.JumlahRetur.Size = New System.Drawing.Size(151, 22)
         Me.JumlahRetur.TabIndex = 3
         '
-        'cmdRiwayatHarga
-        '
-        Me.cmdRiwayatHarga.Dock = System.Windows.Forms.DockStyle.Right
-        Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(398, 0)
-        Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
-        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 34)
-        Me.cmdRiwayatHarga.TabIndex = 5
-        Me.cmdRiwayatHarga.Text = "&Riwayat Harga"
-        Me.cmdRiwayatHarga.UseVisualStyleBackColor = True
-        '
         'cmdPenambahanKode
         '
         Me.cmdPenambahanKode.Dock = System.Windows.Forms.DockStyle.Right
@@ -1444,7 +1431,6 @@ Partial Class Form_Gd_LHP
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.cmdRiwayatHarga)
         Me.Panel4.Controls.Add(Me.cmdPenambahanKode)
         Me.Panel4.Controls.Add(Me.PanelNavigate)
         Me.Panel4.Controls.Add(Me.cmdSimpan)
@@ -1761,7 +1747,6 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Label3 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents JumlahRetur As TextBox
-    Friend WithEvents cmdRiwayatHarga As Button
     Friend WithEvents cmdPenambahanKode As Button
     Friend WithEvents PanelNavigate As Panel
     Friend WithEvents cmdPrint As Button

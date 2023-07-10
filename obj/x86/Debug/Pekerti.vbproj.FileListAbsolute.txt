@@ -170,8 +170,9 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.application
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.exe
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.xml
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.pdb
-C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.cache
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_GD_Retur.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuJurnalUmum.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuKodeGL.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuKodeGL_Daftar.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.cache
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_ExploreFoto.resources

@@ -104,7 +104,7 @@ Public Class Form_PI
             Jumlah.Text = "0"
             HargaFOB.Text = "0"
             KodePImportir.Text = ""
-        ElseIf Len(KodeProduk.Text) = 4 Then
+        ElseIf Len(KodeProduk.Text) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         ElseIf Len(KodeProduk.Text) = 7 Then
@@ -171,11 +171,6 @@ Public Class Form_PI
             Pemenuhan1.Visible = tAktif
             Pemenuhan2.Visible = True
         End If
-
-
-
-
-
     End Sub
     Private Sub ClearTextBoxes(Optional ByVal ctlcol As Control.ControlCollection = Nothing)
         If ctlcol Is Nothing Then ctlcol = Me.Controls
@@ -190,6 +185,8 @@ Public Class Form_PI
         Next
         ShowFoto("")
         tglPO.Value = Now
+        tglPI.Value = Now
+        TglKirim.Value = Now
         ShipmentDate.Value = Now
         chk3Digit.Checked = False
         FOBOSO.Text = 0
@@ -216,10 +213,19 @@ Public Class Form_PI
         If e.KeyChar = Chr(13) Then
             Dim rs05 As New DataTable
             Me.Cursor = Cursors.WaitCursor
-            MsgSQL = "Select deskripsi, cur_rp, tamb_sp, perajin, kode_perajin, " &
-                    "Panjang, Lebar, Tinggi, Diameter, Tebal, Berat " &
-                    " From m_KodeProduk " &
-                    "Where KodeProduk = '" & KodeProduk.Text & "' and kodeproduk <> '' "
+            'MsgSQL = "Select deskripsi, cur_rp, tamb_sp, perajin, kode_perajin, " &
+            '        "Panjang, Lebar, Tinggi, Diameter, Tebal, Berat " &
+            '        " From m_KodeProduk " &
+            '        "Where KodeProduk = '" & KodeProduk.Text & "' and kodeproduk <> '' "
+            MsgSQL = "Select Deskripsi, Kode_Buyer, FOBBuyer, MataUang, " &
+                    " Kode_Produk, Kode_Importir, " &
+                    " m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah " &
+                    " From t_PO inner join m_KodeProduk ON " &
+                    " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
+                    " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
+                    "Where t_PO.AktifYN = 'Y' " &
+                    "  And T_PO.NOPO = '" & Nopo.Text & "' " &
+                    "  And Kode_Produk = '" & KodeProduk.Text & "' "
             rs05 = Proses.ExecuteQuery(MsgSQL)
             If rs05.Rows.Count <> 0 Then
                 Produk.Text = Replace(rs05.Rows(0) !Deskripsi, "'", "`")
@@ -246,12 +252,24 @@ Public Class Form_PI
                 Form_Daftar.Text = "Daftar Produk"
                 Form_Daftar.ShowDialog()
                 KodeProduk.Text = FrmMenuUtama.TSKeterangan.Text
-                MsgSQL = "Select deskripsi, cur_rp, tamb_sp, perajin, kode_perajin " &
-                    "Panjang, Lebar, Tinggi, Diameter, Tebal, Berat " &
-                    " From m_KodeProduk " &
-                    "Where KodeProduk = '" & KodeProduk.Text & "' "
+
+                MsgSQL = "Select Deskripsi, Kode_Buyer, FOBBuyer, MataUang, " &
+                    " Kode_Produk, Kode_Importir, " &
+                    " m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah " &
+                    " From t_PO inner join m_KodeProduk ON " &
+                    " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
+                    " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
+                    "Where t_PO.AktifYN = 'Y' " &
+                    "  And T_PO.NOPO = '" & Nopo.Text & "' " &
+                    "  And Kode_Produk = '" & KodeProduk.Text & "' "
+
+                'MsgSQL = "Select deskripsi, cur_rp, tamb_sp, perajin, kode_perajin " &
+                '    "Panjang, Lebar, Tinggi, Diameter, Tebal, Berat " &
+                '    " From m_KodeProduk " &
+                '    "Where KodeProduk = '" & KodeProduk.Text & "' "
                 rs05 = Proses.ExecuteQuery(MsgSQL)
                 If rs05.Rows.Count <> 0 Then
+
                     Produk.Text = Replace(rs05.Rows(0) !Deskripsi, "'", "`")
                     KodePImportir.Text = rs05.Rows(0) !Kode_Buyer
                     Jumlah.Text = Format(rs05.Rows(0) !Jumlah, "###,##0")
@@ -455,10 +473,14 @@ Public Class Form_PI
         For a = 0 To rsDaf.Rows.Count - 1
             Application.DoEvents()
             DGView.Rows.Add(rsDaf.Rows(a) !NoPi,
-                Format(rsDaf.Rows(a) !tglPi, "dd-MM-yyyy"),
+                rsDaf.Rows(a) !tglPi,
                 rsDaf.Rows(a) !nopo, rsDaf.Rows(a) !importir,
-                Format(rsDaf.Rows(a) !ShipmentDate, "dd-MM-yyyy"))
+                rsDaf.Rows(a) !ShipmentDate)
         Next a
+        If DGView.Rows.Count <> 0 Then
+            DGView.Columns(1).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
+            DGView.Columns(4).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
+        End If
     End Sub
     Private Sub IsiPI(tCode As String)
         Dim rsc As New DataTable
@@ -584,15 +606,15 @@ Public Class Form_PI
                         "NilaiPI, UangMuka, KurangBayar, LabelingCost, SpecialPackaging, Fumigation, " &
                         "Phytosanitary, CatatanPI, QTYOSO, Konversi, FOBOSO, IdCompany) VALUES( '" & idRecord.Text & "',   " &
                         "'" & NoPI.Text & "', '" & Nopo.Text & "', '" & Format(tglPI.Value, "yyyy-MM-dd") & "', '', " &
-                        "'" & RS05.Rows(0) !Kode_Importir & "', '" & RS05.Rows(0) !Importir & "', '" & RS05.Rows(0) !tglPO & "', " &
+                        "'" & RS05.Rows(a) !Kode_Importir & "', '" & RS05.Rows(a) !Importir & "', '" & RS05.Rows(a) !tglPO & "', " &
                         "'" & Format(TglKirim.Value, "yyyy-MM-dd") & "', '" & Trim(Pelabuhan.Text) & "', " &
-                        "'" & cmbCaraKirim.Text & "', '" & RS05.Rows(0) !Kode_Produk & "', " &
-                        "'" & Trim(Replace(RS05.Rows(0) !Deskripsi, "'", "`")) & "', '" & RS05.Rows(0) !Kode_Buyer & "', " &
-                        "" & RS05.Rows(0) !Jumlah & ", '" & RS05.Rows(0) !MataUang & "', " & RS05.Rows(0) !FOBBuyer & ", " &
-                        "'" & RS05.Rows(0) !digit3yn & "', '" & Format(TglKirim.Value, "yyyy-MM-dd") & "', " &
+                        "'" & cmbCaraKirim.Text & "', '" & RS05.Rows(a) !Kode_Produk & "', " &
+                        "'" & Trim(Replace(RS05.Rows(a) !Deskripsi, "'", "`")) & "', '" & RS05.Rows(a) !Kode_Buyer & "', " &
+                        "" & RS05.Rows(a) !Jumlah & ", '" & RS05.Rows(a) !MataUang & "', " & RS05.Rows(a) !FOBBuyer & ", " &
+                        "'" & RS05.Rows(a) !digit3yn & "', '" & Format(TglKirim.Value, "yyyy-MM-dd") & "', " &
                         "'', '', '', '', '', 'Y', 'N', '" & UserID & "', GetDate(), 0, 0, 0, 0, 0, 0, 0, " &
-                        "'" & Trim(CatatanPI.Text) & "', " & RS05.Rows(0) !Jumlah & ", " & RS05.Rows(0) !PembagiEuro & ", " &
-                        "" & RS05.Rows(0) !FOBBuyer & ", 'PEKERTI' )"
+                        "'" & Trim(CatatanPI.Text) & "', " & RS05.Rows(a) !Jumlah & ", " & RS05.Rows(a) !PembagiEuro & ", " &
+                        "" & RS05.Rows(a) !FOBBuyer & ", 'PEKERTI' )"
                     Proses.ExecuteNonQuery(MsgSQL)
                 Next a
                 LAdd = False
@@ -1355,7 +1377,7 @@ Public Class Form_PI
                 tglPO.Value = RSN1.Rows(0) !tglPO
             Else
                 Me.Cursor = Cursors.WaitCursor
-                SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir " &
+                SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, max(TglKirim) TglKirim, KodeImportir " &
                     " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "Where T_PO.AktifYN = 'Y' " &
                     "  and nopo like '%" & Nopo.Text & "%' " &
@@ -1401,6 +1423,10 @@ Public Class Form_PI
             End If
             Proses.CloseConn()
         End If
+    End Sub
+
+    Private Sub CatatanPI_TextChanged(sender As Object, e As EventArgs) Handles CatatanPI.TextChanged
+
     End Sub
 
     Private Function CekDouble() As Boolean
@@ -1531,5 +1557,9 @@ Public Class Form_PI
         ElseIf e.TabPageIndex = 1 Then
             DaftarPI("")
         End If
+    End Sub
+
+    Private Sub CatatanPI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanPI.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
     End Sub
 End Class

@@ -96,6 +96,7 @@ Partial Class Form_KeuKodeGL_Daftar
         Me.ClientSize = New System.Drawing.Size(984, 591)
         Me.Controls.Add(Me.DGView)
         Me.Controls.Add(Me.Panel1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form_KeuKodeGL_Daftar"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Daftar Kode GL"

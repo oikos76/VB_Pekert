@@ -57,7 +57,7 @@ Public Class Form_PO
             FOBTerakhir.Text = ""
             Kode_Buyer.Text = ""
             ShowFoto("")
-        ElseIf Len(KodeProduk.Text) = 4 Then
+        ElseIf Len(KodeProduk.Text) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         ElseIf Len(KodeProduk.Text) = 7 Then
@@ -1183,6 +1183,11 @@ Public Class Form_PO
             FOBTerakhir.Text = "Buyer ini belum pernah beli"
         End If
     End Function
+
+    Private Sub CatatanPO_TextChanged(sender As Object, e As EventArgs) Handles CatatanPO.TextChanged
+
+    End Sub
+
     Private Sub SetDataGrid()
         With Me.DGView.RowTemplate
             .Height = 30
@@ -1213,6 +1218,11 @@ Public Class Form_PO
         DGView2.AlternatingRowsDefaultCellStyle.BackColor = Color.White
         DGView2.ColumnHeadersDefaultCellStyle().Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
+
+    Private Sub CatatanProduk_TextChanged(sender As Object, e As EventArgs) Handles CatatanProduk.TextChanged
+
+    End Sub
+
     Private Sub Form_PO_Load(sender As Object, e As EventArgs) Handles Me.Load
         ClearTextBoxes()
         'NoSPLama.Visible = False
@@ -1239,9 +1249,9 @@ Public Class Form_PO
             "From t_PO " &
             "Where AktifYN = 'Y' " &
             "Order By TglPO Desc, IDRec Desc "
-        Rs = Proses.ExecuteQuery(MsgSQL)
-        If Rs.Rows.Count <> 0 Then
-            tIdRec = Rs.Rows(0) !IDRec
+        RS = Proses.ExecuteQuery(MsgSQL)
+        If RS.Rows.Count <> 0 Then
+            tIdRec = RS.Rows(0) !IDRec
         Else
             tIdRec = ""
             tKodeProduk = ""
@@ -1328,5 +1338,13 @@ Public Class Form_PO
         ElseIf e.TabPageIndex = 1 Then
             DaftarPO("")
         End If
+    End Sub
+
+    Private Sub CatatanPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanPO.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+    End Sub
+
+    Private Sub CatatanProduk_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanProduk.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
     End Sub
 End Class

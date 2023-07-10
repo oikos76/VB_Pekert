@@ -32,6 +32,32 @@
                     .Table.Rows(a) !phone)
                 Next (a)
             End With
+        ElseIf Me.Text = "Daftar Jurnal" Then
+            DGView.Columns(0).HeaderText = "Id JurnalL"
+            DGView.Columns(0).Width = 100
+            DGView.Columns(1).HeaderText = "Tgl Jurnal"
+            DGView.Columns(1).Width = 120
+            DGView.Columns(2).HeaderText = "Uraian"
+            DGView.Columns(2).Width = 200
+            DGView.Columns(3).HeaderText = "Kode GL"
+            DGView.Columns(3).Width = 200
+            DGView.Columns(4).HeaderText = "Debet"
+            DGView.Columns(4).Width = 100
+            DGView.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DGView.Columns(5).HeaderText = "Kredit"
+            DGView.Columns(5).Width = 100
+            DGView.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !IDRec,
+                                    Format(.Table.Rows(a) !tanggal, "dd-MM-yyyy"),
+                                    .Table.Rows(a) !uraian,
+                                    .Table.Rows(a) !accountcode + "  " + .Table.Rows(a) !ketacccode,
+                                    Format(.Table.Rows(a) !Debet, "###,##0"),
+                                    Format(.Table.Rows(a) !Kredit, "###,##0"))
+                Next (a)
+            End With
         ElseIf Me.Text = "Daftar DPL" Then
             DGView.Columns(0).HeaderText = "No DPL"
             DGView.Columns(0).Width = 150
@@ -136,6 +162,29 @@
                 Next (a)
             End With
             Me.Cursor = Cursors.Default
+        ElseIf Me.Text = "Riwayat Harga SP" Then
+            DGView.Columns(0).HeaderText = "IDREC"
+            DGView.Columns(0).Width = 1
+            DGView.Columns(1).HeaderText = "Harga Beli"
+            DGView.Columns(1).Width = 100
+            DGView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DGView.Columns(2).HeaderText = "No DPB"
+            DGView.Columns(2).Width = 100
+            DGView.Columns(3).HeaderText = "Tgl DPB"
+            DGView.Columns(3).Width = 100
+            DGView.Columns(4).HeaderText = "Perajin"
+            DGView.Columns(4).Width = 200
+            DGView.Columns(5).HeaderText = ""
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !IDREC,
+                    Format(.Table.Rows(a) !HargaBeli, "###,##0.00"),
+                    .Table.Rows(a) !nodpb, Format(.Table.Rows(a) !TglDPB, "dd-MM-yyyy"),
+                    .Table.Rows(a) !Perajin)
+
+                Next (a)
+            End With
         ElseIf Me.Text = "Riwayat Harga" Then
             DGView.Columns(0).HeaderText = "IDREC"
             DGView.Columns(0).Width = 1
@@ -178,24 +227,24 @@
                                     .Table.Rows(a) !Perajin)
                 Next (a)
             End With
-        ElseIf Me.Text = "Daftar Toko" Then
-            DGView.Columns(0).HeaderText = "Id Toko"
-            DGView.Columns(0).Width = 80
-            DGView.Columns(1).HeaderText = "Nama Toko"
-            DGView.Columns(1).Width = 250
-            DGView.Columns(2).HeaderText = "Alamat"
-            DGView.Columns(2).Width = 280
-            DGView.Columns(3).HeaderText = "Contact Person"
-            DGView.Columns(3).Width = 120
-            DGView.Columns(4).HeaderText = "Tlp"
+        ElseIf Me.Text = "Daftar Kode GL" Then
+            DGView.Columns(0).HeaderText = "COA"
+            DGView.Columns(0).Width = 2
+            DGView.Columns(1).HeaderText = "Kode GL"
+            DGView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(1).Width = 150
+            DGView.Columns(2).HeaderText = "Nama Account"
+            DGView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(2).Width = 390
+            DGView.Columns(3).HeaderText = ""
+            DGView.Columns(3).Width = 100
+            DGView.Columns(4).HeaderText = ""
             DGView.Columns(4).Width = 100
             With tblData.Columns(0)
                 For a = 0 To tblData.Rows.Count - 1
-                    DGView.Rows.Add(.Table.Rows(a) !idrec,
-                    .Table.Rows(a) !nama,
-                    .Table.Rows(a) !alamat1 + " " + .Table.Rows(a) !alamat2,
-                    .Table.Rows(a) !contactperson,
-                    .Table.Rows(a) !tlpcp)
+                    DGView.Rows.Add(.Table.Rows(a) !no_PERKIRAAN,
+                    .Table.Rows(a) !no_PERKIRAAN,
+                    .Table.Rows(a) !NM_PERKIRAAN)
                 Next (a)
             End With
         ElseIf Me.Text = "Daftar Supplier" Then
@@ -387,12 +436,14 @@
             DGView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             DGView.Columns(3).HeaderText = "Tgl PO"
             DGView.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(4).HeaderText = "Tgl Kirim"
+            DGView.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             With tblData.Columns(0)
                 For a = 0 To tblData.Rows.Count - 1
                     DGView.Rows.Add(.Table.Rows(a) !nopo,
                                     IIf(IsDBNull(.Table.Rows(a) !importir), "", .Table.Rows(a) !importir),
                                     .Table.Rows(a) !KodeImportir,
-                                    Format(.Table.Rows(a) !tglpo, "dd-MM-yyyy"))
+                                    Format(.Table.Rows(a) !tglpo, "dd-MM-yyyy"), Format(.Table.Rows(a) !tglKirim, "dd-MM-yyyy"))
                 Next (a)
             End With
         ElseIf Trim(Me.Text) = "Daftar Produk SP" Then
@@ -413,12 +464,6 @@
             DGView.Columns(5).HeaderText = ""
             DGView.Columns(6).HeaderText = ""
             With tblData.Columns(0)
-                '  Lst = Frm_Browse.lstView.ListItems.Add(, , RSD!KodeProduk)
-                '  Lst.SubItems(1) = RSD!Produk
-                '  Lst.SubItems(2) = RSD!Importir
-                '  Lst.SubItems(3) = RSD!NoPO
-                '  Lst.SubItems(4) = Format(RSD!HargaBeliRp, "###,##0")
-                'Select NoPO, Importir, KodeImportir, HargaBeliRP, Produk, KodeProduk 
                 For a = 0 To tblData.Rows.Count - 1
                     DGView.Rows.Add(.Table.Rows(a) !KodeProduk,
                                     IIf(IsDBNull(.Table.Rows(a) !Produk), "", .Table.Rows(a) !Produk),
@@ -515,6 +560,7 @@
             DGView.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             With tblData.Columns(0)
                 For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
                     DGView.Rows.Add(.Table.Rows(a) !KodePerajin,
                                     .Table.Rows(a) !nama, .Table.Rows(a) !KodePerajin,
                                     .Table.Rows(a) !WilayahProduksi,
@@ -536,6 +582,9 @@
             DGView.Columns(4).HeaderText = "Jumlah PO"
             DGView.Columns(4).Width = 100
             DGView.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DGView.Columns(5).HeaderText = "Jumlah SP"
+            DGView.Columns(5).Width = 100
+            DGView.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             Dim QtySP As Double = 0, QtyDiSP As Double = 0
             With tblData.Columns(0)
                 For a = 0 To tblData.Rows.Count - 1
@@ -631,8 +680,8 @@
                 "Where Nama like '" & tCari.Text & "%' " &
                 "  and AktifYN = 'Y' " &
                 "Order By IDRec, Nama "
-            ElseIf Trim(Me.Text) = "Daftar PO" Then
-                txtQuery.Text = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir " &
+            ElseIf Trim(Me.Text) = "Daftar PO" Or Trim(Me.Text) = "Daftar PO-DPL" Then
+                txtQuery.Text = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir, max(t_PO.tglKirim) tglKirim  " &
                 " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                 "Where T_PO.AktifYN = 'Y' " &
                 "  and nopo like '%" & tCari.Text & "%' " &

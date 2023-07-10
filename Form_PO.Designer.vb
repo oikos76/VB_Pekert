@@ -57,6 +57,9 @@ Partial Class Form_PO
         Me.TabPageDaftar_ = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DGView = New System.Windows.Forms.DataGridView()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LocGmb1 = New System.Windows.Forms.Label()
@@ -113,9 +116,6 @@ Partial Class Form_PO
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.DGView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -475,6 +475,27 @@ Partial Class Form_PO
         Me.DGView.RowTemplate.ReadOnly = True
         Me.DGView.Size = New System.Drawing.Size(996, 241)
         Me.DGView.TabIndex = 156
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "No. PO"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Width = 200
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Tgl PO"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Width = 150
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Importir"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 500
         '
         'Label25
         '
@@ -1128,27 +1149,6 @@ Partial Class Form_PO
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1014, 561)
         Me.TabControl1.TabIndex = 68
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "No. PO"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 200
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Tgl PO"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Width = 150
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Importir"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 500
         '
         'Form_PO
         '

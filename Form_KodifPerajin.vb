@@ -224,6 +224,8 @@ Public Class Form_KodifPerajin
         Else
             cmdHapus.Enabled = tAktif
         End If
+        CmbWilayah.SelectedIndex = -1
+        CmbWilayah.Enabled = Not tAktif
         cmdBatal.Visible = Not tAktif
         cmdExit.Enabled = tAktif
     End Sub
@@ -282,7 +284,6 @@ Public Class Form_KodifPerajin
         LAdd = True
         LEdit = False
         ClearTextBoxes()
-        CmbWilayah.SelectedIndex = -1
         AturTombol(False)
         KodePerajin.ReadOnly = False
         CmbWilayah.Select()
@@ -309,10 +310,6 @@ Public Class Form_KodifPerajin
         LEdit = True
         AturTombol(False)
         cmdSimpan.Visible = tEdit
-    End Sub
-
-    Private Sub Email_TextChanged(sender As Object, e As EventArgs) Handles Email.TextChanged
-
     End Sub
 
     Private Sub Form_KodifPerajin_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -415,12 +412,12 @@ Public Class Form_KodifPerajin
     Private Sub MaxKodePerajin()
         If LAdd Then
             Dim MsgSQL As String, dbMax As New DataTable
-            MsgSQL = "Select isnull(Max(Right(KodePerajin,5)),0) + 10001 RecId " &
+            MsgSQL = "Select isnull(Max(Right(KodePerajin,5)),0) + 1000001 RecId " &
                 " From M_KodePerajin Where KodePerajin <> 'LOKL' " &
                 "  and Left(KodePerajin,2) = '" & Microsoft.VisualBasic.Right(CmbWilayah.Text, 2) & "'  "
             dbMax = Proses.ExecuteQuery(MsgSQL)
             If dbMax.Rows.Count <> 0 Then
-                KodePerajin.Text = Microsoft.VisualBasic.Right(dbMax.Rows(0) !recid, 4)
+                KodePerajin.Text = Microsoft.VisualBasic.Right(dbMax.Rows(0) !recid, 5)
             End If
         End If
     End Sub
@@ -532,4 +529,12 @@ Public Class Form_KodifPerajin
             If Trim(tCari.Text) <> "" Then Data_Record()
         End If
     End Sub
+
+    Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        If e.TabPageIndex = 0 Then
+        ElseIf e.TabPageIndex = 1 Then
+            Data_Record()
+        End If
+    End Sub
+
 End Class

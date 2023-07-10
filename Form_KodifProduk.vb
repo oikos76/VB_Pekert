@@ -322,7 +322,7 @@ Public Class Form_KodifProduk
                 FotoLoc = My.Settings.path_foto
             End If
         End If
-        Dim dbCek As String
+        'Dim dbCek As String
         'SQL = "Select kodeproduk, deskripsi, bahan_ind, namaindonesia
         '  From m_KodeProduk inner join m_KodeBahan on m_KodeProduk.kode_bahan = m_KodeBahan.KodeBahan
         ' Where NamaIndonesia <> bahan_ind "
@@ -495,7 +495,7 @@ Public Class Form_KodifProduk
         dgRiwayatHarga.Rows.Clear()
         Me.Cursor = Cursors.WaitCursor
         MsgSQL = "Select t_DPB.HargaBeli, t_DPB.NoDPB, t_DPB.TglDPB, isnull(m_KodePerajin.Nama, '')  Nama " &
-            " FROM t_DPB_ t_DPB left JOIN m_KodePerajin ON t_DPB.KodePerajin = m_KodePerajin.KodePerajin " &
+            " FROM t_DPB left JOIN m_KodePerajin ON t_DPB.KodePerajin = m_KodePerajin.KodePerajin " &
             "Where t_DPB.AktifYN = 'Y' and t_DPB.Kode_Produk = '" & KodeProduk.Text & "'  " &
             "Order by TglDPB Desc, NoDPB Desc "
         rsfind = Proses.ExecuteQuery(MsgSQL)
@@ -540,7 +540,6 @@ Public Class Form_KodifProduk
         PanelSimpanMultiKode.Visible = LMultiKode
         cmdVariasiMultiKode.Visible = tAktif
         cmdVariasi.Visible = tAktif
-
 
         PanelCariKode.Visible = False
         GBoxInfoUmum.Visible = True
@@ -1837,8 +1836,26 @@ Public Class Form_KodifProduk
         cmdSimpan.Visible = tEdit
         TabPageDaftar_.Enabled = False
         TabPageVariasi_.Enabled = False
+
+        tdPrev_USD = DCur_USD.Value
+        tPrev_USD = Cur_USD.Text * 1
+        tdPrev_RP = DCur_RP.Value
+        tPrev_RP = cur_rp.Text * 1
+        Kode_Perajin.Focus()
+
     End Sub
 
+    Private Sub Descript_TextChanged(sender As Object, e As EventArgs) Handles Descript.TextChanged
+
+    End Sub
+
+    Private Sub KodeProduk_TextChanged(sender As Object, e As EventArgs) Handles KodeProduk.TextChanged
+
+    End Sub
+
+    Private Sub Deskripsi_TextChanged(sender As Object, e As EventArgs) Handles Deskripsi.TextChanged
+
+    End Sub
 
     Private Sub Daftar()
         Dim mKondisi As String = "", RSD As New DataTable

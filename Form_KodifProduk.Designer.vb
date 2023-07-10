@@ -47,10 +47,10 @@ Partial Class Form_KodifProduk
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdHapus = New System.Windows.Forms.Button()
         Me.cmdTambah = New System.Windows.Forms.Button()
-        Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.cmdCari = New System.Windows.Forms.Button()
         Me.cmdVariasiMultiKode = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
+        Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.PanelEntry = New System.Windows.Forms.Panel()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabInfoHarga_ = New System.Windows.Forms.TabPage()
@@ -264,10 +264,10 @@ Partial Class Form_KodifProduk
         Me.Panel4.Controls.Add(Me.cmdEdit)
         Me.Panel4.Controls.Add(Me.cmdHapus)
         Me.Panel4.Controls.Add(Me.cmdTambah)
-        Me.Panel4.Controls.Add(Me.cmdSimpan)
         Me.Panel4.Controls.Add(Me.cmdCari)
         Me.Panel4.Controls.Add(Me.cmdVariasiMultiKode)
         Me.Panel4.Controls.Add(Me.cmdExit)
+        Me.Panel4.Controls.Add(Me.cmdSimpan)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 527)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
@@ -418,19 +418,6 @@ Partial Class Form_KodifProduk
         Me.cmdTambah.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdTambah.UseVisualStyleBackColor = True
         '
-        'cmdSimpan
-        '
-        Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Left
-        Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
-        Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdSimpan.Location = New System.Drawing.Point(0, 0)
-        Me.cmdSimpan.Name = "cmdSimpan"
-        Me.cmdSimpan.Size = New System.Drawing.Size(82, 34)
-        Me.cmdSimpan.TabIndex = 60
-        Me.cmdSimpan.Text = "&Simpan"
-        Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.UseVisualStyleBackColor = True
-        '
         'cmdCari
         '
         Me.cmdCari.Image = CType(resources.GetObject("cmdCari.Image"), System.Drawing.Image)
@@ -465,6 +452,19 @@ Partial Class Form_KodifProduk
         Me.cmdExit.Text = "E&xit"
         Me.cmdExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdExit.UseVisualStyleBackColor = True
+        '
+        'cmdSimpan
+        '
+        Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
+        Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdSimpan.Location = New System.Drawing.Point(0, 0)
+        Me.cmdSimpan.Name = "cmdSimpan"
+        Me.cmdSimpan.Size = New System.Drawing.Size(82, 34)
+        Me.cmdSimpan.TabIndex = 60
+        Me.cmdSimpan.Text = "&Simpan"
+        Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdSimpan.UseVisualStyleBackColor = True
         '
         'PanelEntry
         '
@@ -673,7 +673,6 @@ Partial Class Form_KodifProduk
         Me.Edit.Location = New System.Drawing.Point(208, 127)
         Me.Edit.Margin = New System.Windows.Forms.Padding(4)
         Me.Edit.Name = "Edit"
-        Me.Edit.ReadOnly = True
         Me.Edit.Size = New System.Drawing.Size(151, 22)
         Me.Edit.TabIndex = 26
         '
@@ -1318,7 +1317,7 @@ Partial Class Form_KodifProduk
         Me.KodeProduk.Name = "KodeProduk"
         Me.KodeProduk.Size = New System.Drawing.Size(126, 22)
         Me.KodeProduk.TabIndex = 6
-        Me.KodeProduk.Text = "0003-20-5000A"
+        Me.KodeProduk.Text = "00003-20-5000A"
         '
         'Kode_Perajin
         '

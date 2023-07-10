@@ -41,7 +41,7 @@ Public Class Form_SP
             CatatanProduk.Text = ""
             CatatanSP.Text = ""
             ShowFoto("")
-        ElseIf Len(Trim(Kode_Produk.Text)) = 4 Then
+        ElseIf Len(Trim(Kode_Produk.Text)) = 5 Then
             Kode_Produk.Text = Kode_Produk.Text + "-"
             Kode_Produk.SelectionStart = Len(Trim(Kode_Produk.Text)) + 1
         ElseIf Len(Trim(Kode_Produk.Text)) = 7 Then
@@ -69,7 +69,8 @@ Public Class Form_SP
             cmdHapus.Visible = tAktif
         End If
         cmdPenambahanKode.Visible = tAktif
-
+        TglKirimPerajin.Enabled = Not tAktif
+        TglMasukGudang.Enabled = Not tAktif
         cmdRiwayatHarga.Visible = tAktif
         cmdBatal.Visible = Not tAktif
         PanelNavigate.Visible = tAktif
@@ -132,6 +133,7 @@ Public Class Form_SP
             Kode_Produk.Focus()
             Exit Sub
         End If
+        If NilaiKurs.Text = "" Then NilaiKurs.Text = 0
         Dim rs05 As New DataTable, tmp As String = ""
         Dim rsi As New DataTable, tJumlah As String, QTYSP As Double = 0
         If LEdit Then
@@ -286,6 +288,7 @@ Public Class Form_SP
                     Exit Sub
                 End If
                 idRecord.Text = Proses.MaxNoUrut("IDRec", "t_SP", "SP")
+
                 MsgSQL = "INSERT INTO t_SP(IDRec, NoSP, TglSP, TPO, PO, " &
                     "NoPO, KodeImportir, Importir, ShipmentDate, Kode_Perajin, " &
                     "Perajin, KodeProduk, Produk, KodePerajin, Jumlah, HargaBeliRP, " &
@@ -689,27 +692,31 @@ ErrMSG:
                     If RSI.Rows(0) !Panjang <> 0 Then Ukuran = Ukuran + "P = " & Format(RSI.Rows(0) !Panjang, "###,##0.00") + " "
                     If RSI.Rows(0) !Lebar <> 0 Then Ukuran = Ukuran + "L = " & Format(RSI.Rows(0) !Lebar, "###,##0.00") + " "
                     If RSI.Rows(0) !Tinggi <> 0 Then Ukuran = Ukuran + "T = " & Format(RSI.Rows(0) !Tinggi, "###,##0.00") + " "
-                    If RSI.Rows(0) !Diameter <> 0 Then Ukuran = Ukuran + "Diameter = " & Format(RSI.Rows(0) !Diameter, "###,##0.00") + " "
+                    If IsNumeric(RSI.Rows(0) !Diameter) Then
+                        If RSI.Rows(0) !Diameter <> 0 Then Ukuran = Ukuran + "Diameter = " & Format(RSI.Rows(0) !Diameter, "###,##0.00") + " "
+                    Else
+                        Ukuran = Ukuran + "Diameter = " & RSI.Rows(0) !Diameter & " "
+                    End If
                     If RSI.Rows(0) !Tebal <> 0 Then Ukuran = Ukuran + "Tebal = " & Format(RSI.Rows(0) !Tebal, "###,##0.00") + " "
                     If RSI.Rows(0) !Berat <> 0 Then Ukuran = Ukuran + "Berat = " & Format(RSI.Rows(0) !Berat, "###,##0.00") + " "
                     CatatanProduk.Text = RSI.Rows(0) !tamb_SP
                     Produk.Text = Replace(RSI.Rows(0) !Deskripsi, "'", "`")
                     '                CatatanTambahan.Text = RSI!tamb_SP
                     '                If Trim(Jumlah.Text) = "" Or Jumlah.Text = 0 Then
-                    Jumlah.Text = RSI.Rows(0) !Jumlah
-                    '                End If
+                    Jumlah.Text = Format(RSI.Rows(0) !Jumlah, "###,##0")
+                    HargaBeliRp.Text = Format(RSI.Rows(0) !cur_rp, "###,##0")
                     KodePerajin.Text = RSI.Rows(0) !KodePerajin2
                 Else
                     Kode_Produk.Text = Proses.FindKodeProdukPO_SP(Kode_Produk.Text, NoPO.Text)
                     MsgSQL = "Select Deskripsi, Kode_Buyer, Kode_Produk, Kode_Importir, " &
-                        " m_KodeImportir.Nama, T_PO.Jumlah, Tamb_SP, Panjang, Lebar, " &
-                        " Diameter, tebal, Berat, Tinggi, cur_rp, isnull(KodePerajin2,'') KodePerajin2, TAMB_SP " &
-                        " From t_PO inner join m_KodeProduk ON " &
-                        " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
-                        " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
-                        "Where KodeProduk = '" & Kode_Produk.Text & "' " &
-                        "  And t_PO.AktifYN = 'Y' " &
-                        "  And T_PO.NOPO = '" & NoPO.Text & "' "
+                            " m_KodeImportir.Nama, T_PO.Jumlah, Tamb_SP, Panjang, Lebar, " &
+                            " Diameter, tebal, Berat, Tinggi, cur_rp, isnull(KodePerajin2,'') KodePerajin2, TAMB_SP " &
+                            " From t_PO inner join m_KodeProduk ON " &
+                            " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
+                            " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
+                            "Where KodeProduk = '" & Kode_Produk.Text & "' " &
+                            "  And t_PO.AktifYN = 'Y' " &
+                            "  And T_PO.NOPO = '" & NoPO.Text & "' "
                     RSF = Proses.ExecuteQuery(MsgSQL)
                     If RSF.Rows.Count <> 0 Then
                         If CEKProdukSP(Kode_Produk.Text, NoPO.Text) Then
@@ -739,7 +746,7 @@ ErrMSG:
                         If Jumlah.Text = "0" Or Trim(Jumlah.Text) = "" Then
                             Jumlah.Text = RSF.Rows(0) !Jumlah
                         End If
-                        HargaBeliRp.Text = RSF.Rows(0) !cur_rp
+                        HargaBeliRp.Text = Format(RSF.Rows(0) !cur_rp, "###,##0")
                         KodePerajin.Text = RSF.Rows(0) !KodePerajin2
                         'CatatanTambahan.Text = RSF!tamb_SP
                     End If
@@ -775,7 +782,7 @@ ErrMSG:
                     If RSI.Rows(0) !Berat <> 0 Then Ukuran = Ukuran + "Berat = " & Format(RSI.Rows(0) !Berat, "###,##0.00") + " "
                     CatatanProduk.Text = IIf(IsDBNull(RSI.Rows(0) !tamb_SP), "", RSI.Rows(0) !tamb_SP)
                     Produk.Text = Replace(RSI.Rows(0) !Deskripsi, "'", "`")
-                    HargaBeliRp.Text = RSI.Rows(0) !cur_rp
+                    HargaBeliRp.Text = Format(RSI.Rows(0) !cur_rp, "###,##0")
                 End If
                 'tanpa po------
             End If
@@ -790,7 +797,9 @@ ErrMSG:
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
-        CetakSP
+        cmdPrint.Enabled = False
+        CetakSP()
+        cmdPrint.Enabled = True
     End Sub
     Private Sub CetakSP()
         Dim DTadapter As New SqlDataAdapter
@@ -948,22 +957,23 @@ ErrMSG:
 
     Private Sub NoPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoPO.KeyPress
         If e.KeyChar = Chr(13) Then
-            SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, kodeimportir " &
+            SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, kodeimportir, tglKirim " &
                 " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                 "Where T_PO.AktifYN = 'Y' " &
                 "  and nopo = '" & NoPO.Text & "' " &
-                "Group By NoPO, m_KodeImportir.Nama, TglPO, kodeimportir " &
+                "Group By NoPO, m_KodeImportir.Nama, TglPO, kodeimportir, tglKirim  " &
                 "Order By TglPO Desc, NoPO Desc "
             dbTable = Proses.ExecuteQuery(SQL)
             If dbTable.Rows.Count <> 0 Then
                 NoPO.Text = dbTable.Rows(0) !nopo
+                ShipmentDate.Value = dbTable.Rows(0) !tglKirim
                 Kode_Importir.Text = dbTable.Rows(0) !kodeimportir
                 Importir.Text = dbTable.Rows(0) !importir
                 KetNoPO.Text = "Ambil data dari PO No." & NoPO.Text
-                ShipmentDate.Focus()
+                Kode_Perajin.Focus()
             Else
                 Dim dbpo As New DataTable
-                SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir " &
+                SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir, max(t_PO.tglKirim) tglKirim  " &
                     " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "Where T_PO.AktifYN = 'Y' " &
                     "  and nopo like '%" & NoPO.Text & "%' " &
@@ -973,7 +983,7 @@ ErrMSG:
                 Form_Daftar.Text = "Daftar PO"
                 Form_Daftar.ShowDialog()
                 NoPO.Text = FrmMenuUtama.TSKeterangan.Text
-                SQL = "SELECT nopo, kodeimportir, m_KodeImportir.Nama Importir " &
+                SQL = "SELECT nopo, kodeimportir, m_KodeImportir.Nama Importir, t_PO.tglKirim " &
                     " FROM t_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "WHERE nopo = '" & NoPO.Text & "' AND t_PO.aktifYN = 'Y' "
                 dbpo = Proses.ExecuteQuery(SQL)
@@ -981,6 +991,7 @@ ErrMSG:
                     NoPO.Text = dbpo.Rows(0) !nopo
                     Kode_Importir.Text = dbpo.Rows(0) !kodeimportir
                     Importir.Text = dbpo.Rows(0) !importir
+                    ShipmentDate.Value = dbpo.Rows(0) !tglKirim
                     KetNoPO.Text = "Ambil data dari PO No." & NoPO.Text
                     ShipmentDate.Focus()
                 Else
@@ -1143,9 +1154,15 @@ ErrMSG:
 
     Private Sub Kode_Perajin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Kode_Perajin.KeyPress
         If e.KeyChar = Chr(13) Then
-            SQL = "Select nama From m_KodePerajin " &
-              " Where KodePerajin = '" & Kode_Perajin.Text & "' " &
-              " and aktifyn = 'Y' "
+            If optPO.Checked Then
+                SQL = "Select nama From m_KodePerajin inner join t_PO on left(kode_produk,5) = kodeperajin " &
+                  "Where KodePerajin = '" & Kode_Perajin.Text & "' " &
+                  " and m_KodePerajin.aktifyn = 'Y' "
+            Else
+                SQL = "Select nama From m_KodePerajin " &
+                  " Where KodePerajin = '" & Kode_Perajin.Text & "' " &
+                  " and aktifyn = 'Y' "
+            End If
             dbTable = Proses.ExecuteQuery(SQL)
             If dbTable.Rows.Count <> 0 Then
                 Perajin.Text = dbTable.Rows(0) !nama
@@ -1158,11 +1175,19 @@ ErrMSG:
                 End If
                 Kode_Produk.Focus()
             Else
-                Form_Daftar.txtQuery.Text = "Select * " &
-                    " From m_KodePerajin " &
-                    "Where AktifYN = 'Y' " &
-                    "  And ( KodePerajin Like '%" & Kode_Perajin.Text & "%' or nama Like '%" & Kode_Perajin.Text & "%') " &
-                    "Order By nama "
+                If optPO.Checked Then
+                    Form_Daftar.txtQuery.Text = "SELECT DISTINCT KodePerajin, nama, kodeperajin, wilayahproduksi, alamat " &
+                        " FROM m_KodePerajin inner join (select kode_produk from t_PO where NoPO = '" & NoPO.Text & "') PO ON  " &
+                        "      left(kode_produk,5) = kodeperajin " &
+                        "WHERE (m_KodePerajin.KodePerajin Like '%" & Kode_Perajin.Text & "%' or nama Like '%" & Kode_Perajin.Text & "%') " &
+                        "  And m_KodePerajin.aktifyn = 'Y' "
+                Else
+                    Form_Daftar.txtQuery.Text = "Select * " &
+                        " From m_KodePerajin " &
+                        "Where AktifYN = 'Y' " &
+                        "  And ( KodePerajin Like '%" & Kode_Perajin.Text & "%' or nama Like '%" & Kode_Perajin.Text & "%') " &
+                        "Order By nama "
+                End If
                 Form_Daftar.Text = "Daftar Perajin"
                 Form_Daftar.ShowDialog()
 
@@ -1433,6 +1458,42 @@ ErrMSG:
         End If
     End Sub
 
+    Private Sub cmdRiwayatHarga_Click(sender As Object, e As EventArgs) Handles cmdRiwayatHarga.Click
+        '    MsgSQL = "Select * From T_PI " &
+        '"Where AktifYN = 'Y' " &
+        '" And Kode_Produk = '" & KodeProduk.Text & "'  " &
+        '"order by tglpi, idrec "
+        '    Form_Daftar.txtQuery.Text = MsgSQL
+        '    Form_Daftar.Text = "Riwayat Harga"
+        '    Form_Daftar.ShowDialog()
+        Dim rsFind As New DataTable
+        MsgSQL = "Select Distinct T_DPB.IDRec, T_DPB.HargaBeli, " &
+            "T_DPB.NoDPB, T_DPB.TglDPB, t_SP.Perajin " &
+            " From T_DPB inner join t_SP on " &
+            " T_DPB.NoSP = t_SP.NoSP " &
+            "Where T_DPB.AktifYN = 'Y' " &
+            " And T_DPB.Kode_Produk = '" & Kode_Produk.Text & "' " &
+            "Order by TglDPB Desc "
+        rsFind = Proses.ExecuteQuery(MsgSQL)
+        If rsFind.Rows.Count = 0 Then
+            Dim curRp As Double = 0
+            SQL = "Select * from M_KodeProduk " &
+            "Where KodeProduk = '" & Kode_Produk.Text & "' "
+            curRp = Proses.ExecuteSingleDblQuery(SQL)
+            If curRp <> 0 Then
+                MsgBox("Kode ini belum ada riwayat harga dari DPB" & vbCrLf &
+                    "Harga dari database produk Rp. " & Format(curRp, "###,##0"), vbInformation + vbOKOnly, ".:Just Info!")
+            End If
+        End If
+        Form_Daftar.txtQuery.Text = MsgSQL
+        Form_Daftar.Text = "Riwayat Harga SP"
+        Form_Daftar.ShowDialog()
+    End Sub
+
+    Private Sub CatatanProduk_TextChanged(sender As Object, e As EventArgs) Handles CatatanProduk.TextChanged
+
+    End Sub
+
     Private Sub HargaBeliUS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles HargaBeliUS.KeyPress
         If e.KeyChar >= "0" And e.KeyChar <= "9" Then 'Allows only numbers
             e.KeyChar = e.KeyChar 'Allows only numbers
@@ -1460,6 +1521,10 @@ ErrMSG:
             e.Handled = True  'Disallows all other characters from being used on txtNights.Text
             Beep()
         End If
+    End Sub
+
+    Private Sub CatatanSP_TextChanged(sender As Object, e As EventArgs) Handles CatatanSP.TextChanged
+
     End Sub
 
     Private Sub NilaiKurs_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NilaiKurs.KeyPress
@@ -1491,6 +1556,9 @@ ErrMSG:
         End If
     End Sub
 
+    Private Sub CatatanTambahan_TextChanged(sender As Object, e As EventArgs) Handles CatatanTambahan.TextChanged
+
+    End Sub
 
     Private Sub Kode_Importir_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Kode_Importir.KeyPress
         If e.KeyChar = Chr(13) Then
@@ -1552,5 +1620,31 @@ ErrMSG:
         ElseIf e.TabPageIndex = 1 Then
             DaftarSP("")
         End If
+    End Sub
+
+    Private Sub TglKirimPerajin_KeyDown(sender As Object, e As KeyEventArgs) Handles TglKirimPerajin.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TglMasukGudang.Value = DateAdd("d", 7, TglKirimPerajin.Value)
+        End If
+    End Sub
+
+    Private Sub TglKirimPerajin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TglKirimPerajin.KeyPress
+        If e.KeyChar = Chr(13) Then
+            'CatatanSP.Text = NoteSP(Trim(Perajin.Text), Format(TglKirimPerajin, "dd MMMM yyyy"))
+            TglMasukGudang.Value = DateAdd("d", 7, TglKirimPerajin.Value)
+            'If LAdd Or LEdit Or LTambahKode Then cmdSave.SetFocus
+        End If
+    End Sub
+
+    Private Sub CatatanProduk_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanProduk.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+    End Sub
+
+    Private Sub CatatanSP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanSP.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+    End Sub
+
+    Private Sub CatatanTambahan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanTambahan.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
     End Sub
 End Class

@@ -559,6 +559,7 @@ Public Class Form_GD_DPL
         Else
             TotalTiapBoks.Text = 0
         End If
+        JumlahTiapBoks.Text = TotalTiapBoks.Text
     End Sub
 
     Private Sub DaftarDPL()
@@ -651,7 +652,7 @@ Public Class Form_GD_DPL
         If TMP > (QTYPI.Text * 1) Then
             MsgBox("DPL untuk Produk ini melebihi QTY PI", vbCritical + vbOKOnly, ".:Error!")
             JumlahTiapBoks.Focus()
-            Exit Sub
+            '  Exit Sub
         End If
         TotalJumlahBoksDPL.Text = JumProduk(NoDPL.Text)
         If trim(cmbJenisBox.Text) = "" Then
@@ -843,7 +844,7 @@ Public Class Form_GD_DPL
         RSHIT = Proses.ExecuteQuery(MsgSQL)
         If RSHIT.Rows.Count <> 0 Then
             If (RSHIT.Rows(0) !totvoldpl) = 0 Then
-                TotalVolDPL.Text = 0 + (TotalVolumeBoks.Text * 1)
+                TotalVolDPL.Text = Format(0 + (TotalVolumeBoks.Text * 1), "###,##0.0000")
             Else
                 TotalVolDPL.Text = Format(RSHIT.Rows(0) !totvoldpl + (TotalVolumeBoks.Text * 1), "###,##0.000")
             End If
@@ -974,6 +975,7 @@ Public Class Form_GD_DPL
             Dim temp As Double = Bruto.Text
             Bruto.Text = Format(temp, "###,##0")
             Bruto.SelectionStart = Bruto.TextLength
+            Netto.Text = Format(temp - 2, "###,##0")
         Else
             Bruto.Text = 0
         End If
@@ -987,7 +989,7 @@ Public Class Form_GD_DPL
         Else
             mKondisi = "And NoPO like '%" & Trim(Cari) & "%' "
         End If
-        MsgSQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir " &
+        MsgSQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir, max(tglkirim) tglkirim " &
             " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
             "Where T_PO.AktifYN = 'Y' " &
             "  " & mKondisi & " " &
@@ -1007,7 +1009,7 @@ Public Class Form_GD_DPL
             mKondisi = "And NoPO like '%" & Trim(Cari) & "%' "
         End If
         mKondisi = mKondisi + " And Kode_Importir = '" & Trim(tImportir) & "' "
-        MsgSQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir " &
+        MsgSQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir, max(t_PO.tglKirim) tglKirim " &
             " FROM T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
             "WHERE T_PO.AktifYN = 'Y' " &
             "  " & mKondisi & " " &
@@ -1304,6 +1306,17 @@ Public Class Form_GD_DPL
         End With
     End Sub
 
+    Private Sub Tinggi_TextChanged(sender As Object, e As EventArgs) Handles Tinggi.TextChanged
+        If Trim(Tinggi.Text) = "" Then Tinggi.Text = 0
+        If IsNumeric(Tinggi.Text) Then
+            Dim temp As Double = Tinggi.Text
+            Tinggi.Text = Format(temp, "###,##0")
+            Tinggi.SelectionStart = Tinggi.TextLength
+        Else
+            Tinggi.Text = 0
+        End If
+    End Sub
+
     Private Sub NoBoks2_TextChanged(sender As Object, e As EventArgs) Handles NoBoks2.TextChanged
         If Trim(NoBoks2.Text) = "" Then NoBoks.Text = 0
         If IsNumeric(NoBoks2.Text) Then
@@ -1314,6 +1327,39 @@ Public Class Form_GD_DPL
             JumlahBoks.Text = (NoBoks2.Text * 1) - (NoBoks.Text * 1) + 1
         Else
             NoBoks2.Text = 0
+        End If
+    End Sub
+
+    Private Sub Lebar_TextChanged(sender As Object, e As EventArgs) Handles Lebar.TextChanged
+        If Trim(Lebar.Text) = "" Then Lebar.Text = 0
+        If IsNumeric(Lebar.Text) Then
+            Dim temp As Double = Lebar.Text
+            Lebar.Text = Format(temp, "###,##0")
+            Lebar.SelectionStart = Lebar.TextLength
+        Else
+            Lebar.Text = 0
+        End If
+    End Sub
+
+    Private Sub Panjang_TextChanged(sender As Object, e As EventArgs) Handles Panjang.TextChanged
+        If Trim(Panjang.Text) = "" Then Panjang.Text = 0
+        If IsNumeric(Panjang.Text) Then
+            Dim temp As Double = Panjang.Text
+            Panjang.Text = Format(temp, "###,##0")
+            Panjang.SelectionStart = Panjang.TextLength
+        Else
+            Panjang.Text = 0
+        End If
+    End Sub
+
+    Private Sub TotalVolumeBoks_TextChanged(sender As Object, e As EventArgs) Handles TotalVolumeBoks.TextChanged
+        If Trim(TotalVolumeBoks.Text) = "" Then TotalVolumeBoks.Text = 0
+        If IsNumeric(Tinggi.Text) Then
+            Dim temp As Double = TotalVolumeBoks.Text
+            TotalVolumeBoks.Text = Format(temp, "###,##0.00")
+            TotalVolumeBoks.SelectionStart = TotalVolumeBoks.TextLength
+        Else
+            TotalVolumeBoks.Text = 0
         End If
     End Sub
 
@@ -1473,5 +1519,116 @@ Public Class Form_GD_DPL
         ElseIf e.TabPageIndex = 1 Then
             DaftarDPL()
         End If
+    End Sub
+
+    Private Sub Tinggi_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Tinggi.KeyPress
+        If e.KeyChar >= "0" And e.KeyChar <= "9" Then 'Allows only numbers
+            e.KeyChar = e.KeyChar 'Allows only numbers
+        ElseIf Asc(e.KeyChar) = 8 Then
+            e.KeyChar = e.KeyChar 'Allows "Backspace" to be used
+        ElseIf e.KeyChar = " "c Then
+            e.KeyChar = " "c 'Allows "Spacebar" to be used
+        ElseIf e.KeyChar = ","c Then
+            e.KeyChar = ","c
+        ElseIf e.KeyChar = "." Then
+            If Panjang.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
+                e.Handled = True
+                Beep()
+            End If
+        ElseIf e.KeyChar = Chr(13) Then
+            If IsNumeric(Tinggi.Text) Then
+                Dim temp As Double = Tinggi.Text
+                Tinggi.Text = Format(temp, "###,##0")
+                Tinggi.SelectionStart = Tinggi.TextLength
+                HitungVolume()
+            Else
+                Tinggi.Text = 0
+            End If
+            If LAdd Or LEdit Or LTambahKode Then Bruto.Focus()
+        Else
+            e.Handled = True  'Disallows all other characters from being used on txtNights.Text
+            Beep()
+        End If
+    End Sub
+
+    Private Sub Panjang_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Panjang.KeyPress
+        If e.KeyChar >= "0" And e.KeyChar <= "9" Then 'Allows only numbers
+            e.KeyChar = e.KeyChar 'Allows only numbers
+        ElseIf Asc(e.KeyChar) = 8 Then
+            e.KeyChar = e.KeyChar 'Allows "Backspace" to be used
+        ElseIf e.KeyChar = " "c Then
+            e.KeyChar = " "c 'Allows "Spacebar" to be used
+        ElseIf e.KeyChar = ","c Then
+            e.KeyChar = ","c
+        ElseIf e.KeyChar = "." Then
+            If Panjang.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
+                e.Handled = True
+                Beep()
+            End If
+        ElseIf e.KeyChar = Chr(13) Then
+            If IsNumeric(Panjang.Text) Then
+                Dim temp As Double = Panjang.Text
+                Panjang.Text = Format(temp, "###,##0")
+                Panjang.SelectionStart = Panjang.TextLength
+                HitungVolume()
+            Else
+                Panjang.Text = 0
+            End If
+            If LAdd Or LEdit Or LTambahKode Then Lebar.Focus()
+        Else
+            e.Handled = True  'Disallows all other characters from being used on txtNights.Text
+            Beep()
+        End If
+    End Sub
+
+    Private Sub Lebar_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Lebar.KeyPress
+        If e.KeyChar >= "0" And e.KeyChar <= "9" Then 'Allows only numbers
+            e.KeyChar = e.KeyChar 'Allows only numbers
+        ElseIf Asc(e.KeyChar) = 8 Then
+            e.KeyChar = e.KeyChar 'Allows "Backspace" to be used
+        ElseIf e.KeyChar = " "c Then
+            e.KeyChar = " "c 'Allows "Spacebar" to be used
+        ElseIf e.KeyChar = ","c Then
+            e.KeyChar = ","c
+        ElseIf e.KeyChar = "." Then
+            If Panjang.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
+                e.Handled = True
+                Beep()
+            End If
+        ElseIf e.KeyChar = Chr(13) Then
+            If IsNumeric(Lebar.Text) Then
+                Dim temp As Double = Lebar.Text
+                Lebar.Text = Format(temp, "###,##0")
+                Lebar.SelectionStart = Lebar.TextLength
+                HitungVolume()
+            Else
+                Lebar.Text = 0
+            End If
+            If LAdd Or LEdit Or LTambahKode Then Tinggi.Focus()
+        Else
+            e.Handled = True  'Disallows all other characters from being used on txtNights.Text
+            Beep()
+        End If
+    End Sub
+
+    Private Sub Panjang_GotFocus(sender As Object, e As EventArgs) Handles Panjang.GotFocus
+        With Panjang
+            .SelectionStart = 0
+            .SelectionLength = .TextLength
+        End With
+    End Sub
+
+    Private Sub Lebar_GotFocus(sender As Object, e As EventArgs) Handles Lebar.GotFocus
+        With Lebar
+            .SelectionStart = 0
+            .SelectionLength = .TextLength
+        End With
+    End Sub
+
+    Private Sub Tinggi_GotFocus(sender As Object, e As EventArgs) Handles Tinggi.GotFocus
+        With Tinggi
+            .SelectionStart = 0
+            .SelectionLength = .TextLength
+        End With
     End Sub
 End Class

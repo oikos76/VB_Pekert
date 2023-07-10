@@ -23,14 +23,13 @@ Partial Class Form_GdPraLHP
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GdPraLHP))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.cmdRiwayatHarga = New System.Windows.Forms.Button()
         Me.cmdPenambahanKode = New System.Windows.Forms.Button()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
         Me.cmdPrint = New System.Windows.Forms.Button()
@@ -174,7 +173,6 @@ Partial Class Form_GdPraLHP
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.cmdRiwayatHarga)
         Me.Panel4.Controls.Add(Me.cmdPenambahanKode)
         Me.Panel4.Controls.Add(Me.PanelNavigate)
         Me.Panel4.Controls.Add(Me.cmdSimpan)
@@ -189,17 +187,6 @@ Partial Class Form_GdPraLHP
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(986, 36)
         Me.Panel4.TabIndex = 146
-        '
-        'cmdRiwayatHarga
-        '
-        Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(426, 3)
-        Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
-        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 28)
-        Me.cmdRiwayatHarga.TabIndex = 5
-        Me.cmdRiwayatHarga.Text = "&Riwayat Harga"
-        Me.cmdRiwayatHarga.UseVisualStyleBackColor = True
         '
         'cmdPenambahanKode
         '
@@ -970,8 +957,8 @@ Partial Class Form_GdPraLHP
         '
         'Column2
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column2.HeaderText = "Jumlah di Pack"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -986,8 +973,8 @@ Partial Class Form_GdPraLHP
         '
         'Column3
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column3.HeaderText = "Harga Beli"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -1002,8 +989,8 @@ Partial Class Form_GdPraLHP
         '
         'Column9
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column9.HeaderText = "Sisa"
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -1141,7 +1128,6 @@ Partial Class Form_GdPraLHP
     Friend WithEvents TabPageFormEntry_ As TabPage
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents cmdRiwayatHarga As Button
     Friend WithEvents cmdPenambahanKode As Button
     Friend WithEvents PanelNavigate As Panel
     Friend WithEvents cmdPrint As Button

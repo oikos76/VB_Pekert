@@ -51,7 +51,7 @@ Public Class Form_GdPraLHP
         Dim tIdRec As String
         MsgSQL = "Select Top 1 * From T_PraLHP " &
             "Where IDRec > '" & IDRecord.Text & "' " &
-            " And NoSP = '" & NoSP.Text & "' and aktifYN = 'Y' " &
+            " And aktifYN = 'Y' " &
             " And NoPraLHP = '" & NoPraLHP.Text & "' " &
             "Order By IdRec "
         Rs = Proses.ExecuteQuery(MsgSQL)
@@ -410,15 +410,11 @@ Public Class Form_GdPraLHP
             cmdHapus.Visible = tAktif
         End If
         cmdPenambahanKode.Visible = tAktif
-
-        cmdRiwayatHarga.Visible = tAktif
         cmdBatal.Visible = Not tAktif
         PanelNavigate.Visible = tAktif
         cmdExit.Visible = tAktif
         TabPageDaftar_.Enabled = True
         TabPageFormEntry_.Enabled = True
-        'Kirim.ReadOnly = True
-        'NoSP.ReadOnly = True
         Me.Text = "Pra LHP"
     End Sub
 
@@ -813,8 +809,7 @@ Public Class Form_GdPraLHP
         Dim MsgSQL As String, Rs As New DataTable
         Dim tIdRec As String
         MsgSQL = "Select Top 1 * From t_PraLHP " &
-            "Where NoSP = '" & NoSP.Text & "' " &
-            " And IDRec < '" & IDRecord.Text & "' " &
+            "Where IDRec < '" & IDRecord.Text & "' " &
             " And NoPraLHP = '" & NoPraLHP.Text & "' " &
             " And aktifYN = 'Y' " &
             "Order By IdRec Desc "
@@ -923,6 +918,10 @@ Public Class Form_GdPraLHP
         If e.KeyChar = Chr(13) Then
             SuratPengantar.Focus()
         End If
+    End Sub
+
+    Private Sub cmdRiwayatHarga_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub SuratPengantar_KeyPress(sender As Object, e As KeyPressEventArgs) Handles SuratPengantar.KeyPress

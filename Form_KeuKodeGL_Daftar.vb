@@ -30,7 +30,7 @@ Public Class Form_KeuKodeGL_Daftar
         DGView.Font = New Font("Arial", 10, FontStyle.Regular)
         tCari.Text = ""
         Data_Refresh()
-        tCari.Visible = False
+        tCari.Visible = True
     End Sub
     Private Sub Data_Refresh()
         Dim dbKel As New DataTable, dbKode As New DataTable,
@@ -154,5 +154,15 @@ Public Class Form_KeuKodeGL_Daftar
             .isi_COA
         End With
         Me.Close()
+    End Sub
+
+    Private Sub tCari_TextChanged(sender As Object, e As EventArgs) Handles tCari.TextChanged
+
+    End Sub
+
+    Private Sub tCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tCari.KeyPress
+        If e.KeyChar = Chr(13) Then
+
+        End If
     End Sub
 End Class

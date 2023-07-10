@@ -512,7 +512,8 @@ Public Class FrmMenuUtama
     End Sub
 
     Private Sub _43KodeProdukBuyer_Click(sender As Object, e As EventArgs) Handles _43KodeProdukBuyer.Click
-        Form_KodeProdukBuyer.ShowDialog()
+        Form_KodeProdukBuyer.MdiParent = Me
+        Form_KodeProdukBuyer.Show()
     End Sub
 
     Private Sub _32DPB_Click(sender As Object, e As EventArgs) Handles _32DPB.Click
@@ -560,6 +561,11 @@ Public Class FrmMenuUtama
     Private Sub _105KodeGL_Click(sender As Object, e As EventArgs) Handles _105KodeGL.Click
         Form_KeuKodeGL.MdiParent = Me
         Form_KeuKodeGL.Show()
+    End Sub
+
+    Private Sub ExploreFileFotoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExploreFileFotoToolStripMenuItem.Click
+        Form_ExploreFoto.MdiParent = Me
+        Form_ExploreFoto.Show()
     End Sub
 End Class
 

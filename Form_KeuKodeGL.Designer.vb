@@ -32,9 +32,6 @@ Partial Class Form_KeuKodeGL
         Me.cmdTambah = New System.Windows.Forms.Button()
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.PanelEntry_ = New System.Windows.Forms.Panel()
-        Me.cmbSubPerkiraan = New System.Windows.Forms.ComboBox()
-        Me.cmbNoKode = New System.Windows.Forms.ComboBox()
-        Me.CmbNoKelompok = New System.Windows.Forms.ComboBox()
         Me.cmbJenisTabel = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.NoPerkiraan = New System.Windows.Forms.TextBox()
@@ -48,6 +45,9 @@ Partial Class Form_KeuKodeGL
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmbSubPerkiraan = New System.Windows.Forms.ComboBox()
+        Me.cmbNoKode = New System.Windows.Forms.ComboBox()
+        Me.CmbNoKelompok = New System.Windows.Forms.ComboBox()
         Me.cmbNoGolongan = New System.Windows.Forms.ComboBox()
         Me.NoKelompok = New System.Windows.Forms.TextBox()
         Me.NoKode = New System.Windows.Forms.TextBox()
@@ -80,9 +80,9 @@ Partial Class Form_KeuKodeGL
         Me.cmdPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.cmdPrint.Location = New System.Drawing.Point(254, 3)
         Me.cmdPrint.Name = "cmdPrint"
-        Me.cmdPrint.Size = New System.Drawing.Size(93, 28)
+        Me.cmdPrint.Size = New System.Drawing.Size(77, 28)
         Me.cmdPrint.TabIndex = 8
-        Me.cmdPrint.Text = "&Print/Daftar"
+        Me.cmdPrint.Text = "&Daftar"
         Me.cmdPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdPrint.UseVisualStyleBackColor = True
         '
@@ -128,7 +128,7 @@ Partial Class Form_KeuKodeGL
         '
         Me.cmdExit.Image = CType(resources.GetObject("cmdExit.Image"), System.Drawing.Image)
         Me.cmdExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdExit.Location = New System.Drawing.Point(352, 3)
+        Me.cmdExit.Location = New System.Drawing.Point(334, 3)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(77, 28)
         Me.cmdExit.TabIndex = 3
@@ -190,42 +190,6 @@ Partial Class Form_KeuKodeGL
         Me.PanelEntry_.Name = "PanelEntry_"
         Me.PanelEntry_.Size = New System.Drawing.Size(591, 378)
         Me.PanelEntry_.TabIndex = 149
-        '
-        'cmbSubPerkiraan
-        '
-        Me.cmbSubPerkiraan.BackColor = System.Drawing.SystemColors.Window
-        Me.cmbSubPerkiraan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSubPerkiraan.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbSubPerkiraan.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.cmbSubPerkiraan.FormattingEnabled = True
-        Me.cmbSubPerkiraan.Location = New System.Drawing.Point(172, 228)
-        Me.cmbSubPerkiraan.Name = "cmbSubPerkiraan"
-        Me.cmbSubPerkiraan.Size = New System.Drawing.Size(322, 26)
-        Me.cmbSubPerkiraan.TabIndex = 233
-        '
-        'cmbNoKode
-        '
-        Me.cmbNoKode.BackColor = System.Drawing.SystemColors.Window
-        Me.cmbNoKode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNoKode.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbNoKode.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.cmbNoKode.FormattingEnabled = True
-        Me.cmbNoKode.Location = New System.Drawing.Point(172, 166)
-        Me.cmbNoKode.Name = "cmbNoKode"
-        Me.cmbNoKode.Size = New System.Drawing.Size(321, 26)
-        Me.cmbNoKode.TabIndex = 232
-        '
-        'CmbNoKelompok
-        '
-        Me.CmbNoKelompok.BackColor = System.Drawing.SystemColors.Window
-        Me.CmbNoKelompok.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbNoKelompok.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbNoKelompok.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.CmbNoKelompok.FormattingEnabled = True
-        Me.CmbNoKelompok.Location = New System.Drawing.Point(172, 105)
-        Me.CmbNoKelompok.Name = "CmbNoKelompok"
-        Me.CmbNoKelompok.Size = New System.Drawing.Size(322, 26)
-        Me.CmbNoKelompok.TabIndex = 231
         '
         'cmbJenisTabel
         '
@@ -376,6 +340,42 @@ Partial Class Form_KeuKodeGL
         Me.Label6.Size = New System.Drawing.Size(136, 16)
         Me.Label6.TabIndex = 217
         Me.Label6.Text = "Golongan       :"
+        '
+        'cmbSubPerkiraan
+        '
+        Me.cmbSubPerkiraan.BackColor = System.Drawing.SystemColors.Window
+        Me.cmbSubPerkiraan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSubPerkiraan.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbSubPerkiraan.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.cmbSubPerkiraan.FormattingEnabled = True
+        Me.cmbSubPerkiraan.Location = New System.Drawing.Point(172, 228)
+        Me.cmbSubPerkiraan.Name = "cmbSubPerkiraan"
+        Me.cmbSubPerkiraan.Size = New System.Drawing.Size(322, 26)
+        Me.cmbSubPerkiraan.TabIndex = 233
+        '
+        'cmbNoKode
+        '
+        Me.cmbNoKode.BackColor = System.Drawing.SystemColors.Window
+        Me.cmbNoKode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbNoKode.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbNoKode.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.cmbNoKode.FormattingEnabled = True
+        Me.cmbNoKode.Location = New System.Drawing.Point(172, 166)
+        Me.cmbNoKode.Name = "cmbNoKode"
+        Me.cmbNoKode.Size = New System.Drawing.Size(321, 26)
+        Me.cmbNoKode.TabIndex = 232
+        '
+        'CmbNoKelompok
+        '
+        Me.CmbNoKelompok.BackColor = System.Drawing.SystemColors.Window
+        Me.CmbNoKelompok.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbNoKelompok.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbNoKelompok.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.CmbNoKelompok.FormattingEnabled = True
+        Me.CmbNoKelompok.Location = New System.Drawing.Point(172, 105)
+        Me.CmbNoKelompok.Name = "CmbNoKelompok"
+        Me.CmbNoKelompok.Size = New System.Drawing.Size(322, 26)
+        Me.CmbNoKelompok.TabIndex = 231
         '
         'cmbNoGolongan
         '

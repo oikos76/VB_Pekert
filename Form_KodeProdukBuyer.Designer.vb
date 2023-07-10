@@ -60,7 +60,7 @@ Partial Class Form_KodeProdukBuyer
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.KODEPRODUK_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KODE_BY_IMPORTIR_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DESKRIPSI_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.PanelKanan.SuspendLayout()
@@ -232,7 +232,7 @@ Partial Class Form_KodeProdukBuyer
         Me.DGView2.AllowUserToDeleteRows = False
         Me.DGView2.AllowUserToOrderColumns = True
         Me.DGView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODEPRODUK_, Me.Column11, Me.DESKRIPSI_})
+        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODEPRODUK_, Me.KODE_BY_IMPORTIR_, Me.DESKRIPSI_})
         Me.DGView2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGView2.Location = New System.Drawing.Point(0, 272)
         Me.DGView2.Margin = New System.Windows.Forms.Padding(4)
@@ -407,12 +407,12 @@ Partial Class Form_KodeProdukBuyer
         Me.KODEPRODUK_.ReadOnly = True
         Me.KODEPRODUK_.Width = 130
         '
-        'Column11
+        'KODE_BY_IMPORTIR_
         '
-        Me.Column11.HeaderText = "Kode Importir"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Width = 150
+        Me.KODE_BY_IMPORTIR_.HeaderText = "Kode Importir"
+        Me.KODE_BY_IMPORTIR_.Name = "KODE_BY_IMPORTIR_"
+        Me.KODE_BY_IMPORTIR_.ReadOnly = True
+        Me.KODE_BY_IMPORTIR_.Width = 150
         '
         'DESKRIPSI_
         '
@@ -484,6 +484,6 @@ Partial Class Form_KodeProdukBuyer
     Friend WithEvents Column22 As DataGridViewTextBoxColumn
     Friend WithEvents Column23 As DataGridViewTextBoxColumn
     Friend WithEvents KODEPRODUK_ As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents KODE_BY_IMPORTIR_ As DataGridViewTextBoxColumn
     Friend WithEvents DESKRIPSI_ As DataGridViewTextBoxColumn
 End Class
