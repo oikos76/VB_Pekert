@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Apps.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Pekerti" version="23.5.29.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Pekerti" version="23.7.25.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="Pekerti.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -295,14 +295,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pekerti.exe" size="6554112">
-      <assemblyIdentity name="Pekerti" version="23.5.29.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pekerti.exe" size="6643200">
+      <assemblyIdentity name="Pekerti" version="23.7.25.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>HbWz3zHQhepGgKRbGbEuT6eYDuY=</dsig:DigestValue>
+        <dsig:DigestValue>fWPOMHuq2aH4sbmlpswim9eR9so=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -339,13 +339,13 @@
       <dsig:DigestValue>YIRBntud7i9t6+ZieXAuXvBHbKw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Pekerti.exe.config" size="3611">
+  <file name="Pekerti.exe.config" size="3618">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>x1se16i2X2Z9J15Ig9nMwkexJP8=</dsig:DigestValue>
+      <dsig:DigestValue>mWEsNjFMZHDAc2h2McDat55JmU0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ShoppingCart.ico" size="223493">

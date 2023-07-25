@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="IPServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">it-ek0\SQLEXPRESS</Value>
+      <Value Profile="(Default)">it-ek0\sqlexpress</Value>
     </Setting>
     <Setting Name="UserID" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>

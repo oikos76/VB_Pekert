@@ -176,3 +176,5 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuKodeGL.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuKodeGL_Daftar.resources
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.cache
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_ExploreFoto.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuJurnalKeluar.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Form_KeuJurnalMasuk.resources

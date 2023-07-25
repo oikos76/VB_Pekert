@@ -23,14 +23,15 @@ Partial Class Form_KeuJurnalUmum
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_KeuJurnalUmum))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelTombol_ = New System.Windows.Forms.Panel()
         Me.cmdExit = New System.Windows.Forms.Button()
         Me.cmdDaftar = New System.Windows.Forms.Button()
+        Me.cmdPrint = New System.Windows.Forms.Button()
         Me.cmdHapus = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdTambah = New System.Windows.Forms.Button()
@@ -63,7 +64,6 @@ Partial Class Form_KeuJurnalUmum
         Me.TotalDebet = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DGView = New System.Windows.Forms.DataGridView()
-        Me.cmdPrint = New System.Windows.Forms.Button()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -125,6 +125,21 @@ Partial Class Form_KeuJurnalUmum
         Me.cmdDaftar.Text = "&Daftar"
         Me.cmdDaftar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdDaftar.UseVisualStyleBackColor = True
+        '
+        'cmdPrint
+        '
+        Me.cmdPrint.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPrint.Image = CType(resources.GetObject("cmdPrint.Image"), System.Drawing.Image)
+        Me.cmdPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdPrint.Location = New System.Drawing.Point(315, 0)
+        Me.cmdPrint.Name = "cmdPrint"
+        Me.cmdPrint.Size = New System.Drawing.Size(77, 32)
+        Me.cmdPrint.TabIndex = 9
+        Me.cmdPrint.Text = "&Print"
+        Me.cmdPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdPrint.UseVisualStyleBackColor = True
+        Me.cmdPrint.Visible = False
         '
         'cmdHapus
         '
@@ -241,12 +256,12 @@ Partial Class Form_KeuJurnalUmum
         '
         Me.NilaiJurnal.BackColor = System.Drawing.SystemColors.Window
         Me.NilaiJurnal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NilaiJurnal.Location = New System.Drawing.Point(152, 160)
+        Me.NilaiJurnal.Location = New System.Drawing.Point(155, 160)
         Me.NilaiJurnal.Margin = New System.Windows.Forms.Padding(4)
         Me.NilaiJurnal.MaxLength = 50
         Me.NilaiJurnal.Name = "NilaiJurnal"
         Me.NilaiJurnal.ReadOnly = True
-        Me.NilaiJurnal.Size = New System.Drawing.Size(137, 22)
+        Me.NilaiJurnal.Size = New System.Drawing.Size(134, 22)
         Me.NilaiJurnal.TabIndex = 304
         '
         'Kurs
@@ -380,7 +395,7 @@ Partial Class Form_KeuJurnalUmum
         Me.AccCode1.MaxLength = 255
         Me.AccCode1.Name = "AccCode1"
         Me.AccCode1.ReadOnly = True
-        Me.AccCode1.Size = New System.Drawing.Size(137, 22)
+        Me.AccCode1.Size = New System.Drawing.Size(134, 22)
         Me.AccCode1.TabIndex = 221
         '
         'Label4
@@ -527,25 +542,10 @@ Partial Class Form_KeuJurnalUmum
         Me.DGView.Size = New System.Drawing.Size(994, 344)
         Me.DGView.TabIndex = 228
         '
-        'cmdPrint
-        '
-        Me.cmdPrint.Dock = System.Windows.Forms.DockStyle.Left
-        Me.cmdPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrint.Image = CType(resources.GetObject("cmdPrint.Image"), System.Drawing.Image)
-        Me.cmdPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdPrint.Location = New System.Drawing.Point(315, 0)
-        Me.cmdPrint.Name = "cmdPrint"
-        Me.cmdPrint.Size = New System.Drawing.Size(77, 32)
-        Me.cmdPrint.TabIndex = 9
-        Me.cmdPrint.Text = "&Print"
-        Me.cmdPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdPrint.UseVisualStyleBackColor = True
-        Me.cmdPrint.Visible = False
-        '
         'Column9
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column9.HeaderText = "No."
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -581,8 +581,8 @@ Partial Class Form_KeuJurnalUmum
         '
         'Column4
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column4.HeaderText = "Kurs"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -590,24 +590,24 @@ Partial Class Form_KeuJurnalUmum
         '
         'Column5
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column5.HeaderText = "Jumlah"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column13
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column13.HeaderText = "Debet"
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
         '
         'Column1
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle10
         Me.Column1.HeaderText = "Kredit"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True

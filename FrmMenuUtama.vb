@@ -567,6 +567,11 @@ Public Class FrmMenuUtama
         Form_ExploreFoto.MdiParent = Me
         Form_ExploreFoto.Show()
     End Sub
+
+    Private Sub _102KasBankKeluar_Click(sender As Object, e As EventArgs) Handles _102KasBankKeluar.Click
+        Form_KeuJurnalKeluar.MdiParent = Me
+        Form_KeuJurnalKeluar.Show()
+    End Sub
 End Class
 
 
