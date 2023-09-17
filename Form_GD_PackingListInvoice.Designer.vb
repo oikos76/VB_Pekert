@@ -403,7 +403,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.TabPageDaftar_.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPageDaftar_.Size = New System.Drawing.Size(1011, 543)
         Me.TabPageDaftar_.TabIndex = 0
-        Me.TabPageDaftar_.Text = "Daftar PI"
+        Me.TabPageDaftar_.Text = "Daftar Invoice"
         Me.TabPageDaftar_.UseVisualStyleBackColor = True
         '
         'Panel2
@@ -480,7 +480,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.TabPageFormEntry_.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPageFormEntry_.Size = New System.Drawing.Size(1011, 543)
         Me.TabPageFormEntry_.TabIndex = 1
-        Me.TabPageFormEntry_.Text = "Proforma Invoice"
+        Me.TabPageFormEntry_.Text = "Packing List Invoice"
         Me.TabPageFormEntry_.UseVisualStyleBackColor = True
         '
         'PanelEntry

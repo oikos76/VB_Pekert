@@ -60,7 +60,7 @@ Public Class Form_PO
         ElseIf Len(KodeProduk.Text) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
-        ElseIf Len(KodeProduk.Text) = 7 Then
+        ElseIf Len(KodeProduk.Text) = 8 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         End If

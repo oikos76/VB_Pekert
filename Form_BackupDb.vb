@@ -22,16 +22,7 @@
             MsgBox("Folder simpan hasil backup belum di pilih", vbCritical, ".:Warning!")
             Exit Sub
         Else
-            If UCase(Mid(dbase, 1, 5)) = "PRIMA" Then
-                lokasiSimpan = locFile.Text + "\DBPrimaJaya_" & Format(Now, "yyMMdd_HHmmss") & ".bak"
-            ElseIf UCase(Mid(dbase, 1, 5)) = "DOMIN" Then
-                lokasiSimpan = locFile.Text + "\DBDomino_" & Format(Now, "yyMMdd_HHmmss") & ".bak"
-            ElseIf UCase(Mid(dbase, 1, 5)) = "KUNCI" Then
-                lokasiSimpan = locFile.Text + "\DBKunciMas_" & Format(Now, "yyMMdd_HHmmss") & ".bak"
-            Else
-                lokasiSimpan = locFile.Text + "\DBBackup_" & Format(Now, "yyMMdd_HHmmss") & ".bak"
-            End If
-
+            lokasiSimpan = locFile.Text + "\DBBackup_" & Format(Now, "yyMMdd_HHmmss") & ".bak"
         End If
         cmdBackup.Enabled = False
         Me.Cursor = Cursors.WaitCursor

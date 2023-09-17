@@ -644,10 +644,10 @@ Public Class Form_SP_Contoh
             HargaBeli.Text = 0
             CatatanProduk.Text = ""
             CatatanSP.Text = ""
-        ElseIf Len(trim(KodeProduk.Text)) = 4 Then
+        ElseIf Len(trim(KodeProduk.Text)) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
-        ElseIf Len(trim(KodeProduk.Text)) = 7 Then
+        ElseIf Len(trim(KodeProduk.Text)) = 8 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         End If
@@ -783,7 +783,7 @@ Public Class Form_SP_Contoh
                 Form_Daftar.txtQuery.Text = "Select * " &
                     " From m_KodeImportir " &
                     "Where AktifYN = 'Y' " &
-                    "  And ( KodeImportir Like '%" & Kode_Importir.Text & "%' or nama Like '%" & Kode_Importir.Text & "%') " &
+                    "  And ( KodeImportir Like '%9999%' ) " &
                     "Order By nama "
                 Form_Daftar.Text = "Daftar Importir"
                 Form_Daftar.ShowDialog()

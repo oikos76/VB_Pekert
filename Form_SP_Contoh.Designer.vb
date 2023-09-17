@@ -42,8 +42,8 @@ Partial Class Form_SP_Contoh
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdHapus = New System.Windows.Forms.Button()
         Me.cmdTambah = New System.Windows.Forms.Button()
-        Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
+        Me.cmdBatal = New System.Windows.Forms.Button()
         Me.PanelEntry = New System.Windows.Forms.Panel()
         Me.tglKirim = New System.Windows.Forms.DateTimePicker()
         Me.LabeltglKirim = New System.Windows.Forms.Label()
@@ -314,19 +314,6 @@ Partial Class Form_SP_Contoh
         Me.cmdTambah.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdTambah.UseVisualStyleBackColor = True
         '
-        'cmdBatal
-        '
-        Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
-        Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdBatal.Location = New System.Drawing.Point(337, 3)
-        Me.cmdBatal.Name = "cmdBatal"
-        Me.cmdBatal.Size = New System.Drawing.Size(77, 28)
-        Me.cmdBatal.TabIndex = 15
-        Me.cmdBatal.Text = "&Batal"
-        Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdBatal.UseVisualStyleBackColor = True
-        Me.cmdBatal.Visible = False
-        '
         'cmdExit
         '
         Me.cmdExit.Image = CType(resources.GetObject("cmdExit.Image"), System.Drawing.Image)
@@ -338,6 +325,20 @@ Partial Class Form_SP_Contoh
         Me.cmdExit.Text = "E&xit"
         Me.cmdExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdExit.UseVisualStyleBackColor = True
+        '
+        'cmdBatal
+        '
+        Me.cmdBatal.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdBatal.Image = CType(resources.GetObject("cmdBatal.Image"), System.Drawing.Image)
+        Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
+        Me.cmdBatal.Name = "cmdBatal"
+        Me.cmdBatal.Size = New System.Drawing.Size(77, 34)
+        Me.cmdBatal.TabIndex = 15
+        Me.cmdBatal.Text = "&Batal"
+        Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdBatal.UseVisualStyleBackColor = True
+        Me.cmdBatal.Visible = False
         '
         'PanelEntry
         '
@@ -453,7 +454,7 @@ Partial Class Form_SP_Contoh
         Me.Kode_Importir.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Kode_Importir.Location = New System.Drawing.Point(183, 135)
         Me.Kode_Importir.Margin = New System.Windows.Forms.Padding(4)
-        Me.Kode_Importir.MaxLength = 4
+        Me.Kode_Importir.MaxLength = 9
         Me.Kode_Importir.Name = "Kode_Importir"
         Me.Kode_Importir.Size = New System.Drawing.Size(66, 22)
         Me.Kode_Importir.TabIndex = 201

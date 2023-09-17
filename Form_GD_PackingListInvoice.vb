@@ -47,8 +47,8 @@ Public Class Form_GD_PackingListInvoice
         CekPI = NoPOTidakAda
     End Function
     Private Sub cmdSimpan_Click(sender As Object, e As EventArgs) Handles cmdSimpan.Click
-        Dim Rs As New DataTable, RS05 As New DataTable, tTotal As Double,
-            JumADD As Double, tNoPO As String, mNoPackList As String
+        Dim Rs As New DataTable, RS05 As New DataTable
+        'JumADD As Double, tNoPO As String, mNoPackList As String, tTotal As Double
         Dim mTgl As String = ""
         If LAdd Or LEdit Then
 
@@ -253,7 +253,7 @@ Public Class Form_GD_PackingListInvoice
         Dim dttable As New DataTable
 
         Dim MsgSQL As String, TCetak As String, rsc As New DataTable
-        Dim terbilang As String = "", tb As New Terbilang
+        'Dim terbilang As String = "", tb As New Terbilang
 
         If Opt_PackingList.Checked = False And Opt_Invoice.Checked = False Then
             MsgBox("Jenis Packing list yang akan di cetak belom di pilih !", vbCritical + vbOKOnly, ".:Warning !")
@@ -263,13 +263,13 @@ Public Class Form_GD_PackingListInvoice
         Proses.OpenConn(CN)
         dttable = New DataTable
 
-        MsgSQL = "Select isnull(Sum(JumlahBoks * JumlahTiapBoks * HargaFOB), 0) SubTotal " &
-            " From t_PackingList " &
-            "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' "
-        rsc = Proses.ExecuteQuery(MsgSQL)
-        If rsc.Rows.Count <> 0 Then
-            terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !SubTotal)) & " "
-        End If
+        'MsgSQL = "Select isnull(Sum(JumlahBoks * JumlahTiapBoks * HargaFOB), 0) SubTotal " &
+        '    " From t_PackingList " &
+        '    "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' "
+        'rsc = Proses.ExecuteQuery(MsgSQL)
+        'If rsc.Rows.Count <> 0 Then
+        '    terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !SubTotal)) & " "
+        'End If
         Proses.CloseConn()
         TCetak = "Jakarta, " & Proses.TglIndo(Format(TglPL.Value, "dd MMNN yyyy"))
 
@@ -441,6 +441,10 @@ Public Class Form_GD_PackingListInvoice
         LEdit = True
         LTambahKode = False
         AturTombol(False)
+    End Sub
+
+    Private Sub Kode_Produk_TextChanged(sender As Object, e As EventArgs) Handles Kode_Produk.TextChanged
+
     End Sub
 
     Private Sub Form_GD_PackingListInvoice_Load(sender As Object, e As EventArgs) Handles Me.Load

@@ -264,10 +264,10 @@ Partial Class Form_KodifProduk
         Me.Panel4.Controls.Add(Me.cmdEdit)
         Me.Panel4.Controls.Add(Me.cmdHapus)
         Me.Panel4.Controls.Add(Me.cmdTambah)
-        Me.Panel4.Controls.Add(Me.cmdCari)
         Me.Panel4.Controls.Add(Me.cmdVariasiMultiKode)
         Me.Panel4.Controls.Add(Me.cmdExit)
         Me.Panel4.Controls.Add(Me.cmdSimpan)
+        Me.Panel4.Controls.Add(Me.cmdCari)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 527)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)

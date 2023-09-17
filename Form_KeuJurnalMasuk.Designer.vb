@@ -22,11 +22,11 @@ Partial Class Form_KeuJurnalMasuk
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_KeuJurnalMasuk))
         Me.PanelTotal_ = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -196,13 +196,13 @@ Partial Class Form_KeuJurnalMasuk
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
         Me.DGView.RowTemplate.ReadOnly = True
-        Me.DGView.Size = New System.Drawing.Size(994, 340)
+        Me.DGView.Size = New System.Drawing.Size(994, 311)
         Me.DGView.TabIndex = 232
         '
         'Column9
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column9.HeaderText = "No."
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -238,8 +238,8 @@ Partial Class Form_KeuJurnalMasuk
         '
         'Column4
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column4.HeaderText = "Kurs"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -247,24 +247,24 @@ Partial Class Form_KeuJurnalMasuk
         '
         'Column5
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column5.HeaderText = "Jumlah"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column13
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column13.HeaderText = "Debet"
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
         '
         'Column1
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column1.HeaderText = "Kredit"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -576,10 +576,12 @@ Partial Class Form_KeuJurnalMasuk
         '
         'NoPI
         '
+        Me.NoPI.BackColor = System.Drawing.SystemColors.Window
         Me.NoPI.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoPI.Location = New System.Drawing.Point(171, 111)
         Me.NoPI.Margin = New System.Windows.Forms.Padding(4)
         Me.NoPI.Name = "NoPI"
+        Me.NoPI.ReadOnly = True
         Me.NoPI.Size = New System.Drawing.Size(113, 22)
         Me.NoPI.TabIndex = 314
         '
@@ -596,11 +598,13 @@ Partial Class Form_KeuJurnalMasuk
         '
         'Importir
         '
+        Me.Importir.BackColor = System.Drawing.SystemColors.Window
         Me.Importir.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Importir.Location = New System.Drawing.Point(228, 85)
         Me.Importir.Margin = New System.Windows.Forms.Padding(4)
         Me.Importir.MaxLength = 4
         Me.Importir.Name = "Importir"
+        Me.Importir.ReadOnly = True
         Me.Importir.Size = New System.Drawing.Size(270, 22)
         Me.Importir.TabIndex = 307
         '
@@ -611,6 +615,7 @@ Partial Class Form_KeuJurnalMasuk
         Me.Kode_Importir.Location = New System.Drawing.Point(171, 85)
         Me.Kode_Importir.Margin = New System.Windows.Forms.Padding(4)
         Me.Kode_Importir.Name = "Kode_Importir"
+        Me.Kode_Importir.ReadOnly = True
         Me.Kode_Importir.Size = New System.Drawing.Size(49, 22)
         Me.Kode_Importir.TabIndex = 306
         '
@@ -710,8 +715,8 @@ Partial Class Form_KeuJurnalMasuk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(994, 601)
-        Me.Controls.Add(Me.PanelTotal_)
         Me.Controls.Add(Me.DGView)
+        Me.Controls.Add(Me.PanelTotal_)
         Me.Controls.Add(Me.PanelTombol_)
         Me.Controls.Add(Me.PanelEntry_)
         Me.Name = "Form_KeuJurnalMasuk"

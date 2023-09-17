@@ -572,6 +572,21 @@ Public Class FrmMenuUtama
         Form_KeuJurnalKeluar.MdiParent = Me
         Form_KeuJurnalKeluar.Show()
     End Sub
+
+    Private Sub _103KasBankMasuk_Click(sender As Object, e As EventArgs) Handles _103KasBankMasuk.Click
+        Form_KeuJurnalMasuk.MdiParent = Me
+        Form_KeuJurnalMasuk.Show()
+    End Sub
+
+    Private Sub _107DaftarJurnal_Click(sender As Object, e As EventArgs) Handles _107DaftarJurnal.Click
+        Rpt_Jurnal.MdiParent = Me
+        Rpt_Jurnal.Show()
+    End Sub
+
+    Private Sub _106SaldoAkhir_Click(sender As Object, e As EventArgs) Handles _106SaldoAkhir.Click
+        Form_SaldoAwal.MdiParent = Me
+        Form_SaldoAwal.Show()
+    End Sub
 End Class
 
 

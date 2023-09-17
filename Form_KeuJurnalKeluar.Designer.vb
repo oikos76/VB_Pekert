@@ -22,18 +22,17 @@ Partial Class Form_KeuJurnalKeluar
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_KeuJurnalKeluar))
         Me.PanelTotal_ = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TotalKredit = New System.Windows.Forms.TextBox()
         Me.TotalDebet = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.NilaiJurnal = New System.Windows.Forms.TextBox()
         Me.DGView = New System.Windows.Forms.DataGridView()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,10 +44,7 @@ Partial Class Form_KeuJurnalKeluar
         Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.btnAdd = New System.Windows.Forms.Button()
         Me.NoUrut = New System.Windows.Forms.TextBox()
-        Me.cmbDK = New System.Windows.Forms.ComboBox()
-        Me.LNilaiJurnal = New System.Windows.Forms.Label()
         Me.KetAccCode1 = New System.Windows.Forms.Label()
         Me.IDRecord = New System.Windows.Forms.TextBox()
         Me.PanelTombol_ = New System.Windows.Forms.Panel()
@@ -61,6 +57,22 @@ Partial Class Form_KeuJurnalKeluar
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.PanelEntry_ = New System.Windows.Forms.Panel()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.LMataUang = New System.Windows.Forms.Label()
+        Me.NilaiJurnal = New System.Windows.Forms.TextBox()
+        Me.Kurs = New System.Windows.Forms.TextBox()
+        Me.LKurs = New System.Windows.Forms.Label()
+        Me.cmbMataUang = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.cmbDK = New System.Windows.Forms.ComboBox()
+        Me.Jumlah = New System.Windows.Forms.TextBox()
+        Me.LNilaiJurnal = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.NoDPB = New System.Windows.Forms.TextBox()
+        Me.Perajin = New System.Windows.Forms.TextBox()
+        Me.Kode_Perajin = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.LabelNoPO = New System.Windows.Forms.Label()
         Me.NoSP = New System.Windows.Forms.TextBox()
         Me.AccCode1 = New System.Windows.Forms.TextBox()
@@ -70,11 +82,6 @@ Partial Class Form_KeuJurnalKeluar
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TglTr = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Perajin = New System.Windows.Forms.TextBox()
-        Me.Kode_Perajin = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.PanelTotal_.SuspendLayout()
         CType(Me.DGView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelTombol_.SuspendLayout()
@@ -141,18 +148,6 @@ Partial Class Form_KeuJurnalKeluar
         Me.Label1.TabIndex = 219
         Me.Label1.Text = "Total Debet :"
         '
-        'NilaiJurnal
-        '
-        Me.NilaiJurnal.BackColor = System.Drawing.SystemColors.Window
-        Me.NilaiJurnal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NilaiJurnal.Location = New System.Drawing.Point(155, 169)
-        Me.NilaiJurnal.Margin = New System.Windows.Forms.Padding(4)
-        Me.NilaiJurnal.MaxLength = 50
-        Me.NilaiJurnal.Name = "NilaiJurnal"
-        Me.NilaiJurnal.ReadOnly = True
-        Me.NilaiJurnal.Size = New System.Drawing.Size(137, 22)
-        Me.NilaiJurnal.TabIndex = 304
-        '
         'DGView
         '
         Me.DGView.AllowUserToAddRows = False
@@ -161,19 +156,19 @@ Partial Class Form_KeuJurnalKeluar
         Me.DGView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column3, Me.Column4, Me.Column5, Me.Column13, Me.Column1, Me.Column2})
         Me.DGView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGView.Location = New System.Drawing.Point(0, 206)
+        Me.DGView.Location = New System.Drawing.Point(0, 230)
         Me.DGView.Margin = New System.Windows.Forms.Padding(4)
         Me.DGView.Name = "DGView"
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
         Me.DGView.RowTemplate.ReadOnly = True
-        Me.DGView.Size = New System.Drawing.Size(994, 361)
+        Me.DGView.Size = New System.Drawing.Size(994, 308)
         Me.DGView.TabIndex = 232
         '
         'Column9
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle11
         Me.Column9.HeaderText = "No."
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -209,8 +204,8 @@ Partial Class Form_KeuJurnalKeluar
         '
         'Column4
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column4.HeaderText = "Kurs"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -218,24 +213,24 @@ Partial Class Form_KeuJurnalKeluar
         '
         'Column5
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle13
         Me.Column5.HeaderText = "Jumlah"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column13
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle14
         Me.Column13.HeaderText = "Debet"
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
         '
         'Column1
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle15
         Me.Column1.HeaderText = "Kredit"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -246,15 +241,6 @@ Partial Class Form_KeuJurnalKeluar
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
-        'btnAdd
-        '
-        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
-        Me.btnAdd.Location = New System.Drawing.Point(456, 166)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(33, 28)
-        Me.btnAdd.TabIndex = 233
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
         'NoUrut
         '
         Me.NoUrut.Location = New System.Drawing.Point(931, 7)
@@ -262,29 +248,6 @@ Partial Class Form_KeuJurnalKeluar
         Me.NoUrut.Size = New System.Drawing.Size(51, 20)
         Me.NoUrut.TabIndex = 232
         Me.NoUrut.Visible = False
-        '
-        'cmbDK
-        '
-        Me.cmbDK.BackColor = System.Drawing.SystemColors.Window
-        Me.cmbDK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbDK.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbDK.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.cmbDK.FormattingEnabled = True
-        Me.cmbDK.Location = New System.Drawing.Point(316, 169)
-        Me.cmbDK.Name = "cmbDK"
-        Me.cmbDK.Size = New System.Drawing.Size(134, 24)
-        Me.cmbDK.TabIndex = 231
-        '
-        'LNilaiJurnal
-        '
-        Me.LNilaiJurnal.AutoSize = True
-        Me.LNilaiJurnal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNilaiJurnal.Location = New System.Drawing.Point(11, 172)
-        Me.LNilaiJurnal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LNilaiJurnal.Name = "LNilaiJurnal"
-        Me.LNilaiJurnal.Size = New System.Drawing.Size(136, 16)
-        Me.LNilaiJurnal.TabIndex = 225
-        Me.LNilaiJurnal.Text = "Jumlah         :"
         '
         'KetAccCode1
         '
@@ -444,38 +407,217 @@ Partial Class Form_KeuJurnalKeluar
         '
         'PanelEntry_
         '
+        Me.PanelEntry_.Controls.Add(Me.Uraian)
+        Me.PanelEntry_.Controls.Add(Me.btnAdd)
+        Me.PanelEntry_.Controls.Add(Me.LMataUang)
+        Me.PanelEntry_.Controls.Add(Me.NilaiJurnal)
+        Me.PanelEntry_.Controls.Add(Me.Kurs)
+        Me.PanelEntry_.Controls.Add(Me.LKurs)
+        Me.PanelEntry_.Controls.Add(Me.cmbMataUang)
+        Me.PanelEntry_.Controls.Add(Me.Label18)
+        Me.PanelEntry_.Controls.Add(Me.TextBox2)
+        Me.PanelEntry_.Controls.Add(Me.cmbDK)
+        Me.PanelEntry_.Controls.Add(Me.Jumlah)
+        Me.PanelEntry_.Controls.Add(Me.LNilaiJurnal)
         Me.PanelEntry_.Controls.Add(Me.Label5)
-        Me.PanelEntry_.Controls.Add(Me.TextBox1)
+        Me.PanelEntry_.Controls.Add(Me.NoDPB)
         Me.PanelEntry_.Controls.Add(Me.Perajin)
         Me.PanelEntry_.Controls.Add(Me.Kode_Perajin)
         Me.PanelEntry_.Controls.Add(Me.Label8)
         Me.PanelEntry_.Controls.Add(Me.LabelNoPO)
         Me.PanelEntry_.Controls.Add(Me.NoSP)
-        Me.PanelEntry_.Controls.Add(Me.NilaiJurnal)
-        Me.PanelEntry_.Controls.Add(Me.btnAdd)
         Me.PanelEntry_.Controls.Add(Me.NoUrut)
-        Me.PanelEntry_.Controls.Add(Me.cmbDK)
-        Me.PanelEntry_.Controls.Add(Me.LNilaiJurnal)
         Me.PanelEntry_.Controls.Add(Me.KetAccCode1)
         Me.PanelEntry_.Controls.Add(Me.IDRecord)
         Me.PanelEntry_.Controls.Add(Me.AccCode1)
         Me.PanelEntry_.Controls.Add(Me.Label4)
         Me.PanelEntry_.Controls.Add(Me.Label3)
-        Me.PanelEntry_.Controls.Add(Me.Uraian)
         Me.PanelEntry_.Controls.Add(Me.Label6)
         Me.PanelEntry_.Controls.Add(Me.TglTr)
         Me.PanelEntry_.Controls.Add(Me.Label2)
         Me.PanelEntry_.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelEntry_.Location = New System.Drawing.Point(0, 0)
         Me.PanelEntry_.Name = "PanelEntry_"
-        Me.PanelEntry_.Size = New System.Drawing.Size(994, 206)
+        Me.PanelEntry_.Size = New System.Drawing.Size(994, 230)
         Me.PanelEntry_.TabIndex = 230
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
+        Me.btnAdd.Location = New System.Drawing.Point(730, 191)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(33, 28)
+        Me.btnAdd.TabIndex = 323
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'LMataUang
+        '
+        Me.LMataUang.AutoSize = True
+        Me.LMataUang.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LMataUang.Location = New System.Drawing.Point(297, 199)
+        Me.LMataUang.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LMataUang.Name = "LMataUang"
+        Me.LMataUang.Size = New System.Drawing.Size(104, 16)
+        Me.LMataUang.TabIndex = 322
+        Me.LMataUang.Text = "Euro  =  Rp."
+        '
+        'NilaiJurnal
+        '
+        Me.NilaiJurnal.BackColor = System.Drawing.SystemColors.Window
+        Me.NilaiJurnal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NilaiJurnal.Location = New System.Drawing.Point(155, 195)
+        Me.NilaiJurnal.Margin = New System.Windows.Forms.Padding(4)
+        Me.NilaiJurnal.MaxLength = 50
+        Me.NilaiJurnal.Name = "NilaiJurnal"
+        Me.NilaiJurnal.ReadOnly = True
+        Me.NilaiJurnal.Size = New System.Drawing.Size(134, 22)
+        Me.NilaiJurnal.TabIndex = 321
+        '
+        'Kurs
+        '
+        Me.Kurs.BackColor = System.Drawing.SystemColors.Window
+        Me.Kurs.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Kurs.Location = New System.Drawing.Point(408, 170)
+        Me.Kurs.Margin = New System.Windows.Forms.Padding(4)
+        Me.Kurs.MaxLength = 50
+        Me.Kurs.Name = "Kurs"
+        Me.Kurs.ReadOnly = True
+        Me.Kurs.Size = New System.Drawing.Size(137, 22)
+        Me.Kurs.TabIndex = 320
+        '
+        'LKurs
+        '
+        Me.LKurs.AutoSize = True
+        Me.LKurs.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LKurs.Location = New System.Drawing.Point(296, 172)
+        Me.LKurs.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LKurs.Name = "LKurs"
+        Me.LKurs.Size = New System.Drawing.Size(104, 16)
+        Me.LKurs.TabIndex = 319
+        Me.LKurs.Text = "Nilai Kurs :"
+        '
+        'cmbMataUang
+        '
+        Me.cmbMataUang.BackColor = System.Drawing.SystemColors.Window
+        Me.cmbMataUang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbMataUang.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMataUang.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.cmbMataUang.FormattingEnabled = True
+        Me.cmbMataUang.Location = New System.Drawing.Point(155, 168)
+        Me.cmbMataUang.Name = "cmbMataUang"
+        Me.cmbMataUang.Size = New System.Drawing.Size(134, 24)
+        Me.cmbMataUang.TabIndex = 318
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(11, 171)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(136, 16)
+        Me.Label18.TabIndex = 317
+        Me.Label18.Text = "Mata Uang      :"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(590, 168)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(51, 20)
+        Me.TextBox2.TabIndex = 316
+        Me.TextBox2.Visible = False
+        '
+        'cmbDK
+        '
+        Me.cmbDK.BackColor = System.Drawing.SystemColors.Window
+        Me.cmbDK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbDK.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbDK.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.cmbDK.FormattingEnabled = True
+        Me.cmbDK.Location = New System.Drawing.Point(590, 194)
+        Me.cmbDK.Name = "cmbDK"
+        Me.cmbDK.Size = New System.Drawing.Size(134, 24)
+        Me.cmbDK.TabIndex = 315
+        '
+        'Jumlah
+        '
+        Me.Jumlah.BackColor = System.Drawing.SystemColors.Window
+        Me.Jumlah.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Jumlah.Location = New System.Drawing.Point(408, 196)
+        Me.Jumlah.Margin = New System.Windows.Forms.Padding(4)
+        Me.Jumlah.MaxLength = 50
+        Me.Jumlah.Name = "Jumlah"
+        Me.Jumlah.ReadOnly = True
+        Me.Jumlah.Size = New System.Drawing.Size(137, 22)
+        Me.Jumlah.TabIndex = 314
+        '
+        'LNilaiJurnal
+        '
+        Me.LNilaiJurnal.AutoSize = True
+        Me.LNilaiJurnal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LNilaiJurnal.Location = New System.Drawing.Point(11, 197)
+        Me.LNilaiJurnal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LNilaiJurnal.Name = "LNilaiJurnal"
+        Me.LNilaiJurnal.Size = New System.Drawing.Size(136, 16)
+        Me.LNilaiJurnal.TabIndex = 313
+        Me.LNilaiJurnal.Text = "Jumlah         :"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(297, 117)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(16, 16)
+        Me.Label5.TabIndex = 312
+        Me.Label5.Text = "/"
+        '
+        'NoDPB
+        '
+        Me.NoDPB.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NoDPB.Location = New System.Drawing.Point(316, 114)
+        Me.NoDPB.Margin = New System.Windows.Forms.Padding(4)
+        Me.NoDPB.Name = "NoDPB"
+        Me.NoDPB.Size = New System.Drawing.Size(137, 22)
+        Me.NoDPB.TabIndex = 311
+        '
+        'Perajin
+        '
+        Me.Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Perajin.Location = New System.Drawing.Point(212, 87)
+        Me.Perajin.Margin = New System.Windows.Forms.Padding(4)
+        Me.Perajin.MaxLength = 4
+        Me.Perajin.Name = "Perajin"
+        Me.Perajin.Size = New System.Drawing.Size(241, 22)
+        Me.Perajin.TabIndex = 309
+        '
+        'Kode_Perajin
+        '
+        Me.Kode_Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Kode_Perajin.Location = New System.Drawing.Point(155, 87)
+        Me.Kode_Perajin.Margin = New System.Windows.Forms.Padding(4)
+        Me.Kode_Perajin.MaxLength = 50
+        Me.Kode_Perajin.Name = "Kode_Perajin"
+        Me.Kode_Perajin.Size = New System.Drawing.Size(49, 22)
+        Me.Kode_Perajin.TabIndex = 308
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(11, 90)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(136, 16)
+        Me.Label8.TabIndex = 310
+        Me.Label8.Text = "Perajin        :"
         '
         'LabelNoPO
         '
         Me.LabelNoPO.AutoSize = True
         Me.LabelNoPO.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelNoPO.Location = New System.Drawing.Point(11, 91)
+        Me.LabelNoPO.Location = New System.Drawing.Point(11, 118)
         Me.LabelNoPO.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LabelNoPO.Name = "LabelNoPO"
         Me.LabelNoPO.Size = New System.Drawing.Size(136, 16)
@@ -485,7 +627,7 @@ Partial Class Form_KeuJurnalKeluar
         'NoSP
         '
         Me.NoSP.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NoSP.Location = New System.Drawing.Point(155, 87)
+        Me.NoSP.Location = New System.Drawing.Point(155, 114)
         Me.NoSP.Margin = New System.Windows.Forms.Padding(4)
         Me.NoSP.Name = "NoSP"
         Me.NoSP.Size = New System.Drawing.Size(137, 22)
@@ -571,63 +713,13 @@ Partial Class Form_KeuJurnalKeluar
         Me.Label2.TabIndex = 176
         Me.Label2.Text = "Tanggal        :"
         '
-        'Perajin
-        '
-        Me.Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Perajin.Location = New System.Drawing.Point(212, 113)
-        Me.Perajin.Margin = New System.Windows.Forms.Padding(4)
-        Me.Perajin.MaxLength = 4
-        Me.Perajin.Name = "Perajin"
-        Me.Perajin.Size = New System.Drawing.Size(241, 22)
-        Me.Perajin.TabIndex = 309
-        '
-        'Kode_Perajin
-        '
-        Me.Kode_Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Kode_Perajin.Location = New System.Drawing.Point(155, 113)
-        Me.Kode_Perajin.Margin = New System.Windows.Forms.Padding(4)
-        Me.Kode_Perajin.Name = "Kode_Perajin"
-        Me.Kode_Perajin.Size = New System.Drawing.Size(49, 22)
-        Me.Kode_Perajin.TabIndex = 308
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(11, 116)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(136, 16)
-        Me.Label8.TabIndex = 310
-        Me.Label8.Text = "Perajin        :"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(316, 87)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(137, 22)
-        Me.TextBox1.TabIndex = 311
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(297, 90)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(16, 16)
-        Me.Label5.TabIndex = 312
-        Me.Label5.Text = "/"
-        '
         'Form_KeuJurnalKeluar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(994, 601)
-        Me.Controls.Add(Me.PanelTotal_)
         Me.Controls.Add(Me.DGView)
+        Me.Controls.Add(Me.PanelTotal_)
         Me.Controls.Add(Me.PanelTombol_)
         Me.Controls.Add(Me.PanelEntry_)
         Me.Name = "Form_KeuJurnalKeluar"
@@ -648,7 +740,6 @@ Partial Class Form_KeuJurnalKeluar
     Friend WithEvents TotalKredit As TextBox
     Friend WithEvents TotalDebet As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents NilaiJurnal As TextBox
     Friend WithEvents DGView As DataGridView
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
@@ -660,10 +751,7 @@ Partial Class Form_KeuJurnalKeluar
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewButtonColumn
-    Friend WithEvents btnAdd As Button
     Friend WithEvents NoUrut As TextBox
-    Friend WithEvents cmbDK As ComboBox
-    Friend WithEvents LNilaiJurnal As Label
     Friend WithEvents KetAccCode1 As Label
     Friend WithEvents IDRecord As TextBox
     Friend WithEvents PanelTombol_ As Panel
@@ -686,8 +774,19 @@ Partial Class Form_KeuJurnalKeluar
     Friend WithEvents LabelNoPO As Label
     Friend WithEvents NoSP As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents NoDPB As TextBox
     Friend WithEvents Perajin As TextBox
     Friend WithEvents Kode_Perajin As TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents LMataUang As Label
+    Friend WithEvents NilaiJurnal As TextBox
+    Friend WithEvents Kurs As TextBox
+    Friend WithEvents LKurs As Label
+    Friend WithEvents cmbMataUang As ComboBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents cmbDK As ComboBox
+    Friend WithEvents Jumlah As TextBox
+    Friend WithEvents LNilaiJurnal As Label
+    Friend WithEvents btnAdd As Button
 End Class

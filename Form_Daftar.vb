@@ -32,6 +32,40 @@
                     .Table.Rows(a) !phone)
                 Next (a)
             End With
+        ElseIf Me.Text = "History DPL" Then
+            DGView.Columns(0).HeaderText = "No PO"
+            DGView.Columns(0).Width = 100
+            DGView.Columns(1).HeaderText = "No DPL"
+            DGView.Columns(1).Width = 100
+            DGView.Columns(2).HeaderText = "No Boks"
+            DGView.Columns(2).Width = 100
+            DGView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+            DGView.Columns(3).HeaderText = "Jumlah Boks"
+            DGView.Columns(3).Width = 100
+            DGView.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            DGView.Columns(4).HeaderText = "Isi Tiap Boks"
+            DGView.Columns(4).Width = 100
+            DGView.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            DGView.Columns(5).HeaderText = "Total"
+            DGView.Columns(5).Width = 100
+            DGView.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Dim Total As Double = 0
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !NoPO,
+                        .Table.Rows(a) !NoDPL,
+                        .Table.Rows(a) !NoBoksAwal & " ~ " & .Table.Rows(a) !NoBoksAkhir,
+                        Format(.Table.Rows(a) !JumlahBoks, "###,##0"),
+                        Format(.Table.Rows(a) !TotalTiapBoks, "###,##0"),
+                        Format(.Table.Rows(a) !QTYDPL, "###,##0"))
+                    Total += .Table.Rows(a) !QTYDPL
+                Next (a)
+            End With
+            DGView.Rows.Add("", "", "", "", "T O T A L  :", Format(Total, "###,##0"))
         ElseIf Me.Text = "Daftar Jurnal" Then
             DGView.Columns(0).HeaderText = "Id JurnalL"
             DGView.Columns(0).Width = 100
@@ -600,6 +634,33 @@
                     End If
                 Next (a)
             End With
+        ElseIf Trim(Me.Text) = "Daftar PI" Then
+            DGView.Columns(0).HeaderText = "No. PI"
+            DGView.Columns(0).Width = 140
+            DGView.Columns(1).HeaderText = "Tgl.PI"
+            DGView.Columns(1).Width = 140
+            DGView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(2).HeaderText = "Kode Importir"
+            DGView.Columns(2).Width = 100
+            DGView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(3).HeaderText = "Importir"
+            DGView.Columns(3).Width = 190
+            DGView.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            '  select nopi, nopo, tglpi, statuspi, Kode_Importir, importir
+            '          From t_pi
+            'Where aktifyn = 'Y'
+            'And Kode_Importir = 'E0701'
+            'group by nopi, nopo, tglpi, statuspi, Kode_Importir, importir
+
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !nopi,
+                                    .Table.Rows(a) !tglPI,
+                                    .Table.Rows(a) !Kode_Importir,
+                                    .Table.Rows(a) !importir)
+                Next (a)
+            End With
         Else
             MsgBox("Please cek this condition code! :" & Me.Text)
             DGView.DataSource = tblData
@@ -680,6 +741,18 @@
                 "Where Nama like '" & tCari.Text & "%' " &
                 "  and AktifYN = 'Y' " &
                 "Order By IDRec, Nama "
+            ElseIf Trim(Me.Text) = "Daftar Jurnal" Then
+                If Trim(param1.Text) = "" Then
+                    MsgBox("Jenis Jurnal Belum di kirim !", vbCritical + vbOKOnly, ".:Warning !")
+                    Exit Sub
+                End If
+                Dim tPeriode As String = Format(Now, "yyMM")
+                txtQuery.Text = "Select * From T_Jurnal " &
+                    "Where AktifYN = 'Y' " &
+                    " And convert(char(4), tanggal, 12) = '" & tPeriode & "' " &
+                    " And JenisJurnal = '" & param1.Text & "' " &
+                    " And uraian like '%" & tCari.Text & "%' " &
+                    "Order By IdRec, NoUrut "
             ElseIf Trim(Me.Text) = "Daftar PO" Or Trim(Me.Text) = "Daftar PO-DPL" Then
                 txtQuery.Text = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir, max(t_PO.tglKirim) tglKirim  " &
                 " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
@@ -774,9 +847,12 @@
                     "Where T_DPL.AktifYN = 'Y' " & mKondisi & " " &
                     "Group By NoDPL, TglDPL, T_DPL.Importir, RIGHT(T_DPL.NoDPL,2) + LEFT(T_DPL.NoDPL,3)   " &
                     "Order By TGLDPL DESC "
-
-
-
+            ElseIf Me.Text = "Daftar Kode GL"
+                txtQuery.Text = "Select * From M_PERKIRAAN " &
+                        "Where AktifYN = 'Y' " &
+                        "  And (NM_PERKIRAAN like '%" & tCari.Text & "%' or " &
+                        "      NO_PERKIRAAN like '%" & tCari.Text & "%') " &
+                        " Order By NO_PERKIRAAN, NM_PERKIRAAN "
             ElseIf Me.Text = "Daftar LHP" Then
                 txtQuery.Text = "Select NoLHP, a.NamaPerajin, a.TglLHP " &
                     " From T_LHP a  " &

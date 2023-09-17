@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT230725\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT230915\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>37</ApplicationRevision>
+    <ApplicationRevision>42</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -460,6 +460,12 @@
     <Compile Include="Form_MToko.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_SaldoAwal.Designer.vb">
+      <DependentUpon>Form_SaldoAwal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SaldoAwal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_SettingFolderFoto.Designer.vb">
       <DependentUpon>Form_SettingFolderFoto.vb</DependentUpon>
     </Compile>
@@ -494,6 +500,12 @@
       <DependentUpon>Form_UangMuka.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_UangMuka.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_UploadFoto.Designer.vb">
+      <DependentUpon>Form_UploadFoto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UploadFoto.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_User.Designer.vb">
@@ -557,6 +569,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Rpt_DPL_DaftarIsi.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_Jurnal_All.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_Jurnal_All.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Rpt_KatalogProduk_InInd.vb">
@@ -660,6 +678,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Rpt_SP.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Rpt_Jurnal.Designer.vb">
+      <DependentUpon>Rpt_Jurnal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_Jurnal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rpt_Surat_Jalan.designer.vb">
+      <DependentUpon>Rpt_Surat_Jalan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_Surat_Jalan.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Terbilang.vb" />
   </ItemGroup>
@@ -822,6 +852,9 @@
     <EmbeddedResource Include="Form_MToko.resx">
       <DependentUpon>Form_MToko.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_SaldoAwal.resx">
+      <DependentUpon>Form_SaldoAwal.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_SettingFolderFoto.resx">
       <DependentUpon>Form_SettingFolderFoto.vb</DependentUpon>
     </EmbeddedResource>
@@ -839,6 +872,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_UangMuka.resx">
       <DependentUpon>Form_UangMuka.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_UploadFoto.resx">
+      <DependentUpon>Form_UploadFoto.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_User.resx">
       <DependentUpon>Form_User.vb</DependentUpon>
@@ -874,6 +910,10 @@
     <EmbeddedResource Include="Report\Rpt_DPL_DaftarIsi.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_DPL_DaftarIsi.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_Jurnal_All.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_Jurnal_All.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_KatalogProduk_InInd.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -942,6 +982,12 @@
     <EmbeddedResource Include="Report\Rpt_SP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_SP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rpt_Jurnal.resx">
+      <DependentUpon>Rpt_Jurnal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rpt_Surat_Jalan.resx">
+      <DependentUpon>Rpt_Surat_Jalan.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

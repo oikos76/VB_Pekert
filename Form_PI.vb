@@ -107,7 +107,7 @@ Public Class Form_PI
         ElseIf Len(KodeProduk.Text) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
-        ElseIf Len(KodeProduk.Text) = 7 Then
+        ElseIf Len(KodeProduk.Text) = 8 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         End If
@@ -1289,38 +1289,35 @@ Public Class Form_PI
         Dim DTadapter As New SqlDataAdapter
         Dim objRep As New ReportDocument
         Dim CN As New SqlConnection
-        Dim dttable As New DataTable, tb As New Terbilang
-        Dim terbilang As String = "", DeliveryDate As String = "", totalPI As Double = 0
+        Dim dttable As New DataTable, clsTerbilang As New Terbilang
+        Dim terbilang As String = "", DeliveryDate As String = "", totalPI As Double = 0, MataUang As String = ""
 
-        MsgSQL = "Select isNull(Sum(t_PI.Jumlah * t_PI.HargaFOB),0) JValue " &
+        MsgSQL = "Select isNull(Sum(t_PI.Jumlah * t_PI.HargaFOB),0) JValue, max(MataUang) MataUang " &
             "From Pekerti.dbo.t_PI  " &
             "Where t_PI.NoPI = '" & NoPI.Text & "' " &
             "  And T_PI.AktifYn = 'Y' "
-        totalPI = Proses.ExecuteSingleDblQuery(MsgSQL)
-        terbilang = " " & tb.Terbilang(totalPI) & " "
+        dttable = Proses.ExecuteQuery(MsgSQL)
+        If dttable.Rows.Count <> 0 Then
+            totalPI = dttable.Rows(0) !Jvalue
+            MataUang = dttable.Rows(0) !matauang
+        Else
+            totalPI = 0
+            MataUang = ""
+        End If
+        ' terbilang = "- " + Proses.ConvertCurrencyToEnglish(totalPI) + " " + MataUang + " -"
+        terbilang = "- " + clsTerbilang.CurrencyText(totalPI, MataUang) + " -"
+
         DeliveryDate = Format(TglKirim.Value, "dd MMMM yyyy") + " (Leave Indonesia)"
         Me.Cursor = Cursors.WaitCursor
         Proses.OpenConn(CN)
         dttable = New DataTable
-        'MsgSQL = "SELECT t_PI.IDRec, t_PI.NoPI, t_PI.NoPO, t_PI.ShipmentDate, " &
-        '    "t_PI.Pelabuhan, t_PI.Sea, t_PI.Air, t_PI.Kode_Produk, t_PI.Produk, " &
-        '    "t_PI.Kode_PImport, t_PI.Jumlah, t_PI.MataUang, t_PI.HargaFOB, " &
-        '    "m_KodeImportir.Nama, m_KodeImportir.Alamat, m_KodeProduk.Satuan " &
-        '    "FROM  Pekerti.dbo.t_PI t_PI INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
-        '    "    t_PI.Kode_Produk = m_KodeProduk.KodeProduk " &
-        '    " INNER JOIN Pekerti.dbo.m_Company m_Company ON  " &
-        '    "    t_PI.IDCompany = m_Company.IDComp " &
-        '    " INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
-        '    "    t_PI.Kode_Importir = m_KodeImportir.KodeImportir " &
-        '    "Where t_PI.NoPI = '" & NoPI.Text & "' " &
-        '    "  And T_PI.AktifYn = 'Y'  " &
-        '    "Order By T_PI.IDRec "
 
-        MsgSQL = "SELECT t_PI.IDRec, t_PI.NoPI, t_PI.NoPO, t_PI.ShipmentDate,  t_PI.CaraKirim,
-            t_PI.Pelabuhan, t_PI.Sea, t_PI.Air, t_PI.Kode_Produk, t_PI.Produk,  
-            t_PI.Kode_PImport, t_PI.Jumlah, t_PI.MataUang, t_PI.HargaFOB,  
-            m_KodeImportir.Nama, m_KodeImportir.Alamat, m_KodeProduk.Satuan  
-            FROM  Pekerti.dbo.t_PI t_PI INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON  
+        MsgSQL = "Select t_PI.IDRec, t_PI.NoPI, t_PI.NoPO, t_PI.ShipmentDate,  t_PI.CaraKirim,
+                t_PI.Pelabuhan, t_PI.Sea, t_PI.Air, t_PI.Kode_Produk, m_KodeProduk.descript Produk,  
+                t_PI.Kode_PImport, t_PI.Jumlah, t_PI.MataUang, t_PI.HargaFOB,  
+                m_KodeImportir.Nama, m_KodeImportir.Alamat, m_KodeProduk.Satuan,
+                convert(varchar(20), tglpi, 106) TglPI, CatatanPI, m_Company.direksi, m_Company.TTDireksi
+            FROM Pekerti.dbo.t_PI t_PI INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON  
                 t_PI.Kode_Produk = m_KodeProduk.KodeProduk  
              INNER JOIN Pekerti.dbo.m_Company m_Company ON   
                 t_PI.IDCompany = m_Company.CompCode  
@@ -1329,14 +1326,12 @@ Public Class Form_PI
             Where t_PI.NoPI = '" & NoPI.Text & "'  
               And T_PI.AktifYn = 'Y'   
             Order By T_PI.IDRec "
-
-
         DTadapter = New SqlDataAdapter(MsgSQL, CN)
         Try
             DTadapter.Fill(dttable)
             objRep = New Rpt_PI
             objRep.SetDataSource(dttable)
-            'objRep.SetParameterValue("Terbilang", terbilang)
+            objRep.SetParameterValue("Terbilang", terbilang)
             'objRep.SetParameterValue("DeliveryDate", DeliveryDate)
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()

@@ -44,7 +44,7 @@ Public Class Form_SP
         ElseIf Len(Trim(Kode_Produk.Text)) = 5 Then
             Kode_Produk.Text = Kode_Produk.Text + "-"
             Kode_Produk.SelectionStart = Len(Trim(Kode_Produk.Text)) + 1
-        ElseIf Len(Trim(Kode_Produk.Text)) = 7 Then
+        ElseIf Len(Trim(Kode_Produk.Text)) = 8 Then
             Kode_Produk.Text = Kode_Produk.Text + "-"
             Kode_Produk.SelectionStart = Len(Trim(Kode_Produk.Text)) + 1
         End If

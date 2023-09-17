@@ -355,6 +355,8 @@ Public Class Form_GdPraLHP
         LTambahKode = False
         ClearTextBoxes()
         AturTombol(False)
+        SQL = "Select KoordinatorPraLHP From M_Company "
+        Koordinator.Text = Proses.ExecuteSingleStrQuery(SQL)
         NoPraLHP.Text = Proses.MaxYNoUrut("NoPraLHP", "t_PraLHP", "PLHP")
         Kargo.Focus()
         NoPraLHP.ReadOnly = False
@@ -422,10 +424,10 @@ Public Class Form_GdPraLHP
         If Len(KodeProduk.Text) < 1 Then
             KodeProduk.Text = ""
             Produk.Text = ""
-        ElseIf Len(KodeProduk.Text) = 4 Then
+        ElseIf Len(KodeProduk.Text) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
-        ElseIf Len(KodeProduk.Text) = 7 Then
+        ElseIf Len(KodeProduk.Text) = 8 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         End If
@@ -953,11 +955,13 @@ Public Class Form_GdPraLHP
             Else
                 QtyKoli.Text = 0
             End If
-            SQL = "Select KoordinatorPraLHP From M_Company "
-            Koordinator.Text = Proses.ExecuteSingleStrQuery(SQL)
+            If Koordinator.Text = "" Then
+                SQL = "Select KoordinatorPraLHP From M_Company "
+                Koordinator.Text = Proses.ExecuteSingleStrQuery(SQL)
+            End If
             If LAdd Or LEdit Or LTambahKode Then Koordinator.Focus()
-        Else
-            e.Handled = True  'Disallows all other characters from being used on txtNights.Text
+            Else
+                e.Handled = True  'Disallows all other characters from being used on txtNights.Text
             Beep()
         End If
     End Sub

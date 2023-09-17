@@ -474,6 +474,7 @@ Public Class Form_GD_DPL
         OptSemuaData.Checked = False
         OptLaut.Checked = False
         OptUdara.Checked = False
+        tglDPL.Value = Now
         ShowFoto("")
     End Sub
     Private Sub ShowFoto(NamaFileJPG As String)
@@ -532,6 +533,7 @@ Public Class Form_GD_DPL
         AturTombol(True)
         Me.Cursor = Cursors.Default
         DaftarDPL()
+        idRec.Visible = False
     End Sub
 
     Private Sub IsiJenisBox()
@@ -647,12 +649,13 @@ Public Class Form_GD_DPL
         Dim TMP As Double
         If JumlahTiapBoks.Text = "" Then JumlahTiapBoks.Text = 0
         If JumlahBoks.Text = "" Then JumlahBoks.Text = 0
-        TMP = QTY_SudahDPL() + ((JumlahTiapBoks.Text * 1) * (JumlahBoks.Text * 1))
         If TotalTiapBoks.Text = "" Then TotalTiapBoks.Text = 0
+        If QTYPI.Text = "" Then TotalTiapBoks.Text = 0
+        TMP = QTY_SudahDPL() + ((JumlahTiapBoks.Text * 1) * (JumlahBoks.Text * 1))
         If TMP > (QTYPI.Text * 1) Then
             MsgBox("DPL untuk Produk ini melebihi QTY PI", vbCritical + vbOKOnly, ".:Error!")
             JumlahTiapBoks.Focus()
-            '  Exit Sub
+            Exit Sub
         End If
         TotalJumlahBoksDPL.Text = JumProduk(NoDPL.Text)
         If trim(cmbJenisBox.Text) = "" Then
@@ -664,7 +667,9 @@ Public Class Form_GD_DPL
         If LAdd Then
             NoDPL.Text = Proses.MaxYNoUrut("NoDPL", "t_DPL", "DPL")
         End If
+
         If LAdd Or LTambahKode Then
+
             idRec.Text = MaxNoUrutDPL("IDRec", "t_DPL", "DPL", Format(Now, "yyMM"))
             If VolContainer.Text = "" Then VolContainer.Text = 0
             ' Error disini request by marno !
@@ -698,7 +703,7 @@ Public Class Form_GD_DPL
                     "" & IIf(optTotalJumlah.Checked, 1, 0) & ", '" & Trim(LocGmb1.Text) & "', " &
                     "'N', 'Y', '" & UserID & "', GetDate())"
             Proses.ExecuteNonQuery(MsgSQL)
-            TambahDPL
+            TambahDPL()
             KodeProduk.Text = ""
         ElseIf LEdit Then
             MsgSQL = "Update t_DPL Set " &
@@ -764,8 +769,7 @@ Public Class Form_GD_DPL
                     RSL.Rows(a) !KodeProduk & " " & RSL.Rows(a) !Produk,
                     Format(RSL.Rows(a) !JmlTiapBoks, "###,##0"),
                     RSL.Rows(a) !NoPO,
-                    RSL.Rows(a) !Importir,
-                    RSL.Rows(a) !KodePImportir)
+                    RSL.Rows(a) !KodePImportir, "History")
         Next a
         DGView2.Visible = True
         If DGView2.Rows.Count <> 0 Then
@@ -780,10 +784,10 @@ Public Class Form_GD_DPL
             ShowFoto("")
             HargaFOB.Text = "0"
             KodePImportir.Text = ""
-        ElseIf Len(KodeProduk.Text) = 4 Then
+        ElseIf Len(KodeProduk.Text) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
-        ElseIf Len(KodeProduk.Text) = 7 Then
+        ElseIf Len(KodeProduk.Text) = 8 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         End If
@@ -793,6 +797,21 @@ Public Class Form_GD_DPL
         If DGView2.Rows.Count = 0 Then Exit Sub
         idRec.Text = DGView2.Rows(DGView2.CurrentCell.RowIndex).Cells(0).Value
         Isi_DPL()
+        'Dim tID As String = DGView.Rows(DGView.CurrentCell.RowIndex).Cells(0).Value
+        'idRec.Text = tID
+        If DGView2.Rows.Count <> 0 Then
+            If e.ColumnIndex = 9 Then 'History
+                MsgSQL = "select nopo, NoDPL, NoBoksAwal,NoBoksAkhir, JumlahBoks, TotalTiapBoks, JumlahBoks * TotalTiapBoks QTYDPL " &
+                   " From t_DPL " &
+                   "Where nopo = '" & NoPO.Text & "' and aktifYN = 'Y' " &
+                   " AND KodeProduk = '" & KodeProduk.Text & "' "
+                Form_Daftar.txtQuery.Text = MsgSQL
+                Form_Daftar.Text = "History DPL"
+                Form_Daftar.ShowDialog()
+                FrmMenuUtama.TSKeterangan.Text = ""
+            End If
+        End If
+
     End Sub
     Private Sub IsiPLT()
         Panjang.Text = Trim(Mid(cmbJenisBox.Text, 51, 20))
@@ -945,7 +964,6 @@ Public Class Form_GD_DPL
                 KodeProduk.Focus()
             Else
                 If LTambahKode Then
-                    'not yet !
                     NoPO.Text = FindPO_DPL(NoPO.Text, KodeImportir.Text)
                 Else
                     NoPO.Text = FindPO(NoPO.Text)
@@ -1067,7 +1085,7 @@ Public Class Form_GD_DPL
             Dim RSP As New DataTable, rs05 As New DataTable
             Me.Cursor = Cursors.WaitCursor
             MsgSQL = "Select Deskripsi, Kode_Buyer, Kode_Produk, Kode_Importir, " &
-                "     m_KodeImportir.Nama, t_PO.Jumlah " &
+                "     m_KodeImportir.Nama, t_PO.Jumlah, file_foto " &
                 "From t_PO inner join m_KodeProduk ON " &
                 "     m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
                 "     inner join m_KodeImportir on Kode_Importir = KodeImportir " &
@@ -1441,6 +1459,22 @@ Public Class Form_GD_DPL
             .SelectionStart = 0
             .SelectionLength = .TextLength
         End With
+    End Sub
+
+    Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
+
+        If Trim(idRec.Text) = "" Then
+            MsgBox("Data yang akan di hapus belum di pilih!", vbCritical, ".:Empty Data!")
+            Exit Sub
+        End If
+
+        Form_Hapus.Left = Me.Left
+        Form_Hapus.Top = Me.Top
+        Form_Hapus.tIDSebagian.Text = idRec.Text
+        Form_Hapus.tIDSemua.Text = NoDPL.Text
+        Form_Hapus.Text = "Hapus DPL"
+        Form_Hapus.ShowDialog()
+        ClearTextBoxes()
     End Sub
 
     Private Sub TotalVolDPL_GotFocus(sender As Object, e As EventArgs) Handles TotalVolDPL.GotFocus

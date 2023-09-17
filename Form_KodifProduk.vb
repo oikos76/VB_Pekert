@@ -45,6 +45,13 @@ Public Class Form_KodifProduk
         If Trim(cur_Euro.Text) = "" Then cur_Euro.Text = 0
         If Trim(Prev_Euro.Text) = "" Then Prev_Euro.Text = 0
 
+        If Trim(Cur_USD.Text) = "" Then Cur_USD.Text = 0
+        If Trim(Prev_USD.Text) = "" Then Prev_USD.Text = 0
+
+        If Trim(cur_rp.Text) = "" Then cur_rp.Text = 0
+        If Trim(Prev_RP.Text) = "" Then Prev_RP.Text = 0
+        If Trim(HPP_USD.Text) = "" Then HPP_USD.Text = 0
+
         LocGmb1.Text = Trim(KodeProduk.Text) + ".jpg"
         If LAdd Or LMultiKode Then
             Dim CekProduk As String = ""

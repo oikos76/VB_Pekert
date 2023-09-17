@@ -23,12 +23,12 @@ Partial Class Form_GD_DPL
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GD_DPL))
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -133,17 +133,17 @@ Partial Class Form_GD_DPL
         Me.Label25 = New System.Windows.Forms.Label()
         Me.TabPageDaftar_ = New System.Windows.Forms.TabPage()
         Me.DGView = New System.Windows.Forms.DataGridView()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.tCari = New System.Windows.Forms.TextBox()
         Me.cmbCari = New System.Windows.Forms.ComboBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.PanelDaftarLHP = New System.Windows.Forms.Panel()
         Me.DGView2 = New System.Windows.Forms.DataGridView()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -153,6 +153,7 @@ Partial Class Form_GD_DPL
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPageFormEntry_.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -1097,7 +1098,7 @@ Partial Class Form_GD_DPL
         Me.NoPO.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoPO.Location = New System.Drawing.Point(214, 124)
         Me.NoPO.Margin = New System.Windows.Forms.Padding(4)
-        Me.NoPO.MaxLength = 4
+        Me.NoPO.MaxLength = 50
         Me.NoPO.Name = "NoPO"
         Me.NoPO.ReadOnly = True
         Me.NoPO.Size = New System.Drawing.Size(151, 22)
@@ -1386,43 +1387,6 @@ Partial Class Form_GD_DPL
         Me.DGView.Size = New System.Drawing.Size(988, 267)
         Me.DGView.TabIndex = 156
         '
-        'Column9
-        '
-        Me.Column9.HeaderText = "No. DPL"
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.Width = 125
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Tgl.DPL"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Width = 125
-        '
-        'Column11
-        '
-        Me.Column11.HeaderText = "No. PO"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Width = 140
-        '
-        'Column12
-        '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column12.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Column12.HeaderText = "Shipment Date"
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = True
-        Me.Column12.Width = 130
-        '
-        'Column13
-        '
-        Me.Column13.HeaderText = "Importir"
-        Me.Column13.Name = "Column13"
-        Me.Column13.ReadOnly = True
-        Me.Column13.Width = 150
-        '
         'Panel11
         '
         Me.Panel11.Controls.Add(Me.tCari)
@@ -1481,7 +1445,7 @@ Partial Class Form_GD_DPL
         Me.DGView2.AllowUserToDeleteRows = False
         Me.DGView2.AllowUserToOrderColumns = True
         Me.DGView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column1, Me.Column2, Me.Column3, Me.Column6, Me.Column7, Me.Column5, Me.Column15, Me.Column16})
+        Me.DGView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column1, Me.Column2, Me.Column3, Me.Column6, Me.Column7, Me.Column5, Me.Column15, Me.Column16, Me.Column4})
         Me.DGView2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGView2.Location = New System.Drawing.Point(0, 0)
         Me.DGView2.Margin = New System.Windows.Forms.Padding(4)
@@ -1491,6 +1455,43 @@ Partial Class Form_GD_DPL
         Me.DGView2.RowTemplate.ReadOnly = True
         Me.DGView2.Size = New System.Drawing.Size(988, 252)
         Me.DGView2.TabIndex = 9
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "No. DPL"
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        Me.Column9.Width = 125
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Tgl.DPL"
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        Me.Column10.Width = 125
+        '
+        'Column11
+        '
+        Me.Column11.HeaderText = "No. PO"
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        Me.Column11.Width = 140
+        '
+        'Column12
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column12.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column12.HeaderText = "Shipment Date"
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        Me.Column12.Width = 150
+        '
+        'Column13
+        '
+        Me.Column13.HeaderText = "Importir"
+        Me.Column13.Name = "Column13"
+        Me.Column13.ReadOnly = True
+        Me.Column13.Width = 430
         '
         'Column14
         '
@@ -1502,8 +1503,8 @@ Partial Class Form_GD_DPL
         '
         'Column1
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column1.HeaderText = "Boks Awal"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -1511,8 +1512,8 @@ Partial Class Form_GD_DPL
         '
         'Column2
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column2.HeaderText = "Boks Akhir"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -1520,8 +1521,8 @@ Partial Class Form_GD_DPL
         '
         'Column3
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column3.HeaderText = "Jumlah Boks"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -1529,8 +1530,8 @@ Partial Class Form_GD_DPL
         '
         'Column6
         '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column6.HeaderText = "Isi Tiap Boks"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -1541,12 +1542,12 @@ Partial Class Form_GD_DPL
         Me.Column7.HeaderText = "Kode Produk"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
-        Me.Column7.Width = 150
+        Me.Column7.Width = 250
         '
         'Column5
         '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column5.HeaderText = "Jumlah kode ini tiap boks"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -1557,14 +1558,20 @@ Partial Class Form_GD_DPL
         Me.Column15.HeaderText = "No.PO"
         Me.Column15.Name = "Column15"
         Me.Column15.ReadOnly = True
-        Me.Column15.Width = 120
         '
         'Column16
         '
-        Me.Column16.HeaderText = "Kode Importir"
+        Me.Column16.HeaderText = "Kode Buyer"
         Me.Column16.Name = "Column16"
         Me.Column16.ReadOnly = True
-        Me.Column16.Width = 200
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "History"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'Form_GD_DPL
         '
@@ -1715,14 +1722,14 @@ Partial Class Form_GD_DPL
     Friend WithEvents idRec As TextBox
     Friend WithEvents Label47 As Label
     Friend WithEvents Label46 As Label
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents cmbCari As ComboBox
+    Friend WithEvents tCari As TextBox
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents cmbCari As ComboBox
-    Friend WithEvents tCari As TextBox
     Friend WithEvents Column14 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
@@ -1732,4 +1739,5 @@ Partial Class Form_GD_DPL
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column15 As DataGridViewTextBoxColumn
     Friend WithEvents Column16 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewButtonColumn
 End Class

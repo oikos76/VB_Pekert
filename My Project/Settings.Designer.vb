@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS  D:\FotoProduct")>  _
         Public Property ip_server() As String
             Get
                 Return CType(Me("ip_server"),String)
@@ -188,7 +188,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("C:\me\FotoPKT")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Intel\FotoPKTD:\FotoProduct")>  _
         Public Property path_foto() As String
             Get
                 Return CType(Me("path_foto"),String)

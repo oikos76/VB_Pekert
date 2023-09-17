@@ -21,7 +21,7 @@
       <Value Profile="(Default)">belum di pilih !</Value>
     </Setting>
     <Setting Name="ip_server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS</Value>
+      <Value Profile="(Default)">IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS  D:\FotoProduct</Value>
     </Setting>
     <Setting Name="KodeGLPiutangPerajin" Type="System.String" Scope="User">
       <Value Profile="(Default)">10.10.15.01</Value>
@@ -36,7 +36,7 @@
       <Value Profile="(Default)">20.10.05.02</Value>
     </Setting>
     <Setting Name="path_foto" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\me\FotoPKT</Value>
+      <Value Profile="(Default)">C:\Intel\FotoPKTD:\FotoProduct</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -73,6 +73,7 @@ Partial Class Form_CompanySetup
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.cariTTD = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -445,7 +446,7 @@ Partial Class Form_CompanySetup
         Me.Direksi.Location = New System.Drawing.Point(152, 302)
         Me.Direksi.MaxLength = 50
         Me.Direksi.Name = "Direksi"
-        Me.Direksi.Size = New System.Drawing.Size(309, 20)
+        Me.Direksi.Size = New System.Drawing.Size(277, 20)
         Me.Direksi.TabIndex = 144
         '
         'Label20
@@ -502,11 +503,21 @@ Partial Class Form_CompanySetup
         Me.Label27.TabIndex = 150
         Me.Label27.Text = "Path Foto Produk"
         '
+        'cariTTD
+        '
+        Me.cariTTD.Image = CType(resources.GetObject("cariTTD.Image"), System.Drawing.Image)
+        Me.cariTTD.Location = New System.Drawing.Point(435, 300)
+        Me.cariTTD.Name = "cariTTD"
+        Me.cariTTD.Size = New System.Drawing.Size(26, 22)
+        Me.cariTTD.TabIndex = 152
+        Me.cariTTD.UseVisualStyleBackColor = True
+        '
         'Form_CompanySetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 422)
+        Me.Controls.Add(Me.cariTTD)
         Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Label27)
         Me.Controls.Add(Me.cariFile)
@@ -610,4 +621,5 @@ Partial Class Form_CompanySetup
     Friend WithEvents Label23 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
+    Friend WithEvents cariTTD As Button
 End Class

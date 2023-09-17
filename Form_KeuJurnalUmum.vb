@@ -68,7 +68,8 @@ Public Class Form_KeuJurnalUmum
                 tsaldo = Proses.ExecuteSingleDblQuery(MsgSQL)
                 MsgSQL = "Insert Into T_Jurnal (idrec, NoUrut, tanggal, Uraian, AccountCode, " &
                     "KetAccCode, MataUang, Kurs, NilaiJurnal, Debet, Kredit, Saldo, AktifYN, " &
-                    "LastUpd, UserId, JenisJurnal, ClosingYN) Values('" & IDRecord.Text & "', " &
+                    "LastUpd, UserId, JenisJurnal, ClosingYN, Kode_importir, No_PI, No_PackingList, " &
+                    "Kode_Perajin, No_SP, No_DPB) Values('" & IDRecord.Text & "', " &
                     "'" & Trim(DGView.Rows(i).Cells(0).Value) & "', " &
                     "'" & Format(TglTr.Value, "yyyy-MM-dd") & "', " &
                     "'" & Trim(DGView.Rows(i).Cells(1).Value) & "', " &
@@ -79,7 +80,8 @@ Public Class Form_KeuJurnalUmum
                     "" & Trim(DGView.Rows(i).Cells(6).Value) * 1 & ", " &
                     "" & Trim(DGView.Rows(i).Cells(7).Value) * 1 & ", " &
                     "" & Trim(DGView.Rows(i).Cells(8).Value) * 1 & ", " &
-                    "" & tsaldo & ", 'Y', GetDate(), '" & UserID & "', 'JURNAL UMUM','N')"
+                    "" & tsaldo & ", 'Y', GetDate(), '" & UserID & "', " &
+                    "'JURNAL UMUM','N','','','','','','') "
                 Proses.ExecuteNonQuery(MsgSQL)
                 MsgSQL = "Update m_Perkiraan set SAkhir = " & tsaldo & " " &
                     "Where NO_Perkiraan = '" & Trim(DGView.Rows(i).Cells(3).Value) & "' " &
@@ -93,7 +95,8 @@ Public Class Form_KeuJurnalUmum
             For i As Integer = 0 To DGView.Rows.Count - 1
                 MsgSQL = "Insert Into T_Jurnal (idrec, NoUrut, tanggal, Uraian, AccountCode, " &
                     "KetAccCode, MataUang, Kurs, NilaiJurnal, Debet, Kredit, Saldo, AktifYN, " &
-                    "LastUpd, UserId, JenisJurnal, ClosingYN) Values('" & IDRecord.Text & "', " &
+                    "LastUpd, UserId, JenisJurnal, ClosingYN, Kode_importir, No_PI, No_PackingList, " &
+                    "Kode_Perajin, No_SP, No_DPB) Values('" & IDRecord.Text & "', " &
                     "'" & Trim(DGView.Rows(i).Cells(0).Value) & "', " &
                     "'" & Format(TglTr.Value, "yyyy-MM-dd") & "', " &
                     "'" & Trim(DGView.Rows(i).Cells(1).Value) & "', " &
@@ -104,7 +107,8 @@ Public Class Form_KeuJurnalUmum
                     "" & Trim(DGView.Rows(i).Cells(6).Value) * 1 & ", " &
                     "" & Trim(DGView.Rows(i).Cells(7).Value) * 1 & ", " &
                     "" & Trim(DGView.Rows(i).Cells(8).Value) * 1 & ", " &
-                    "" & tsaldo & ", 'Y', GetDate(), '" & UserID & "', 'JURNAL UMUM','N')"
+                    "" & tsaldo & ", 'Y', GetDate(), '" & UserID & "', " &
+                    "'JURNAL UMUM','N','','','','','','') "
                 Proses.ExecuteNonQuery(MsgSQL)
             Next i
             MsgSQL = "DELETE T_Jurnal " &
@@ -216,6 +220,7 @@ Public Class Form_KeuJurnalUmum
                 End If
             End If
         Next
+        DGView.Rows.Clear()
         KetAccCode1.Text = ""
         TglTr.Value = Now
         TotalDebet.Text = 0
@@ -239,10 +244,9 @@ Public Class Form_KeuJurnalUmum
             Uraian.Focus()
             Exit Sub
         End If
-
         AddItem()
         cmbDK.SelectedIndex = -1
-        Uraian.Text = ""
+        '   Uraian.Text = ""
         AccCode1.Text = ""
         Jumlah.Text = "0"
         NilaiJurnal.Text = "0"
@@ -357,6 +361,8 @@ Public Class Form_KeuJurnalUmum
         Else
             cmbDK.Enabled = True
         End If
+        TglTr.Enabled = Not tAktif
+        cmbMataUang.Enabled = Not tAktif
         Uraian.ReadOnly = tAktif
         AccCode1.ReadOnly = tAktif
         Jumlah.ReadOnly = True
@@ -405,6 +411,7 @@ Public Class Form_KeuJurnalUmum
             "Order By IdRec, NoUrut "
         Form_Daftar.txtQuery.Text = MsgSQL
         Form_Daftar.Text = "Daftar Jurnal"
+        Form_Daftar.param1.Text = "JURNAL UMUM"
         Form_Daftar.ShowDialog()
         IDRecord.Text = FrmMenuUtama.TSKeterangan.Text
         FrmMenuUtama.TSKeterangan.Text = ""
@@ -641,7 +648,7 @@ Public Class Form_KeuJurnalUmum
             End If
         End If
     End Sub
-    Public Function TotalDK() As Boolean
+    Private Function TotalDK() As Boolean
         Dim TDb As Double = 0, TKd As Double = 0
         TDb = (From row As DataGridViewRow In DGView.Rows.Cast(Of DataGridViewRow)()
                Select CDec(row.Cells(7).Value)).Sum
@@ -656,4 +663,10 @@ Public Class Form_KeuJurnalUmum
         End If
     End Function
 
+
+    Private Sub cmbDK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbDK.KeyPress
+        If e.KeyChar = Chr(13) Then
+            btnAdd_Click(sender, e)
+        End If
+    End Sub
 End Class

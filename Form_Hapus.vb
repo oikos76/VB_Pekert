@@ -139,4 +139,8 @@
         End If
     End Sub
 
+    Private Sub Form_Hapus_Load(sender As Object, e As EventArgs) Handles Me.Load
+        OptSebagian.Checked = True
+        OptSebagian.Focus()
+    End Sub
 End Class

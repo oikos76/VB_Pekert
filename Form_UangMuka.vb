@@ -98,7 +98,7 @@ Public Class Form_UangMuka
         AturTombol(True)
     End Sub
     Private Function ValidBayar() As Boolean
-        Dim P50 As Double, P70 As Double, oUM As Double
+        Dim P50 As Double, P70 As Double
         If NilaiSP.Text = "" Then
             NilaiSP.Text = 0
             ValidBayar = True

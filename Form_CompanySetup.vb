@@ -326,7 +326,12 @@ Public Class Form_CompanySetup
         End If
     End Sub
 
+    Private Sub cariTTD_Click(sender As Object, e As EventArgs) Handles cariTTD.Click
+        Form_UploadFoto.ShowDialog()
+    End Sub
+
     Private Sub Direksi_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Direksi.KeyPress
         If e.KeyChar = Chr(13) Then kode_toko.Focus()
     End Sub
+
 End Class

@@ -370,9 +370,13 @@ Public Class Form_KeuKodeGL
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        Me.Cursor = Cursors.WaitCursor
+        PanelEntry_.Enabled = False
         PanelTombol_.Enabled = False
         Form_KeuKodeGL_Daftar.ShowDialog()
         PanelTombol_.Enabled = True
+        PanelEntry_.Enabled = True
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click

@@ -313,18 +313,21 @@ Partial Class FrmMenuUtama
         '
         '_101JurnalUmum
         '
+        Me._101JurnalUmum.Image = CType(resources.GetObject("_101JurnalUmum.Image"), System.Drawing.Image)
         Me._101JurnalUmum.Name = "_101JurnalUmum"
         Me._101JurnalUmum.Size = New System.Drawing.Size(244, 22)
         Me._101JurnalUmum.Text = "Jurnal Umum"
         '
         '_102KasBankKeluar
         '
+        Me._102KasBankKeluar.Image = CType(resources.GetObject("_102KasBankKeluar.Image"), System.Drawing.Image)
         Me._102KasBankKeluar.Name = "_102KasBankKeluar"
         Me._102KasBankKeluar.Size = New System.Drawing.Size(244, 22)
         Me._102KasBankKeluar.Text = "Kas/Bank Keluar"
         '
         '_103KasBankMasuk
         '
+        Me._103KasBankMasuk.Image = CType(resources.GetObject("_103KasBankMasuk.Image"), System.Drawing.Image)
         Me._103KasBankMasuk.Name = "_103KasBankMasuk"
         Me._103KasBankMasuk.Size = New System.Drawing.Size(244, 22)
         Me._103KasBankMasuk.Text = "Kas/Bank Masuk"
@@ -342,12 +345,14 @@ Partial Class FrmMenuUtama
         '
         '_105KodeGL
         '
+        Me._105KodeGL.Image = CType(resources.GetObject("_105KodeGL.Image"), System.Drawing.Image)
         Me._105KodeGL.Name = "_105KodeGL"
         Me._105KodeGL.Size = New System.Drawing.Size(244, 22)
         Me._105KodeGL.Text = "Kode GL"
         '
         '_106SaldoAkhir
         '
+        Me._106SaldoAkhir.Image = CType(resources.GetObject("_106SaldoAkhir.Image"), System.Drawing.Image)
         Me._106SaldoAkhir.Name = "_106SaldoAkhir"
         Me._106SaldoAkhir.Size = New System.Drawing.Size(244, 22)
         Me._106SaldoAkhir.Text = "Saldo Akhir"
@@ -359,6 +364,7 @@ Partial Class FrmMenuUtama
         '
         '_107DaftarJurnal
         '
+        Me._107DaftarJurnal.Image = CType(resources.GetObject("_107DaftarJurnal.Image"), System.Drawing.Image)
         Me._107DaftarJurnal.Name = "_107DaftarJurnal"
         Me._107DaftarJurnal.Size = New System.Drawing.Size(244, 22)
         Me._107DaftarJurnal.Text = "Daftar Jurnal"
