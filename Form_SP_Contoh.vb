@@ -391,6 +391,7 @@ Public Class Form_SP_Contoh
         If SPPO.Checked = True Then
             NoPO.Visible = True
             LabelNoPO.Visible = True
+            tglKirim.Value = Now
             tglKirim.Visible = True
             LabeltglKirim.Visible = True
             If LAdd Then
@@ -678,7 +679,7 @@ Public Class Form_SP_Contoh
         ElseIf e.KeyChar = Chr(13) Then
             If IsNumeric(Jumlah.Text) Then
                 Dim temp As Double = Jumlah.Text
-                Jumlah.Text = Format(temp, "###,##0.00")
+                Jumlah.Text = Replace(Format(temp, "###,##0.00"), ".00", "")
                 Jumlah.SelectionStart = Jumlah.TextLength
             Else
                 Jumlah.Text = 0
@@ -707,7 +708,7 @@ Public Class Form_SP_Contoh
         ElseIf e.KeyChar = Chr(13) Then
             If IsNumeric(Jumlah.Text) Then
                 Dim temp As Double = HargaBeli.Text
-                HargaBeli.Text = Format(temp, "###,##0.00")
+                HargaBeli.Text = Replace(Format(temp, "###,##0.00"), ".00", "")
                 HargaBeli.SelectionStart = HargaBeli.TextLength
             Else
                 Jumlah.Text = 0
@@ -821,9 +822,11 @@ Public Class Form_SP_Contoh
             dbTable = Proses.ExecuteQuery(SQL)
             If dbTable.Rows.Count <> 0 Then
                 NoPO.Text = dbTable.Rows(0) !nopo
+                Kode_Importir.Focus()
             Else
                 Dim dbpo As New DataTable
-                SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir " &
+
+                SQL = "Select NoPO, m_KodeImportir.Nama Importir, TglPO, KodeImportir, max(t_PO.tglKirim) tglKirim " &
                     " From T_PO Inner Join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "Where T_PO.AktifYN = 'Y' " &
                     "  and nopo like '%" & NoPO.Text & "%' " &
@@ -841,7 +844,7 @@ Public Class Form_SP_Contoh
                     NoPO.Text = dbpo.Rows(0) !nopo
                     Kode_Importir.Text = dbpo.Rows(0) !kodeimportir
                     Importir.Text = dbpo.Rows(0) !importir
-                    tglKirim.Focus()
+                    Importir.Focus()
                 Else
                     NoPO.Text = ""
                     Kode_Importir.Text = ""
@@ -979,6 +982,10 @@ Public Class Form_SP_Contoh
 
     End Sub
 
+    Private Sub TglSP_ValueChanged(sender As Object, e As EventArgs) Handles TglSP.ValueChanged
+
+    End Sub
+
     Public Function FindKodeProdukDPL(tKodeProduk As String, tNoPO As String) As String
         Dim RSD As New DataTable, mKondisi As String, hasil As String = ""
         Dim MsgSQL As String, ukuran As String, rKodeProduk As String = ""
@@ -987,7 +994,7 @@ Public Class Form_SP_Contoh
         Else
             mKondisi = "And Deskripsi like '%" & Trim(tKodeProduk) & "%' "
         End If
-
+        FrmMenuUtama.TSKeterangan.Text = ""
         MsgSQL = "SELECT Deskripsi, Kode_Buyer, Kode_Produk, Kode_Importir, " &
             "      m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah, file_foto " &
             " FROM t_PO inner join m_KodeProduk ON " &
@@ -1038,17 +1045,18 @@ Public Class Form_SP_Contoh
                 If RSD.Rows(0) !Berat <> 0 Then ukuran = ukuran + "Berat = " & Format(RSD.Rows(0) !Berat, "###,##0.00") + " "
                 CatatanProduk.Text = ukuran + RSD.Rows(0) !tamb_SP
                 Produk.Text = Replace(RSD.Rows(0) !Deskripsi, "'", "`")
-                Jumlah.Text = RSD.Rows(0) !Jumlah
+                Jumlah.Text = Format(RSD.Rows(0) !Jumlah, "###,##0")
                 CatatanProduk.Text = RSD.Rows(0) !tamb_SP
-                HargaBeli.Text = RSD.Rows(0) !cur_rp
+                HargaBeli.Text = Format(RSD.Rows(0) !cur_rp, "###,##0")
                 LocGmb1.Text = RSD.Rows(0) !file_foto
                 If Trim(Dir(FotoLoc + "\" + Trim(LocGmb1.Text))) = "" Or Trim(LocGmb1.Text) = "" Then
                     ShowFoto("")
                 Else
                     ShowFoto(LocGmb1.Text)
                 End If
+                hasil = RSD.Rows(0) !Kode_Produk
             End If
-            hasil = 1
+
         End If
         FindKodeProdukDPL = hasil
     End Function
@@ -1103,5 +1111,24 @@ Public Class Form_SP_Contoh
             .SelectionStart = 0
             .SelectionLength = .TextLength
         End With
+    End Sub
+
+    Private Sub TglSP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TglSP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            SPPO.Focus()
+
+        End If
+    End Sub
+
+    Private Sub SPPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles SPPO.KeyPress
+        If e.KeyChar = Chr(13) Then
+            NoPO.Focus()
+        End If
+    End Sub
+
+    Private Sub SPPO_T_KeyPress(sender As Object, e As KeyPressEventArgs) Handles SPPO_T.KeyPress
+        If e.KeyChar = Chr(13) Then
+            Kode_Importir.Focus()
+        End If
     End Sub
 End Class

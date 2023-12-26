@@ -36,7 +36,7 @@
       <Value Profile="(Default)">20.10.05.02</Value>
     </Setting>
     <Setting Name="path_foto" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Intel\FotoPKTD:\FotoProduct</Value>
+      <Value Profile="(Default)">D:\FotoProduct</Value>
     </Setting>
   </Settings>
 </SettingsFile>

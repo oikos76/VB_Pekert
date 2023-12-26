@@ -134,7 +134,7 @@ Public Class Form_PI
         cmdTambahKode.Visible = tAktif
         cmdUangMuka.Visible = tAktif
         cmdTutupPI.Visible = tAktif
-
+        KodeProduk.BackColor = Color.White
         cmdBatal.Visible = Not tAktif
         PanelNavigate.Visible = tAktif
         cmdExit.Visible = tAktif
@@ -155,6 +155,17 @@ Public Class Form_PI
             PermintaanPO3.Visible = False
             Pemenuhan1.Visible = False
             Pemenuhan2.Visible = False
+        ElseIf LTambahKode Then
+
+            NoPI.Enabled = False
+            Nopo.Enabled = False
+            Kode_Importir.Enabled = False
+            Importir.Enabled = False
+            tglPO.Enabled = False
+            TglKirim.Enabled = False
+            Pelabuhan.Enabled = False
+            cmbCaraKirim.Enabled = False
+            KodeProduk.BackColor = Color.LightSeaGreen
         Else
             KodeProduk.Visible = tAktif
             Produk.Visible = tAktif
@@ -210,19 +221,17 @@ Public Class Form_PI
     End Sub
 
     Private Sub KodeProduk_KeyPress(sender As Object, e As KeyPressEventArgs) Handles KodeProduk.KeyPress
+        KodeProduk.BackColor = Color.White
         If e.KeyChar = Chr(13) Then
-            Dim rs05 As New DataTable
+            Dim rs05 As New DataTable, mKondisi As String = ""
             Me.Cursor = Cursors.WaitCursor
-            'MsgSQL = "Select deskripsi, cur_rp, tamb_sp, perajin, kode_perajin, " &
-            '        "Panjang, Lebar, Tinggi, Diameter, Tebal, Berat " &
-            '        " From m_KodeProduk " &
-            '        "Where KodeProduk = '" & KodeProduk.Text & "' and kodeproduk <> '' "
+
             MsgSQL = "Select Deskripsi, Kode_Buyer, FOBBuyer, MataUang, " &
-                    " Kode_Produk, Kode_Importir, " &
-                    " m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah " &
+                    "        Kode_Produk, Kode_Importir, file_foto, " &
+                    "        m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah " &
                     " From t_PO inner join m_KodeProduk ON " &
-                    " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
-                    " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
+                    "      m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
+                    "      inner join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "Where t_PO.AktifYN = 'Y' " &
                     "  And T_PO.NOPO = '" & Nopo.Text & "' " &
                     "  And Kode_Produk = '" & KodeProduk.Text & "' "
@@ -244,29 +253,38 @@ Public Class Form_PI
                     ShowFoto(LocGmb1.Text)
                 End If
             Else
-                Form_Daftar.txtQuery.Text = "Select * " &
-                    " From m_KodeProduk " &
-                    "Where AktifYN = 'Y' " &
-                    "  And ( KodeProduk Like '%" & KodeProduk.Text & "%' or Deskripsi Like '%" & KodeProduk.Text & "%') " &
-                    "Order By Deskripsi "
-                Form_Daftar.Text = "Daftar Produk"
-                Form_Daftar.ShowDialog()
-                KodeProduk.Text = FrmMenuUtama.TSKeterangan.Text
 
-                MsgSQL = "Select Deskripsi, Kode_Buyer, FOBBuyer, MataUang, " &
-                    " Kode_Produk, Kode_Importir, " &
+
+                If Trim(KodeProduk.Text) = "" Then
+                    mKondisi = ""
+                Else
+                    mKondisi = "And Deskripsi like '%" & Trim(KodeProduk.Text) & "%' "
+                End If
+
+
+                SQL = "Select Deskripsi, Kode_Buyer, Kode_Produk, Kode_Importir, " &
                     " m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah " &
                     " From t_PO inner join m_KodeProduk ON " &
                     " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
                     " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
                     "Where t_PO.AktifYN = 'Y' " &
                     "  And T_PO.NOPO = '" & Nopo.Text & "' " &
-                    "  And Kode_Produk = '" & KodeProduk.Text & "' "
+                    " " & mKondisi & " "
+                Form_Daftar.txtQuery.Text = SQL
+                Form_Daftar.Text = "Daftar Produk PO"
+                Form_Daftar.param1.Text = Nopo.Text
+                Form_Daftar.ShowDialog()
+                KodeProduk.Text = FrmMenuUtama.TSKeterangan.Text
 
-                'MsgSQL = "Select deskripsi, cur_rp, tamb_sp, perajin, kode_perajin " &
-                '    "Panjang, Lebar, Tinggi, Diameter, Tebal, Berat " &
-                '    " From m_KodeProduk " &
-                '    "Where KodeProduk = '" & KodeProduk.Text & "' "
+                MsgSQL = "Select Deskripsi, Kode_Buyer, FOBBuyer, MataUang, " &
+                    "      Kode_Produk, Kode_Importir, file_foto, " &
+                    "      m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah " &
+                    " From t_PO inner join m_KodeProduk ON " &
+                    " m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
+                    " inner join m_KodeImportir on Kode_Importir = KodeImportir " &
+                    "Where t_PO.AktifYN = 'Y' " &
+                    "  And T_PO.NOPO = '" & Nopo.Text & "' " &
+                    "  And Kode_Produk = '" & KodeProduk.Text & "' "
                 rs05 = Proses.ExecuteQuery(MsgSQL)
                 If rs05.Rows.Count <> 0 Then
 
@@ -353,6 +371,7 @@ Public Class Form_PI
 
         ShowFoto("")
         KodeProduk.Focus()
+
     End Sub
     Private Sub cmdTambahKode_Click(sender As Object, e As EventArgs) Handles cmdTambahKode.Click
         TambahKode()
@@ -707,40 +726,41 @@ Public Class Form_PI
         Dim MsgSQL As String
         Dim RS05 As New DataTable
         MsgSQL = "Select t_PO.IDRec, m_KodeProduk.deskripsi, t_PO.Kode_Produk, " &
-        " m_KodeImportir.Nama AS Importir, t_PO.Kode_Importir, t_PO.Kode_Perajin, " &
-        " t_PO.Kode_Buyer, t_PO.Jumlah, t_PO.TglKirim, t_PO.MataUang, t_PO.FOBBuyer, " &
-        " t_PO.FOBUmum, t_PO.Digit3YN, t_PO.CatatanPO, t_PO.CatatanProduk, t_PO.FotoLoc, " &
-        " t_PO.StatusPO, t_PO.TglPO, t_PO.NoPO, PembagiEuro " &
-        " From t_PO INNER JOIN m_KodeProduk ON " &
-        "   t_PO.Kode_Produk = m_KodeProduk.KodeProduk " &
-        "   INNER JOIN m_KodeImportir ON " &
-        "   m_KodeImportir.KodeImportir = t_PO.Kode_Importir " &
-        "Where t_PO.AktifYN = 'Y' " &
-        "  And m_KodeImportir.AktifYN = 'Y' " &
-        "  And m_KodeProduk.AktifYN = 'Y' " &
-        "  And t_PO.Kode_Produk = '" & KodeProduk.Text & "' " &
-        "  And NOPO = '" & Nopo.Text & "' " &
-        "Order By IDRec "
+            " m_KodeImportir.Nama AS Importir, t_PO.Kode_Importir, t_PO.Kode_Perajin, " &
+            " t_PO.Kode_Buyer, t_PO.Jumlah, t_PO.TglKirim, t_PO.MataUang, t_PO.FOBBuyer, " &
+            " t_PO.FOBUmum, t_PO.Digit3YN, t_PO.CatatanPO, t_PO.CatatanProduk, t_PO.FotoLoc, " &
+            " t_PO.StatusPO, t_PO.TglPO, t_PO.NoPO, PembagiEuro " &
+            " From t_PO INNER JOIN m_KodeProduk ON " &
+            "   t_PO.Kode_Produk = m_KodeProduk.KodeProduk " &
+            "   INNER JOIN m_KodeImportir ON " &
+            "   m_KodeImportir.KodeImportir = t_PO.Kode_Importir " &
+            "Where t_PO.AktifYN = 'Y' " &
+            "  And m_KodeImportir.AktifYN = 'Y' " &
+            "  And m_KodeProduk.AktifYN = 'Y' " &
+            "  And t_PO.Kode_Produk = '" & KodeProduk.Text & "' " &
+            "  And NOPO = '" & Nopo.Text & "' " &
+            "Order By IDRec "
+
         RS05 = Proses.ExecuteQuery(MsgSQL)
         If RS05.Rows.Count <> 0 Then
             Application.DoEvents()
             idRecord.Text = Proses.MaxNoUrut("IDRec", "t_PI", "PI")
-            MsgSQL = "INSERT INTO t_PI(IDRec, NoPI, NoPO, TglPI, " &
-            "StatusPI, Kode_Importir, Importir, TglPO, ShipmentDate, Pelabuhan, " &
-            "CaraKirim, Kode_Produk, Produk, Kode_PImport, Jumlah, MataUang, " &
-            "HargaFOB, Digit3YN, ShipmentDateKode, PermintaanPO1, PermintaanPO2, " &
-            "PermintaanPO3, Pemenuhan1, Pemenuhan2, AktifYN, UserID, LastUPD, NilaiPI, " &
-            "UangMuka, KurangBayar, LabelingCost, SpecialPackaging, Fumigation, " &
-            "Phytosanitary, CatatanPI, QTYOSO, Konversi) VALUES( '" & idRecord.Text & "',   " &
-            "'" & NoPI.Text & "', '" & Nopo.Text & "', '" & Format(tglPI.Value, "yyyy-MM-dd") & "', '', " &
-            " '" & RS05.Rows(0) !Kode_Importir & "', '" & RS05.Rows(0) !Importir & "', '" & RS05.Rows(0) !tglPO & "', " &
-            "'" & RS05.Rows(0) !tglKirim & "', '" & Trim(Pelabuhan.Text) & "', " &
-            "'" & cmbCaraKirim.Text & "', '" & RS05.Rows(0) !Kode_Produk & "', " &
-            "'" & Trim(Replace(RS05.Rows(0) !Deskripsi, "'", "`")) & "', '" & RS05.Rows(0) !Kode_Buyer & "', " &
-            "" & RS05.Rows(0) !Jumlah & ", '" & RS05.Rows(0) !MataUang & "', " & RS05.Rows(0) !FOBBuyer & ", " &
-            "'" & RS05.Rows(0) !digit3yn & "', '" & RS05.Rows(0) !tglKirim & "', '', '', '', '', '', 'Y', " &
-            "'" & UserID & "', GetDate(), 0, 0, 0, 0, 0, 0, 0, '" & Trim(CatatanPI.Text) & "', " &
-            "" & RS05.Rows(0) !Jumlah & ", " & RS05.Rows(0) !PembagiEuro & ")"
+
+            MsgSQL = "INSERT INTO t_PI(IDRec, NoPI, NoPO, TglPI, StatusPI, Kode_Importir, Importir,  " &
+                "TglPO, ShipmentDate, Pelabuhan, CaraKirim, Kode_Produk, Produk, Kode_PImport, " &
+                "Jumlah, MataUang, HargaFOB, Digit3YN, ShipmentDateKode, PermintaanPO1, PermintaanPO2, " &
+                "PermintaanPO3, Pemenuhan1, Pemenuhan2, AktifYN, TransferYN, UserID, LastUPD, " &
+                "NilaiPI, UangMuka, KurangBayar, LabelingCost, SpecialPackaging, Fumigation, " &
+                "Phytosanitary, CatatanPI, QTYOSO, Konversi, FOBOSO, IdCompany) VALUES( '" & idRecord.Text & "',   " &
+                "'" & NoPI.Text & "', '" & Nopo.Text & "', '" & Format(tglPI.Value, "yyyy-MM-dd") & "', '', " &
+                " '" & RS05.Rows(0) !Kode_Importir & "', '" & RS05.Rows(0) !Importir & "', '" & RS05.Rows(0) !tglPO & "', " &
+                "'" & Format(TglKirim.Value, "yyyy-MM-dd") & "', '" & Trim(Pelabuhan.Text) & "', " &
+                "'" & cmbCaraKirim.Text & "', '" & RS05.Rows(0) !Kode_Produk & "', " &
+                "'" & Trim(Replace(RS05.Rows(0) !Deskripsi, "'", "`")) & "', '" & RS05.Rows(0) !Kode_Buyer & "', " &
+                "" & RS05.Rows(0) !Jumlah & ", '" & RS05.Rows(0) !MataUang & "', " & RS05.Rows(0) !FOBBuyer & ", " &
+                "'" & RS05.Rows(0) !digit3yn & "', '" & Format(TglKirim.Value, "yyyy-MM-dd") & "', '', '', '', '', '',  " &
+                "'Y', 'N', '" & UserID & "', GetDate(), 0, 0, 0, 0, 0, 0, 0, '" & Trim(CatatanPI.Text) & "', " &
+                "" & RS05.Rows(0) !Jumlah & ", " & RS05.Rows(0) !PembagiEuro & ", " & RS05.Rows(0) !FOBBuyer & ", 'PEKERTI')"
             Proses.ExecuteNonQuery(MsgSQL)
 
         End If
@@ -1332,7 +1352,7 @@ Public Class Form_PI
             objRep = New Rpt_PI
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("Terbilang", terbilang)
-            'objRep.SetParameterValue("DeliveryDate", DeliveryDate)
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep

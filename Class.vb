@@ -555,6 +555,7 @@ Public Class ClsKoneksi
     End Function
     Public Function FindKodeProdukSP(Cari As String, tNoSP As String) As String
         Dim MsgSQL As String, tKodeBrg As String = "", mKondisi As String = ""
+        FrmMenuUtama.TSKeterangan.Text = ""
         If Trim(Cari) = "" Then
             mKondisi = ""
         Else
@@ -574,7 +575,7 @@ Public Class ClsKoneksi
     End Function
     Public Function FindSP(Cari, tKodePerajin) As String
         Dim tNoSP As String = "", mKondisi As String = "", MsgSQL As String = ""
-
+        FrmMenuUtama.TSKeterangan.Text = ""
         If Trim(Cari) = "" Then
             mKondisi = ""
         Else
@@ -642,6 +643,7 @@ Public Class ClsKoneksi
     Public Function FindKodeProdukPO_SP(Cari As String, tNoPO As String) As String
         Dim RSD As New DataTable, mKondisi As String
         Dim MsgSQL As String, tKodeProduk As String = ""
+        FrmMenuUtama.TSKeterangan.Text = ""
         If Trim(Cari) = "" Then
             mKondisi = ""
         Else

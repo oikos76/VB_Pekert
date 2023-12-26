@@ -23,15 +23,15 @@ Partial Class Form_KodifPerajin
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_KodifPerajin))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -96,6 +96,7 @@ Partial Class Form_KodifPerajin
         Me.btnCari = New System.Windows.Forms.Button()
         Me.tCari = New System.Windows.Forms.TextBox()
         Me.Cari = New System.Windows.Forms.Label()
+        Me.btnGenerateCOAPerajin = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPageFormEntry_.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -149,6 +150,7 @@ Partial Class Form_KodifPerajin
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.btnGenerateCOAPerajin)
         Me.Panel4.Controls.Add(Me.cmdSimpan)
         Me.Panel4.Controls.Add(Me.cmdEdit)
         Me.Panel4.Controls.Add(Me.cmdHapus)
@@ -638,8 +640,8 @@ Partial Class Form_KodifPerajin
         '
         'Column1
         '
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle10
         Me.Column1.HeaderText = "Nama"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -647,8 +649,8 @@ Partial Class Form_KodifPerajin
         '
         'Column2
         '
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle11
         Me.Column2.HeaderText = "Kode Perajin"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -656,8 +658,8 @@ Partial Class Form_KodifPerajin
         '
         'Column3
         '
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column3.HeaderText = "Wilayah"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -665,8 +667,8 @@ Partial Class Form_KodifPerajin
         '
         'Column5
         '
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle13
         Me.Column5.HeaderText = "Alamat"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -692,8 +694,8 @@ Partial Class Form_KodifPerajin
         '
         'Column6
         '
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle14
         Me.Column6.HeaderText = "Bank"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -701,8 +703,8 @@ Partial Class Form_KodifPerajin
         '
         'Column7
         '
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle15
         Me.Column7.HeaderText = "Rekening"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
@@ -717,8 +719,8 @@ Partial Class Form_KodifPerajin
         '
         'Column14
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column14.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column14.DefaultCellStyle = DataGridViewCellStyle16
         Me.Column14.HeaderText = "Masih Produksi (Y/N)"
         Me.Column14.Name = "Column14"
         Me.Column14.ReadOnly = True
@@ -726,8 +728,8 @@ Partial Class Form_KodifPerajin
         '
         'Column9
         '
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle17
         Me.Column9.HeaderText = "Catatan"
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -742,8 +744,8 @@ Partial Class Form_KodifPerajin
         '
         'Column8
         '
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column8.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column8.DefaultCellStyle = DataGridViewCellStyle18
         Me.Column8.HeaderText = "Kode GL Piutang"
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
@@ -802,6 +804,18 @@ Partial Class Form_KodifPerajin
         Me.Cari.Size = New System.Drawing.Size(56, 16)
         Me.Cari.TabIndex = 48
         Me.Cari.Text = "Nama :"
+        '
+        'btnGenerateCOAPerajin
+        '
+        Me.btnGenerateCOAPerajin.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnGenerateCOAPerajin.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerateCOAPerajin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnGenerateCOAPerajin.Location = New System.Drawing.Point(789, 0)
+        Me.btnGenerateCOAPerajin.Name = "btnGenerateCOAPerajin"
+        Me.btnGenerateCOAPerajin.Size = New System.Drawing.Size(106, 34)
+        Me.btnGenerateCOAPerajin.TabIndex = 61
+        Me.btnGenerateCOAPerajin.Text = "Generate COA Perajin"
+        Me.btnGenerateCOAPerajin.UseVisualStyleBackColor = True
         '
         'Form_KodifPerajin
         '
@@ -892,4 +906,5 @@ Partial Class Form_KodifPerajin
     Friend WithEvents btnCari As Button
     Friend WithEvents tCari As TextBox
     Friend WithEvents Cari As Label
+    Friend WithEvents btnGenerateCOAPerajin As Button
 End Class

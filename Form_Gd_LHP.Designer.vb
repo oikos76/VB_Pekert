@@ -22,6 +22,7 @@ Partial Class Form_Gd_LHP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -148,6 +149,8 @@ Partial Class Form_Gd_LHP
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelEntry = New System.Windows.Forms.Panel()
+        Me.JumlahSP = New System.Windows.Forms.TextBox()
+        Me.JumlahPackPraLHP = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.JumlahBaik = New System.Windows.Forms.TextBox()
@@ -160,6 +163,7 @@ Partial Class Form_Gd_LHP
         Me.Produk = New System.Windows.Forms.TextBox()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageDaftar_.SuspendLayout()
         Me.PanelDaftarLHP.SuspendLayout()
@@ -1487,6 +1491,8 @@ Partial Class Form_Gd_LHP
         '
         'PanelEntry
         '
+        Me.PanelEntry.Controls.Add(Me.JumlahSP)
+        Me.PanelEntry.Controls.Add(Me.JumlahPackPraLHP)
         Me.PanelEntry.Controls.Add(Me.PanelInfo)
         Me.PanelEntry.Controls.Add(Me.Label11)
         Me.PanelEntry.Controls.Add(Me.Keterangan)
@@ -1527,6 +1533,34 @@ Partial Class Form_Gd_LHP
         Me.PanelEntry.Name = "PanelEntry"
         Me.PanelEntry.Size = New System.Drawing.Size(986, 543)
         Me.PanelEntry.TabIndex = 174
+        '
+        'JumlahSP
+        '
+        Me.JumlahSP.BackColor = System.Drawing.SystemColors.Window
+        Me.JumlahSP.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JumlahSP.Location = New System.Drawing.Point(357, 122)
+        Me.JumlahSP.Margin = New System.Windows.Forms.Padding(4)
+        Me.JumlahSP.MaxLength = 4
+        Me.JumlahSP.Name = "JumlahSP"
+        Me.JumlahSP.ReadOnly = True
+        Me.JumlahSP.Size = New System.Drawing.Size(50, 23)
+        Me.JumlahSP.TabIndex = 223
+        Me.JumlahSP.Text = "999.999"
+        Me.JumlahSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'JumlahPackPraLHP
+        '
+        Me.JumlahPackPraLHP.BackColor = System.Drawing.SystemColors.Window
+        Me.JumlahPackPraLHP.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JumlahPackPraLHP.Location = New System.Drawing.Point(302, 122)
+        Me.JumlahPackPraLHP.Margin = New System.Windows.Forms.Padding(4)
+        Me.JumlahPackPraLHP.MaxLength = 4
+        Me.JumlahPackPraLHP.Name = "JumlahPackPraLHP"
+        Me.JumlahPackPraLHP.ReadOnly = True
+        Me.JumlahPackPraLHP.Size = New System.Drawing.Size(50, 23)
+        Me.JumlahPackPraLHP.TabIndex = 222
+        Me.JumlahPackPraLHP.Text = "999.999"
+        Me.JumlahPackPraLHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label11
         '
@@ -1830,4 +1864,7 @@ Partial Class Form_Gd_LHP
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column17 As DataGridViewTextBoxColumn
     Friend WithEvents cmdExcel As Button
+    Friend WithEvents JumlahPackPraLHP As TextBox
+    Friend WithEvents JumlahSP As TextBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

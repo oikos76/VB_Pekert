@@ -717,7 +717,7 @@ Partial Class Form_SP_Contoh
         Me.Kode_Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Kode_Perajin.Location = New System.Drawing.Point(184, 190)
         Me.Kode_Perajin.Margin = New System.Windows.Forms.Padding(4)
-        Me.Kode_Perajin.MaxLength = 4
+        Me.Kode_Perajin.MaxLength = 5
         Me.Kode_Perajin.Name = "Kode_Perajin"
         Me.Kode_Perajin.Size = New System.Drawing.Size(65, 22)
         Me.Kode_Perajin.TabIndex = 167

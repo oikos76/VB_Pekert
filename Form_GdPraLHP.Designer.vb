@@ -1073,7 +1073,7 @@ Partial Class Form_GdPraLHP
         '
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Column11.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Column11.HeaderText = "di terima"
+        Me.Column11.HeaderText = "Kirim"
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
         Me.Column11.Width = 120

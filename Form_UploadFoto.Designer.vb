@@ -33,12 +33,14 @@ Partial Class Form_UploadFoto
         Me.userUpdate = New System.Windows.Forms.Label()
         Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Jenis = New System.Windows.Forms.Label()
         Me.PanelGambar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelGambar
         '
+        Me.PanelGambar.Controls.Add(Me.Jenis)
         Me.PanelGambar.Controls.Add(Me.PictureBox1)
         Me.PanelGambar.Controls.Add(Me.namaFile)
         Me.PanelGambar.Controls.Add(Me.btnBrowseImg)
@@ -141,6 +143,16 @@ Partial Class Form_UploadFoto
         Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdSimpan.UseVisualStyleBackColor = True
         '
+        'Jenis
+        '
+        Me.Jenis.AutoSize = True
+        Me.Jenis.Location = New System.Drawing.Point(14, 207)
+        Me.Jenis.Name = "Jenis"
+        Me.Jenis.Size = New System.Drawing.Size(31, 13)
+        Me.Jenis.TabIndex = 95
+        Me.Jenis.Text = "Jenis"
+        Me.Jenis.Visible = False
+        '
         'Form_UploadFoto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -151,6 +163,7 @@ Partial Class Form_UploadFoto
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form_UploadFoto"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Upload Foto"
         Me.PanelGambar.ResumeLayout(False)
         Me.PanelGambar.PerformLayout()
@@ -169,4 +182,5 @@ Partial Class Form_UploadFoto
     Friend WithEvents userUpdate As Label
     Friend WithEvents cmdSimpan As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents Jenis As Label
 End Class

@@ -188,7 +188,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("C:\Intel\FotoPKTD:\FotoProduct")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\FotoProduct")>  _
         Public Property path_foto() As String
             Get
                 Return CType(Me("path_foto"),String)

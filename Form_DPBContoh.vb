@@ -31,6 +31,7 @@ Public Class Form_DPBContoh
 
     Private Sub cmdSimpan_Click(sender As Object, e As EventArgs) Handles cmdSimpan.Click
         Dim MsgSQL As String, dbS As New DataTable
+        If Trim(OngKir.Text) = "" Then OngKir.Text = 0
         If LAdd Then
             MsgSQL = "Select convert(Char(2), GetDate(), 12) thn, 
                              isnull(Max(substring(NoDPB,8,3)),0) + 10001 RecId  

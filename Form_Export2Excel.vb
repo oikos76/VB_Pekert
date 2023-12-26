@@ -1,8 +1,10 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
 Imports System.IO.Directory
+Imports System.IO
 Imports Microsoft.Office.Interop.Excel 'Before you add this refrence to your project you need to install Microsoft Office and find last version of this file.
 Imports Microsoft.Office.Interop
+
 
 Public Class Form_Export2Excel
     Dim MsgSQL As String = ""
@@ -150,28 +152,54 @@ Public Class Form_Export2Excel
         oExcel = CreateObject("Excel.Application")
         oBook = oExcel.Workbooks.Add(Type.Missing)
         oSheet = oBook.Worksheets(1)
-        Dim tTotal As Double = 0
+        Dim tTotal As Double = 0, tTotalQTY As Double = 0
         MsgSQL = "Select Sum (JumlahBoks * JumlahTiapBoks * HargaFOB) SubTotal " &
             " From t_PackingList " &
             "Where t_PackingList.NoPackingList = '" & idRec.Text & "' "
         tTotal = Proses.ExecuteSingleDblQuery(MsgSQL)
 
-        oSheet.Cells(4, 2) = "Packing List No " + idRec.Text
-        oSheet.Range("B4:B4").Font.Bold = True
+        Dim logoFile As String = My.Application.Info.DirectoryPath.ToString + "\biaozhi_p.jpg"
 
-        oSheet.Cells(6, 1) = "No."
-        oSheet.Cells(6, 2) = "Our Code"
-        oSheet.Cells(6, 3) = "Your Code"
-        oSheet.Cells(6, 4) = "Description"
-        oSheet.Cells(6, 5) = "QTY"
-        oSheet.Cells(6, 6) = "FOB Price (USD)"
-        oSheet.Cells(7, 6) = "Unit"
-        oSheet.Cells(7, 7) = "Total"
-        oSheet.Range("F6:G6").Merge()
-        oSheet.Cells(6, 6).HorizontalAlignment = Excel.Constants.xlCenter
+        'oSheet.Shapes.AddPicture("C:\Sample Pictures\p.jpg", False, True, 0, 0, 45, 50)
+
+
+        oSheet.Cells(1, 3) = "PEKERTI NUSANTARA PT."
+        oSheet.Cells(2, 3) = "JL. RAYA BEKASI TIMUR"
+        oSheet.Cells(3, 3) = "KM 17. NO. 19A, JATINEGARA - CAKUNG"
+        oSheet.Cells(4, 3) = "JAKARTA TIMUR 13930"
+        oSheet.Cells(5, 3) = "INDONESIA"
+        oSheet.Cells(6, 3) = "PH. 62 21 460 0836  FAX 62-21 460 0836"
+        oSheet.Cells(7, 1) = "pekerti"
+        oSheet.Range("A7:B7").Merge()
+
+        oSheet.Cells(9, 1) = "Invoice No:"
+        oSheet.Cells(10, 1) = idRec.Text
+        oSheet.Range("A9:G9").Merge()
+        oSheet.Range("A10:G10").Merge()
+
+        oSheet.Cells(9, 1).HorizontalAlignment = Excel.Constants.xlCenter
+        oSheet.Cells(10, 1).HorizontalAlignment = Excel.Constants.xlCenter
+
+        oSheet.Cells(11, 1) = "No."
+        oSheet.Range("A11:A12").Merge()
+        oSheet.Cells(11, 2) = "Our Code"
+        oSheet.Range("B11:B12").Merge()
+        oSheet.Cells(11, 3) = "Your Code"
+        oSheet.Range("C11:C12").Merge()
+        oSheet.Cells(11, 4) = "Description"
+        oSheet.Range("D11:D12").Merge()
+        oSheet.Cells(11, 5) = "QTY"
+        oSheet.Range("E11:E12").Merge()
+        oSheet.Cells(11, 6) = "FOB Price (USD)"
+        oSheet.Range("F11:G11").Merge()
+        oSheet.Cells(11, 6).HorizontalAlignment = Excel.Constants.xlCenter
+        oSheet.Cells(12, 6) = "Unit"
+        oSheet.Cells(12, 7) = "Total"
+        oSheet.Range("A11:G12").HorizontalAlignment = Excel.Constants.xlCenter
+
         Cursor = Cursors.WaitCursor
 
-        Dim NoUrut As Integer = 1, i As Integer = 8, tQTY As Double = 0, mSubTot As Double = 0,
+        Dim NoUrut As Integer = 1, i As Integer = 13, tQTY As Double = 0, mSubTot As Double = 0,
             mTglPL As Date, mNoPO As String = "", NoBoks As String = "", boxes As String = ""
 
         MsgSQL = "SELECT Kode_Produk, NoPO, KodePImportir, Descript, t_PackingList.HargaFOB, " &
@@ -188,64 +216,87 @@ Public Class Form_Export2Excel
 
         dbTable = Proses.ExecuteQuery(MsgSQL)
         If dbTable.Rows.Count <> 0 Then
-            oSheet.Cells(1, 1) = dbTable.Rows(0) !Nama
-            oSheet.Cells(2, 1) = dbTable.Rows(0) !Alamat.Replace(vbCrLf, "")
-            oSheet.Range("A1:F1").Merge()
-            oSheet.Range("A2:F2").Merge()
-            oSheet.Range("A1:F2").Font.Bold = True
+            oSheet.Cells(1, 7) = dbTable.Rows(0) !Nama
+            oSheet.Cells(1, 7).HorizontalAlignment = Excel.Constants.xlRight
+            oSheet.Cells(2, 7) = dbTable.Rows(0) !Alamat.Replace(vbCrLf, "")
+            oSheet.Cells(2, 7).HorizontalAlignment = Excel.Constants.xlRight
+            oSheet.Range("E2:G4").WrapText = True
+            oSheet.Range("E2:G4").Merge()
+            oSheet.Range("E2:G4").EntireRow.AutoFit()
             mTglPL = dbTable.Rows(0) !TglPL
         End If
 
         Cursor = Cursors.WaitCursor
         For a = 0 To dbTable.Rows.Count - 1
             If mNoPO <> dbTable.Rows(a) !NoPO Then
-                If mNoPO <> "" Then
-                    oSheet.Cells(i, 6) = "Sub Total PO No : " & mNoPO & " : "
-                    oSheet.Cells(i, 7) = Format(mSubTot, "###,##0.00")
-                    i = i + 1
-                End If
-                oSheet.Cells(i, 2) = "No. PO : " + IIf(dbTable.Rows(a) !NoPO = "", "PEKERTI", dbTable.Rows(a) !NoPO)
+                'If mNoPO <> "" Then
+                '    oSheet.Cells(i, 6) = "Sub Total PO No : " & mNoPO & " : "
+                '    oSheet.Cells(i, 7) = Format(mSubTot, "###,##0.00")
+                '    i = i + 1
+                'End If
+                oSheet.Cells(i, 4) = "No. PO : " + IIf(dbTable.Rows(a) !NoPO = "", "PEKERTI", dbTable.Rows(a) !NoPO)
+                oSheet.Cells(i, 4).HorizontalAlignment = Excel.Constants.xlCenter
                 i = i + 1
                 mSubTot = 0
             End If
 
             oSheet.Cells(i, 1) = Format(NoUrut, "###,##0")
-            oSheet.Cells(i, 2) = dbTable.Rows(a) !Kode_Produk
-            oSheet.Cells(i, 3) = dbTable.Rows(a) !KodePImportir
+            oSheet.Cells(i, 2) = dbTable.Rows(a) !Kode_Produk.ToString
+            oSheet.Cells(i, 3) = dbTable.Rows(a) !KodePImportir.ToString
             oSheet.Cells(i, 4) = dbTable.Rows(a) !Descript
             oSheet.Cells(i, 5) = Format(dbTable.Rows(a) !qty, "###,##0.00")
             oSheet.Cells(i, 6) = Format(dbTable.Rows(a) !HargaFOB, "###,##0.00")
             oSheet.Cells(i, 7) = Format(dbTable.Rows(a) !SubTot, "###,##0.00")
             mSubTot = mSubTot + dbTable.Rows(a) !SubTot
             mNoPO = dbTable.Rows(a) !NoPO
-            If a = dbTable.Rows.Count - 1 Then
-                i += 1
-                oSheet.Cells(i, 6) = "Sub Total PO No : " & mNoPO & " : "
-                oSheet.Cells(i, 6).HorizontalAlignment = Excel.Constants.xlRight
-                oSheet.Cells(i, 7) = Format(mSubTot, "###,##0.00")
-            End If
+            tTotalQTY = tTotalQTY + dbTable.Rows(a) !qty
+            'If a = dbTable.Rows.Count - 1 Then
+            '    i += 1
+            '    oSheet.Cells(i, 6) = "Sub Total PO No : " & mNoPO & " : "
+            '    oSheet.Cells(i, 6).HorizontalAlignment = Excel.Constants.xlRight
+            '    oSheet.Cells(i, 7) = Format(mSubTot, "###,##0.00")
+            'End If
             i += 1
             NoUrut += 1
         Next (a)
+        oSheet.Range("A1:G11").Font.Bold = True
+        oSheet.Cells(i, 4) = "T O T A L   A M O U N T"
+        oSheet.Cells(i, 4).HorizontalAlignment = Excel.Constants.xlCenter
+        oSheet.Cells(i, 5) = Format(tTotalQTY, "###,##0.00")
+        oSheet.Cells(i, 7) = Format(tTotal, "###,##0.00")
+        oSheet.Range("A" + Format(i, "##0") & ":G" + Format(i, "##0")).Font.Bold = True
+        'oSheet.Range("A11:" & "G" + Format(i, "##0")).EntireColumn.AutoFit()
+        oSheet.Range("A11").ColumnWidth = 4
+        oSheet.Range("B11").ColumnWidth = 15
+        oSheet.Range("C11").ColumnWidth = 15
+        oSheet.Range("D11").ColumnWidth = 35
+        oSheet.Range("E11").ColumnWidth = 7
+        oSheet.Range("F11").ColumnWidth = 9
+        oSheet.Range("G11").ColumnWidth = 9
+        oSheet.Range("A13:D" + Format(i, "##0")).WrapText = True
+
+        'oSheet.Columns("D").WrapText = True
+
+        oSheet.Range("A11:G" + Format(i, "##0")).Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous
+        oSheet.Range("A11:G" + Format(i, "##0")).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter
+        i = i + 2
+        oSheet.Cells(i, 7) = "Jakarta, " & Format(mTglPL, "dd MMMM yyyy")
+        oSheet.Cells(i, 7).HorizontalAlignment = Excel.Constants.xlRight
+        oSheet.Range("E" + Format(i, "##0") + ":G" + Format(i, "##0")).Merge()
+
+        i = i + 5
+        oSheet.Cells(i, 7) = "MARNO"
+        oSheet.Cells(i, 7).HorizontalAlignment = Excel.Constants.xlRight
+        oSheet.Range("E" + Format(i, "##0") + ":G" + Format(i, "##0")).Merge()
 
         i = i + 1
-        oSheet.Cells(i, 6) = "Total :"
-        oSheet.Cells(i, 6).HorizontalAlignment = Excel.Constants.xlRight
-        oSheet.Cells(i, 7) = Format(tTotal, "###,##0")
-        i = i + 2
-        oSheet.Cells(i, 6) = "Jakarta, " & Format(mTglPL, "dd MMMM yyyy")
-        i = i + 6
-        oSheet.Cells(i, 6) = "RUDIONO"
-        i = i + 1
-        oSheet.Cells(i, 6) = "EXPORT DEPT"
+        oSheet.Cells(i, 7) = "EXPORT DEPT"
+        oSheet.Cells(i, 7).HorizontalAlignment = Excel.Constants.xlRight
+        oSheet.Range("E" + Format(i, "##0") + ":G" + Format(i, "##0")).Merge()
+
 
         Dim fileName As String = locFile.Text & "\PLi_" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
-        'oSheet.Range("A1:L3").Font.Bold = True
-        'oSheet.Range("A1:D1").Merge()
-        oSheet.Columns.AutoFit()
         oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
-
-        'Release the objects
         ReleaseObject(oSheet)
         oBook.Close(False, Type.Missing, Type.Missing)
         ReleaseObject(oBook)

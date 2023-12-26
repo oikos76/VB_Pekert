@@ -47,10 +47,10 @@ Partial Class Form_KodifProduk
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdHapus = New System.Windows.Forms.Button()
         Me.cmdTambah = New System.Windows.Forms.Button()
-        Me.cmdCari = New System.Windows.Forms.Button()
         Me.cmdVariasiMultiKode = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
         Me.cmdSimpan = New System.Windows.Forms.Button()
+        Me.cmdCari = New System.Windows.Forms.Button()
         Me.PanelEntry = New System.Windows.Forms.Panel()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabInfoHarga_ = New System.Windows.Forms.TabPage()
@@ -143,11 +143,18 @@ Partial Class Form_KodifProduk
         Me.PBar1 = New System.Windows.Forms.ProgressBar()
         Me.DGView = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.TKodeProduk = New System.Windows.Forms.TextBox()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -418,18 +425,6 @@ Partial Class Form_KodifProduk
         Me.cmdTambah.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdTambah.UseVisualStyleBackColor = True
         '
-        'cmdCari
-        '
-        Me.cmdCari.Image = CType(resources.GetObject("cmdCari.Image"), System.Drawing.Image)
-        Me.cmdCari.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCari.Location = New System.Drawing.Point(3, 3)
-        Me.cmdCari.Name = "cmdCari"
-        Me.cmdCari.Size = New System.Drawing.Size(77, 28)
-        Me.cmdCari.TabIndex = 175
-        Me.cmdCari.Text = "&Cari"
-        Me.cmdCari.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdCari.UseVisualStyleBackColor = True
-        '
         'cmdVariasiMultiKode
         '
         Me.cmdVariasiMultiKode.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -465,6 +460,18 @@ Partial Class Form_KodifProduk
         Me.cmdSimpan.Text = "&Simpan"
         Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.cmdSimpan.UseVisualStyleBackColor = True
+        '
+        'cmdCari
+        '
+        Me.cmdCari.Image = CType(resources.GetObject("cmdCari.Image"), System.Drawing.Image)
+        Me.cmdCari.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.cmdCari.Location = New System.Drawing.Point(3, 3)
+        Me.cmdCari.Name = "cmdCari"
+        Me.cmdCari.Size = New System.Drawing.Size(77, 28)
+        Me.cmdCari.TabIndex = 175
+        Me.cmdCari.Text = "&Cari"
+        Me.cmdCari.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdCari.UseVisualStyleBackColor = True
         '
         'PanelEntry
         '
@@ -906,11 +913,11 @@ Partial Class Form_KodifProduk
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.PanelCariKode)
         Me.Panel2.Controls.Add(Me.PanelPicture)
         Me.Panel2.Controls.Add(Me.GBoxInfoDimensi)
         Me.Panel2.Controls.Add(Me.GBoxInfoUmum)
         Me.Panel2.Controls.Add(Me.GBoxCatatanTambahan)
-        Me.Panel2.Controls.Add(Me.PanelCariKode)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 283)
         Me.Panel2.Name = "Panel2"
@@ -1324,11 +1331,11 @@ Partial Class Form_KodifProduk
         Me.Kode_Perajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Kode_Perajin.Location = New System.Drawing.Point(180, 15)
         Me.Kode_Perajin.Margin = New System.Windows.Forms.Padding(4)
-        Me.Kode_Perajin.MaxLength = 4
+        Me.Kode_Perajin.MaxLength = 5
         Me.Kode_Perajin.Name = "Kode_Perajin"
         Me.Kode_Perajin.Size = New System.Drawing.Size(57, 22)
         Me.Kode_Perajin.TabIndex = 0
-        Me.Kode_Perajin.Text = "0003"
+        Me.Kode_Perajin.Text = "12345"
         '
         'KodePerajin2
         '
@@ -1483,14 +1490,13 @@ Partial Class Form_KodifProduk
         Me.DGView.AllowUserToDeleteRows = False
         Me.DGView.AllowUserToOrderColumns = True
         Me.DGView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5})
+        Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column12, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column8, Me.Column9, Me.Column10, Me.Column11})
         Me.DGView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGView.Location = New System.Drawing.Point(4, 74)
         Me.DGView.Margin = New System.Windows.Forms.Padding(4)
         Me.DGView.Name = "DGView"
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
-        Me.DGView.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGView.RowTemplate.ReadOnly = True
         Me.DGView.Size = New System.Drawing.Size(988, 495)
         Me.DGView.TabIndex = 9
@@ -1501,6 +1507,13 @@ Partial Class Form_KodifProduk
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         Me.Column1.Width = 150
+        '
+        'Column12
+        '
+        Me.Column12.HeaderText = "Kode Perajin"
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        Me.Column12.Width = 150
         '
         'Column2
         '
@@ -1530,9 +1543,37 @@ Partial Class Form_KodifProduk
         Me.Column5.ReadOnly = True
         Me.Column5.Width = 175
         '
+        'Column8
+        '
+        Me.Column8.HeaderText = "Kode Perajin"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Width = 140
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "Tanggal"
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Description"
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        Me.Column10.Width = 300
+        '
+        'Column11
+        '
+        Me.Column11.HeaderText = "-"
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        '
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label36)
+        Me.Panel3.Controls.Add(Me.TKodeProduk)
         Me.Panel3.Controls.Add(Me.Label30)
         Me.Panel3.Controls.Add(Me.Label29)
         Me.Panel3.Controls.Add(Me.Label28)
@@ -1550,47 +1591,67 @@ Partial Class Form_KodifProduk
         Me.Panel3.Size = New System.Drawing.Size(988, 70)
         Me.Panel3.TabIndex = 0
         '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.Location = New System.Drawing.Point(440, 41)
+        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(97, 19)
+        Me.Label36.TabIndex = 176
+        Me.Label36.Text = "Kode Produk :"
+        '
+        'TKodeProduk
+        '
+        Me.TKodeProduk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TKodeProduk.Location = New System.Drawing.Point(545, 41)
+        Me.TKodeProduk.Margin = New System.Windows.Forms.Padding(4)
+        Me.TKodeProduk.Name = "TKodeProduk"
+        Me.TKodeProduk.Size = New System.Drawing.Size(93, 22)
+        Me.TKodeProduk.TabIndex = 175
+        '
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(338, 7)
+        Me.Label30.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(331, 7)
         Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(128, 16)
+        Me.Label30.Size = New System.Drawing.Size(109, 19)
         Me.Label30.TabIndex = 174
         Me.Label30.Text = "Fungsi Barang :"
         '
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.Location = New System.Drawing.Point(9, 7)
         Me.Label29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(120, 16)
+        Me.Label29.Size = New System.Drawing.Size(104, 19)
         Me.Label29.TabIndex = 173
         Me.Label29.Text = "Nama Perajin :"
         '
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(676, 7)
+        Me.Label28.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Location = New System.Drawing.Point(686, 7)
         Me.Label28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(104, 16)
+        Me.Label28.Size = New System.Drawing.Size(94, 19)
         Me.Label28.TabIndex = 172
         Me.Label28.Text = "Bahan Baku :"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(628, 44)
+        Me.Label13.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(659, 41)
         Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(152, 16)
+        Me.Label13.Size = New System.Drawing.Size(121, 19)
         Me.Label13.TabIndex = 171
         Me.Label13.Text = "Diskripsi Produk :"
         '
@@ -1619,7 +1680,7 @@ Partial Class Form_KodifProduk
         Me.cmbNamaPerajin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbNamaPerajin.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbNamaPerajin.FormattingEnabled = True
-        Me.cmbNamaPerajin.Location = New System.Drawing.Point(133, 4)
+        Me.cmbNamaPerajin.Location = New System.Drawing.Point(119, 4)
         Me.cmbNamaPerajin.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbNamaPerajin.Name = "cmbNamaPerajin"
         Me.cmbNamaPerajin.Size = New System.Drawing.Size(194, 24)
@@ -1630,7 +1691,7 @@ Partial Class Form_KodifProduk
         Me.CmbFungsi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbFungsi.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbFungsi.FormattingEnabled = True
-        Me.CmbFungsi.Location = New System.Drawing.Point(469, 4)
+        Me.CmbFungsi.Location = New System.Drawing.Point(444, 4)
         Me.CmbFungsi.Margin = New System.Windows.Forms.Padding(4)
         Me.CmbFungsi.Name = "CmbFungsi"
         Me.CmbFungsi.Size = New System.Drawing.Size(194, 24)
@@ -1639,7 +1700,7 @@ Partial Class Form_KodifProduk
         'JRec
         '
         Me.JRec.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.JRec.Location = New System.Drawing.Point(411, 41)
+        Me.JRec.Location = New System.Drawing.Point(335, 42)
         Me.JRec.Margin = New System.Windows.Forms.Padding(4)
         Me.JRec.Name = "JRec"
         Me.JRec.Size = New System.Drawing.Size(60, 22)
@@ -1648,11 +1709,11 @@ Partial Class Form_KodifProduk
         'Cari
         '
         Me.Cari.AutoSize = True
-        Me.Cari.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cari.Location = New System.Drawing.Point(9, 44)
+        Me.Cari.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cari.Location = New System.Drawing.Point(9, 41)
         Me.Cari.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Cari.Name = "Cari"
-        Me.Cari.Size = New System.Drawing.Size(400, 16)
+        Me.Cari.Size = New System.Drawing.Size(318, 19)
         Me.Cari.TabIndex = 48
         Me.Cari.Text = "Total Produk Berdasarkan Kriteria di Atas (pcs) :"
         '
@@ -2010,11 +2071,6 @@ Partial Class Form_KodifProduk
     Friend WithEvents btnNext As Button
     Friend WithEvents btnPrev As Button
     Friend WithEvents btnTop As Button
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Panel7 As Panel
     Friend WithEvents lstVwMultiKode As DataGridView
@@ -2069,4 +2125,16 @@ Partial Class Form_KodifProduk
     Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+    Friend WithEvents Label36 As Label
+    Friend WithEvents TKodeProduk As TextBox
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
 End Class

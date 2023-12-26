@@ -21,6 +21,8 @@ Public Class Form_DPB
         If Trim(nodpb.Text) = "" Then
             MsgBox("No DPB masih kosong!", vbCritical, ".:ERROR!")
             Exit Sub
+        Else
+            nodpb.ReadOnly = True
         End If
         LTambahKode = True
         LAdd = False
@@ -45,10 +47,20 @@ Public Class Form_DPB
     Private Sub cmdSimpan_Click(sender As Object, e As EventArgs) Handles cmdSimpan.Click
         Dim MsgSQL As String
         Dim rs04 As New DataTable, rs05 As New DataTable
-        If LAdd Or LEdit Or LTambahKode Then
+        If LTambahKode Then
             If Trim(nodpb.Text) = "" Then
                 MsgBox("No DPB masih kosong!", vbOKOnly + vbCritical, ".:ERROR!")
                 nodpb.Focus()
+                Exit Sub
+            End If
+        End If
+        If LAdd Then
+            GetMaxIdDPB
+        End If
+        If LAdd Or LEdit Or LTambahKode Then
+            If Trim(NoLHP.Text) = "" Then
+                MsgBox("No LHP masih kosong!", vbOKOnly + vbCritical, ".:ERROR!")
+                NoSP.Focus()
                 Exit Sub
             End If
             If Trim(OngKir.Text) = "" Then OngKir.Text = 0
@@ -225,6 +237,7 @@ Public Class Form_DPB
                 End If
             End If
         Next
+        TglDPB.Value = Now()
         ShowFoto("")
     End Sub
 
@@ -315,6 +328,7 @@ Public Class Form_DPB
 
     Private Sub NoLHP_TextChanged(sender As Object, e As EventArgs) Handles NoLHP.TextChanged
         If Len(Trim(NoLHP.Text)) < 1 Then
+            NoLHP.Text = ""
             NoSP.Text = ""
             Pengirim.Text = ""
             SPB.Text = ""
@@ -439,8 +453,8 @@ Public Class Form_DPB
         LTambahKode = False
         AturTombol(False)
         ClearTextBoxes()
-        nodpb.Text = Proses.MaxYNoUrut("NoDPB", "t_DPB", "DPB")
-        NoLHP.Focus()
+        TglDPB.Focus()
+        nodpb.ReadOnly = False
     End Sub
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
         If Trim(IDRecord.Text) = "" Then
@@ -558,12 +572,15 @@ Public Class Form_DPB
         If cariKodeBrg.Text <> "" Then
             mKondisi = " and t_DPB.Kode_Produk like '%" & cariKodeBrg.Text & "%' "
         End If
-        MsgSQL = "Select distinct NoDPB, TglDPB, pengirim as NamaPerajin, right(nodpb,2) + left(nodpb,3) " &
+        If Trim(mKondisi) = "" Then
+            mKondisi = " and convert(char(8), TglDPB, 112)   >= convert(char(8),  DATEADD(m, -12, getdate()) , 112)  "
+        End If
+        MsgSQL = "Select distinct NoDPB, TglDPB, pengirim as NamaPerajin, right(nodpb,2) + substring(nodpb, 5, 1) + left(nodpb,3) " &
             " From t_DPB  " &
-            "Where t_DPB.AktifYN = 'Y' " & mKondisi & "  " &
+            "Where t_DPB.AktifYN = 'Y' " &
             "  and right(nodpb,2) not in ('s/', '99') " &
-            "  and year(TglDPB) > 1999 " &
-            "Order By right(nodpb,2) + left(nodpb,3) desc, TglDPB Desc, nodpb Desc "
+            "  " & mKondisi & " " &
+            "Order By TglDPB Desc, right(nodpb,2) + substring(nodpb, 5, 1) + left(nodpb,3) Desc, nodpb Desc "
         RSDaf = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To RSDaf.Rows.Count - 1
             Application.DoEvents()
@@ -709,6 +726,11 @@ Public Class Form_DPB
         LAdd = False
         LEdit = False
         LTambahKode = False
+        DaftarDPB()
+    End Sub
+
+    Private Sub TglDPB_ValueChanged(sender As Object, e As EventArgs) Handles TglDPB.ValueChanged
+
     End Sub
 
     Private Sub NoLHP_GotFocus(sender As Object, e As EventArgs) Handles NoLHP.GotFocus
@@ -760,10 +782,50 @@ Public Class Form_DPB
             Beep()
         End If
     End Sub
+    Private Sub GetMaxIdDPB()
+        Dim code As String = "",
+            MsgSQL As String, RsMax As New DataTable
 
+        SQL = "SELECT substring(nosp, 5,1) From t_LHP " &
+             " Where NoLHP = '" & NoLHP.Text & "' " &
+             "Group by substring(nosp, 5, 1) "
+        code = Proses.ExecuteSingleStrQuery(SQL)
+
+        MsgSQL = "Select convert(Char(2), GetDate(), 12) TGL, " &
+            "      isnull(Max(left(NoDPB, 3)),0) + 1000001 RecId " &
+            " From t_DPB " &
+            "Where Right(NoDPB, 8) = '" & code & "' + '/DPB/' + convert(Char(2), GetDate(), 12)  " &
+            "  And aktifYN = 'Y' "
+        RsMax = Proses.ExecuteQuery(MsgSQL)
+        If LAdd Then
+            nodpb.Text = Microsoft.VisualBasic.Right(RsMax.Rows(0) !recid, 3) + "/" + code + "/DPB/" +
+            Trim(Str(RsMax.Rows(0) !tGL))
+        End If
+
+        'NoSP.Text = Proses.ExecuteSingleStrQuery(SQL)
+
+        'MsgSQL = "INSERT INTO t_DPB(IdRec, NoDPB, TglDPB, NoSP, NoLHP, " &
+        '    " Kode_Produk, NamaProduk, KodePerajin, Jumlah, HargaBeli, " &
+        '    " DeadlineSP, Ongkir, SpecProduk,Keterangan, Pengirim, SPB, " &
+        '    " TglTerima, Kargo, AktifYN, LastUPD, UserID, tglcetak,ID," &
+        '    " StatusDPB, TransferYN) VALUES('" & IDRecord.Text & "', '" & nodpb.Text & "',"
+
+
+        'nodpb.Text = Proses.MaxYNoUrut("NoDPB", "t_DPB", "DPB")
+
+        'Dim MsgSQL As String, RsMax As New DataTable
+        'MsgSQL = "Select convert(Char(2), GetDate(), 12) TGL, isnull(Max(left(" & tField & ",3)),0) + 1000001 RecId " &
+        '    " From " & tTable & " " &
+        '    "Where Right(" & tField & ",2) = convert(Char(2), GetDate(), 12) and aktifYN = 'Y'  "
+        'RsMax = ExecuteQuery(MsgSQL)
+        'MaxYNoUrut = Microsoft.VisualBasic.Right(RsMax.Rows(0) !recid, 3) + "/" + Kode + "/" +
+        '    Trim(Str(RsMax.Rows(0) !tGL))
+
+    End Sub
     Private Sub NoLHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoLHP.KeyPress
         If e.KeyChar = Chr(13) Then
             Dim rsN1 As New DataTable
+            NoLHP.Enabled = False
             NoLHP.Text = FindLHP(NoLHP.Text)
             MsgSQL = "Select NamaPerajin, a.NoSPB, a.TglTerima, a.Kargo " &
                 " From T_LHP a " &
@@ -774,6 +836,7 @@ Public Class Form_DPB
                 SPB.Text = rsN1.Rows(0) !NoSPB
                 TglTerima.Value = rsN1.Rows(0) !TglTerima
                 Kargo.Text = rsN1.Rows(0) !Kargo
+                getMaxIDDPB()
                 OngKir.Focus()
             Else
                 NoSP.Text = ""
@@ -783,6 +846,7 @@ Public Class Form_DPB
                 OngKir.Text = 0
                 NoLHP.Focus()
             End If
+            NoLHP.Enabled = True
         End If
     End Sub
 
@@ -835,6 +899,12 @@ Public Class Form_DPB
         e.KeyChar = UCase(e.KeyChar)
         If e.KeyChar = Chr(13) Then
             cmdSimpan.Focus()
+        End If
+    End Sub
+
+    Private Sub TglDPB_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TglDPB.KeyPress
+        If e.KeyChar = Chr(13) Then
+            NoLHP.Focus()
         End If
     End Sub
 End Class

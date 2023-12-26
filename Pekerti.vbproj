@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT230915\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT231127\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>42</ApplicationRevision>
+    <ApplicationRevision>52</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -148,6 +148,12 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Class.vb" />
     <Compile Include="Crypto.vb" />
+    <Compile Include="Rpt_GeneralLedger.Designer.vb">
+      <DependentUpon>Rpt_GeneralLedger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_GeneralLedger.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_DPB.Designer.vb">
       <DependentUpon>Form_DPB.vb</DependentUpon>
     </Compile>
@@ -673,6 +679,12 @@
       <DependentUpon>Rpt_Retur.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Rpt_SaldoAkhir.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_SaldoAkhir.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\Rpt_SP.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -685,15 +697,30 @@
     <Compile Include="Rpt_Jurnal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Rpt_LabaRugi.Designer.vb">
+      <DependentUpon>Rpt_LabaRugi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_LabaRugi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Rpt_Surat_Jalan.designer.vb">
       <DependentUpon>Rpt_Surat_Jalan.vb</DependentUpon>
     </Compile>
     <Compile Include="Rpt_Surat_Jalan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Rpt_TrialBalance.Designer.vb">
+      <DependentUpon>Rpt_TrialBalance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_TrialBalance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Terbilang.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Rpt_GeneralLedger.resx">
+      <DependentUpon>Rpt_GeneralLedger.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_DPB.resx">
       <DependentUpon>Form_DPB.vb</DependentUpon>
     </EmbeddedResource>
@@ -979,6 +1006,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_Retur.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_SaldoAkhir.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_SaldoAkhir.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_SP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_SP.vb</LastGenOutput>
@@ -986,14 +1017,21 @@
     <EmbeddedResource Include="Rpt_Jurnal.resx">
       <DependentUpon>Rpt_Jurnal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Rpt_LabaRugi.resx">
+      <DependentUpon>Rpt_LabaRugi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Rpt_Surat_Jalan.resx">
       <DependentUpon>Rpt_Surat_Jalan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rpt_TrialBalance.resx">
+      <DependentUpon>Rpt_TrialBalance.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

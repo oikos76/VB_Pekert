@@ -224,6 +224,7 @@ Public Class Form_KodifPerajin
         Else
             cmdHapus.Enabled = tAktif
         End If
+        btnGenerateCOAPerajin.Visible = tAktif
         CmbWilayah.SelectedIndex = -1
         CmbWilayah.Enabled = Not tAktif
         cmdBatal.Visible = Not tAktif
@@ -489,6 +490,60 @@ Public Class Form_KodifPerajin
         If e.KeyChar = Chr(13) Then
             Rekening.Focus()
         End If
+    End Sub
+
+    Private Sub btnGenerateCOAPerajin_Click(sender As Object, e As EventArgs) Handles btnGenerateCOAPerajin.Click
+        Me.Cursor = Cursors.WaitCursor
+        If MsgBox("Yakin re-numbering Kode GL Perajin ?", vbYesNo, "Confirmation !") = vbYes Then
+            Panel4.Enabled = False
+
+            SQL = "DELETE m_Perkiraan WHERE NO_SUB = '20.10.05.01' "
+            Proses.ExecuteNonQuery(SQL)
+
+            SQL = "DELETE m_Perkiraan WHERE NO_SUB = '10.10.15.01' "
+            Proses.ExecuteNonQuery(SQL)
+
+            SQL = "DELETE m_Perkiraan WHERE NO_SUB = '50.10.01.01' "
+            Proses.ExecuteNonQuery(SQL)
+
+            SQL = "Select A.*, isnull(kodepiutang,'') kode_piutang, isnull(kodehutang,'') kode_hutang " &
+            " From m_KodePerajin A " &
+            " Where A.AktifYN = 'Y'   " &
+            " Order By Nama "
+            dbTable = Proses.ExecuteQuery(SQL)
+            DGView.Rows.Clear()
+            DGView.Visible = False
+            For a = 0 To dbTable.Rows.Count - 1
+                Application.DoEvents()
+                NamaPerajin.Text = Trim(dbTable.Rows(a) !Nama)
+                KodePerajin.Text = Trim(dbTable.Rows(a) !KodePerajin)
+
+                SQL = "INSERT INTO m_Perkiraan(NO_PERKIRAAN, NO_SUB, " &
+                  "NM_PERKIRAAN, AKTIFYN, LASTUPD, SAkhir)VALUES( " &
+                  "'20.10.05.01." & KodePerajin.Text & "', " &
+                  "'20.10.05.01', 'Hutang Dagang " & Trim(NamaPerajin.Text) & "'," &
+                  "'Y', GetDate(), 0)"
+                Proses.ExecuteNonQuery(SQL)
+
+                SQL = "INSERT INTO m_Perkiraan(NO_PERKIRAAN, NO_SUB, " &
+                    "NM_PERKIRAAN, AKTIFYN, LASTUPD, SAkhir)VALUES( " &
+                    "'10.10.15.01." & KodePerajin.Text & "', " &
+                    "'10.10.15.01', 'Piutang Dagang " & Trim(NamaPerajin.Text) & "'," &
+                    "'Y', GetDate(), 0)"
+                Proses.ExecuteNonQuery(SQL)
+
+                SQL = "INSERT INTO m_Perkiraan(NO_PERKIRAAN, NO_SUB, " &
+                    "NM_PERKIRAAN, AKTIFYN, LASTUPD, SAkhir)VALUES( " &
+                    "'50.10.01.01." & KodePerajin.Text & "', " &
+                    "'50.10.01.01', 'Pembelian dari " & Trim(NamaPerajin.Text) & "'," &
+                    "'Y', GetDate(), 0)"
+                Proses.ExecuteNonQuery(SQL)
+            Next a
+            MsgBox("Finish !", vbInformation + vbOKOnly, ".:Selesa!")
+        End If
+        ClearTextBoxes()
+        Panel4.Enabled = True
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub Rekening_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Rekening.KeyPress

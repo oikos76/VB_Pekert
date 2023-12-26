@@ -1039,7 +1039,7 @@ Partial Class Form_PI
         Me.KodeProduk.Name = "KodeProduk"
         Me.KodeProduk.Size = New System.Drawing.Size(130, 22)
         Me.KodeProduk.TabIndex = 263
-        Me.KodeProduk.Text = "0120-22-1182A"
+        Me.KodeProduk.Text = "12345-22-1182A"
         '
         'Produk
         '

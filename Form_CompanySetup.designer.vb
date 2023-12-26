@@ -74,6 +74,7 @@ Partial Class Form_CompanySetup
         Me.Label27 = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.cariTTD = New System.Windows.Forms.Button()
+        Me.cariTTKoodinator = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -214,7 +215,7 @@ Partial Class Form_CompanySetup
         Me.KoodinatorPraLHP.Location = New System.Drawing.Point(152, 224)
         Me.KoodinatorPraLHP.MaxLength = 50
         Me.KoodinatorPraLHP.Name = "KoodinatorPraLHP"
-        Me.KoodinatorPraLHP.Size = New System.Drawing.Size(309, 20)
+        Me.KoodinatorPraLHP.Size = New System.Drawing.Size(277, 20)
         Me.KoodinatorPraLHP.TabIndex = 9
         '
         'Label19
@@ -512,11 +513,21 @@ Partial Class Form_CompanySetup
         Me.cariTTD.TabIndex = 152
         Me.cariTTD.UseVisualStyleBackColor = True
         '
+        'cariTTKoodinator
+        '
+        Me.cariTTKoodinator.Image = CType(resources.GetObject("cariTTKoodinator.Image"), System.Drawing.Image)
+        Me.cariTTKoodinator.Location = New System.Drawing.Point(435, 224)
+        Me.cariTTKoodinator.Name = "cariTTKoodinator"
+        Me.cariTTKoodinator.Size = New System.Drawing.Size(26, 22)
+        Me.cariTTKoodinator.TabIndex = 153
+        Me.cariTTKoodinator.UseVisualStyleBackColor = True
+        '
         'Form_CompanySetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 422)
+        Me.Controls.Add(Me.cariTTKoodinator)
         Me.Controls.Add(Me.cariTTD)
         Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Label27)
@@ -622,4 +633,5 @@ Partial Class Form_CompanySetup
     Friend WithEvents Label27 As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents cariTTD As Button
+    Friend WithEvents cariTTKoodinator As Button
 End Class

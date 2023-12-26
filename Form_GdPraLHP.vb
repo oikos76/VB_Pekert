@@ -31,6 +31,7 @@ Public Class Form_GdPraLHP
         MsgSQL = "Select NoPraLHP, TglPraLHP, NamaPerajin, MAX(NoSP) NOSP, MAX(NoPO) NoPO  " &
             " From T_PraLHP " &
             "Where AktifYN = 'Y' " & mKondisi & " " &
+            "  AND convert(char(8), TglPraLHP, 112)   >= convert(char(8),  DATEADD(m, -18, getdate()) , 112) " &
             "Group By NoPraLHP, TglPraLHP, NamaPerajin  " &
             "ORDER BY TglPraLHP DESC, " &
             "         Right(NoPraLHP,2) + LEFT(nOpRALHP,3) Desc "
@@ -69,7 +70,8 @@ Public Class Form_GdPraLHP
         Dim MsgSQL As String, RSP As New DataTable
         On Error Resume Next
         MsgSQL = "Select * From T_PraLHP " &
-            "Where IDRec = '" & IDRecord.Text & "' "
+            "Where IDRec = '" & IDRecord.Text & "' " &
+            "  And aktifYN = 'Y' "
         RSP = Proses.ExecuteQuery(MsgSQL)
         If RSP.Rows.Count <> 0 Then
             NoPraLHP.Text = RSP.Rows(0) !NoPraLHP
@@ -121,6 +123,10 @@ Public Class Form_GdPraLHP
             MsgBox("No SP salah/tidak boleh kosong !", vbCritical + vbOKOnly, ".:Warning !")
             NoSP.Focus()
             Exit Sub
+        Else
+            If LAdd Then
+                getMaxIdPraLHP()
+            End If
         End If
         If LAdd Or LEdit Or LTambahKode Then
             If Trim(NoPraLHP.Text) = "" Then
@@ -274,8 +280,6 @@ Public Class Form_GdPraLHP
         If Trim(NoSP.Text) = "" Then
             MsgBox("No SP masih kosong!", vbCritical, ".:ERROR!")
             Exit Sub
-        Else
-            NoSP.ReadOnly = True
         End If
         LTambahKode = True
         LAdd = False
@@ -349,6 +353,36 @@ Public Class Form_GdPraLHP
         End If
     End Sub
 
+    Private Sub getMaxIdPraLHP()
+        Dim MsgSQL As String, RsMax As New DataTable, MaxNoUrut As String = ""
+        Dim Proses As New ClsKoneksi, Kode As String
+        If Trim(NoSP.Text) = "" Then
+            MsgBox("No SP tidak boleh kosong !", vbCritical + vbOKOnly, ".:Warning !")
+            Exit Sub
+        End If
+        Kode = Mid(NoSP.Text, 5, 1)
+        SQL = "Select NoSP, Kode_Perajin, Perajin " &
+                    " From T_SP " &
+                    "Where AktifYN='Y' and NoSP = '" & NoSP.Text & "' "
+        RsMax = Proses.ExecuteQuery(SQL)
+        If RsMax.Rows.Count = 0 Then
+            MsgBox("No SP " & NoSP.Text & " salah / tidak terdaftar", vbCritical + vbOKOnly, ".:Warning !")
+            NoSP.Focus()
+            Exit Sub
+        End If
+        MsgSQL = "Select convert(Char(2), GetDate(), 12) TGL, " &
+            "      isnull(Max(left(NoPraLHP, 3)),0) + 1000001 RecId " &
+            " From t_PraLHP " &
+            "Where Right(NoPraLHP, 9) = '" & Kode & "' + '/PLHP/' + convert(Char(2), GetDate(), 12)  " &
+            "  And aktifYN = 'Y' "
+        RsMax = Proses.ExecuteQuery(MsgSQL)
+        If LAdd Then
+            NoPraLHP.Text = Microsoft.VisualBasic.Right(RsMax.Rows(0) !recid, 3) + "/" + Kode + "/PLHP/" +
+                         Trim(Str(RsMax.Rows(0) !tGL))
+        End If
+
+    End Sub
+
     Private Sub cmdTambah_Click(sender As Object, e As EventArgs) Handles cmdTambah.Click
         LAdd = True
         LEdit = False
@@ -357,7 +391,8 @@ Public Class Form_GdPraLHP
         AturTombol(False)
         SQL = "Select KoordinatorPraLHP From M_Company "
         Koordinator.Text = Proses.ExecuteSingleStrQuery(SQL)
-        NoPraLHP.Text = Proses.MaxYNoUrut("NoPraLHP", "t_PraLHP", "PLHP")
+        'NoPraLHP.Text = Proses.MaxYNoUrut("NoPraLHP", "t_PraLHP", "PLHP")
+        'getMaxIdPraLHP()
         Kargo.Focus()
         NoPraLHP.ReadOnly = False
         NoSP.ReadOnly = False
@@ -453,7 +488,8 @@ Public Class Form_GdPraLHP
         Dim tIdRec As String
         MsgSQL = "Select Top 1 * From t_PraLHP " &
             "where AktifYN = 'Y' " &
-            "Order By TglPraLHP Desc, IdRec desc "
+            "ORDER BY TglPraLHP DESC, " &
+            "         Right(NoPraLHP,2) + LEFT(nOpRALHP,3) Desc "
         Rs = Proses.ExecuteQuery(MsgSQL)
         If Rs.Rows.Count <> 0 Then
             tIdRec = Rs.Rows(0) !IDRec
@@ -523,7 +559,7 @@ Public Class Form_GdPraLHP
     Private Sub NoSP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoSP.KeyPress
         Dim DBSP As New DataTable
         If e.KeyChar = Chr(13) Then
-            If LAdd Or LEdit Then
+            If LAdd Or LEdit Or LTambahKode Then
                 SQL = "Select NoSP, Kode_Perajin, Perajin " &
                     " From T_SP " &
                     "Where AktifYN='Y' and NoSP = '" & NoSP.Text & "' "
@@ -550,6 +586,9 @@ Public Class Form_GdPraLHP
                         NoSP.Text = ""
                         NoSP.Focus()
                     End If
+                End If
+                If LAdd And Trim(NoSP.Text) <> "" Then
+                    getMaxIdPraLHP()
                 End If
             End If
         End If
@@ -979,7 +1018,7 @@ Public Class Form_GdPraLHP
         Me.Cursor = Cursors.WaitCursor
         Dim tCari As String = DGView.Rows(DGView.CurrentCell.RowIndex).Cells(0).Value
         Dim MsgSQL As String, rsc As New DataTable, Terkirim As Double = 0, KurangKirim As Double = 0
-        MsgSQL = "Select IDRec, Produk, Kode_Produk, JumlahPack, Jumlah, HargaBeli, NoSP,NoPO " &
+        MsgSQL = "Select IDRec, Produk, Kode_Produk, JumlahPack, kirim, Jumlah, HargaBeli, NoSP,NoPO " &
             " From T_PraLHP " &
             "Where AktifYN = 'Y' " &
             "  And NoPraLHP = '" & tCari & "' " &
@@ -987,10 +1026,12 @@ Public Class Form_GdPraLHP
         rsc = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To rsc.Rows.Count - 1
             Application.DoEvents()
-            SQL = "Select Sum(JumlahBaik) JB From T_LHP " &
-                "Where Kode_Produk = '" & rsc.Rows(a) !Kode_Produk & "' " &
-                " And NoPraLHP = '" & tCari & "' "
-            Terkirim = Proses.ExecuteSingleDblQuery(SQL)
+            'SQL = "Select Sum(JumlahBaik) JB From T_LHP " &
+            '    "Where Kode_Produk = '" & rsc.Rows(a) !Kode_Produk & "' " &
+            '    " And NoPraLHP = '" & tCari & "' "
+            'Terkirim = Proses.ExecuteSingleDblQuery(SQL)
+            'KurangKirim = rsc.Rows(a) !JumlahPack - Terkirim
+            Terkirim = rsc.Rows(a) !kirim
             KurangKirim = rsc.Rows(a) !JumlahPack - Terkirim
             DGView2.Rows.Add(rsc.Rows(a) !IdRec,
                     rsc.Rows(a) !Kode_Produk,
@@ -1029,5 +1070,9 @@ Public Class Form_GdPraLHP
         ElseIf e.TabPageIndex = 1 Then
             DaftarPraLHP()
         End If
+    End Sub
+
+    Private Sub NoSP_KeyUp(sender As Object, e As KeyEventArgs) Handles NoSP.KeyUp
+
     End Sub
 End Class

@@ -182,3 +182,6 @@ C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.exe
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.xml
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.pdb
 C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti.vbprojResolveAssemblyReference.cache
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Rpt_GeneralLedger.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Rpt_TrialBalance.resources
+C:\me\VS_SanDisk\Pekerti\obj\x86\Debug\Pekerti_Root.Rpt_LabaRugi.resources

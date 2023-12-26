@@ -31,6 +31,10 @@ Partial Class Form_GD_PackingListInvoice
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GD_PackingListInvoice))
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.tgl_2 = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.tgl_1 = New System.Windows.Forms.DateTimePicker()
         Me.tKodeBrg = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Harga = New System.Windows.Forms.TextBox()
@@ -161,11 +165,15 @@ Partial Class Form_GD_PackingListInvoice
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 247)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1003, 292)
+        Me.Panel3.Size = New System.Drawing.Size(1038, 292)
         Me.Panel3.TabIndex = 158
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.Label2)
+        Me.Panel5.Controls.Add(Me.tgl_2)
+        Me.Panel5.Controls.Add(Me.Label1)
+        Me.Panel5.Controls.Add(Me.tgl_1)
         Me.Panel5.Controls.Add(Me.tKodeBrg)
         Me.Panel5.Controls.Add(Me.Label26)
         Me.Panel5.Controls.Add(Me.Harga)
@@ -179,14 +187,60 @@ Partial Class Form_GD_PackingListInvoice
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(735, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(268, 292)
+        Me.Panel5.Size = New System.Drawing.Size(303, 292)
         Me.Panel5.TabIndex = 10
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(174, 8)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(13, 18)
+        Me.Label2.TabIndex = 372
+        Me.Label2.Text = "-"
+        '
+        'tgl_2
+        '
+        Me.tgl_2.CalendarFont = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tgl_2.CustomFormat = "dd-MM-yyyy"
+        Me.tgl_2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tgl_2.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.tgl_2.Location = New System.Drawing.Point(193, 5)
+        Me.tgl_2.Margin = New System.Windows.Forms.Padding(4)
+        Me.tgl_2.Name = "tgl_2"
+        Me.tgl_2.Size = New System.Drawing.Size(105, 26)
+        Me.tgl_2.TabIndex = 371
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(9, 8)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(53, 18)
+        Me.Label1.TabIndex = 370
+        Me.Label1.Text = "Tgl. PL :"
+        '
+        'tgl_1
+        '
+        Me.tgl_1.CalendarFont = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tgl_1.CustomFormat = "dd-MM-yyyy"
+        Me.tgl_1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tgl_1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.tgl_1.Location = New System.Drawing.Point(64, 5)
+        Me.tgl_1.Margin = New System.Windows.Forms.Padding(4)
+        Me.tgl_1.Name = "tgl_1"
+        Me.tgl_1.Size = New System.Drawing.Size(105, 26)
+        Me.tgl_1.TabIndex = 369
         '
         'tKodeBrg
         '
         Me.tKodeBrg.BackColor = System.Drawing.SystemColors.Window
         Me.tKodeBrg.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tKodeBrg.Location = New System.Drawing.Point(64, 93)
+        Me.tKodeBrg.Location = New System.Drawing.Point(52, 114)
         Me.tKodeBrg.Margin = New System.Windows.Forms.Padding(4)
         Me.tKodeBrg.Name = "tKodeBrg"
         Me.tKodeBrg.Size = New System.Drawing.Size(165, 22)
@@ -196,7 +250,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(21, 74)
+        Me.Label26.Location = New System.Drawing.Point(9, 95)
         Me.Label26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(232, 16)
@@ -207,7 +261,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.Harga.BackColor = System.Drawing.SystemColors.Window
         Me.Harga.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Harga.Location = New System.Drawing.Point(64, 240)
+        Me.Harga.Location = New System.Drawing.Point(52, 261)
         Me.Harga.Margin = New System.Windows.Forms.Padding(4)
         Me.Harga.Name = "Harga"
         Me.Harga.ReadOnly = True
@@ -219,7 +273,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.TProd.BackColor = System.Drawing.SystemColors.Window
         Me.TProd.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TProd.Location = New System.Drawing.Point(64, 196)
+        Me.TProd.Location = New System.Drawing.Point(52, 217)
         Me.TProd.Margin = New System.Windows.Forms.Padding(4)
         Me.TProd.Name = "TProd"
         Me.TProd.ReadOnly = True
@@ -231,7 +285,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.JumProd.BackColor = System.Drawing.SystemColors.Window
         Me.JumProd.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.JumProd.Location = New System.Drawing.Point(64, 152)
+        Me.JumProd.Location = New System.Drawing.Point(52, 173)
         Me.JumProd.Margin = New System.Windows.Forms.Padding(4)
         Me.JumProd.Name = "JumProd"
         Me.JumProd.ReadOnly = True
@@ -243,7 +297,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.tNoPO.BackColor = System.Drawing.SystemColors.Window
         Me.tNoPO.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tNoPO.Location = New System.Drawing.Point(64, 45)
+        Me.tNoPO.Location = New System.Drawing.Point(52, 66)
         Me.tNoPO.Margin = New System.Windows.Forms.Padding(4)
         Me.tNoPO.Name = "tNoPO"
         Me.tNoPO.Size = New System.Drawing.Size(165, 22)
@@ -253,7 +307,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(21, 220)
+        Me.Label10.Location = New System.Drawing.Point(9, 241)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(224, 16)
@@ -264,7 +318,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.Label_11.AutoSize = True
         Me.Label_11.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_11.Location = New System.Drawing.Point(21, 177)
+        Me.Label_11.Location = New System.Drawing.Point(9, 198)
         Me.Label_11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label_11.Name = "Label_11"
         Me.Label_11.Size = New System.Drawing.Size(208, 16)
@@ -275,7 +329,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(21, 133)
+        Me.Label4.Location = New System.Drawing.Point(9, 154)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(232, 16)
@@ -286,7 +340,7 @@ Partial Class Form_GD_PackingListInvoice
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(21, 26)
+        Me.Label3.Location = New System.Drawing.Point(9, 47)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(208, 16)
@@ -401,7 +455,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.TabPageDaftar_.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPageDaftar_.Name = "TabPageDaftar_"
         Me.TabPageDaftar_.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPageDaftar_.Size = New System.Drawing.Size(1011, 543)
+        Me.TabPageDaftar_.Size = New System.Drawing.Size(1046, 543)
         Me.TabPageDaftar_.TabIndex = 0
         Me.TabPageDaftar_.Text = "Daftar Invoice"
         Me.TabPageDaftar_.UseVisualStyleBackColor = True
@@ -413,7 +467,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1003, 243)
+        Me.Panel2.Size = New System.Drawing.Size(1038, 243)
         Me.Panel2.TabIndex = 157
         '
         'DGView
@@ -430,7 +484,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
         Me.DGView.RowTemplate.ReadOnly = True
-        Me.DGView.Size = New System.Drawing.Size(1001, 241)
+        Me.DGView.Size = New System.Drawing.Size(1036, 241)
         Me.DGView.TabIndex = 156
         '
         'Column8
@@ -478,7 +532,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.TabPageFormEntry_.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPageFormEntry_.Name = "TabPageFormEntry_"
         Me.TabPageFormEntry_.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPageFormEntry_.Size = New System.Drawing.Size(1011, 543)
+        Me.TabPageFormEntry_.Size = New System.Drawing.Size(1046, 543)
         Me.TabPageFormEntry_.TabIndex = 1
         Me.TabPageFormEntry_.Text = "Packing List Invoice"
         Me.TabPageFormEntry_.UseVisualStyleBackColor = True
@@ -532,7 +586,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.PanelEntry.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEntry.Location = New System.Drawing.Point(4, 4)
         Me.PanelEntry.Name = "PanelEntry"
-        Me.PanelEntry.Size = New System.Drawing.Size(1003, 506)
+        Me.PanelEntry.Size = New System.Drawing.Size(1038, 506)
         Me.PanelEntry.TabIndex = 108
         '
         'Button1
@@ -1050,7 +1104,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.PanelFotoProduk.Controls.Add(Me.Panel1)
         Me.PanelFotoProduk.Controls.Add(Me.PanelExp2Excel)
         Me.PanelFotoProduk.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelFotoProduk.Location = New System.Drawing.Point(693, 0)
+        Me.PanelFotoProduk.Location = New System.Drawing.Point(728, 0)
         Me.PanelFotoProduk.Name = "PanelFotoProduk"
         Me.PanelFotoProduk.Size = New System.Drawing.Size(308, 504)
         Me.PanelFotoProduk.TabIndex = 0
@@ -1187,7 +1241,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.Panel_Tombol.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel_Tombol.Location = New System.Drawing.Point(4, 510)
         Me.Panel_Tombol.Name = "Panel_Tombol"
-        Me.Panel_Tombol.Size = New System.Drawing.Size(1003, 29)
+        Me.Panel_Tombol.Size = New System.Drawing.Size(1038, 29)
         Me.Panel_Tombol.TabIndex = 107
         '
         'PanelNavigate
@@ -1198,7 +1252,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.PanelNavigate.Controls.Add(Me.btnPrev)
         Me.PanelNavigate.Controls.Add(Me.btnTop)
         Me.PanelNavigate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelNavigate.Location = New System.Drawing.Point(723, 0)
+        Me.PanelNavigate.Location = New System.Drawing.Point(758, 0)
         Me.PanelNavigate.Name = "PanelNavigate"
         Me.PanelNavigate.Size = New System.Drawing.Size(189, 27)
         Me.PanelNavigate.TabIndex = 63
@@ -1258,7 +1312,7 @@ Partial Class Form_GD_PackingListInvoice
         Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
         Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.Location = New System.Drawing.Point(912, 0)
+        Me.cmdSimpan.Location = New System.Drawing.Point(947, 0)
         Me.cmdSimpan.Name = "cmdSimpan"
         Me.cmdSimpan.Size = New System.Drawing.Size(89, 27)
         Me.cmdSimpan.TabIndex = 8
@@ -1343,14 +1397,14 @@ Partial Class Form_GD_PackingListInvoice
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1019, 571)
+        Me.TabControl1.Size = New System.Drawing.Size(1054, 571)
         Me.TabControl1.TabIndex = 70
         '
         'Form_GD_PackingListInvoice
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1019, 571)
+        Me.ClientSize = New System.Drawing.Size(1054, 571)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Form_GD_PackingListInvoice"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1489,4 +1543,8 @@ Partial Class Form_GD_PackingListInvoice
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
+    Friend WithEvents Label2 As Label
+    Friend WithEvents tgl_2 As DateTimePicker
+    Friend WithEvents Label1 As Label
+    Friend WithEvents tgl_1 As DateTimePicker
 End Class

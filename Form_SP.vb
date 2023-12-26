@@ -243,17 +243,16 @@ Public Class Form_SP
                                 LstPO.Focus()
                                 Exit Sub
                             End If
-                            MsgSQL = "INSERT INTO t_SP(IDRec, NoSP, TglSP, TPO, PO, " &
-                                "NoPO, KodeImportir, Importir, ShipmentDate, Kode_Perajin, " &
-                                "Perajin, KodeProduk, Produk, KodePerajin, Jumlah, HargaBeliRP," &
-                                "HargaBeliUS, NilaiKurs, TglKirimPerajin, TglMasukGudang, " &
-                                "CatatanProduk, CatatanSP, StatusSP, FotoLoc, AktifYN, UserID, " &
-                                "LastUPD, Pernyataan, TransferYN, CatatanTambahan) VALUES('" & idRecord.Text & "', " &
-                                "'" & Trim(NoSP.Text) & "', '" & Format(TglSP.Value, "yyyy-MM-dd") & "', " &
+                            MsgSQL = "INSERT INTO t_SP(IDRec, NoSP, TglSP, TPO, PO, NoPO, KodeImportir, " &
+                                "Importir, ShipmentDate, Kode_Perajin, Perajin, KodeProduk, Produk,  " &
+                                "KodePerajin, Jumlah, HargaBeliRP, HargaBeliUS, NilaiKurs, TglKirimPerajin, " &
+                                "TglMasukGudang, CatatanProduk, CatatanSP, StatusSP, FotoLoc, AktifYN, UserID," &
+                                "LastUPD, Pernyataan, TransferYN, CatatanTambahan, IdCompany) VALUES ( " &
+                                "'" & idRecord.Text & "', '" & Trim(NoSP.Text) & "', " &
+                                "'" & Format(TglSP.Value, "yyyy-MM-dd") & "', " &
                                 "" & IIf(optTPO.Checked, 1, 0) & ", " & IIf(optPO.Checked, 1, 0) & ", " &
-                                " '" & Trim(NoPO.Text) & "', " &
-                                "'" & Kode_Importir.Text & "' , '" & Importir.Text & "', " &
-                                "'" & Format(ShipmentDate.Value, "yyyy-MM-dd") & "', " &
+                                " '" & Trim(NoPO.Text) & "', '" & Kode_Importir.Text & "' , " &
+                                "'" & Importir.Text & "',  '" & Format(ShipmentDate.Value, "yyyy-MM-dd") & "', " &
                                 "'" & Kode_Perajin.Text & "','" & Perajin.Text & "'," &
                                 " '" & LstPO.Rows(i).Cells(1).Value & "', " &
                                 " '" & Trim(LstPO.Rows(i).Cells(2).Value) & "', " &
@@ -266,7 +265,7 @@ Public Class Form_SP
                                 "'" & Format(TglMasukGudang.Value, "yyyy-MM-dd") & "', " &
                                 "'" & LstPO.Rows(i).Cells(8).Value & "', '" & Trim(CatatanSP.Text) & "', " &
                                 "'', '" & LocGmb1.Text & "', 'Y', '" & UserID & "', GetDate(), '', 'N', " &
-                                "'" & Trim(CatatanTambahan.Text) & "')"
+                                "'" & Trim(CatatanTambahan.Text) & "', 'PEKERTI')"
                             Proses.ExecuteNonQuery(MsgSQL)
                         End If
                     Next i
@@ -294,7 +293,7 @@ Public Class Form_SP
                     "Perajin, KodeProduk, Produk, KodePerajin, Jumlah, HargaBeliRP, " &
                     "HargaBeliUS, NilaiKurs, TglKirimPerajin, TglMasukGudang, " &
                     "CatatanProduk, CatatanSP, StatusSP, FotoLoc, AktifYN, UserID," &
-                    "LastUPD, Pernyataan, TransferYN, CatatanTambahan) VALUES(" &
+                    "LastUPD, Pernyataan, TransferYN, CatatanTambahan, IdCompany) VALUES(" &
                     "'" & idRecord.Text & "', '" & Trim(NoSP.Text) & "', " &
                     "'" & Format(TglSP.Value, "yyyy-MM-dd") & "', " &
                     "" & IIf(optTPO.Checked, 1, 0) & ", " & IIf(optPO.Checked, 1, 0) & ",  " &
@@ -308,7 +307,7 @@ Public Class Form_SP
                     "'" & Format(TglMasukGudang.Value, "yyyy-MM-dd") & "', " &
                     "'" & Trim(CatatanProduk.Text) & "', '" & Trim(CatatanSP.Text) & "', " &
                     "'', '" & LocGmb1.Text & "', 'Y', '" & UserID & "', GetDate(), '', 'N', " &
-                    "'" & Trim(CatatanTambahan.Text) & "')"
+                    "'" & Trim(CatatanTambahan.Text) & "', 'PEKERTI')"
                 Proses.ExecuteNonQuery(MsgSQL)
                 TambahKode_Click
             End If
@@ -845,16 +844,16 @@ ErrMSG:
             'terbilang = " " & tb.Terbilang(CDbl(IIf(rsc.Rows(0) !jvalue, 0, rsc.Rows(0) !jvalue))) & " "
             terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !jvalue)) & " "
         End If
-        Proses.CloseConn()
         TCetak = "Jakarta, " & Proses.TglIndo(Format(TglSP.Value, "dd-MM-yyyy"))
         MsgSQL = "SELECT t_SP.IDRec, t_SP.NoSP, t_SP.NoPO, t_SP.Kode_Perajin, " &
             "     t_SP.Perajin, t_SP.KodeProduk, t_SP.Produk, t_SP.KodePerajin, " &
             "     t_SP.Jumlah, t_SP.HargaBeliRP, t_SP.CatatanSP, m_KodeProduk.Panjang, " &
             "     m_KodeProduk.Lebar, m_KodeProduk.Tinggi,  m_KodeProduk.diameter, " &
             "     m_KodeProduk.tebal, m_KodeProduk.Satuan, m_KodeProduk.KodePerajin2, " &
-            "     t_SP.Importir, CatatanProduk, CatatanTambahan, CatatanSP " &
+            "     t_SP.Importir, CatatanProduk, CatatanTambahan, CatatanSP, direksi, ttDireksi " &
             "FROM Pekerti.dbo.t_SP t_SP INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk On " &
             "   t_SP.KodeProduk = m_KodeProduk.KodeProduk  " &
+            " INNER JOIN m_Company on idCompany = CompCode " &
             "Where t_SP.AktifYN = 'Y' " &
             "  And t_SP.NoSP = '" & NoSP.Text & "' " &
             "ORDER BY t_SP.IDRec, t_SP.NoPO ASC "
@@ -911,7 +910,7 @@ ErrMSG:
             lShipmentDate.Visible = True
             Kode_Importir.Text = ""
             If LAdd Then
-                NoSP.Text = Proses.MaxYNoUrut("NoSP", "t_SP", "E")
+                NoSP.Text = MaxNoUrut("E")
             ElseIf LEdit Then
             End If
         End If
@@ -1141,7 +1140,7 @@ ErrMSG:
             lShipmentDate.Visible = False
             NoPO.Text = ""
             If LAdd Or LEdit Then
-                If LAdd Then NoSP.Text = Proses.MaxYNoUrut("NoSP", "t_SP", "L")
+                If LAdd Then NoSP.Text = MaxNoUrut("L")
                 Kode_Importir.Text = "9999A"
                 SQL = "Select nama From m_kodeImportir " &
                   " Where KodeImportir = '" & Kode_Importir.Text & "' " &
@@ -1398,7 +1397,7 @@ ErrMSG:
         NilaiPesan.Text = ""
 
         MsgSQL = "Select Distinct NoSP, TglSP, NoPO, Importir, " &
-            "Perajin, ShipmentDate " &
+            "Perajin, ShipmentDate, TglMasukGudang " &
             "From t_SP " &
             "Where AktifYN = 'Y' " &
             " And NoSP Not IN (Select NoSP From t_PraLHP " &
@@ -1600,6 +1599,11 @@ ErrMSG:
             NoPO.Focus()
         End If
     End Sub
+
+    Private Sub DGView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellContentClick
+
+    End Sub
+
     Private Function CekDouble(tKodeProduk As String, tNoSP As String) As Double
         Dim MsgSQL As String, RSCek As New DataTable
         MsgSQL = "Select IDRec From t_SP " &
@@ -1647,4 +1651,15 @@ ErrMSG:
     Private Sub CatatanTambahan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanTambahan.KeyPress
         If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
     End Sub
+
+    Private Function MaxNoUrut(Jenis As String) As String
+        Dim RSMax As New DataTable
+        SQL = "  Select convert(Char(2), GetDate(), 12) TGL, right(isnull(Max(left(NoSP,3)),0) + 1000001,3) RecId 
+           From t_SP
+          Where Right(NoSP,2) = convert(Char(2), GetDate(), 12) and aktifYN = 'Y'
+            And SUBSTRING(nosp, 5,1) = '" & Jenis & "' "
+        RSMax = Proses.ExecuteQuery(SQL)
+        MaxNoUrut = Microsoft.VisualBasic.Right(RSMax.Rows(0) !recid, 3) + "/" + Jenis + "/" +
+            Trim(Str(RSMax.Rows(0) !tGL))
+    End Function
 End Class

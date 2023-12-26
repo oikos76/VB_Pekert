@@ -23,12 +23,12 @@ Partial Class Form_GD_DPL
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GD_DPL))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -133,17 +133,17 @@ Partial Class Form_GD_DPL
         Me.Label25 = New System.Windows.Forms.Label()
         Me.TabPageDaftar_ = New System.Windows.Forms.TabPage()
         Me.DGView = New System.Windows.Forms.DataGridView()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.tCari = New System.Windows.Forms.TextBox()
         Me.cmbCari = New System.Windows.Forms.ComboBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.PanelDaftarLHP = New System.Windows.Forms.Panel()
         Me.DGView2 = New System.Windows.Forms.DataGridView()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -425,7 +425,7 @@ Partial Class Form_GD_DPL
         Me.PanelEntry.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelEntry.Name = "PanelEntry"
         Me.PanelEntry.Size = New System.Drawing.Size(986, 543)
-        Me.PanelEntry.TabIndex = 174
+        Me.PanelEntry.TabIndex = 0
         '
         'idRec
         '
@@ -449,7 +449,7 @@ Partial Class Form_GD_DPL
         Me.KodeImportir.Name = "KodeImportir"
         Me.KodeImportir.ReadOnly = True
         Me.KodeImportir.Size = New System.Drawing.Size(58, 22)
-        Me.KodeImportir.TabIndex = 231
+        Me.KodeImportir.TabIndex = 8
         '
         'Label27
         '
@@ -472,7 +472,7 @@ Partial Class Form_GD_DPL
         Me.JumlahBoks.Name = "JumlahBoks"
         Me.JumlahBoks.ReadOnly = True
         Me.JumlahBoks.Size = New System.Drawing.Size(58, 22)
-        Me.JumlahBoks.TabIndex = 229
+        Me.JumlahBoks.TabIndex = 5
         '
         'NoBoks2
         '
@@ -484,7 +484,7 @@ Partial Class Form_GD_DPL
         Me.NoBoks2.Name = "NoBoks2"
         Me.NoBoks2.ReadOnly = True
         Me.NoBoks2.Size = New System.Drawing.Size(58, 22)
-        Me.NoBoks2.TabIndex = 228
+        Me.NoBoks2.TabIndex = 4
         '
         'Importir
         '
@@ -496,7 +496,7 @@ Partial Class Form_GD_DPL
         Me.Importir.Name = "Importir"
         Me.Importir.ReadOnly = True
         Me.Importir.Size = New System.Drawing.Size(281, 22)
-        Me.Importir.TabIndex = 4
+        Me.Importir.TabIndex = 9
         '
         'Label26
         '
@@ -594,7 +594,7 @@ Partial Class Form_GD_DPL
         Me.Panel8.Location = New System.Drawing.Point(0, 330)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(986, 213)
-        Me.Panel8.TabIndex = 226
+        Me.Panel8.TabIndex = 16
         '
         'Label47
         '
@@ -623,7 +623,7 @@ Partial Class Form_GD_DPL
         Me.Bruto.Name = "Bruto"
         Me.Bruto.ReadOnly = True
         Me.Bruto.Size = New System.Drawing.Size(94, 22)
-        Me.Bruto.TabIndex = 232
+        Me.Bruto.TabIndex = 23
         '
         'Netto
         '
@@ -634,7 +634,7 @@ Partial Class Form_GD_DPL
         Me.Netto.Name = "Netto"
         Me.Netto.ReadOnly = True
         Me.Netto.Size = New System.Drawing.Size(94, 22)
-        Me.Netto.TabIndex = 231
+        Me.Netto.TabIndex = 24
         '
         'HargaFOB
         '
@@ -645,7 +645,7 @@ Partial Class Form_GD_DPL
         Me.HargaFOB.Name = "HargaFOB"
         Me.HargaFOB.ReadOnly = True
         Me.HargaFOB.Size = New System.Drawing.Size(94, 22)
-        Me.HargaFOB.TabIndex = 230
+        Me.HargaFOB.TabIndex = 20
         '
         'QTYPO
         '
@@ -656,7 +656,7 @@ Partial Class Form_GD_DPL
         Me.QTYPO.Name = "QTYPO"
         Me.QTYPO.ReadOnly = True
         Me.QTYPO.Size = New System.Drawing.Size(94, 22)
-        Me.QTYPO.TabIndex = 229
+        Me.QTYPO.TabIndex = 21
         '
         'QTYPI
         '
@@ -667,7 +667,7 @@ Partial Class Form_GD_DPL
         Me.QTYPI.Name = "QTYPI"
         Me.QTYPI.ReadOnly = True
         Me.QTYPI.Size = New System.Drawing.Size(94, 22)
-        Me.QTYPI.TabIndex = 228
+        Me.QTYPI.TabIndex = 22
         '
         'Label43
         '
@@ -729,7 +729,7 @@ Partial Class Form_GD_DPL
         Me.VolContainer.Name = "VolContainer"
         Me.VolContainer.ReadOnly = True
         Me.VolContainer.Size = New System.Drawing.Size(87, 22)
-        Me.VolContainer.TabIndex = 222
+        Me.VolContainer.TabIndex = 25
         '
         'TotalVolDPL
         '
@@ -740,7 +740,7 @@ Partial Class Form_GD_DPL
         Me.TotalVolDPL.Name = "TotalVolDPL"
         Me.TotalVolDPL.ReadOnly = True
         Me.TotalVolDPL.Size = New System.Drawing.Size(87, 22)
-        Me.TotalVolDPL.TabIndex = 221
+        Me.TotalVolDPL.TabIndex = 26
         '
         'Panel10
         '
@@ -751,7 +751,7 @@ Partial Class Form_GD_DPL
         Me.Panel10.Location = New System.Drawing.Point(371, 140)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(612, 35)
-        Me.Panel10.TabIndex = 188
+        Me.Panel10.TabIndex = 28
         '
         'Label45
         '
@@ -826,7 +826,7 @@ Partial Class Form_GD_DPL
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(365, 213)
-        Me.GroupBox1.TabIndex = 227
+        Me.GroupBox1.TabIndex = 15
         Me.GroupBox1.TabStop = False
         '
         'Label18
@@ -889,7 +889,7 @@ Partial Class Form_GD_DPL
         Me.Panjang.Name = "Panjang"
         Me.Panjang.ReadOnly = True
         Me.Panjang.Size = New System.Drawing.Size(100, 22)
-        Me.Panjang.TabIndex = 213
+        Me.Panjang.TabIndex = 16
         '
         'cmbJenisBox
         '
@@ -900,7 +900,7 @@ Partial Class Form_GD_DPL
         Me.cmbJenisBox.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbJenisBox.Name = "cmbJenisBox"
         Me.cmbJenisBox.Size = New System.Drawing.Size(142, 24)
-        Me.cmbJenisBox.TabIndex = 297
+        Me.cmbJenisBox.TabIndex = 15
         '
         'Label20
         '
@@ -922,7 +922,7 @@ Partial Class Form_GD_DPL
         Me.Lebar.Name = "Lebar"
         Me.Lebar.ReadOnly = True
         Me.Lebar.Size = New System.Drawing.Size(100, 22)
-        Me.Lebar.TabIndex = 215
+        Me.Lebar.TabIndex = 17
         '
         'Label15
         '
@@ -955,7 +955,7 @@ Partial Class Form_GD_DPL
         Me.TotalVolumeBoks.Name = "TotalVolumeBoks"
         Me.TotalVolumeBoks.ReadOnly = True
         Me.TotalVolumeBoks.Size = New System.Drawing.Size(100, 22)
-        Me.TotalVolumeBoks.TabIndex = 217
+        Me.TotalVolumeBoks.TabIndex = 19
         '
         'Label11
         '
@@ -975,7 +975,7 @@ Partial Class Form_GD_DPL
         Me.Tinggi.Name = "Tinggi"
         Me.Tinggi.ReadOnly = True
         Me.Tinggi.Size = New System.Drawing.Size(100, 22)
-        Me.Tinggi.TabIndex = 2
+        Me.Tinggi.TabIndex = 18
         '
         'Label17
         '
@@ -1028,7 +1028,7 @@ Partial Class Form_GD_DPL
         Me.TotalJumlahBoksDPL.Name = "TotalJumlahBoksDPL"
         Me.TotalJumlahBoksDPL.ReadOnly = True
         Me.TotalJumlahBoksDPL.Size = New System.Drawing.Size(87, 22)
-        Me.TotalJumlahBoksDPL.TabIndex = 12
+        Me.TotalJumlahBoksDPL.TabIndex = 27
         '
         'PanelCakupanData
         '
@@ -1037,7 +1037,7 @@ Partial Class Form_GD_DPL
         Me.PanelCakupanData.Location = New System.Drawing.Point(214, 28)
         Me.PanelCakupanData.Name = "PanelCakupanData"
         Me.PanelCakupanData.Size = New System.Drawing.Size(236, 24)
-        Me.PanelCakupanData.TabIndex = 225
+        Me.PanelCakupanData.TabIndex = 1
         '
         'OptSebagian
         '
@@ -1045,7 +1045,7 @@ Partial Class Form_GD_DPL
         Me.OptSebagian.Location = New System.Drawing.Point(128, 1)
         Me.OptSebagian.Name = "OptSebagian"
         Me.OptSebagian.Size = New System.Drawing.Size(90, 20)
-        Me.OptSebagian.TabIndex = 1
+        Me.OptSebagian.TabIndex = 2
         Me.OptSebagian.TabStop = True
         Me.OptSebagian.Text = "Sebagian"
         Me.OptSebagian.UseVisualStyleBackColor = True
@@ -1056,7 +1056,7 @@ Partial Class Form_GD_DPL
         Me.OptSemuaData.Location = New System.Drawing.Point(0, 1)
         Me.OptSemuaData.Name = "OptSemuaData"
         Me.OptSemuaData.Size = New System.Drawing.Size(106, 20)
-        Me.OptSemuaData.TabIndex = 0
+        Me.OptSemuaData.TabIndex = 1
         Me.OptSemuaData.TabStop = True
         Me.OptSemuaData.Text = "Semua Data"
         Me.OptSemuaData.UseVisualStyleBackColor = True
@@ -1068,7 +1068,7 @@ Partial Class Form_GD_DPL
         Me.PanelCargo.Location = New System.Drawing.Point(214, 54)
         Me.PanelCargo.Name = "PanelCargo"
         Me.PanelCargo.Size = New System.Drawing.Size(236, 20)
-        Me.PanelCargo.TabIndex = 224
+        Me.PanelCargo.TabIndex = 2
         '
         'OptUdara
         '
@@ -1076,7 +1076,7 @@ Partial Class Form_GD_DPL
         Me.OptUdara.Location = New System.Drawing.Point(128, 0)
         Me.OptUdara.Name = "OptUdara"
         Me.OptUdara.Size = New System.Drawing.Size(66, 20)
-        Me.OptUdara.TabIndex = 1
+        Me.OptUdara.TabIndex = 2
         Me.OptUdara.TabStop = True
         Me.OptUdara.Text = "Udara"
         Me.OptUdara.UseVisualStyleBackColor = True
@@ -1087,7 +1087,7 @@ Partial Class Form_GD_DPL
         Me.OptLaut.Location = New System.Drawing.Point(0, 0)
         Me.OptLaut.Name = "OptLaut"
         Me.OptLaut.Size = New System.Drawing.Size(58, 20)
-        Me.OptLaut.TabIndex = 0
+        Me.OptLaut.TabIndex = 1
         Me.OptLaut.TabStop = True
         Me.OptLaut.Text = "Laut"
         Me.OptLaut.UseVisualStyleBackColor = True
@@ -1102,7 +1102,7 @@ Partial Class Form_GD_DPL
         Me.NoPO.Name = "NoPO"
         Me.NoPO.ReadOnly = True
         Me.NoPO.Size = New System.Drawing.Size(151, 22)
-        Me.NoPO.TabIndex = 2
+        Me.NoPO.TabIndex = 7
         '
         'Label6
         '
@@ -1124,7 +1124,7 @@ Partial Class Form_GD_DPL
         Me.NoDPL.Name = "NoDPL"
         Me.NoDPL.ReadOnly = True
         Me.NoDPL.Size = New System.Drawing.Size(151, 22)
-        Me.NoDPL.TabIndex = 213
+        Me.NoDPL.TabIndex = 0
         '
         'Label5
         '
@@ -1168,7 +1168,7 @@ Partial Class Form_GD_DPL
         Me.TotalTiapBoks.Name = "TotalTiapBoks"
         Me.TotalTiapBoks.ReadOnly = True
         Me.TotalTiapBoks.Size = New System.Drawing.Size(151, 22)
-        Me.TotalTiapBoks.TabIndex = 8
+        Me.TotalTiapBoks.TabIndex = 6
         '
         'Label14
         '
@@ -1190,7 +1190,7 @@ Partial Class Form_GD_DPL
         Me.ShipmentDate.Margin = New System.Windows.Forms.Padding(4)
         Me.ShipmentDate.Name = "ShipmentDate"
         Me.ShipmentDate.Size = New System.Drawing.Size(151, 24)
-        Me.ShipmentDate.TabIndex = 9
+        Me.ShipmentDate.TabIndex = 14
         '
         'tglDPL
         '
@@ -1223,7 +1223,7 @@ Partial Class Form_GD_DPL
         Me.KodeProduk.Name = "KodeProduk"
         Me.KodeProduk.ReadOnly = True
         Me.KodeProduk.Size = New System.Drawing.Size(151, 22)
-        Me.KodeProduk.TabIndex = 4
+        Me.KodeProduk.TabIndex = 10
         '
         'JumlahTiapBoks
         '
@@ -1234,7 +1234,7 @@ Partial Class Form_GD_DPL
         Me.JumlahTiapBoks.Name = "JumlahTiapBoks"
         Me.JumlahTiapBoks.ReadOnly = True
         Me.JumlahTiapBoks.Size = New System.Drawing.Size(151, 22)
-        Me.JumlahTiapBoks.TabIndex = 10
+        Me.JumlahTiapBoks.TabIndex = 13
         '
         'Label2
         '
@@ -1279,7 +1279,7 @@ Partial Class Form_GD_DPL
         Me.NoBoks.Name = "NoBoks"
         Me.NoBoks.ReadOnly = True
         Me.NoBoks.Size = New System.Drawing.Size(58, 22)
-        Me.NoBoks.TabIndex = 7
+        Me.NoBoks.TabIndex = 3
         '
         'Label3
         '
@@ -1312,7 +1312,7 @@ Partial Class Form_GD_DPL
         Me.KodePImportir.Name = "KodePImportir"
         Me.KodePImportir.ReadOnly = True
         Me.KodePImportir.Size = New System.Drawing.Size(151, 22)
-        Me.KodePImportir.TabIndex = 3
+        Me.KodePImportir.TabIndex = 12
         '
         'Label4
         '
@@ -1335,7 +1335,7 @@ Partial Class Form_GD_DPL
         Me.Produk.Name = "Produk"
         Me.Produk.ReadOnly = True
         Me.Produk.Size = New System.Drawing.Size(412, 47)
-        Me.Produk.TabIndex = 5
+        Me.Produk.TabIndex = 11
         '
         'Label1
         '
@@ -1386,6 +1386,43 @@ Partial Class Form_GD_DPL
         Me.DGView.RowTemplate.ReadOnly = True
         Me.DGView.Size = New System.Drawing.Size(988, 267)
         Me.DGView.TabIndex = 156
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "No. DPL"
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        Me.Column9.Width = 125
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Tgl.DPL"
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        Me.Column10.Width = 125
+        '
+        'Column11
+        '
+        Me.Column11.HeaderText = "No. PO"
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        Me.Column11.Width = 140
+        '
+        'Column12
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column12.DefaultCellStyle = DataGridViewCellStyle13
+        Me.Column12.HeaderText = "Shipment Date"
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        Me.Column12.Width = 150
+        '
+        'Column13
+        '
+        Me.Column13.HeaderText = "Importir"
+        Me.Column13.Name = "Column13"
+        Me.Column13.ReadOnly = True
+        Me.Column13.Width = 430
         '
         'Panel11
         '
@@ -1456,43 +1493,6 @@ Partial Class Form_GD_DPL
         Me.DGView2.Size = New System.Drawing.Size(988, 252)
         Me.DGView2.TabIndex = 9
         '
-        'Column9
-        '
-        Me.Column9.HeaderText = "No. DPL"
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.Width = 125
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Tgl.DPL"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Width = 125
-        '
-        'Column11
-        '
-        Me.Column11.HeaderText = "No. PO"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Width = 140
-        '
-        'Column12
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column12.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Column12.HeaderText = "Shipment Date"
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = True
-        Me.Column12.Width = 150
-        '
-        'Column13
-        '
-        Me.Column13.HeaderText = "Importir"
-        Me.Column13.Name = "Column13"
-        Me.Column13.ReadOnly = True
-        Me.Column13.Width = 430
-        '
         'Column14
         '
         Me.Column14.HeaderText = "IdRec"
@@ -1503,8 +1503,8 @@ Partial Class Form_GD_DPL
         '
         'Column1
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle14
         Me.Column1.HeaderText = "Boks Awal"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -1512,8 +1512,8 @@ Partial Class Form_GD_DPL
         '
         'Column2
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle15
         Me.Column2.HeaderText = "Boks Akhir"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -1521,8 +1521,8 @@ Partial Class Form_GD_DPL
         '
         'Column3
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle16
         Me.Column3.HeaderText = "Jumlah Boks"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -1530,8 +1530,8 @@ Partial Class Form_GD_DPL
         '
         'Column6
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle17
         Me.Column6.HeaderText = "Isi Tiap Boks"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -1546,8 +1546,8 @@ Partial Class Form_GD_DPL
         '
         'Column5
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle18
         Me.Column5.HeaderText = "Jumlah kode ini tiap boks"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True

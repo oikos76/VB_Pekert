@@ -16,7 +16,7 @@ Public Class Form_GD_DPL
     Dim Proses As New ClsKoneksi
     Dim dbTable As DataTable, UserID As String, SQL As String, MsgSQL As String
     Private CN As SqlConnection
-
+    Private Cmd As SqlCommand
 
 
     Private Sub cmdTambah_Click(sender As Object, e As EventArgs) Handles cmdTambah.Click
@@ -204,7 +204,7 @@ Public Class Form_GD_DPL
         End If
     End Sub
 
-    Private Cmd As SqlCommand
+
 
     Private Sub SetDataGrid()
         With Me.DGView.RowTemplate
@@ -658,12 +658,12 @@ Public Class Form_GD_DPL
             Exit Sub
         End If
         TotalJumlahBoksDPL.Text = JumProduk(NoDPL.Text)
-        If trim(cmbJenisBox.Text) = "" Then
-            MsgBox("Jenis Box belum di pilih !", vbCritical + vbOKOnly, ".:Error !")
-            cmbJenisBox.Select()
-            cmbJenisBox.Focus()
-            Exit Sub
-        End If
+        'If trim(cmbJenisBox.Text) = "" Then
+        '    MsgBox("Jenis Box belum di pilih !", vbCritical + vbOKOnly, ".:Error !")
+        '    cmbJenisBox.Select()
+        '    cmbJenisBox.Focus()
+        '    Exit Sub
+        'End If
         If LAdd Then
             NoDPL.Text = Proses.MaxYNoUrut("NoDPL", "t_DPL", "DPL")
         End If
@@ -831,7 +831,7 @@ Public Class Form_GD_DPL
         If Trim(NoBoks.Text) = "" Then NoBoks.Text = 0
         If IsNumeric(NoBoks.Text) Then
             Dim temp As Double = NoBoks.Text
-            NoBoks.Text = Format(temp, "###,##0")
+            NoBoks.Text = Format(temp, "##0")
             NoBoks.SelectionStart = NoBoks.TextLength
             If NoBoks2.Text = "" Then NoBoks2.Text = 0
             JumlahBoks.Text = (NoBoks2.Text * 1) - (NoBoks.Text * 1) + 1
@@ -1222,7 +1222,7 @@ Public Class Form_GD_DPL
                 If NoBoks.Text = "" Then NoBoks.Text = 0
                 If NoBoks2.Text = "" Then NoBoks2.Text = 0
                 Dim temp As Double = NoBoks.Text
-                NoBoks.Text = Format(temp, "###,##0")
+                NoBoks.Text = Format(temp, "##0")
                 NoBoks.SelectionStart = NoBoks.TextLength
                 If NoBoks.Text = 0 And NoBoks2.Text = 0 Then
                     JumlahBoks.Text = 0
@@ -1275,7 +1275,7 @@ Public Class Form_GD_DPL
                     Exit Sub
                 End If
                 Dim temp As Double = NoBoks.Text
-                NoBoks.Text = Format(temp, "###,##0")
+                NoBoks.Text = Format(temp, "##0")
                 NoBoks.SelectionStart = NoBoks.TextLength
                 If NoBoks.Text = 0 And NoBoks2.Text = 0 Then
                     JumlahBoks.Text = 0
@@ -1339,7 +1339,7 @@ Public Class Form_GD_DPL
         If Trim(NoBoks2.Text) = "" Then NoBoks.Text = 0
         If IsNumeric(NoBoks2.Text) Then
             Dim temp As Double = NoBoks2.Text
-            NoBoks2.Text = Format(temp, "###,##0")
+            NoBoks2.Text = Format(temp, "##0")
             NoBoks2.SelectionStart = NoBoks2.TextLength
             If NoBoks.Text = "" Then NoBoks.Text = 0
             JumlahBoks.Text = (NoBoks2.Text * 1) - (NoBoks.Text * 1) + 1

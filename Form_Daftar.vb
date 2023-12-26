@@ -477,7 +477,8 @@
                     DGView.Rows.Add(.Table.Rows(a) !nopo,
                                     IIf(IsDBNull(.Table.Rows(a) !importir), "", .Table.Rows(a) !importir),
                                     .Table.Rows(a) !KodeImportir,
-                                    Format(.Table.Rows(a) !tglpo, "dd-MM-yyyy"), Format(.Table.Rows(a) !tglKirim, "dd-MM-yyyy"))
+                                    Format(.Table.Rows(a) !tglpo, "dd-MM-yyyy"),
+                                    Format(.Table.Rows(a) !tglKirim, "dd-MM-yyyy"))
                 Next (a)
             End With
         ElseIf Trim(Me.Text) = "Daftar Produk SP" Then
@@ -530,7 +531,7 @@
                                     .Table.Rows(a) !Kode_Importir,
                                     .Table.Rows(a) !Nama,
                                     .Table.Rows(a) !NoPO,
-                                    Format(.Table.Rows(a) !Jumlah, "###,##0.00"))
+                                    Replace(Format(.Table.Rows(a) !Jumlah, "###,##0.00"), ".00", ""))
                 Next (a)
             End With
         ElseIf Trim(Me.Text) = "Daftar Importir" Then
@@ -779,6 +780,16 @@
                    "Where t_PO.AktifYN = 'Y' " &
                    "  And T_PO.NOPO = '" & param1.Text & "' " &
                    "  And Deskripsi like '%" & tCari.Text & "%' "
+            ElseIf Trim(Me.Text) = "Daftar Produk PO" Then
+                txtQuery.Text = "SELECT Deskripsi, Kode_Buyer, Kode_Produk, Kode_Importir, " &
+                    "      m_KodeImportir.Nama, T_PO.NoPO, t_PO.Jumlah, file_foto " &
+                    " FROM t_PO inner join m_KodeProduk ON " &
+                    "      m_KodeProduk.KodeProduk = t_PO.Kode_produk " &
+                    "      INNER JOIN m_KodeImportir on Kode_Importir = KodeImportir " &
+                    "WHERE t_PO.AktifYN = 'Y' " &
+                    "  And T_PO.NOPO = '" & param1.Text & "' " &
+                    "  And Deskripsi like '%" & tCari.Text & "%'  " &
+                    "ORDER BY kode_buyer"
             ElseIf Me.Text = "Daftar Toko" Then
                 txtQuery.Text = "Select * " &
                 " From M_Toko " &

@@ -191,16 +191,16 @@ Public Class FrmMenuUtama
         '     LastUPD datetime NULL )  "
         '    Proses.ExecuteNonQuery(SQL)
         'End If
-        'SQL = "SELECT *  FROM information_schema.COLUMNS " &
-        '     "WHERE TABLE_NAME = 'm_barang'  " &
-        '     "  And column_name = 'psDisc' "
-        'dbTable = Proses.ExecuteQuery(SQL)
-        'If dbTable.Rows.Count = 0 Then
-        '    SQL = "ALTER TABLE m_barang ADD psDisc float default 0 "
-        '    Proses.ExecuteNonQuery(SQL)
-        '    SQL = "Update m_barang set psDisc = 0 "
-        '    Proses.ExecuteNonQuery(SQL)
-        'End If
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+             "WHERE TABLE_NAME = 't_SP'  " &
+             "  And column_name = 'IdCompany' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE t_SP ADD IdCompany Varchar(10) default 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "Update t_SP set IdCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
 
 
         SQL = "Select company, kode_toko, convert(varchar(8), getdate(), 112) as tglServer, compcode " &
@@ -586,6 +586,21 @@ Public Class FrmMenuUtama
     Private Sub _106SaldoAkhir_Click(sender As Object, e As EventArgs) Handles _106SaldoAkhir.Click
         Form_SaldoAwal.MdiParent = Me
         Form_SaldoAwal.Show()
+    End Sub
+
+    Private Sub _108GeneralLedger_Click(sender As Object, e As EventArgs) Handles _108GeneralLedger.Click
+        Rpt_GeneralLedger.MdiParent = Me
+        Rpt_GeneralLedger.Show()
+    End Sub
+
+    Private Sub _109TrialBalance_Click(sender As Object, e As EventArgs) Handles _109TrialBalance.Click
+        Rpt_TrialBalance.MdiParent = Me
+        Rpt_TrialBalance.Show()
+    End Sub
+
+    Private Sub _110LabaRugi_Click(sender As Object, e As EventArgs) Handles _110LabaRugi.Click
+        Rpt_LabaRugi.MdiParent = Me
+        Rpt_LabaRugi.Show()
     End Sub
 End Class
 

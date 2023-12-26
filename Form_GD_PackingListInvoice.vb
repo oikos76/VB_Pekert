@@ -59,7 +59,7 @@ Public Class Form_GD_PackingListInvoice
             End If
 
             If LAdd Then
-                MsgSQL = "Select * From t_PackingList Where NoPackingList = '" & Trim(NoPackingList.Text) & "' "
+                MsgSQL = "Select * From t_PackingList Where NoPackingList = '" & Trim(NoPackingList.Text) & "' and aktifYN = 'Y' "
                 RS05 = Proses.ExecuteQuery(MsgSQL)
                 If RS05.Rows.Count <> 0 Then
                     MsgBox("No Packing List " & Trim(NoPackingList.Text) & " SUDAH pernah di buat!", vbCritical + vbOKOnly, ".:Warning!")
@@ -101,7 +101,7 @@ Public Class Form_GD_PackingListInvoice
                     "JPackingList, JInvoice, TglPL, TglKapal, NoBoks1, NoBoks2, JumlahBoks, " &
                     "JumlahTiapBoks, StatusPL, NoPI, Kode_Produk, Produk, QtyTiapBoks, MataUang, " &
                     "HargaFOB, Uang3Digit, NoPO, Kode_Importir, Importir, KodePImportir, CatatanPL, " &
-                    "FotoLoc, TransferYN, AktifYN, UserID, LastUPD) VALUES('" & IDRec.Text & "', " &
+                    "FotoLoc, TransferYN, AktifYN, UserID, LastUPD, idCompany) VALUES('" & IDRec.Text & "', " &
                     "'" & Trim(NoPackingList.Text) & "', '" & txtNoDPL.Text & "', " & IIf(Rs.Rows(i) !CargoLaut = True, 1, 0) & ",  " &
                     "" & IIf(Rs.Rows(i) !CargoUdara = True, 1, 0) & ", " & IIf(OptPackingList.Checked, 1, 0) & ", " &
                     "" & IIf(OptInvoice.Checked, 1, 0) & " , '" & Format(TglPL.Value, "yyyy-MM-dd") & "', " &
@@ -114,7 +114,7 @@ Public Class Form_GD_PackingListInvoice
                     "'" & Microsoft.VisualBasic.Left(Rs.Rows(i) !KodeImportir, 5) & "',  " &
                     "'" & Rs.Rows(i) !Importir & "', '" & Rs.Rows(i) !KodePImportir & "', " &
                     "'" & Trim(CatatanPackingList.Text) & "', '" & Trim(LocGmb1.Text) & "', " &
-                    "'Y', 'N', '" & UserID & "', GetDate())"
+                    "'N', 'Y', '" & UserID & "', GetDate(), 'PEKERTI' ) "
                 Proses.ExecuteNonQuery(MsgSQL)
             Next i
             Me.Cursor = Cursors.Default
@@ -252,7 +252,7 @@ Public Class Form_GD_PackingListInvoice
         Dim CN As New SqlConnection
         Dim dttable As New DataTable
 
-        Dim MsgSQL As String, TCetak As String, rsc As New DataTable
+        Dim MsgSQL As String = "", TCetak As String, rsc As New DataTable
         'Dim terbilang As String = "", tb As New Terbilang
 
         If Opt_PackingList.Checked = False And Opt_Invoice.Checked = False Then
@@ -270,23 +270,25 @@ Public Class Form_GD_PackingListInvoice
         'If rsc.Rows.Count <> 0 Then
         '    terbilang = " " & tb.Terbilang(CDbl(rsc.Rows(0) !SubTotal)) & " "
         'End If
-        Proses.CloseConn()
+        ' Proses.CloseConn()
         TCetak = "Jakarta, " & Proses.TglIndo(Format(TglPL.Value, "dd MMNN yyyy"))
-
 
         If Opt_PackingList.Checked = True Then
             MsgSQL = "SELECT t_PackingList.NoBoks1, t_PackingList.NoBoks2, " &
                 "t_PackingList.JumlahBoks, t_PackingList.JumlahTiapBoks,  " &
                 "t_PackingList.NoPI, t_PackingList.Kode_Produk, t_PackingList.QtyTiapBoks,  " &
                 "t_PackingList.NoPO, t_PackingList.KodePImportir, m_KodeProduk.descript,  " &
-                "m_KodeBahan.NamaInggris, NoPackingList, CatatanPL, m_KodeImportir.Nama, m_KodeImportir.Alamat   " &
+                "m_KodeBahan.NamaInggris, NoPackingList, CatatanPL, m_KodeImportir.Nama, " &
+                "m_KodeImportir.Alamat, ttKoordinator " &
                 "FROM Pekerti.dbo.t_PackingList t_PackingList " &
                 "   INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
-                "   t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
+                "         t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
                 "   INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON  " &
-                "   t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+                "         t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
                 "   INNER JOIN Pekerti.dbo.m_KodeBahan m_KodeBahan ON  " &
-                "m_KodeProduk.Kode_Bahan = m_KodeBahan.KodeBahan  " &
+                "         m_KodeProduk.Kode_Bahan = m_KodeBahan.KodeBahan  " &
+                "  INNER JOIN Pekerti.dbo.m_Company m_Company ON " &
+                "        t_PackingList.IDCompany = m_Company.CompCode  " &
                 "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' " &
                 "  And t_PackingList.aktifYN = 'Y' " &
                 "Order By right('0000000000'+noboks1,10), right('0000000000' + noboks2, 10), idrec  "
@@ -311,10 +313,14 @@ Public Class Form_GD_PackingListInvoice
             MsgSQL = "SELECT t_PackingList.NoPackingList, t_PackingList.NoPI, t_PackingList.Kode_Produk, " &
                 "     t_PackingList.QtyTiapBoks, t_PackingList.HargaFOB, t_PackingList.KodePImportir, " &
                 "     t_PackingList.CatatanPL, m_KodeProduk.Descript, t_PackingList.NoPO, " &
-                "     t_PackingList.jumlahboks, t_PackingList.JumlahTiapBoks, m_KodeImportir.Nama, m_KodeImportir.Alamat " &
+                "     t_PackingList.jumlahboks, t_PackingList.JumlahTiapBoks, m_KodeImportir.Nama,  " &
+                "     m_KodeImportir.Alamat, ttKoordinator " &
                 "FROM Pekerti.dbo.t_PackingList t_PackingList INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
-                "     t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
-                "     INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+                "           t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
+                "     INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
+                "           t_PackingList.Kode_Produk = m_KodeProduk.KodeProduk  " &
+                "     INNER JOIN Pekerti.dbo.m_Company m_Company ON " &
+                "           t_PackingList.IDCompany = m_Company.CompCode  " &
                 "Where t_PackingList.NoPackingList = '" & NoPackingList.Text & "' " &
                 "  And t_PackingList.aktifYN = 'Y' " &
                 "Order By t_PackingList.NoPO, t_PackingList.FotoLoc, t_PackingList.Kode_Produk, right('0000000000'+noboks1,10), right('0000000000' + noboks2, 10) "
@@ -326,13 +332,12 @@ Public Class Form_GD_PackingListInvoice
                 objRep = New Rpt_PackingList
             ElseIf Opt_Invoice.Checked = True Then
                 objRep = New Rpt_PackingList_INV
-                'objRep.SetDataSource(dttable)
-                'objRep.SetParameterValue("terbilang", terbilang)
             End If
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("TANGGAL", TCetak)
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ReportSource = objRep
             Form_Report.CrystalReportViewer1.ShowRefreshButton = False
             Form_Report.CrystalReportViewer1.ShowPrintButton = False
@@ -349,8 +354,23 @@ Public Class Form_GD_PackingListInvoice
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub tNoPO_TextChanged(sender As Object, e As EventArgs) Handles tNoPO.TextChanged
-
+    Private Sub CekTable()
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+        "WHERE TABLE_NAME = 't_PackingList'  " &
+        "  And column_name = 'IDCompany' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE t_PackingList ADD IDCompany Varchar(10) "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "UPDATE t_PackingList SET IDCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+        SQL = "SELECT IDCompany FROM t_PackingList WHERE idCompany is Null "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count <> 0 Then
+            SQL = "UPDATE t_PackingList set idCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
     End Sub
 
     Private Sub cmdBatal_Click(sender As Object, e As EventArgs) Handles cmdBatal.Click
@@ -366,7 +386,7 @@ Public Class Form_GD_PackingListInvoice
         MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
             "Where AktifYN = 'Y' " &
             " And NoPackingList = '" & NoPackingList.Text & "' " &
-            "ORDER BY tglpl, IDRec "
+            "Order By right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC "
         RSNav = Proses.ExecuteQuery(MsgSQL)
         If RSNav.Rows.Count <> 0 Then
             tNoPO.Text = ""
@@ -382,7 +402,7 @@ Public Class Form_GD_PackingListInvoice
         MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
             "Where AktifYN = 'Y' " &
             " And NoPackingList = '" & NoPackingList.Text & "' " &
-            "ORDER BY tglpl DESC, IDRec DESC "
+            "Order By right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC DESC "
         RSNav = Proses.ExecuteQuery(MsgSQL)
         If RSNav.Rows.Count <> 0 Then
             tNoPO.Text = ""
@@ -399,6 +419,16 @@ Public Class Form_GD_PackingListInvoice
             "  And IDRec < '" & IDRec.Text & "' " &
             "  And NOPACKINGLIST = '" & NoPackingList.Text & "' " &
             "ORDER BY tglpl desc, IDRec desc "
+
+        Dim tmpUrut As String = "", noBox1 As String = "", noBox2 As String = ""
+        noBox1 = Microsoft.VisualBasic.Right("00000" + Replace(NoBoks1.Text, ",", ""), 5)
+        noBox2 = Microsoft.VisualBasic.Right("00000" + Replace(NoBoks2.Text, ",", ""), 5)
+        tmpUrut = noBox1 + noBox2 + IDRec.Text
+        MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
+            "Where AktifYN = 'Y' " &
+            "  And right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC  < '" & tmpUrut & "' " &
+            "  And NOPACKINGLIST = '" & NoPackingList.Text & "' " &
+            "Order By right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC DESC "
         RSNav = Proses.ExecuteQuery(MsgSQL)
         If RSNav.Rows.Count <> 0 Then
             tNoPO.Text = ""
@@ -410,11 +440,24 @@ Public Class Form_GD_PackingListInvoice
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         Dim MsgSQL As String, RSNav As New DataTable
+
         MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
             "Where AktifYN = 'Y' " &
             "  And IDRec > '" & IDRec.Text & "' " &
             "  And NOPACKINGLIST = '" & NoPackingList.Text & "' " &
             "ORDER BY tglpl, IDRec  "
+        '    "Order By right('0000000000'+noboks1,10) + right('0000000000' + noboks2, 10), IDREC "
+
+        Dim tmpUrut As String = "", noBox1 As String = "", noBox2 As String = ""
+        noBox1 = Microsoft.VisualBasic.Right("00000" + Replace(NoBoks1.Text, ",", ""), 5)
+        noBox2 = Microsoft.VisualBasic.Right("00000" + Replace(NoBoks2.Text, ",", ""), 5)
+        tmpUrut = noBox1 + noBox2 + IDRec.Text
+        MsgSQL = "SELECT top 1 IDrec From T_PACKINGLIST " &
+            "Where AktifYN = 'Y' " &
+            "  And right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC  > '" & tmpUrut & "' " &
+            "  And NOPACKINGLIST = '" & NoPackingList.Text & "' " &
+            "Order By right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC "
+
         RSNav = Proses.ExecuteQuery(MsgSQL)
         If RSNav.Rows.Count <> 0 Then
             tNoPO.Text = ""
@@ -447,8 +490,13 @@ Public Class Form_GD_PackingListInvoice
 
     End Sub
 
+    Private Sub tgl_2_ValueChanged(sender As Object, e As EventArgs) Handles tgl_2.ValueChanged
+
+    End Sub
+
     Private Sub Form_GD_PackingListInvoice_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim MsgSQL As String
+        CekTable()
         LAdd = False
         LEdit = False
         TabControl1.SelectedTab = TabPageFormEntry_
@@ -466,7 +514,7 @@ Public Class Form_GD_PackingListInvoice
         Next i
         MsgSQL = "Select Top 1 * From t_PackingList " &
             "where AktifYN = 'Y' " &
-            "Order By TglPL Desc, IdRec desc "
+            "Order By TglPL Desc, IdRec asc "
         Rs = Proses.ExecuteQuery(MsgSQL)
         If Rs.Rows.Count <> 0 Then
             IDRec.Text = Rs.Rows(0) !IDRec
@@ -480,8 +528,15 @@ Public Class Form_GD_PackingListInvoice
         tLaporan = Proses.UserAksesTombol(UserID, "55_PACKING_LIST_INV", "laporan")
         AturTombol(True)
         Me.Cursor = Cursors.Default
+        tgl_1.Value = DateAdd(DateInterval.Month, -18, Now())
+        tgl_2.Value = Now()
         DaftarPL()
     End Sub
+
+    Private Sub NoBoks1_TextChanged(sender As Object, e As EventArgs) Handles NoBoks1.TextChanged
+
+    End Sub
+
     Private Sub ClearTextBoxes(Optional ByVal ctlcol As Control.ControlCollection = Nothing)
         If ctlcol Is Nothing Then ctlcol = Me.Controls
         For Each ctl As Control In ctlcol
@@ -506,6 +561,11 @@ Public Class Form_GD_PackingListInvoice
         chk3Digit.Checked = False
         ShowFoto("")
     End Sub
+
+    Private Sub JumlahBoks_TextChanged(sender As Object, e As EventArgs) Handles JumlahBoks.TextChanged
+
+    End Sub
+
     Private Sub SetDataGrid()
         With Me.DGView.RowTemplate
             .Height = 33
@@ -665,6 +725,8 @@ Public Class Form_GD_PackingListInvoice
         MsgSQL = "SELECT NoPackingList, TglPL,  MIN(NoPI) NoPI, TglKapal, Importir " &
             " FROM t_PackingList " &
             "Where AktifYN = 'Y' " & mKondisi & " " &
+            "  AND convert(char(8), TglPL, 112) BETWEEN '" & Format(tgl_1.Value, "yyyyMMdd") & "' And " &
+            "      '" & Format(tgl_2.Value, "yyyyMMdd") & "' " &
             "Group By NoPackingList, TglPL, TglKapal, Importir " &
             "Order By TglPL Desc, right(NoPackingList ,2) + left(nopackinglist,3) Desc "
         RS05 = Proses.ExecuteQuery(MsgSQL)
@@ -695,7 +757,7 @@ Public Class Form_GD_PackingListInvoice
 
         MsgSQL = "Select * From t_PackingList " &
             "Where NoPackingList = '" & tCari & "' and aktifYN = 'Y' " &
-            "Order By right('0000000000'+noboks1,10), right('0000000000' + noboks2, 10) "
+            "Order By right('00000'+noboks1,5) + right('00000' + noboks2, 5) + IDREC "
         RSL = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To RSL.Rows.Count - 1
             Application.DoEvents()
@@ -740,5 +802,19 @@ Public Class Form_GD_PackingListInvoice
         If e.KeyChar = Chr(13) Then
             DaftarPL()
         End If
+    End Sub
+
+    Private Sub tgl_2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tgl_2.KeyPress
+        If e.KeyChar = Chr(13) Then
+            DaftarPL()
+        End If
+    End Sub
+
+    Private Sub NoBoks1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoBoks1.KeyPress
+
+    End Sub
+
+    Private Sub JumlahBoks_KeyPress(sender As Object, e As KeyPressEventArgs) Handles JumlahBoks.KeyPress
+
     End Sub
 End Class

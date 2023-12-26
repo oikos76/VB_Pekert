@@ -13,10 +13,6 @@ Public Class Form_UploadFoto
         If OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
             PictureBox1.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
             namaFile.Text = OpenFileDialog1.FileName
-            If Len(namaFile.Text) > 100 Then
-                MsgBox("Nama Lokasi File Gambar Terlalu Panjang !" & vbCrLf &
-                        "Hanya bisa 100 character.", vbCritical, ".:Warning !")
-            End If
         End If
     End Sub
 
@@ -45,7 +41,11 @@ Public Class Form_UploadFoto
         conn.ConnectionString = sqlC
         conn.Open()
         'SQL = "insert into " & dbase & ".dbo.m_barang_foto values('" & IdRec.Text & "',@name, @photo, '" & UserID & "',  GetDate() ) "
-        SQL = "UPDATE m_Company  set TTDireksi = @photo"
+        If Jenis.Text = "TTDireksi" Then
+            SQL = "UPDATE m_Company  set TTDireksi = @photo"
+        Else
+            SQL = "UPDATE m_Company  set TTKoordinator = @photo"
+        End If
         Dim cmd As SqlCommand = New SqlCommand(Sql, conn)
         cmd.Parameters.AddWithValue("@name", namaFile.Text)
         Dim ms As New MemoryStream()
@@ -59,6 +59,7 @@ Public Class Form_UploadFoto
             conn.Close()
             conn = Nothing
         End If
+        MsgBox("Image berhasil di simpan", vbInformation + vbOKOnly, ".:Success !")
     End Sub
 
     Private Sub Retrieve(idRecord As String, DBase As String)
@@ -74,7 +75,12 @@ Public Class Form_UploadFoto
         conn.ConnectionString = sqlC
         conn.Open()
         'Sql = "select photo from " & DBase & ".dbo.m_barang_foto where IDRec='" & idRecord & "'"
-        SQL = "SELECT TTDireksi FROM m_Company "
+        If Jenis.Text = "TTDireksi" Then
+            SQL = "SELECT TTDireksi FROM m_Company "
+        Else
+            SQL = "SELECT TTKoordinator FROM m_Company "
+        End If
+
         Dim cmd = New SqlCommand(Sql, conn)
         Dim imageData As Byte() = DirectCast(cmd.ExecuteScalar(), Byte())
         If Not imageData Is Nothing Then

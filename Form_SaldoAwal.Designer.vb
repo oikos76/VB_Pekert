@@ -36,6 +36,18 @@ Partial Class Form_SaldoAwal
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PanelEditSaldo = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.eIndex = New System.Windows.Forms.Label()
+        Me.eNilaiSaldo = New System.Windows.Forms.TextBox()
+        Me.eNamaGL = New System.Windows.Forms.Label()
+        Me.eKodeGL = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.btnSimpanEdit = New System.Windows.Forms.Button()
+        Me.btnBatalEdit = New System.Windows.Forms.Button()
         Me.PanelSetupPeriode = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -48,9 +60,13 @@ Partial Class Form_SaldoAwal
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.PanelTombol.SuspendLayout()
         Me.PanelPeriode.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.PanelEditSaldo.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
         Me.PanelSetupPeriode.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -204,6 +220,7 @@ Partial Class Form_SaldoAwal
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.PanelEditSaldo)
         Me.Panel1.Controls.Add(Me.PanelSetupPeriode)
         Me.Panel1.Controls.Add(Me.DGView)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -211,6 +228,144 @@ Partial Class Form_SaldoAwal
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1004, 543)
         Me.Panel1.TabIndex = 148
+        '
+        'PanelEditSaldo
+        '
+        Me.PanelEditSaldo.BackColor = System.Drawing.Color.DarkCyan
+        Me.PanelEditSaldo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PanelEditSaldo.Controls.Add(Me.Panel5)
+        Me.PanelEditSaldo.Location = New System.Drawing.Point(249, 166)
+        Me.PanelEditSaldo.Name = "PanelEditSaldo"
+        Me.PanelEditSaldo.Size = New System.Drawing.Size(516, 174)
+        Me.PanelEditSaldo.TabIndex = 158
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.Panel5.Controls.Add(Me.eIndex)
+        Me.Panel5.Controls.Add(Me.eNilaiSaldo)
+        Me.Panel5.Controls.Add(Me.eNamaGL)
+        Me.Panel5.Controls.Add(Me.eKodeGL)
+        Me.Panel5.Controls.Add(Me.Label5)
+        Me.Panel5.Controls.Add(Me.Label3)
+        Me.Panel5.Controls.Add(Me.Label4)
+        Me.Panel5.Controls.Add(Me.Panel6)
+        Me.Panel5.Location = New System.Drawing.Point(8, 7)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(498, 156)
+        Me.Panel5.TabIndex = 325
+        '
+        'eIndex
+        '
+        Me.eIndex.AutoSize = True
+        Me.eIndex.Font = New System.Drawing.Font("Arial Rounded MT Bold", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.eIndex.Location = New System.Drawing.Point(12, 93)
+        Me.eIndex.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.eIndex.Name = "eIndex"
+        Me.eIndex.Size = New System.Drawing.Size(57, 17)
+        Me.eIndex.TabIndex = 327
+        Me.eIndex.Text = "Label7"
+        '
+        'eNilaiSaldo
+        '
+        Me.eNilaiSaldo.BackColor = System.Drawing.SystemColors.Window
+        Me.eNilaiSaldo.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.eNilaiSaldo.Location = New System.Drawing.Point(158, 63)
+        Me.eNilaiSaldo.Margin = New System.Windows.Forms.Padding(4)
+        Me.eNilaiSaldo.Name = "eNilaiSaldo"
+        Me.eNilaiSaldo.Size = New System.Drawing.Size(151, 22)
+        Me.eNilaiSaldo.TabIndex = 328
+        '
+        'eNamaGL
+        '
+        Me.eNamaGL.AutoSize = True
+        Me.eNamaGL.Font = New System.Drawing.Font("Arial Rounded MT Bold", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.eNamaGL.Location = New System.Drawing.Point(158, 37)
+        Me.eNamaGL.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.eNamaGL.Name = "eNamaGL"
+        Me.eNamaGL.Size = New System.Drawing.Size(80, 17)
+        Me.eNamaGL.TabIndex = 327
+        Me.eNamaGL.Text = "eNamaGL"
+        '
+        'eKodeGL
+        '
+        Me.eKodeGL.AutoSize = True
+        Me.eKodeGL.Font = New System.Drawing.Font("Arial Rounded MT Bold", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.eKodeGL.Location = New System.Drawing.Point(158, 11)
+        Me.eKodeGL.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.eKodeGL.Name = "eKodeGL"
+        Me.eKodeGL.Size = New System.Drawing.Size(76, 17)
+        Me.eKodeGL.TabIndex = 326
+        Me.eKodeGL.Text = "eKodeGL"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Courier New", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(12, 65)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(138, 18)
+        Me.Label5.TabIndex = 325
+        Me.Label5.Text = "Nilai Saldo :"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Courier New", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(12, 10)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(138, 18)
+        Me.Label3.TabIndex = 324
+        Me.Label3.Text = "Kode GL     :"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Courier New", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(12, 36)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(138, 18)
+        Me.Label4.TabIndex = 168
+        Me.Label4.Text = "Keterangan  :"
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.btnSimpanEdit)
+        Me.Panel6.Controls.Add(Me.btnBatalEdit)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel6.Location = New System.Drawing.Point(0, 125)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(498, 31)
+        Me.Panel6.TabIndex = 323
+        '
+        'btnSimpanEdit
+        '
+        Me.btnSimpanEdit.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnSimpanEdit.Image = CType(resources.GetObject("btnSimpanEdit.Image"), System.Drawing.Image)
+        Me.btnSimpanEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSimpanEdit.Location = New System.Drawing.Point(409, 0)
+        Me.btnSimpanEdit.Name = "btnSimpanEdit"
+        Me.btnSimpanEdit.Size = New System.Drawing.Size(89, 31)
+        Me.btnSimpanEdit.TabIndex = 67
+        Me.btnSimpanEdit.Text = "&Simpan"
+        Me.btnSimpanEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSimpanEdit.UseVisualStyleBackColor = True
+        '
+        'btnBatalEdit
+        '
+        Me.btnBatalEdit.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnBatalEdit.Image = CType(resources.GetObject("btnBatalEdit.Image"), System.Drawing.Image)
+        Me.btnBatalEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnBatalEdit.Location = New System.Drawing.Point(0, 0)
+        Me.btnBatalEdit.Name = "btnBatalEdit"
+        Me.btnBatalEdit.Size = New System.Drawing.Size(77, 31)
+        Me.btnBatalEdit.TabIndex = 66
+        Me.btnBatalEdit.Text = "&Batal"
+        Me.btnBatalEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnBatalEdit.UseVisualStyleBackColor = True
         '
         'PanelSetupPeriode
         '
@@ -309,7 +464,7 @@ Partial Class Form_SaldoAwal
         Me.DGView.AllowUserToDeleteRows = False
         Me.DGView.AllowUserToOrderColumns = True
         Me.DGView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column4, Me.Column6, Me.Column5})
+        Me.DGView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column4, Me.Column6, Me.Column5, Me.Column1})
         Me.DGView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGView.Location = New System.Drawing.Point(0, 0)
         Me.DGView.Margin = New System.Windows.Forms.Padding(4)
@@ -326,14 +481,14 @@ Partial Class Form_SaldoAwal
         Me.Column4.HeaderText = "Kode GL"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
-        Me.Column4.Width = 250
+        Me.Column4.Width = 225
         '
         'Column6
         '
         Me.Column6.HeaderText = "Keterangan"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
-        Me.Column6.Width = 500
+        Me.Column6.Width = 475
         '
         'Column5
         '
@@ -342,7 +497,13 @@ Partial Class Form_SaldoAwal
         Me.Column5.HeaderText = "Saldo Akhir"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
-        Me.Column5.Width = 200
+        Me.Column5.Width = 180
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Edit"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
         '
         'Form_SaldoAwal
         '
@@ -358,6 +519,10 @@ Partial Class Form_SaldoAwal
         Me.PanelPeriode.ResumeLayout(False)
         Me.PanelPeriode.PerformLayout()
         Me.Panel1.ResumeLayout(False)
+        Me.PanelEditSaldo.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
         Me.PanelSetupPeriode.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -377,9 +542,6 @@ Partial Class Form_SaldoAwal
     Friend WithEvents Panel1 As Panel
     Friend WithEvents PanelPeriode As Panel
     Friend WithEvents DGView As DataGridView
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Label6 As Label
     Friend WithEvents tPeriode As ComboBox
     Friend WithEvents IDRec As TextBox
@@ -391,4 +553,20 @@ Partial Class Form_SaldoAwal
     Friend WithEvents btnBatalSetup As Button
     Friend WithEvents PeriodeSaldo As DateTimePicker
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents PanelEditSaldo As Panel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents eNamaGL As Label
+    Friend WithEvents eKodeGL As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents btnSimpanEdit As Button
+    Friend WithEvents btnBatalEdit As Button
+    Friend WithEvents eNilaiSaldo As TextBox
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewButtonColumn
+    Friend WithEvents eIndex As Label
 End Class

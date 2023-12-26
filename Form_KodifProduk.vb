@@ -329,7 +329,14 @@ Public Class Form_KodifProduk
                 FotoLoc = My.Settings.path_foto
             End If
         End If
-        'Dim dbCek As String
+        Dim dbCek As String
+        SQL = "SELECT * FROM m_KodeProduk WHERE aktifYN = 'N' "
+        dbCek = Proses.ExecuteSingleStrQuery(SQL)
+        If dbCek <> "" Then
+            SQL = " DELETE M_KODEPRODUK WHERE aktifYN='N' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+
         'SQL = "Select kodeproduk, deskripsi, bahan_ind, namaindonesia
         '  From m_KodeProduk inner join m_KodeBahan on m_KodeProduk.kode_bahan = m_KodeBahan.KodeBahan
         ' Where NamaIndonesia <> bahan_ind "
@@ -345,10 +352,10 @@ Public Class Form_KodifProduk
     Private Sub KodeCari_TextChanged(sender As Object, e As EventArgs) Handles KodeCari.TextChanged
         If Len(KodeCari.Text) < 1 Then
             KodeCari.Text = ""
-        ElseIf Len(KodeCari.Text) = 4 Then
+        ElseIf Len(KodeCari.Text) = 5 Then
             KodeCari.Text = KodeCari.Text + "-"
             KodeCari.SelectionStart = Len(Trim(KodeCari.Text)) + 1
-        ElseIf Len(KodeCari.Text) = 7 Then
+        ElseIf Len(KodeCari.Text) = 8 Then
             KodeCari.Text = KodeCari.Text + "-"
             KodeCari.SelectionStart = Len(Trim(KodeCari.Text)) + 1
         End If
@@ -683,22 +690,22 @@ Public Class Form_KodifProduk
             Bahan.Text = RSL.Rows(0) !bahan_ind
             Kode_Fungsi.Text = RSL.Rows(0) !Fungsi
             Fungsi.Text = RSL.Rows(0) !fungsi_ind
-            Cur_USD.Text = RSL.Rows(0) !Cur_USD
+            Cur_USD.Text = Format(RSL.Rows(0) !Cur_USD, "###,##0.00")
             DCur_USD.Value = RSL.Rows(0) !DCur_USD
-            Prev_USD.Text = RSL.Rows(0) !Prev_USD
+            Prev_USD.Text = Format(RSL.Rows(0) !Prev_USD, "###,##0.00")
             dprev_usd.Value = RSL.Rows(0) !dprev_usd
 
-            cur_Euro.Text = IIf(IsDBNull(RSL.Rows(0) !Cur_euro), 0, RSL.Rows(0) !Cur_euro)
+            cur_Euro.Text = IIf(IsDBNull(RSL.Rows(0) !Cur_euro), 0, Format(RSL.Rows(0) !Cur_euro, "###,##0.00"))
             DCur_Euro.Value = IIf(IsDBNull(RSL.Rows(0) !DCur_euro), "01-01-1900", RSL.Rows(0) !DCur_euro)
-            Prev_Euro.Text = IIf(IsDBNull(RSL.Rows(0) !Prev_euro), 0, RSL.Rows(0) !Prev_euro)
+            Prev_Euro.Text = IIf(IsDBNull(RSL.Rows(0) !Prev_euro), 0, Format(RSL.Rows(0) !Prev_euro, "###,##0.00"))
             dprev_Euro.Value = IIf(IsDBNull(RSL.Rows(0) !dprev_euro), "01-01-1900", RSL.Rows(0) !dprev_euro)
 
-            cur_rp.Text = RSL.Rows(0) !cur_rp
+            cur_rp.Text = Format(RSL.Rows(0) !cur_rp, "###,##0")
             DCur_RP.Value = RSL.Rows(0) !DCur_RP
-            Prev_RP.Text = RSL.Rows(0) !Prev_RP
+            Prev_RP.Text = Format(RSL.Rows(0) !Prev_RP, "###,##0")
             DPrev_RP.Value = RSL.Rows(0) !DPrev_RP
             Kapasitas.Text = RSL.Rows(0) !Kapasitas
-            HPP_USD.Text = RSL.Rows(0) !HPP_USD
+            HPP_USD.Text = Format(RSL.Rows(0) !HPP_USD, "###,##0.00")
             Edit.Text = IIf(IsDBNull(RSL.Rows(0) !usd_edited), "", RSL.Rows(0) !usd_edited)
             PathFoto.Text = Trim(RSL.Rows(0) !FotoLoc)
             LocGmb1.Text = RSL.Rows(0) !File_Foto
@@ -878,15 +885,15 @@ Public Class Form_KodifProduk
             RMax As String = ""
         MsgSQL = "Select KodeProduk " &
             " From M_KodeProduk " &
-            "Where left(kodeproduk, 9) = '" & tKode & "' "
+            "Where left(kodeproduk, 10) = '" & tKode & "' "
         rsc = Proses.ExecuteQuery(MsgSQL)
 
         If rsc.Rows.Count = 0 Then
             MaxKodeProduk = "000"
         Else
-            MsgSQL = "Select isnull(max(subString(kodeproduk,10,3)),0) + 1001 IDRec " &
+            MsgSQL = "Select isnull(max(subString(kodeproduk,11,3)),0) + 1001 IDRec " &
                 " From M_KodeProduk " &
-                "Where left(kodeproduk, 9) = '" & tKode & "' "
+                "Where left(kodeproduk, 10) = '" & tKode & "' "
             RMax = Proses.ExecuteSingleStrQuery(MsgSQL)
             MaxKodeProduk = Microsoft.VisualBasic.Right(RMax, 3)
         End If
@@ -1401,18 +1408,15 @@ Public Class Form_KodifProduk
     End Sub
 
     Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
-        If DGView.Rows.Count <> 0 Then
-            KodeProduk.Text = DGView.Rows(DGView.CurrentCell.RowIndex).Cells(0).Value
-        Else
-            Exit Sub
-        End If
         If Trim(KodeProduk.Text) = "" Then
-            MsgBox("Data Perajin Belum di pilih!", vbCritical, ".:ERROR!")
+            MsgBox("Data Produk Belum di pilih!", vbCritical, ".:ERROR!")
             DGView.Focus()
         End If
-        If MsgBox("Yakin hapus data " & Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(1).Value) & "?", vbYesNo + vbInformation, "Confirm!") = vbYes Then
-            SQL = "Update m_KodeProduk Set AktifYN = 'N', UserID = '" & UserID & "', LastUPD = GetDate() " &
-                    "Where KodeProduk  = '" & KodeProduk.Text & "' "
+        If MsgBox("Yakin hapus data " & Trim(KodeProduk.Text) & "?", vbYesNo + vbInformation, "Confirm!") = vbYes Then
+            'SQL = "Update m_KodeProduk Set AktifYN = 'N', UserID = '" & UserID & "', LastUPD = GetDate() " &
+            '    "Where KodeProduk  = '" & KodeProduk.Text & "' "
+
+            SQL = "DELETE m_KodeProduk WHERE KodeProduk  = '" & KodeProduk.Text & "' "
             Proses.ExecuteNonQuery(SQL)
             ClearTextBoxes()
             Daftar()
@@ -1496,13 +1500,14 @@ Public Class Form_KodifProduk
     Private Sub KodeVariasi_TextChanged(sender As Object, e As EventArgs) Handles KodeVariasi.TextChanged
         If Len(KodeVariasi.Text) < 1 Then
             KodeVariasi.Text = ""
-        ElseIf Len(KodeVariasi.Text) = 4 Then
+        ElseIf Len(KodeVariasi.Text) = 5 Then
             KodeVariasi.Text = KodeVariasi.Text + "-"
             KodeVariasi.SelectionStart = Len(Trim(KodeVariasi.Text)) + 1
-        ElseIf Len(KodeVariasi.Text) = 7 Then
+        ElseIf Len(KodeVariasi.Text) = 8 Then
             KodeVariasi.Text = KodeVariasi.Text + "-"
             KodeVariasi.SelectionStart = Len(Trim(KodeVariasi.Text)) + 1
         End If
+
     End Sub
 
     Private Sub Prev_USD_GotFocus(sender As Object, e As EventArgs) Handles Prev_USD.GotFocus
@@ -1794,17 +1799,17 @@ Public Class Form_KodifProduk
         Me.Text = Judul + " ~ BUAT VARIASI KODE " & Trim(KodeProduk.Text)
 
         MsgSQL = "Select KodeProduk From M_KodeProduk " &
-            "Where KodeProduk like '" & Trim(Microsoft.VisualBasic.Left(KodeProduk.Text, 12)) & "%' " &
+            "Where KodeProduk like '" & Trim(Microsoft.VisualBasic.Left(KodeProduk.Text, 13)) & "%' " &
             "order by kodeproduk desc "
         RSF = Proses.ExecuteQuery(MsgSQL)
         If RSF.Rows.Count <> 0 Then
-            If Len(RSF.Rows(0) !KodeProduk) = 12 Then
+            If Len(RSF.Rows(0) !KodeProduk) = 13 Then
                 KdVar = "A"
             Else
                 KdVar = Chr(Asc(Microsoft.VisualBasic.Right(RSF.Rows(0) !KodeProduk, 1)) + 1)
             End If
         End If
-        KodeProduk.Text = Microsoft.VisualBasic.Left(KodeProduk.Text, 12) + Trim(KdVar)
+        KodeProduk.Text = Microsoft.VisualBasic.Left(KodeProduk.Text, 13) + Trim(KdVar)
         tdPrev_USD = DCur_USD.Value
         tPrev_USD = Cur_USD.Text * 1
         tdPrev_RP = DCur_RP.Value
@@ -1864,11 +1869,16 @@ Public Class Form_KodifProduk
 
     End Sub
 
+    Private Sub TKodeProduk_TextChanged(sender As Object, e As EventArgs) Handles TKodeProduk.TextChanged
+
+    End Sub
+
     Private Sub Daftar()
         Dim mKondisi As String = "", RSD As New DataTable
         Dim MsgSQL As String, a As Integer
         If Trim(cmbNamaPerajin.Text) = "" And Trim(CmbFungsi.Text) = "" And Trim(cmbBahan.Text) = "" And Trim(TDeskripsi.Text) = "" Then
             mKondisi = ""
+
         ElseIf Trim(cmbNamaPerajin.Text) = "" And Trim(CmbFungsi.Text) = "" And Trim(cmbBahan.Text) <> "" Then
             mKondisi = "And kode_bahan = '" & Trim(Microsoft.VisualBasic.Right(cmbBahan.Text, 10)) & "' "
         ElseIf Trim(cmbNamaPerajin.Text) = "" And Trim(CmbFungsi.Text) <> "" And Trim(cmbBahan.Text) = "" Then
@@ -1891,6 +1901,9 @@ Public Class Form_KodifProduk
         ElseIf Trim(TDeskripsi.Text) <> "" Then
             mKondisi = " AND Deskripsi Like '%" & TDeskripsi.Text & "%' "
         End If
+        If Trim(TKodeProduk.Text) <> "" Then
+            mKondisi += " AND KodePerajin2 Like '%" & TKodeProduk.Text & "%' "
+        End If
         PBar1.Visible = True
         DGView.Rows.Clear()
         DGView.Visible = False
@@ -1909,11 +1922,12 @@ Public Class Form_KodifProduk
                 Application.DoEvents()
                 PBar1.Value = a
                 DGView.Rows.Add(.Table.Rows(a) !KodeProduk,
+                    IIf(IsDBNull(.Table.Rows(a) !Kode_Perajin), "", .Table.Rows(a) !Kode_Perajin),
                     .Table.Rows(a) !Deskripsi,
                     IIf(IsDBNull(.Table.Rows(a) !Perajin), "", .Table.Rows(a) !Perajin),
                     .Table.Rows(a) !fungsi_ind,
                     .Table.Rows(a) !bahan_ind,
-                     .Table.Rows(a) !File_Foto,
+                     .Table.Rows(a) !KodePerajin2,
                     Format(.Table.Rows(a) !tanggal, "dd-MM-yyyy"),
                     IIf(IsDBNull(.Table.Rows(a) !Descript), "", .Table.Rows(a) !Descript))
             Next (a)
@@ -2103,6 +2117,12 @@ Public Class Form_KodifProduk
     Private Sub TabControl2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl2.SelectedIndexChanged
         If TabControl2.SelectedTab Is TabRiwayatHarga_ Then
             RiwayatHarga()
+        End If
+    End Sub
+
+    Private Sub TKodeProduk_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TKodeProduk.KeyPress
+        If e.KeyChar = Chr(13) Then
+            Daftar()
         End If
     End Sub
 End Class

@@ -506,10 +506,10 @@ Public Class Form_KatalogSample
     Private Sub KodeProduk_TextChanged(sender As Object, e As EventArgs) Handles KodeProduk.TextChanged
         If Len(Trim(KodeProduk.Text)) < 1 Then
             ClearProduk()
-        ElseIf Len(Trim(KodeProduk.Text)) = 4 Then
+        ElseIf Len(Trim(KodeProduk.Text)) = 5 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
-        ElseIf Len(Trim(KodeProduk.Text)) = 7 Then
+        ElseIf Len(Trim(KodeProduk.Text)) = 8 Then
             KodeProduk.Text = KodeProduk.Text + "-"
             KodeProduk.SelectionStart = Len(Trim(KodeProduk.Text)) + 1
         End If
@@ -599,17 +599,17 @@ Public Class Form_KatalogSample
             Tebal.Text = Format(dbProduk.Rows(0) !Tebal, "###,##0.00")
             Diameter.Text = Format(dbProduk.Rows(0) !Diameter, "###,##0.00")
             Berat.Text = Format(dbProduk.Rows(0) !Berat, "###,##0.00")
-            HargaBeli.Text = Format(dbProduk.Rows(0) !cur_rp, "###,##0.00")
-            HargaFOB.Text = Format(dbProduk.Rows(0) !Cur_USD, "###,##0.00")
-            HargaUSD.Text = Format(dbProduk.Rows(0) !Cur_USD, "###,##0.00")
+            HargaBeli.Text = Replace(Format(dbProduk.Rows(0) !cur_rp, "###,##0.00"), ".00", "")
+            HargaFOB.Text = Replace(Format(dbProduk.Rows(0) !Cur_USD, "###,##0.00"), ".00", "")
+            HargaUSD.Text = Replace(Format(dbProduk.Rows(0) !Cur_USD, "###,##0.00"), ".00", "")
             If cmbMataUang.Text = "USD" Then
                 Konversi.Text = 1
-                HargaJual.Text = Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00")
+                HargaJual.Text = Replace(Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00"), ".00", "")
             ElseIf cmbMataUang.Text = "RP" Then
-                HargaJual.Text = Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00")
+                HargaJual.Text = Replace(Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00"), ".00", "")
             ElseIf cmbMataUang.Text = "EURO" Then
                 If Trim(Konversi.Text) = "" Then Konversi.Text = 1.35
-                HargaJual.Text = Format((HargaUSD.Text * 1) / (Konversi.Text * 1), "###,##0.00")
+                HargaJual.Text = Replace(Format((HargaUSD.Text * 1) / (Konversi.Text * 1), "###,##0.00"), ".00", "")
             End If
             LocGmb1.Text = dbProduk.Rows(0) !file_foto
             If Trim(Dir(FotoLoc + "\" + Trim(LocGmb1.Text))) = "" Or Trim(LocGmb1.Text) = "" Then
@@ -664,8 +664,8 @@ Public Class Form_KatalogSample
             End If
 
 
-            HargaJual.Text = Format(RSK.Rows(0) !HargaJual, "###,##0.00")
-            HargaUSD.Text = Format(RSK.Rows(0) !hargaasli, "###,##0.00")
+            HargaJual.Text = Replace(Format(RSK.Rows(0) !HargaJual, "###,##0.00"), ".00", "")
+            HargaUSD.Text = Replace(Format(RSK.Rows(0) !hargaasli, "###,##0.00"), ".00", "")
             Konversi.Text = Format(RSK.Rows(0) !Konversi, "###,##0.00")
             Kapasitas.Text = Format(RSK.Rows(0) !Kapasitas, "###,##0")
             Panjang.Text = Format(RSK.Rows(0) !Panjang, "###,##0.00")
@@ -674,17 +674,17 @@ Public Class Form_KatalogSample
             Tebal.Text = Format(RSK.Rows(0) !Tebal, "###,##0.00")
             Diameter.Text = Format(RSK.Rows(0) !Diameter, "###,##0.00")
             Berat.Text = Format(RSK.Rows(0) !Berat, "###,##0.00")
-            HargaBeli.Text = Format(RSK.Rows(0) !HargaBeli, "###,##0.00")
-            HargaFOB.Text = Format(RSK.Rows(0) !HargaFOB, "###,##0.00")
+            HargaBeli.Text = Replace(Format(RSK.Rows(0) !HargaBeli, "###,##0.00"), ".00", "")
+            HargaFOB.Text = Replace(Format(RSK.Rows(0) !HargaFOB, "###,##0.00"), ".00", "")
 
             If cmbMataUang.Text = "USD" Then
                 Konversi.Text = 1
-                HargaJual.Text = Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00")
+                HargaJual.Text = Replace(Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00"), ".00", "")
             ElseIf cmbMataUang.Text = "RP" Then
-                HargaJual.Text = Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00")
+                HargaJual.Text = Replace(Format((HargaUSD.Text * 1) * (Konversi.Text * 1), "###,##0.00"), ".00", "")
             ElseIf cmbMataUang.Text = "EURO" Then
                 If Trim(Konversi.Text) = "" Then Konversi.Text = 1.35
-                HargaJual.Text = Format((HargaUSD.Text * 1) / (Konversi.Text * 1), "###,##0.00")
+                HargaJual.Text = Replace(Format((HargaUSD.Text * 1) / (Konversi.Text * 1), "###,##0.00"), ".00", "")
             End If
 
             If RSK.Rows(0) !LengthGambar = 0 Then
