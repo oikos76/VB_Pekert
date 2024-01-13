@@ -96,7 +96,7 @@ Public Class Form_KeuJurnalMasuk
             Uraian.Focus()
             Exit Sub
         End If
-
+        If Trim(NilaiJurnal.Text) = "" Then NilaiJurnal.Text = 0
         If Trim(AccCode1.Text) = "" Then
             MsgBox("Kode GL belum di pilih !", vbCritical + vbOKOnly, ".:Warning !")
             Uraian.Focus()

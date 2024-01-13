@@ -1541,6 +1541,7 @@ ErrMSG:
                 Beep()
             End If
         ElseIf e.KeyChar = Chr(13) Then
+            If Trim(NilaiKurs.Text) = "" Then NilaiKurs.Text = 0
             If IsNumeric(Jumlah.Text) Then
                 Dim temp As Double = NilaiKurs.Text
                 NilaiKurs.Text = Format(temp, "###,##0.00")
@@ -1602,6 +1603,21 @@ ErrMSG:
 
     Private Sub DGView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellContentClick
 
+    End Sub
+
+    Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
+        If Trim(idRecord.Text) = "" Then
+            MsgBox("Data yang akan di hapus belum di pilih!", vbCritical + vbOKOnly, ".:Empty Data!")
+            Exit Sub
+        End If
+        Form_Hapus.Left = Me.Left
+        Form_Hapus.Top = Me.Top
+        Form_Hapus.tIDSebagian.Text = idRecord.Text
+        Form_Hapus.tIDSemua.Text = NoSP.Text
+        Form_Hapus.Text = "Hapus SP"
+        Form_Hapus.ShowDialog()
+        DaftarSP("")
+        ClearTextBoxes()
     End Sub
 
     Private Function CekDouble(tKodeProduk As String, tNoSP As String) As Double

@@ -753,7 +753,7 @@ Public Class Form_KatalogSample
         Me.Cursor = Cursors.WaitCursor
 
         Form_Report.Text = "Daftar Produk"
-        ' terbilang = "#" + tb.Terbilang(CDbl(Form_InvoiceCustomer.Total.Text)) + " Rupiah #"
+        ' terbilang = "#" + tb.Terbilang(CDbl(Form_InvoiceCustomer.Total.Text)) + " Rupiah #"  
         nPrinter = My.Settings.NamaPrinter
         nKertas = My.Settings.NamaKertas
         nPrintYN = FrmMenuUtama.TSKeterangan.Text
@@ -767,7 +767,7 @@ Public Class Form_KatalogSample
             "  t_KatalogProduk.Berat, t_KatalogProduk.MataUang, t_KatalogProduk.Gambar, " &
             "  m_KodeImportir.Alamat , m_KodeBahan.NamaIndonesia " &
             "  FROM Pekerti.dbo.t_KatalogProduk t_KatalogProduk INNER JOIN " &
-            "     Pekerti.dbo.m_KodeBahan m_KodeBahan ON substring(t_KatalogProduk.KodeProduk,6,2) = m_KodeBahan.KodeBahan " &
+            "     Pekerti.dbo.m_KodeBahan m_KodeBahan ON substring(t_KatalogProduk.KodeProduk,7,2) = m_KodeBahan.KodeBahan " &
             "     INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON t_KatalogProduk.Kode_Importir = m_KodeImportir.KodeImportir " &
             " Where t_KatalogProduk.AktifYN = 'Y' " &
             "  And t_KatalogProduk.NamaFile = '" & NamaFile.Text & "' " &

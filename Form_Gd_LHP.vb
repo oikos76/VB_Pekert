@@ -163,11 +163,11 @@ Public Class Form_Gd_LHP
             JumlahBaik.Focus()
             Exit Sub
         End If
-        If Trim(JumlahBaik.Text) = "0" Then
-            MsgBox("Jumlah baik nya kenapa nol ya ?", vbCritical + vbOKOnly, ".:Warning !")
-            JumlahBaik.Focus()
-            Exit Sub
-        End If
+        'If Trim(JumlahBaik.Text) = "0" Then
+        '    MsgBox("Jumlah baik nya kenapa nol ya ?", vbCritical + vbOKOnly, ".:Warning !")
+        '    JumlahBaik.Focus()
+        '    'Exit Sub
+        'End If
         If LAdd Then
             MsgSQL = "Select * From t_LHP " &
                 "Where NoLHP = '" & NoLHP.Text & "' " &
@@ -988,8 +988,8 @@ Public Class Form_Gd_LHP
         Form_Hapus.tIDSemua.Text = NoLHP.Text
         Form_Hapus.Text = "Hapus LHP"
         Form_Hapus.ShowDialog()
-        ClearTextBoxes()
         DaftarLHP()
+        ClearTextBoxes()
     End Sub
 
     Private Sub JumlahBaik_TextChanged(sender As Object, e As EventArgs) Handles JumlahBaik.TextChanged
@@ -1458,7 +1458,7 @@ Public Class Form_Gd_LHP
             "    t_LHP.JumlahBaik, t_LHP.JumlahTolak, t_LHP.Pemeriksa, t_LHP.TglMulaiPeriksa,  " &
             "    t_LHP.TglSelesaiPeriksa, t_LHP.Koordinator, t_LHP.Keterangan, t_LHP.NoSP,  " &
             "    t_PraLHP.Kargo, t_PraLHP.SuratPengantar, t_PraLHP.JumlahKoli,  " &
-            "    AlasanDiTolak, T_LHP.TglTerima " &
+            "    AlasanDiTolak, T_LHP.TglTerima, t_LHP.NamaPerajin " &
             "FROM Pekerti.dbo.t_LHP t_LHP INNER JOIN Pekerti.dbo.t_PraLHP t_PraLHP ON  " &
             "        t_LHP.NoPraLHP = t_PraLHP.NoPraLHP AND t_LHP.NoSP = t_PraLHP.NoSP AND  " &
             "        t_LHP.Kode_Produk = t_PraLHP.Kode_Produk " &

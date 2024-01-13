@@ -1474,6 +1474,7 @@ Public Class Form_GD_DPL
         Form_Hapus.tIDSemua.Text = NoDPL.Text
         Form_Hapus.Text = "Hapus DPL"
         Form_Hapus.ShowDialog()
+        DaftarDPL()
         ClearTextBoxes()
     End Sub
 

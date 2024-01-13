@@ -30,14 +30,6 @@ Partial Class Form_DPBContoh
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PanelEntry = New System.Windows.Forms.Panel()
-        Me.PanelProduk = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Produk = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Jumlah = New System.Windows.Forms.TextBox()
-        Me.SatuanHBeli = New System.Windows.Forms.TextBox()
-        Me.KodeProduk = New System.Windows.Forms.TextBox()
         Me.NoSP = New System.Windows.Forms.TextBox()
         Me.IDRecord = New System.Windows.Forms.TextBox()
         Me.PanelPicture = New System.Windows.Forms.Panel()
@@ -53,6 +45,14 @@ Partial Class Form_DPBContoh
         Me.nodpb = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.PanelProduk = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Produk = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Jumlah = New System.Windows.Forms.TextBox()
+        Me.SatuanHBeli = New System.Windows.Forms.TextBox()
+        Me.KodeProduk = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.PanelNavigate = New System.Windows.Forms.Panel()
         Me.cmdPrint = New System.Windows.Forms.Button()
@@ -91,9 +91,9 @@ Partial Class Form_DPBContoh
         Me.TabPageFormEntry_.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.PanelEntry.SuspendLayout()
-        Me.PanelProduk.SuspendLayout()
         Me.PanelPicture.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelProduk.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.PanelNavigate.SuspendLayout()
         Me.TabPageDaftar_.SuspendLayout()
@@ -163,90 +163,6 @@ Partial Class Form_DPBContoh
         Me.PanelEntry.Name = "PanelEntry"
         Me.PanelEntry.Size = New System.Drawing.Size(986, 409)
         Me.PanelEntry.TabIndex = 174
-        '
-        'PanelProduk
-        '
-        Me.PanelProduk.Controls.Add(Me.Label7)
-        Me.PanelProduk.Controls.Add(Me.Produk)
-        Me.PanelProduk.Controls.Add(Me.Label16)
-        Me.PanelProduk.Controls.Add(Me.Label2)
-        Me.PanelProduk.Controls.Add(Me.Jumlah)
-        Me.PanelProduk.Controls.Add(Me.SatuanHBeli)
-        Me.PanelProduk.Controls.Add(Me.KodeProduk)
-        Me.PanelProduk.Location = New System.Drawing.Point(4, 129)
-        Me.PanelProduk.Name = "PanelProduk"
-        Me.PanelProduk.Size = New System.Drawing.Size(526, 151)
-        Me.PanelProduk.TabIndex = 190
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(4, 11)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(160, 16)
-        Me.Label7.TabIndex = 161
-        Me.Label7.Text = "Kode Produk       :"
-        '
-        'Produk
-        '
-        Me.Produk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Produk.Location = New System.Drawing.Point(174, 36)
-        Me.Produk.Margin = New System.Windows.Forms.Padding(4)
-        Me.Produk.Multiline = True
-        Me.Produk.Name = "Produk"
-        Me.Produk.Size = New System.Drawing.Size(342, 50)
-        Me.Produk.TabIndex = 169
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(4, 126)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(160, 16)
-        Me.Label16.TabIndex = 175
-        Me.Label16.Text = "Satuan Harga Beli :"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(4, 97)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(160, 16)
-        Me.Label2.TabIndex = 174
-        Me.Label2.Text = "Jumlah            :"
-        '
-        'Jumlah
-        '
-        Me.Jumlah.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Jumlah.Location = New System.Drawing.Point(174, 94)
-        Me.Jumlah.Margin = New System.Windows.Forms.Padding(4)
-        Me.Jumlah.Name = "Jumlah"
-        Me.Jumlah.Size = New System.Drawing.Size(342, 22)
-        Me.Jumlah.TabIndex = 178
-        '
-        'SatuanHBeli
-        '
-        Me.SatuanHBeli.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SatuanHBeli.Location = New System.Drawing.Point(174, 124)
-        Me.SatuanHBeli.Margin = New System.Windows.Forms.Padding(4)
-        Me.SatuanHBeli.Name = "SatuanHBeli"
-        Me.SatuanHBeli.Size = New System.Drawing.Size(342, 22)
-        Me.SatuanHBeli.TabIndex = 179
-        '
-        'KodeProduk
-        '
-        Me.KodeProduk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KodeProduk.Location = New System.Drawing.Point(174, 5)
-        Me.KodeProduk.Margin = New System.Windows.Forms.Padding(4)
-        Me.KodeProduk.Name = "KodeProduk"
-        Me.KodeProduk.Size = New System.Drawing.Size(342, 22)
-        Me.KodeProduk.TabIndex = 180
         '
         'NoSP
         '
@@ -402,6 +318,90 @@ Partial Class Form_DPBContoh
         Me.Label4.Size = New System.Drawing.Size(160, 16)
         Me.Label4.TabIndex = 156
         Me.Label4.Text = "Perajin           :"
+        '
+        'PanelProduk
+        '
+        Me.PanelProduk.Controls.Add(Me.Label7)
+        Me.PanelProduk.Controls.Add(Me.Produk)
+        Me.PanelProduk.Controls.Add(Me.Label16)
+        Me.PanelProduk.Controls.Add(Me.Label2)
+        Me.PanelProduk.Controls.Add(Me.Jumlah)
+        Me.PanelProduk.Controls.Add(Me.SatuanHBeli)
+        Me.PanelProduk.Controls.Add(Me.KodeProduk)
+        Me.PanelProduk.Location = New System.Drawing.Point(4, 129)
+        Me.PanelProduk.Name = "PanelProduk"
+        Me.PanelProduk.Size = New System.Drawing.Size(526, 151)
+        Me.PanelProduk.TabIndex = 190
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(4, 11)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(160, 16)
+        Me.Label7.TabIndex = 161
+        Me.Label7.Text = "Kode Produk       :"
+        '
+        'Produk
+        '
+        Me.Produk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Produk.Location = New System.Drawing.Point(174, 36)
+        Me.Produk.Margin = New System.Windows.Forms.Padding(4)
+        Me.Produk.Multiline = True
+        Me.Produk.Name = "Produk"
+        Me.Produk.Size = New System.Drawing.Size(342, 50)
+        Me.Produk.TabIndex = 169
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(4, 126)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(160, 16)
+        Me.Label16.TabIndex = 175
+        Me.Label16.Text = "Satuan Harga Beli :"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(4, 97)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(160, 16)
+        Me.Label2.TabIndex = 174
+        Me.Label2.Text = "Jumlah            :"
+        '
+        'Jumlah
+        '
+        Me.Jumlah.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Jumlah.Location = New System.Drawing.Point(174, 94)
+        Me.Jumlah.Margin = New System.Windows.Forms.Padding(4)
+        Me.Jumlah.Name = "Jumlah"
+        Me.Jumlah.Size = New System.Drawing.Size(342, 22)
+        Me.Jumlah.TabIndex = 178
+        '
+        'SatuanHBeli
+        '
+        Me.SatuanHBeli.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SatuanHBeli.Location = New System.Drawing.Point(174, 124)
+        Me.SatuanHBeli.Margin = New System.Windows.Forms.Padding(4)
+        Me.SatuanHBeli.Name = "SatuanHBeli"
+        Me.SatuanHBeli.Size = New System.Drawing.Size(342, 22)
+        Me.SatuanHBeli.TabIndex = 179
+        '
+        'KodeProduk
+        '
+        Me.KodeProduk.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KodeProduk.Location = New System.Drawing.Point(174, 5)
+        Me.KodeProduk.Margin = New System.Windows.Forms.Padding(4)
+        Me.KodeProduk.Name = "KodeProduk"
+        Me.KodeProduk.Size = New System.Drawing.Size(342, 22)
+        Me.KodeProduk.TabIndex = 180
         '
         'Panel4
         '
@@ -790,10 +790,10 @@ Partial Class Form_DPBContoh
         Me.Panel2.ResumeLayout(False)
         Me.PanelEntry.ResumeLayout(False)
         Me.PanelEntry.PerformLayout()
-        Me.PanelProduk.ResumeLayout(False)
-        Me.PanelProduk.PerformLayout()
         Me.PanelPicture.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelProduk.ResumeLayout(False)
+        Me.PanelProduk.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.PanelNavigate.ResumeLayout(False)
         Me.TabPageDaftar_.ResumeLayout(False)

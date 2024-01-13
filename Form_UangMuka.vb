@@ -34,7 +34,7 @@ Public Class Form_UangMuka
 
     Private Sub cmdSimpan_Click(sender As Object, e As EventArgs) Handles cmdSimpan.Click
         Dim tUangMuka As Double = 0, tNilaiBayar As Double = 0
-
+        If Trim(UangMuka.Text) = "" Then UangMuka.Text = 0
         If cmbJenisBayar.Text = "UANG MUKA" Then
             tUangMuka = UangMuka.Text * 1
             tNilaiBayar = 0

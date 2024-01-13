@@ -57,6 +57,7 @@ Public Class Form_DPB
         If LAdd Then
             GetMaxIdDPB
         End If
+
         If LAdd Or LEdit Or LTambahKode Then
             If Trim(NoLHP.Text) = "" Then
                 MsgBox("No LHP masih kosong!", vbOKOnly + vbCritical, ".:ERROR!")
@@ -107,15 +108,16 @@ Public Class Form_DPB
                         " Kode_Produk, NamaProduk, KodePerajin, Jumlah, HargaBeli, " &
                         " DeadlineSP, Ongkir, SpecProduk,Keterangan, Pengirim, SPB, " &
                         " TglTerima, Kargo, AktifYN, LastUPD, UserID, tglcetak,ID," &
-                        " StatusDPB, TransferYN) VALUES('" & IDRecord.Text & "', '" & nodpb.Text & "'," &
-                        " '" & Format(TglDPB.Value, "yyyy-MM-dd") & "', " &
+                        " StatusDPB, TransferYN, IdCompany) VALUES('" & IDRecord.Text & "', " &
+                        " '" & nodpb.Text & "', '" & Format(TglDPB.Value, "yyyy-MM-dd") & "', " &
                         "'" & rs05.Rows(0) !NoSP & "', '" & NoLHP.Text & "', '" & rs05.Rows(0) !Kode_Produk & "', " &
                         "'" & rs05.Rows(0) !Produk & "','" & KodePerajin.Text & "'," & Jumlah.Text * 1 & ", " &
                         "" & rs05.Rows(0) !HargaBeli & ", '" & Format(DeadlineSP.Value, "yyyy-MM-dd") & "', " &
                         "" & OngKir.Text * 1 & ", '" & Trim(SpecProduk.Text) & "', " &
                         "'" & Trim(Keterangan.Text) & "','" & Trim(rs05.Rows(0) !NamaPerajin) & "', " &
                         "'" & Trim(rs05.Rows(0) !NoSPB) & "', '" & rs05.Rows(0) !TglTerima & "', " &
-                        "'" & Trim(rs05.Rows(0) !Kargo) & "', 'Y', GetDate(), '" & UserID & "','', '','', 'N') "
+                        "'" & Trim(rs05.Rows(0) !Kargo) & "', 'Y', GetDate(), '" & UserID & "', " &
+                        "'', '','', 'N', 'Pekerti') "
                     Proses.ExecuteNonQuery(MsgSQL)
                 Next a
                 NoLHP.Text = ""
@@ -182,12 +184,32 @@ Public Class Form_DPB
         End If
         DaftarDPB()
     End Sub
+    Private Sub CekTable()
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+        "WHERE TABLE_NAME = 't_DPB'  " &
+        "  And column_name = 'IDCompany' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE t_DPB ADD IDCompany Varchar(10) "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "UPDATE t_DPB SET IDCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+        SQL = "SELECT IDCompany FROM t_DPB WHERE idCompany is Null "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count <> 0 Then
+            SQL = "UPDATE t_DPB set idCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+    End Sub
     Private Sub Form_DPB_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim MsgSQL As String
+        SetToolTip()
         LAdd = False
         LEdit = False
         TabControl1.SelectedTab = TabPageFormEntry_
         SetDataGrid()
+        cekTable()
         UserID = FrmMenuUtama.TsPengguna.Text
         ClearTextBoxes()
         Dim rs05 As New DataTable
@@ -370,12 +392,11 @@ Public Class Form_DPB
 
     Private Sub OngKir_TextChanged(sender As Object, e As EventArgs) Handles OngKir.TextChanged
         If Trim(OngKir.Text) = "" Then OngKir.Text = 0
-        If IsNumeric(OngKir.Text) Then
+        If Trim(OngKir.Text) = "-" Then
+        ElseIf IsNumeric(OngKir.Text) Then
             Dim temp As Double = OngKir.Text
             OngKir.Text = Format(temp, "###,##0")
             OngKir.SelectionStart = OngKir.TextLength
-        Else
-            OngKir.Text = 0
         End If
     End Sub
 
@@ -479,6 +500,7 @@ Public Class Form_DPB
         Form_Hapus.Text = "Hapus DPB"
         Form_Hapus.ShowDialog()
         DaftarDPB()
+        ClearTextBoxes()
     End Sub
     Private Sub cmdExit_Click(sender As Object, e As EventArgs) Handles cmdExit.Click
         Me.Close()
@@ -644,6 +666,20 @@ Public Class Form_DPB
         End If
     End Sub
 
+    Private Sub SetToolTip()
+        With Me.ToolTip1
+            .AutomaticDelay = 0
+            .AutoPopDelay = 30000
+            .BackColor = System.Drawing.Color.AntiqueWhite
+            .InitialDelay = 50
+            .IsBalloon = False
+            .ReshowDelay = 50
+            .ShowAlways = True
+            .Active = False
+            .Active = True
+            .SetToolTip(Me.OngKir, "ketik tanda minus (-) jika ongkirnya mengurangi total DPB " & vbCrLf)
+        End With
+    End Sub
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
         Dim DTadapter As New SqlDataAdapter
         Dim objRep As New ReportDocument
@@ -687,8 +723,10 @@ Public Class Form_DPB
             " t_DPB.Kode_Produk, t_DPB.NamaProduk, t_DPB.KodePerajin, " &
             " t_DPB.Jumlah, t_DPB.HargaBeli, t_DPB.DeadlineSP, t_DPB.Pengirim, t_DPB.ongkir, " &
             " t_DPB.TglTerima , t_DPB.tglCetak, m_KodeProduk.Satuan, m_KodeProduk.KodePerajin2 " &
-            " FROM Pekerti.dbo.t_DPB t_DPB INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
-            "    t_DPB.Kode_Produk = m_KodeProduk.KodeProduk " &
+            " FROM Pekerti.dbo.t_DPB INNER JOIN Pekerti.dbo.m_KodeProduk ON " &
+            "        t_DPB.Kode_Produk = m_KodeProduk.KodeProduk " &
+            "     INNER JOIN Pekerti.dbo.m_Company m_Company ON " &
+            "        t_DPB.IDCompany = m_Company.CompCode  " &
             "Where t_DPB.NoDPB = '" & nodpb.Text & "' and t_DPB.Jumlah <> 0 " &
             "  And t_DPB.AktifYN = 'Y' order by t_DPB.NoSP, t_DPB.NoLHP, " &
             " t_DPB.IDREC, t_DPB.KODE_PRODUK "
@@ -763,6 +801,12 @@ Public Class Form_DPB
             e.KeyChar = " "c 'Allows "Spacebar" to be used
         ElseIf e.KeyChar = ","c Then
             e.KeyChar = ","c
+        ElseIf e.KeyChar = "-"c Then
+            If OngKir.Text.IndexOf("-") > -1 Then 'Allows " . " and prevents more than 1 " . "
+                e.Handled = True
+                Beep()
+            End If
+            'e.KeyChar = "-"c
         ElseIf e.KeyChar = "." Then
             If OngKir.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
                 e.Handled = True
@@ -906,5 +950,9 @@ Public Class Form_DPB
         If e.KeyChar = Chr(13) Then
             NoLHP.Focus()
         End If
+    End Sub
+
+    Private Sub OngKir_LostFocus(sender As Object, e As EventArgs) Handles OngKir.LostFocus
+       
     End Sub
 End Class

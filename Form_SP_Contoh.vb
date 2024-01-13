@@ -141,6 +141,23 @@ Public Class Form_SP_Contoh
             MsgBox("Bentuk SP Belum dipilih!", vbCritical + vbOKOnly, ".:ERROR!")
             Exit Sub
         End If
+        If Trim(Kode_Importir.Text) = "" Then
+            MsgBox("Importir Belum di pilih !", vbCritical + vbOKOnly, ".:Warn!ng...")
+            Kode_Importir.Focus()
+            Exit Sub
+        Else
+            SQL = "Select nama From m_kodeImportir " &
+              " Where KodeImportir = '" & Kode_Importir.Text & "' " &
+              " and aktifyn = 'Y' "
+            dbTable = Proses.ExecuteQuery(SQL)
+            If dbTable.Rows.Count <> 0 Then
+                Importir.Text = dbTable.Rows(0) !nama
+            Else
+                MsgBox("Importir salah/tidak terdaftar di pilih !", vbCritical + vbOKOnly, ".:Warn!ng...")
+                Kode_Importir.Focus()
+                Exit Sub
+            End If
+        End If
         If LAdd Or LTambahKode Then
             If Trim(NoSP.Text) = "" Then
                 MsgBox("No SP tidak boleh kosong !", vbCritical + vbOKOnly, ".:ERROR!")
@@ -159,8 +176,8 @@ Public Class Form_SP_Contoh
             MsgSQL = "INSERT INTO t_SPContoh(IDRec, NoSP, TglSP, StatusSP, " &
                 "BentukSP, No_PO, Kode_Importir, ShipmentDate, Kode_Perajin, Kode_Produk, " &
                 "Jumlah, HargaBeli, TglKirimPerajin, TglMasukGudang, CatatanProduk, " &
-                "CatatanSP, FotoLoc, UserID, LastUPD, AktifYN, TransferYN) VALUES ('" & IDRecord.Text & "', " &
-                "'" & NoSP.Text & "', '" & Format(TglSP.Value, "yyyy-MM-dd") & "', " &
+                "CatatanSP, FotoLoc, UserID, LastUPD, AktifYN, TransferYN, IdCompany) VALUES (" &
+                "'" & IDRecord.Text & "', '" & NoSP.Text & "', '" & Format(TglSP.Value, "yyyy-MM-dd") & "', " &
                 "'" & Trim(StatusSP.Text) & "', '" & BentukSP & "', '" & Trim(NoPO.Text) & "', " &
                 "'" & Kode_Importir.Text & "','" & Format(tglKirim.Value, "yyyy-MM-dd") & "', " &
                 "'" & Kode_Perajin.Text & "', '" & KodeProduk.Text & "', " &
@@ -168,7 +185,7 @@ Public Class Form_SP_Contoh
                 "'" & Format(TglKirimPerajin.Value, "yyyy-MM-dd") & "', " &
                 "'" & Format(TglMasukGudang.Value, "yyyy-MM-dd") & "', " &
                 "'" & Trim(CatatanProduk.Text) & "', '" & Trim(CatatanSP.Text) & "', " &
-                "'', '" & UserID & "', GetDate(), 'Y', 'N') "
+                "'', '" & UserID & "', GetDate(), 'Y', 'N', 'PEKERTI') "
             Proses.ExecuteNonQuery(MsgSQL)
             TambahKode()
         ElseIf LEdit Then
@@ -475,6 +492,7 @@ Public Class Form_SP_Contoh
     End Sub
 
     Private Sub Form_SP_Contoh_Load(sender As Object, e As EventArgs) Handles Me.Load
+        CekTable()
         LAdd = False
         LEdit = False
         LTambahKode = False
@@ -977,8 +995,115 @@ Public Class Form_SP_Contoh
             End If
         End If
     End Sub
+    Private Sub CekTable()
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+        "WHERE TABLE_NAME = 't_SPContoh'  " &
+        "  And column_name = 'IDCompany' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE t_SPContoh ADD IDCompany Varchar(10) "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "UPDATE t_SPContoh SET IDCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+        SQL = "SELECT IDCompany FROM t_SPContoh WHERE idCompany is Null "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count <> 0 Then
+            SQL = "UPDATE t_SPContoh set idCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
 
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+             "WHERE TABLE_NAME = 'm_company' " &
+             "  And column_name = 'BagianContoh' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE m_company ADD BagianContoh Varchar(50)  "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "UPDATE m_Company SET BagianContoh = 'Dhea' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+
+    End Sub
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+
+
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable, clsTerbilang As New Terbilang
+        Dim totalSPContoh As Double = 0, tanggal As String = "", terbilang As String = ""
+
+        Me.Cursor = Cursors.WaitCursor
+        SQL = "Select isNull(Sum(Jumlah * HargaBeli),0) JValue " &
+            "From Pekerti.dbo.t_SPContoh  " &
+            "Where t_SPContoh.NoSP = '" & NoSP.Text & "' " &
+            "  And t_SPContoh.AktifYn = 'Y' "
+        dttable = Proses.ExecuteQuery(SQL)
+        If dttable.Rows.Count <> 0 Then
+            totalSPContoh = dttable.Rows(0) !Jvalue
+        Else
+            totalSPContoh = 0
+        End If
+        If totalSPContoh = 0 Then
+            terbilang = "-"
+        Else
+            terbilang = "- " + clsTerbilang.CurrencyText(totalSPContoh, "RP") + " -"
+        End If
+
+        SQL = "Select tglSP " &
+            "From Pekerti.dbo.t_SPContoh  " &
+            "Where t_SPContoh.NoSP = '" & NoSP.Text & "' " &
+            "  And t_SPContoh.AktifYn = 'Y' "
+        dttable = Proses.ExecuteQuery(SQL)
+        If dttable.Rows.Count <> 0 Then
+            tanggal = "Jakarta, " & Proses.TglIndo(Format(dttable.Rows(0) !TglSP, "dd-MM-yyyy"))
+        End If
+
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+
+        SQL = "Select t_SPContoh.IDRec, t_SPContoh.NoSP, t_SPContoh.Kode_Produk, " &
+            "     Jumlah, HargaBeli, CatatanSP, m_KodeImportir.Nama Nama_Importir, " &
+            "     TglSP, m_KodePerajin.Nama Nama_Perajin, m_KodePerajin.Alamat, " &
+            "     m_KodeProduk.Deskripsi, m_KodeProduk.Satuan, " &
+            "     m_KodeProduk.KodePerajin2, Direksi, TTDireksi, BagianContoh " &
+            "FROM t_SPContoh INNER JOIN  m_KodePerajin ON " &
+            "           t_SPContoh.Kode_Perajin = m_KodePerajin.KodePerajin " &
+            "     INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk On " &
+            "           t_SPContoh.Kode_Produk = m_KodeProduk.KodeProduk " &
+            "     INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
+            "           t_SPContoh.Kode_Importir = m_KodeImportir.KodeImportir " &
+            "     INNER JOIN Pekerti.dbo.m_Company m_Company ON " &
+            "           t_SPContoh.IDCompany = m_Company.CompCode  " &
+            "WHERE T_SPContoh.NoSP = '" & NoSP.Text & "' " &
+            "  AND T_SPContoh.AktifYN = 'Y' " &
+            "ORDER BY TglSP "
+
+        DTadapter = New SqlDataAdapter(SQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            objRep = New Rpt_SPContoh
+            objRep.SetDataSource(dttable)
+            objRep.SetParameterValue("tanggal", tanggal)
+            objRep.SetParameterValue("Terbilang", Terbilang)
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
 
     End Sub
 

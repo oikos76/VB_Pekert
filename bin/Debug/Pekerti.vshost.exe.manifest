@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="Pekerti.exe" version="20.21.1.52" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
+  <asmv1:assemblyIdentity name="Pekerti.exe" version="20.21.1.53" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <description asmv2:iconFile="Apps.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Pekerti" version="23.11.27.1" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Pekerti" version="24.1.12.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="Pekerti.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -295,14 +295,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pekerti.exe" size="6991872">
-      <assemblyIdentity name="Pekerti" version="23.11.27.1" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pekerti.exe" size="8177664">
+      <assemblyIdentity name="Pekerti" version="24.1.12.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>kkGREW9SRIx64MfcwZuwsxr02t4=</dsig:DigestValue>
+        <dsig:DigestValue>B4/J48hjt2+Z3PMYoRaRRW6Zcok=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -339,13 +339,13 @@
       <dsig:DigestValue>YIRBntud7i9t6+ZieXAuXvBHbKw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Pekerti.exe.config" size="3628">
+  <file name="Pekerti.exe.config" size="3761">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>F4og++ScO85OvmFZMFIbes9JvKs=</dsig:DigestValue>
+      <dsig:DigestValue>nh+7fDILvIi6BOIjo0hSqzICjDA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ShoppingCart.ico" size="223493">

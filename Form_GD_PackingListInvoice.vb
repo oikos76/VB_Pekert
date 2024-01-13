@@ -355,16 +355,16 @@ Public Class Form_GD_PackingListInvoice
     End Sub
 
     Private Sub CekTable()
-        SQL = "SELECT *  FROM information_schema.COLUMNS " &
-        "WHERE TABLE_NAME = 't_PackingList'  " &
-        "  And column_name = 'IDCompany' "
-        dbTable = Proses.ExecuteQuery(SQL)
-        If dbTable.Rows.Count = 0 Then
-            SQL = "ALTER TABLE t_PackingList ADD IDCompany Varchar(10) "
-            Proses.ExecuteNonQuery(SQL)
-            SQL = "UPDATE t_PackingList SET IDCompany = 'PEKERTI' "
-            Proses.ExecuteNonQuery(SQL)
-        End If
+        'SQL = "SELECT *  FROM information_schema.COLUMNS " &
+        '"WHERE TABLE_NAME = 't_PackingList'  " &
+        '"  And column_name = 'IDCompany' "
+        'dbTable = Proses.ExecuteQuery(SQL)
+        'If dbTable.Rows.Count = 0 Then
+        '    SQL = "ALTER TABLE t_PackingList ADD IDCompany Varchar(10) "
+        '    Proses.ExecuteNonQuery(SQL)
+        '    SQL = "UPDATE t_PackingList SET IDCompany = 'PEKERTI' "
+        '    Proses.ExecuteNonQuery(SQL)
+        'End If
         SQL = "SELECT IDCompany FROM t_PackingList WHERE idCompany is Null "
         dbTable = Proses.ExecuteQuery(SQL)
         If dbTable.Rows.Count <> 0 Then

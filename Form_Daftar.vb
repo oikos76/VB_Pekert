@@ -662,6 +662,33 @@
                                     .Table.Rows(a) !importir)
                 Next (a)
             End With
+        ElseIf Me.Text = "Daftar Toko" Then
+            DGView.Columns(0).HeaderText = "Id Toko"
+            DGView.Columns(0).Width = 80
+            DGView.Columns(1).HeaderText = "Nama Toko"
+            DGView.Columns(1).Width = 250
+            DGView.Columns(2).HeaderText = "Alamat"
+            DGView.Columns(2).Width = 280
+            DGView.Columns(3).HeaderText = "Contact Person"
+            DGView.Columns(3).Width = 120
+            DGView.Columns(4).HeaderText = "Tlp"
+            DGView.Columns(4).Width = 100
+            DGView.Columns(5).HeaderText = ""
+            DGView.Columns(6).HeaderText = ""
+            DGView.Columns(7).HeaderText = ""
+            DGView.Columns(8).HeaderText = ""
+            DGView.Columns(9).HeaderText = ""
+            DGView.Columns(10).HeaderText = ""
+            DGView.Rows.Clear()
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    DGView.Rows.Add(.Table.Rows(a) !idrec,
+                    .Table.Rows(a) !nama,
+                    .Table.Rows(a) !alamat1 + " " + .Table.Rows(a) !alamat2,
+                    .Table.Rows(a) !contactperson,
+                    .Table.Rows(a) !tlpcp)
+                Next (a)
+            End With
         Else
             MsgBox("Please cek this condition code! :" & Me.Text)
             DGView.DataSource = tblData
@@ -871,6 +898,12 @@
                     "And NoLHP Like '%" & Trim(tCari.Text) & "%' " &
                     "Group By NoLHP, a.NamaPerajin, a.TglLHP " &
                     "Order By a.tglLHP desc, NoLHP Desc "
+            ElseIf Me.Text = "Daftar Toko" Then
+                txtQuery.Text = "Select * " &
+                        " From M_Toko " &
+                        "Where AktifYN = 'Y' " &
+                        "  And (nama like '%" & tCari.Text & "%' or idrec like '%" & tCari.Text & "%') " &
+                        "Order By idrec"
             Else
                 MsgBox("Code Program untuk pencarian " & Me.Text & " Belum ada ! :" & Me.Text)
                 DGView.DataSource = tblData

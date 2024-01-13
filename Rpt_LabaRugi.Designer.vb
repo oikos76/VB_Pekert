@@ -24,6 +24,7 @@ Partial Class Rpt_LabaRugi
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Rpt_LabaRugi))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ChkDetail = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdCetak = New System.Windows.Forms.Button()
         Me.LStrip = New System.Windows.Forms.Label()
@@ -32,14 +33,13 @@ Partial Class Rpt_LabaRugi
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.CheckBox1)
+        Me.Panel1.Controls.Add(Me.ChkDetail)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Controls.Add(Me.LStrip)
         Me.Panel1.Controls.Add(Me.Tgl2)
@@ -51,6 +51,16 @@ Partial Class Rpt_LabaRugi
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1004, 57)
         Me.Panel1.TabIndex = 10
+        '
+        'ChkDetail
+        '
+        Me.ChkDetail.AutoSize = True
+        Me.ChkDetail.Location = New System.Drawing.Point(327, 15)
+        Me.ChkDetail.Name = "ChkDetail"
+        Me.ChkDetail.Size = New System.Drawing.Size(53, 17)
+        Me.ChkDetail.TabIndex = 203
+        Me.ChkDetail.Text = "Detail"
+        Me.ChkDetail.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -139,16 +149,6 @@ Partial Class Rpt_LabaRugi
         Me.CrystalReportViewer1.Size = New System.Drawing.Size(1004, 524)
         Me.CrystalReportViewer1.TabIndex = 11
         '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(327, 15)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(53, 17)
-        Me.CheckBox1.TabIndex = 203
-        Me.CheckBox1.Text = "Detail"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
         'Rpt_LabaRugi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -175,5 +175,5 @@ Partial Class Rpt_LabaRugi
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents CrystalReportViewer1 As CrystalReportViewer
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ChkDetail As CheckBox
 End Class

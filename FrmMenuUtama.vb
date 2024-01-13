@@ -30,15 +30,8 @@ Public Class FrmMenuUtama
         Dim UserID As String = TsPengguna.Text, dVersion As String = ""
         'mnuBackup.Visible = Proses.UserAksesMenu(UserID, "BACKUP_DB")
         'mnuRestore.Visible = Proses.UserAksesMenu(UserID, "RESTORE_DB")
-        _18Utility.Visible = Proses.UserAksesMenu(UserID, "18_UTILITY")
-        _81_GANTI_PASSWORD.Visible = Proses.UserAksesMenu(UserID, "81_GANTI_PASSWORD")
-        _82_USER_BARU.Visible = Proses.UserAksesMenu(UserID, "82_USER_BARU")
-        _83_PENGATURAN_USER.Visible = Proses.UserAksesMenu(UserID, "83_PENGATURAN_USER")
-        _84_COMPANY_SETUP.Visible = Proses.UserAksesMenu(UserID, "84_COMPANY_SETUP")
 
-        _8A_BACKUP_DATA.Visible = Proses.UserAksesMenu(UserID, "8A_BACKUP_DB")
-        _8B_RESTORE_DATA.Visible = Proses.UserAksesMenu(UserID, "8B_RESTORE_DB")
-
+        _100Keuangan.Visible = Proses.UserAksesMenu(UserID, "100_KEUANGAN")
         _21KodifikasiBahanBaku.Visible = Proses.UserAksesMenu(UserID, "21_KODIF_BAHAN_BAKU")
         _22KodifikasiFungsiProduk.Visible = Proses.UserAksesMenu(UserID, "22_KODIF_FUNGSI_PRODUK")
         _23KodifikasiDaerah.Visible = Proses.UserAksesMenu(UserID, "23_KODIF_DAERAH")
@@ -68,14 +61,32 @@ Public Class FrmMenuUtama
 
 
         If (UCase(UserID) = "EKO_K" Or UCase(UserID) = "ADMIN") Then
+            _100Keuangan.Visible = True
             _18Utility.Visible = True
             _81_GANTI_PASSWORD.Visible = True
             _82_USER_BARU.Visible = True
             _83_PENGATURAN_USER.Visible = True
             _84_COMPANY_SETUP.Visible = True
+            _85_KirimData.Visible = True
+            _86_TerimaData.Visible = True
             _8A_BACKUP_DATA.Visible = True
             _8B_RESTORE_DATA.Visible = True
+            mnuKosongData.Visible = True
+            mnuExploreFileFoto.Visible = True
+        Else
+            _18Utility.Visible = Proses.UserAksesMenu(UserID, "18_UTILITY")
+            _81_GANTI_PASSWORD.Visible = Proses.UserAksesMenu(UserID, "81_GANTI_PASSWORD")
+            _82_USER_BARU.Visible = Proses.UserAksesMenu(UserID, "82_USER_BARU")
+            _83_PENGATURAN_USER.Visible = Proses.UserAksesMenu(UserID, "83_PENGATURAN_USER")
+            _84_COMPANY_SETUP.Visible = Proses.UserAksesMenu(UserID, "84_COMPANY_SETUP")
+            _85_KirimData.Visible = Proses.UserAksesMenu(UserID, "85_KIRIM_DATA")
+            _86_TerimaData.Visible = Proses.UserAksesMenu(UserID, "86_TERIMA_DATA")
+            _8A_BACKUP_DATA.Visible = Proses.UserAksesMenu(UserID, "8A_BACKUP_DB")
+            _8B_RESTORE_DATA.Visible = Proses.UserAksesMenu(UserID, "8B_RESTORE_DB")
+            mnuKosongData.Visible = False
+            mnuExploreFileFoto.Visible = False
         End If
+
         SQL = "Select company, kode_toko, convert(varchar(8), " &
             "         getdate(), 112) as tglServer, compcode, ipcloud, version " &
             "From M_Company "
@@ -116,7 +127,7 @@ Public Class FrmMenuUtama
                 Proses.ExecuteNonQuery(SQL)
                 MsgBox("Program ini berhasil di update ke versi " & version, vbInformation + vbOKOnly, "Congratulation !")
             Else
-                _11Keuangan.Visible = False
+                _100Keuangan.Visible = False
                 _12BagianContoh.Visible = False
                 _13BagianPembelian.Visible = False
                 _14BagianPemasaran.Visible = False
@@ -563,10 +574,7 @@ Public Class FrmMenuUtama
         Form_KeuKodeGL.Show()
     End Sub
 
-    Private Sub ExploreFileFotoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExploreFileFotoToolStripMenuItem.Click
-        Form_ExploreFoto.MdiParent = Me
-        Form_ExploreFoto.Show()
-    End Sub
+
 
     Private Sub _102KasBankKeluar_Click(sender As Object, e As EventArgs) Handles _102KasBankKeluar.Click
         Form_KeuJurnalKeluar.MdiParent = Me
@@ -601,6 +609,19 @@ Public Class FrmMenuUtama
     Private Sub _110LabaRugi_Click(sender As Object, e As EventArgs) Handles _110LabaRugi.Click
         Rpt_LabaRugi.MdiParent = Me
         Rpt_LabaRugi.Show()
+    End Sub
+
+    Private Sub _85_KirimData_Click(sender As Object, e As EventArgs) Handles _85_KirimData.Click
+        Form_DataKirim.ShowDialog()
+    End Sub
+
+    Private Sub _86_TerimaData_Click(sender As Object, e As EventArgs) Handles _86_TerimaData.Click
+        Form_DataTerima.ShowDialog()
+    End Sub
+
+    Private Sub mnuExploreFileFoto_Click(sender As Object, e As EventArgs) Handles mnuExploreFileFoto.Click
+        Form_ExploreFoto.MdiParent = Me
+        Form_ExploreFoto.Show()
     End Sub
 End Class
 

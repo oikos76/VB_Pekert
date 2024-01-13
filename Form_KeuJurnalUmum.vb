@@ -139,6 +139,8 @@ Public Class Form_KeuJurnalUmum
             Exit Sub
         End If
 
+        If Trim(NilaiJurnal.Text) = "" Then NilaiJurnal.Text = 0
+
         If Trim(AccCode1.Text) = "" Then
             MsgBox("Kode GL belum di pilih !", vbCritical + vbOKOnly, ".:Warning !")
             Uraian.Focus()
@@ -288,6 +290,7 @@ Public Class Form_KeuJurnalUmum
             LNilaiJurnal.Text = "Jumlah         :"
             LNilaiJurnal.Text = "Jumlah       Rp."
         Else
+            If Trim(NilaiJurnal.Text) = "" Then NilaiJurnal.Text = 0
             LKurs.Visible = True
             Kurs.Visible = True
             Jumlah.Visible = True

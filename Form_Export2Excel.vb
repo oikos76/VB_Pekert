@@ -353,7 +353,7 @@ Public Class Form_Export2Excel
             oSheet.Range("A" + Format(i, "##0")).Value = dbTable.Rows(a) !nodpb
             MsgSQL = "Select Nama From M_KodePerajin " &
                 "Where aktifYN = 'Y' " &
-                "  And KodePerajin = '" & Microsoft.VisualBasic.Left(dbTable.Rows(a) !Kode_Produk, 4) & "' "
+                "  And KodePerajin = '" & Microsoft.VisualBasic.Left(dbTable.Rows(a) !Kode_Produk, 5) & "' "
             Perajin = Proses.ExecuteSingleStrQuery(MsgSQL)
             oSheet.Range("B" + Format(i, "##0")).Value = Perajin
             oSheet.Range("C" + Format(i, "##0")).Value = dbTable.Rows(a) !NoLHP

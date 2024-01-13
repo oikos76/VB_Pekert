@@ -46,7 +46,7 @@ Partial Class FrmMenuUtama
         Me.UserLoginMenu = New System.Windows.Forms.ToolStripStatusLabel()
         Me.PasswordLoginMenu = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me._11Keuangan = New System.Windows.Forms.ToolStripMenuItem()
+        Me._100Keuangan = New System.Windows.Forms.ToolStripMenuItem()
         Me._101JurnalUmum = New System.Windows.Forms.ToolStripMenuItem()
         Me._102KasBankKeluar = New System.Windows.Forms.ToolStripMenuItem()
         Me._103KasBankMasuk = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,16 +110,13 @@ Partial Class FrmMenuUtama
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me._84_COMPANY_SETUP = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.KirimDataKeGudangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AmbilDataDariGudangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._85_KirimData = New System.Windows.Forms.ToolStripMenuItem()
+        Me._86_TerimaData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.KirimDataKeWaruToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AmbilDataDariWaruToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me._8A_BACKUP_DATA = New System.Windows.Forms.ToolStripMenuItem()
         Me._8B_RESTORE_DATA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuKosongData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExploreFileFotoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExploreFileFoto = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.StatusStrip1.SuspendLayout()
@@ -297,19 +294,19 @@ Partial Class FrmMenuUtama
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me._11Keuangan, Me._12BagianContoh, Me._13BagianPembelian, Me._14BagianPemasaran, Me._15BagianGudang, Me._16Monitoring, Me._17AnalisaData, Me._18Utility, Me.mnuExit})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me._100Keuangan, Me._12BagianContoh, Me._13BagianPembelian, Me._14BagianPemasaran, Me._15BagianGudang, Me._16Monitoring, Me._17AnalisaData, Me._18Utility, Me.mnuExit})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1184, 30)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        '_11Keuangan
+        '_100Keuangan
         '
-        Me._11Keuangan.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._101JurnalUmum, Me._102KasBankKeluar, Me._103KasBankMasuk, Me._104Inventearis, Me.ToolStripSeparator5, Me._105KodeGL, Me._106SaldoAkhir, Me.ToolStripSeparator6, Me._107DaftarJurnal, Me._108GeneralLedger, Me._109TrialBalance, Me._110LabaRugi, Me._111Neraca, Me.ToolStripSeparator7, Me._112ProsesAkhirBulan, Me.ToolStripSeparator8, Me._113PengajuanPotonganPerajin, Me._114UangMukaLanjutanPelunasan})
-        Me._11Keuangan.Name = "_11Keuangan"
-        Me._11Keuangan.Size = New System.Drawing.Size(72, 26)
-        Me._11Keuangan.Text = "Keuangan"
+        Me._100Keuangan.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._101JurnalUmum, Me._102KasBankKeluar, Me._103KasBankMasuk, Me._104Inventearis, Me.ToolStripSeparator5, Me._105KodeGL, Me._106SaldoAkhir, Me.ToolStripSeparator6, Me._107DaftarJurnal, Me._108GeneralLedger, Me._109TrialBalance, Me._110LabaRugi, Me._111Neraca, Me.ToolStripSeparator7, Me._112ProsesAkhirBulan, Me.ToolStripSeparator8, Me._113PengajuanPotonganPerajin, Me._114UangMukaLanjutanPelunasan})
+        Me._100Keuangan.Name = "_100Keuangan"
+        Me._100Keuangan.Size = New System.Drawing.Size(72, 26)
+        Me._100Keuangan.Text = "Keuangan"
         '
         '_101JurnalUmum
         '
@@ -371,6 +368,7 @@ Partial Class FrmMenuUtama
         '
         '_108GeneralLedger
         '
+        Me._108GeneralLedger.Image = CType(resources.GetObject("_108GeneralLedger.Image"), System.Drawing.Image)
         Me._108GeneralLedger.Name = "_108GeneralLedger"
         Me._108GeneralLedger.Size = New System.Drawing.Size(244, 22)
         Me._108GeneralLedger.Text = "General Ledger"
@@ -383,6 +381,7 @@ Partial Class FrmMenuUtama
         '
         '_110LabaRugi
         '
+        Me._110LabaRugi.Image = CType(resources.GetObject("_110LabaRugi.Image"), System.Drawing.Image)
         Me._110LabaRugi.Name = "_110LabaRugi"
         Me._110LabaRugi.Size = New System.Drawing.Size(244, 22)
         Me._110LabaRugi.Text = "Laba Rugi"
@@ -681,7 +680,7 @@ Partial Class FrmMenuUtama
         '
         '_18Utility
         '
-        Me._18Utility.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._81_GANTI_PASSWORD, Me._82_USER_BARU, Me._83_PENGATURAN_USER, Me.ToolStripSeparator1, Me._84_COMPANY_SETUP, Me.ToolStripSeparator4, Me.KirimDataKeGudangToolStripMenuItem, Me.AmbilDataDariGudangToolStripMenuItem, Me.ToolStripSeparator2, Me.KirimDataKeWaruToolStripMenuItem, Me.AmbilDataDariWaruToolStripMenuItem, Me.ToolStripSeparator3, Me._8A_BACKUP_DATA, Me._8B_RESTORE_DATA, Me.mnuKosongData, Me.ExploreFileFotoToolStripMenuItem})
+        Me._18Utility.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._81_GANTI_PASSWORD, Me._82_USER_BARU, Me._83_PENGATURAN_USER, Me.ToolStripSeparator1, Me._84_COMPANY_SETUP, Me.ToolStripSeparator4, Me._85_KirimData, Me._86_TerimaData, Me.ToolStripSeparator2, Me._8A_BACKUP_DATA, Me._8B_RESTORE_DATA, Me.mnuKosongData, Me.mnuExploreFileFoto})
         Me._18Utility.Name = "_18Utility"
         Me._18Utility.Size = New System.Drawing.Size(50, 26)
         Me._18Utility.Text = "Utility"
@@ -689,95 +688,78 @@ Partial Class FrmMenuUtama
         '_81_GANTI_PASSWORD
         '
         Me._81_GANTI_PASSWORD.Name = "_81_GANTI_PASSWORD"
-        Me._81_GANTI_PASSWORD.Size = New System.Drawing.Size(200, 22)
+        Me._81_GANTI_PASSWORD.Size = New System.Drawing.Size(165, 22)
         Me._81_GANTI_PASSWORD.Text = "Ganti Password"
         '
         '_82_USER_BARU
         '
         Me._82_USER_BARU.Name = "_82_USER_BARU"
-        Me._82_USER_BARU.Size = New System.Drawing.Size(200, 22)
+        Me._82_USER_BARU.Size = New System.Drawing.Size(165, 22)
         Me._82_USER_BARU.Text = "User Baru"
         '
         '_83_PENGATURAN_USER
         '
         Me._83_PENGATURAN_USER.Name = "_83_PENGATURAN_USER"
-        Me._83_PENGATURAN_USER.Size = New System.Drawing.Size(200, 22)
+        Me._83_PENGATURAN_USER.Size = New System.Drawing.Size(165, 22)
         Me._83_PENGATURAN_USER.Text = "Pengaturan User"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(197, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(162, 6)
         '
         '_84_COMPANY_SETUP
         '
         Me._84_COMPANY_SETUP.Name = "_84_COMPANY_SETUP"
-        Me._84_COMPANY_SETUP.Size = New System.Drawing.Size(200, 22)
+        Me._84_COMPANY_SETUP.Size = New System.Drawing.Size(165, 22)
         Me._84_COMPANY_SETUP.Text = "Company Setup"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(197, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(162, 6)
         '
-        'KirimDataKeGudangToolStripMenuItem
+        '_85_KirimData
         '
-        Me.KirimDataKeGudangToolStripMenuItem.Name = "KirimDataKeGudangToolStripMenuItem"
-        Me.KirimDataKeGudangToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.KirimDataKeGudangToolStripMenuItem.Text = "Kirim data ke Gudang"
+        Me._85_KirimData.Name = "_85_KirimData"
+        Me._85_KirimData.Size = New System.Drawing.Size(165, 22)
+        Me._85_KirimData.Text = "Kirim data"
         '
-        'AmbilDataDariGudangToolStripMenuItem
+        '_86_TerimaData
         '
-        Me.AmbilDataDariGudangToolStripMenuItem.Name = "AmbilDataDariGudangToolStripMenuItem"
-        Me.AmbilDataDariGudangToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.AmbilDataDariGudangToolStripMenuItem.Text = "Ambil data dari Gudang"
+        Me._86_TerimaData.Name = "_86_TerimaData"
+        Me._86_TerimaData.Size = New System.Drawing.Size(165, 22)
+        Me._86_TerimaData.Text = "Terima data"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(197, 6)
-        '
-        'KirimDataKeWaruToolStripMenuItem
-        '
-        Me.KirimDataKeWaruToolStripMenuItem.Name = "KirimDataKeWaruToolStripMenuItem"
-        Me.KirimDataKeWaruToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.KirimDataKeWaruToolStripMenuItem.Text = "Kirim data ke Waru"
-        '
-        'AmbilDataDariWaruToolStripMenuItem
-        '
-        Me.AmbilDataDariWaruToolStripMenuItem.Name = "AmbilDataDariWaruToolStripMenuItem"
-        Me.AmbilDataDariWaruToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.AmbilDataDariWaruToolStripMenuItem.Text = "Ambil data dari Waru"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(197, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(162, 6)
         '
         '_8A_BACKUP_DATA
         '
         Me._8A_BACKUP_DATA.Name = "_8A_BACKUP_DATA"
-        Me._8A_BACKUP_DATA.Size = New System.Drawing.Size(200, 22)
+        Me._8A_BACKUP_DATA.Size = New System.Drawing.Size(165, 22)
         Me._8A_BACKUP_DATA.Text = "Backup Data"
         '
         '_8B_RESTORE_DATA
         '
         Me._8B_RESTORE_DATA.Name = "_8B_RESTORE_DATA"
-        Me._8B_RESTORE_DATA.Size = New System.Drawing.Size(200, 22)
+        Me._8B_RESTORE_DATA.Size = New System.Drawing.Size(165, 22)
         Me._8B_RESTORE_DATA.Text = "Restore Data"
         '
         'mnuKosongData
         '
         Me.mnuKosongData.Name = "mnuKosongData"
-        Me.mnuKosongData.Size = New System.Drawing.Size(200, 22)
+        Me.mnuKosongData.Size = New System.Drawing.Size(165, 22)
         Me.mnuKosongData.Text = "Kosong Data"
         Me.mnuKosongData.Visible = False
         '
-        'ExploreFileFotoToolStripMenuItem
+        'mnuExploreFileFoto
         '
-        Me.ExploreFileFotoToolStripMenuItem.Name = "ExploreFileFotoToolStripMenuItem"
-        Me.ExploreFileFotoToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.ExploreFileFotoToolStripMenuItem.Text = "Explorer File Foto"
+        Me.mnuExploreFileFoto.Name = "mnuExploreFileFoto"
+        Me.mnuExploreFileFoto.Size = New System.Drawing.Size(165, 22)
+        Me.mnuExploreFileFoto.Text = "Explorer File Foto"
         '
         'mnuExit
         '
@@ -860,13 +842,10 @@ Partial Class FrmMenuUtama
     Friend WithEvents _8A_BACKUP_DATA As ToolStripMenuItem
     Friend WithEvents _8B_RESTORE_DATA As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Friend WithEvents KirimDataKeGudangToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AmbilDataDariGudangToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _85_KirimData As ToolStripMenuItem
+    Friend WithEvents _86_TerimaData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents KirimDataKeWaruToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AmbilDataDariWaruToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
-    Friend WithEvents _11Keuangan As ToolStripMenuItem
+    Friend WithEvents _100Keuangan As ToolStripMenuItem
     Friend WithEvents _101JurnalUmum As ToolStripMenuItem
     Friend WithEvents _102KasBankKeluar As ToolStripMenuItem
     Friend WithEvents _103KasBankMasuk As ToolStripMenuItem
@@ -924,5 +903,5 @@ Partial Class FrmMenuUtama
     Friend WithEvents BagianContohToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents KeuanganPerajinToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImageList1 As ImageList
-    Friend WithEvents ExploreFileFotoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuExploreFileFoto As ToolStripMenuItem
 End Class

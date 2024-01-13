@@ -893,8 +893,8 @@ Public Class Form_GdPraLHP
         Form_Hapus.tIDSemua.Text = NoPraLHP.Text
         Form_Hapus.Text = "Hapus Pra LHP"
         Form_Hapus.ShowDialog()
-        ClearTextBoxes()
         DaftarPraLHP()
+        ClearTextBoxes()
         'Dim MsgSQL As String
         'If Trim(IDRecord.Text) = "" Then
         '    MsgBox("Data yang akan di hapus belum di pilih!", vbCritical, ".:Empty Data!")

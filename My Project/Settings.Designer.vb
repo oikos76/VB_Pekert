@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("it-ek0\sqlexpress")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS")>  _
         Public Property IPServer() As String
             Get
                 Return CType(Me("IPServer"),String)
@@ -195,6 +195,18 @@ Namespace My
             End Get
             Set
                 Me("path_foto") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\KirimTerima")>  _
+        Public Property LokasiFile() As String
+            Get
+                Return CType(Me("LokasiFile"),String)
+            End Get
+            Set
+                Me("LokasiFile") = value
             End Set
         End Property
     End Class

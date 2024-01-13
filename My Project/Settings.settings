@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="IPServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">it-ek0\sqlexpress</Value>
+      <Value Profile="(Default)">IT-EK0\SQLEXPRESS</Value>
     </Setting>
     <Setting Name="UserID" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
@@ -37,6 +37,9 @@
     </Setting>
     <Setting Name="path_foto" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\FotoProduct</Value>
+    </Setting>
+    <Setting Name="LokasiFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\KirimTerima</Value>
     </Setting>
   </Settings>
 </SettingsFile>

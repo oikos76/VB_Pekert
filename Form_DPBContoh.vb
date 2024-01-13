@@ -53,14 +53,14 @@ Public Class Form_DPBContoh
                 Produk.Text = dbS.Rows(A) !Deskripsi
                 SatuanHBeli.Text = dbS.Rows(A) !HargaBeli
                 MsgSQL = "INSERT INTO t_DPBSample(IDRec, NoDPB, TglDPB, " &
-                    "NoSP, KodePerajin, Perajin, KodeProduk, Produk, Jumlah, SatuanHBeli, " &
-                    "OngKir, AktifYN, UserID, LastUPD, UserRev, TglRev, TransferYN) " &
-                    "VALUES('" & IDRecord.Text & "', '" & Trim(nodpb.Text) & "', " &
+                    "NoSP, KodePerajin, Perajin, KodeProduk, Produk, Jumlah, " &
+                    "SatuanHBeli, OngKir, AktifYN, UserID, LastUPD, UserRev, " &
+                    "TglRev, TransferYN, IdCompany) VALUES('" & IDRecord.Text & "', " &
                     "'" & Format(TglDPB.Value, "yyyy-MM-dd") & "', '" & Trim(NoSP.Text) & "', " &
                     "'" & Trim(Kode_Perajin.Text) & "', '" & Trim(Perajin.Text) & "'," &
                     "'" & Trim(dbS.Rows(A) !Kode_Produk) & "', '" & Trim(dbS.Rows(A) !Deskripsi) & "', " &
                     "" & dbS.Rows(A) !Jumlah & ", " & Trim(dbS.Rows(A) !HargaBeli) & ", " &
-                    "" & OngKir.Text * 1 & ",'Y', '" & UserID & "', GetDate(), '', '', 'N') "
+                    "" & OngKir.Text * 1 & ",'Y', '" & UserID & "', GetDate(), '', '', 'N', 'PEKERTI') "
                 Proses.ExecuteNonQuery(MsgSQL)
             Next A
         Else
@@ -81,13 +81,13 @@ Public Class Form_DPBContoh
                 SatuanHBeli.Text = dbS.Rows(A) !HargaBeli
                 MsgSQL = "INSERT INTO t_DPBSample(IDRec, NoDPB, TglDPB, " &
                     "NoSP, KodePerajin, Perajin, KodeProduk, Produk, Jumlah, SatuanHBeli, " &
-                    "OngKir, AktifYN, UserID, LastUPD, UserRev, TglRev, TransferYN) " &
+                    "OngKir, AktifYN, UserID, LastUPD, UserRev, TglRev, TransferYN, IdCompany) " &
                     "VALUES('" & IDRecord.Text & "', '" & Trim(nodpb.Text) & "', " &
                     "'" & Format(TglDPB.Value, "yyyy-MM-dd") & "', '" & Trim(NoSP.Text) & "', " &
                     "'" & Trim(Kode_Perajin.Text) & "', '" & Trim(Perajin.Text) & "'," &
                     "'" & Trim(dbS.Rows(A) !Kode_Produk) & "', '" & Trim(dbS.Rows(A) !Deskripsi) & "', " &
                     "" & dbS.Rows(A) !Jumlah & ", " & Trim(dbS.Rows(A) !HargaBeli) & ", " &
-                    "" & OngKir.Text * 1 & ",'Y', '" & UserID & "', GetDate(), '', '', 'N') "
+                    "" & OngKir.Text * 1 & ",'Y', '" & UserID & "', GetDate(), '', '', 'N', 'PEKERTI') "
                 Proses.ExecuteNonQuery(MsgSQL)
             Next A
             MsgSQL = "Delete t_DPBSample " &
@@ -169,11 +169,11 @@ Public Class Form_DPBContoh
 
     Private Sub OngKir_TextChanged(sender As Object, e As EventArgs) Handles OngKir.TextChanged
         If Trim(OngKir.Text) = "" Then OngKir.Text = 0
-        If IsNumeric(OngKir.Text) Then
+        If Trim(OngKir.Text) = "-" Then
+        ElseIf IsNumeric(OngKir.Text) Then
             Dim temp As Double = OngKir.Text
+            OngKir.Text = Format(temp, "###,##0")
             OngKir.SelectionStart = OngKir.TextLength
-        Else
-            OngKir.Text = 0
         End If
     End Sub
 
@@ -290,7 +290,7 @@ Public Class Form_DPBContoh
     End Sub
 
     Private Sub Form_DPBContoh_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        CekTable()
         DGView.Rows.Clear()
         DGView2.Rows.Clear()
         TglDPB.Value = Now()
@@ -481,6 +481,11 @@ Public Class Form_DPBContoh
             e.KeyChar = " "c 'Allows "Spacebar" to be used
         ElseIf e.KeyChar = ","c Then
             e.KeyChar = ","c
+        ElseIf e.KeyChar = "-"c Then
+            If OngKir.Text.IndexOf("-") > -1 Then 'Allows " . " and prevents more than 1 " . "
+                e.Handled = True
+                Beep()
+            End If
         ElseIf e.KeyChar = "." Then
             If OngKir.Text.IndexOf(".") > -1 Then 'Allows " . " and prevents more than 1 " . "
                 e.Handled = True
@@ -489,7 +494,7 @@ Public Class Form_DPBContoh
         ElseIf e.KeyChar = Chr(13) Then
             If IsNumeric(OngKir.Text) Then
                 Dim temp As Double = OngKir.Text
-                OngKir.Text = Format(temp, "###,##0.00")
+                OngKir.Text = Format(temp, "###,##0")
                 OngKir.SelectionStart = OngKir.TextLength
             Else
                 OngKir.Text = 0
@@ -528,8 +533,128 @@ Public Class Form_DPBContoh
         Form_KodifProduk_Image.ShowDialog()
     End Sub
 
-    Private Sub DGView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView2.CellContentClick
+    Private Sub CekTable()
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+        "WHERE TABLE_NAME = 't_DPBSample'  " &
+        "  And column_name = 'IDCompany' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE t_DPBSample ADD IDCompany Varchar(10) "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "UPDATE t_DPBSample SET IDCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+        SQL = "SELECT IDCompany FROM t_DPBSample WHERE idCompany is Null "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count <> 0 Then
+            SQL = "UPDATE t_DPBSample set idCompany = 'PEKERTI' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
 
+        SQL = "SELECT *  FROM information_schema.COLUMNS " &
+             "WHERE TABLE_NAME = 'm_company' " &
+             "  And column_name = 'BagianContoh' "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "ALTER TABLE m_company ADD BagianContoh Varchar(50)  "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "UPDATE m_Company SET BagianContoh = 'Dhea' "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+
+
+        SQL = "SELECT len(kodeperajin) PanjangKodePerajin,
+                 left(KodeProduk,2) + '0' + substring(KodeProduk,3,13),
+                 left(KodePerajin,2) + '0' + substring(KodePerajin,3,13), *
+            FROM t_DPBSample "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count <> 0 Then
+            If dbTable.Rows(0) !PanjangKodePerajin = 4 Then
+                SQL = "UPDATE t_DPBSample SET " &
+                    " KodePerajin = left(KodePerajin,2) + '0' + substring(KodePerajin,3,2), " &
+                    " KodeProduk = left(KodeProduk,2) + '0' + substring(KodeProduk,3,10)  "
+                Proses.ExecuteNonQuery(SQL)
+            End If
+        End If
+
+
+        SQL = "SELECT len(kode_perajin) PanjangKodePerajin,
+                 left(Kode_Produk,2) + '0' + substring(Kode_Produk,3,13),
+                 left(Kode_Perajin,2) + '0' + substring(Kode_Perajin,3,13), *
+            FROM t_SPContoh "
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count <> 0 Then
+            If dbTable.Rows(0) !PanjangKodePerajin = 4 Then
+                SQL = "UPDATE t_SPContoh SET " &
+                    " Kode_Perajin = left(Kode_Perajin,2) + '0' + substring(Kode_Perajin,3,2), " &
+                    " Kode_Produk = left(Kode_Produk,2) + '0' + substring(Kode_Produk,3,10)  "
+                Proses.ExecuteNonQuery(SQL)
+            End If
+        End If
+    End Sub
+    Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        Dim DTadapter As New SqlDataAdapter
+        Dim objRep As New ReportDocument
+        Dim CN As New SqlConnection
+        Dim dttable As New DataTable, clsTerbilang As New Terbilang
+        Dim jValue As Double = 0, Terbilang As String = "",
+            tanggal As String = "", tOngkir As Double = 0
+
+        Me.Cursor = Cursors.WaitCursor
+
+        SQL = "select distinct TglDPB, ongkir " &
+            " From t_DPBSample " &
+            "Where NoDPB = '" & nodpb.Text & "' "
+        dttable = Proses.ExecuteQuery(SQL)
+        If dttable.Rows.Count <> 0 Then
+            tanggal = "Jakarta, " & Proses.TglIndo(Format(dttable.Rows(0) !TglDPB, "dd-MM-yyyy"))
+            tOngkir = dttable.Rows(0) !ongkir
+        End If
+        SQL = "select isNull(Sum(Jumlah * SatuanHBeli),0) JValue " &
+            " From t_DPBSample " &
+            "Where NoDPB = '" & nodpb.Text & "' "
+        jValue = Proses.ExecuteSingleDblQuery(SQL)
+        If jValue = 0 Then
+            Terbilang = "-"
+        Else
+            Terbilang = "- " + clsTerbilang.CurrencyText(jValue + tOngkir, "RP") + " -"
+        End If
+        Proses.OpenConn(CN)
+        dttable = New DataTable
+
+        SQL = "SELECT T_DPBSample.NoDPB, t_DPBSample.TglDPB, t_DPBSample.NoSP, " &
+            "     t_DPBSample.Perajin, t_DPBSample.KodeProduk, t_DPBSample.Jumlah, " &
+            "     t_DPBSample.SatuanHBeli, t_DPBSample.OngKir , m_KodeProduk.Deskripsi, " &
+            "     kodePerajin2, ttDireksi, Direksi, BagianContoh " &
+            "FROM Pekerti.dbo.t_DPBSample t_DPBSample INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
+            "     t_DPBSample.KodeProduk = m_KodeProduk.KodeProduk " &
+            "     INNER Join m_Company ON idCompany = CompCode " &
+            "Where T_DPBSample.NoDPB = '" & nodpb.Text & "' and t_DPBSample.Jumlah <> 0 " &
+            "Order By t_DPBSample.KodeProduk "
+        DTadapter = New SqlDataAdapter(SQL, CN)
+        Try
+            DTadapter.Fill(dttable)
+            objRep = New Rpt_DPBContoh
+            objRep.SetDataSource(dttable)
+            objRep.SetParameterValue("tanggal", tanggal)
+            objRep.SetParameterValue("Terbilang", Terbilang)
+            Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+            Form_Report.CrystalReportViewer1.Refresh()
+            Form_Report.CrystalReportViewer1.ReportSource = objRep
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.ShowDialog()
+
+            dttable.Dispose()
+            DTadapter.Dispose()
+            Proses.CloseConn(CN)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub OngKir_GotFocus(sender As Object, e As EventArgs) Handles OngKir.GotFocus

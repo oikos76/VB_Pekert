@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT231127\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT240112\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>52</ApplicationRevision>
+    <ApplicationRevision>53</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -148,6 +148,42 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Class.vb" />
     <Compile Include="Crypto.vb" />
+    <Compile Include="Form_DataKirim.Designer.vb">
+      <DependentUpon>Form_DataKirim.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DataKirim.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_DataTerima.Designer.vb">
+      <DependentUpon>Form_DataTerima.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_DataTerima.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_BukuBesar.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_BukuBesar.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_DPBContoh.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_DPBContoh.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPT_LabaRugiD.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_LabaRugiD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\Rpt_SPContoh.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_SPContoh.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Rpt_GeneralLedger.Designer.vb">
       <DependentUpon>Rpt_GeneralLedger.vb</DependentUpon>
     </Compile>
@@ -718,6 +754,28 @@
     <Compile Include="Terbilang.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_DataKirim.resx">
+      <DependentUpon>Form_DataKirim.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_DataTerima.resx">
+      <DependentUpon>Form_DataTerima.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_BukuBesar.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_BukuBesar.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_DPBContoh.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_DPBContoh.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPT_LabaRugiD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_LabaRugiD.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Rpt_SPContoh.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Rpt_SPContoh.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Rpt_GeneralLedger.resx">
       <DependentUpon>Rpt_GeneralLedger.vb</DependentUpon>
     </EmbeddedResource>

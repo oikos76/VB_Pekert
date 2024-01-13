@@ -38,10 +38,171 @@ Public Class Rpt_GeneralLedger
 
 
     Private Sub Ledger()
-        Dim Proses As New ClsKoneksi
-        Dim Periode As String = "", mKondisi As String = ""
+        Dim Proses As New ClsKoneksi, RS05 As DataTable
         cmdCetak.Enabled = False
         Me.Cursor = Cursors.WaitCursor
+
+        '--- Start here
+        Dim Periode As String = "", MsgSQL As String, title As String, tSQL As String, tAccount As String
+        Dim TMPRpt As String, mKondisi As String, mKondisi1A As String, mKondisi1B As String
+        Dim TmpRpt1 As String, mKondisi2 As String, tSaldo As Double, mKondisi3 As String
+        Randomize()
+        'mPeriode = Format(DateAdd("m", -1, Tgl1.Value), "YYYY-MM")
+        TMPRpt = Microsoft.VisualBasic.Left("TMPBB1" & Trim(Replace(Str(100000 * Rnd(1000)), ".", Format(Now, "HHMMSS"))), 30)
+        TmpRpt1 = Microsoft.VisualBasic.Left("TMPBB2" & Trim(Replace(Str(100000 * Rnd(1000)), ".", Format(Now, "HHMMSS"))), 30)
+        MsgSQL = "SELECT *  FROM information_schema.COLUMNS " &
+             "WHERE TABLE_NAME = 'TMP_RPTBukuBesar'  "
+        dbTable = Proses.ExecuteQuery(MsgSQL)
+        If dbTable.Rows.Count <> 0 Then
+            MsgSQL = "Delete tmp_RptBukuBesar "
+        Else
+            MsgSQL = "CREATE TABLE [dbo].[TMP_RPTBukuBesar] ( " &
+                "[IDRpt] [varchar] (30)  NULL , " &
+                "[idrec] [varchar] (10)  NOT NULL , " &
+                "[NoUrut] INT  Default 0, " &
+                "[tanggal] [datetime] NOT NULL , " &
+                "[nobukti] [varchar] (20)  NOT NULL , " &
+                "[uraian] [varchar] (255)  NOT NULL , " &
+                "[AccountCode1] [varchar] (15)  NOT NULL , " &
+                "[NM_SUB] [varchar] (50)  NOT NULL, " &
+                "[IDReg] [varchar] (15)  NOT NULL , " &
+                "[Reg] [varchar] (50)  NOT NULL , " &
+                "[debet] [money] NOT NULL , " &
+                "[kredit] [money] NOT NULL , " &
+                "[lastupd] [datetime] NOT NULL , " &
+                "[userid] [varchar] (10)  NOT NULL , " &
+                "[Saldo] [money] NOT NULL ) "
+        End If
+        Proses.ExecuteNonQuery(MsgSQL)
+
+        If AccCode1.Text = "" Then
+            mKondisi = ""
+            mKondisi1A = ""
+            mKondisi1B = ""
+            mKondisi2 = ""
+        Else
+            mKondisi = " AND TMP_RPTBukuBesar.AccountCode1 = '" & AccCode1.Text & "' "
+            mKondisi1A = " AND t_Jurnal.AccountCode = '" & AccCode1.Text & "' "
+            mKondisi1B = " AND t_Jurnal.AccountCode = '" & AccCode1.Text & "' "
+            mKondisi2 = " And COA = '" & AccCode1.Text & "' "
+        End If
+
+        MsgSQL = "Insert Into TMP_RPTBukuBesar " &
+            "SELECT '" & TMPRpt & "', t_Jurnal.idrec, NoUrut, t_Jurnal.tanggal, " &
+            "t_Jurnal.idrec, t_Jurnal.uraian, t_Jurnal.AccountCode, " &
+            "t_Jurnal.KetAccCode, 'IDRegD', 'RegisterD', " &
+            "t_Jurnal.debet, 0, t_Jurnal.LastUPD, t_Jurnal.UserID, 0 " &
+            " From t_Jurnal t_Jurnal  " &
+            "Where AktifYN = 'Y' and t_Jurnal.Debet <> 0 " &
+            "  " & mKondisi1A & " " &
+            "  And Convert(varchar(8), t_Jurnal.Tanggal, 112) " &
+            "       Between '" & Format(Tgl1.Value, "yyyyMM01") & "' " &
+            "           and '" & Format(Tgl2.Value, "yyyyMMdd") & "' "
+        Proses.ExecuteNonQuery(MsgSQL)
+
+        MsgSQL = "Insert Into TMP_RPTBukuBesar " &
+        "SELECT '" & TMPRpt & "', t_Jurnal.idrec, NoUrut, t_Jurnal.tanggal, " &
+        "t_Jurnal.idrec, t_Jurnal.uraian, t_Jurnal.AccountCode, " &
+        "t_Jurnal.KetAccCode, 'IDRegK', 'RegisterK', " &
+        "0, t_Jurnal.Kredit, t_Jurnal.LastUPD, t_Jurnal.UserID, 0 " &
+        " From t_Jurnal t_Jurnal  " &
+        "Where AktifYN = 'Y' and t_Jurnal.Kredit <> 0 " &
+        "  " & mKondisi1B & " " &
+        "  And Convert(varchar(8), t_Jurnal.Tanggal, 112) " &
+        "       Between '" & Format(Tgl1.Value, "yyyyMM01") & "' " &
+        "           and '" & Format(Tgl2.Value, "yyyyMMdd") & "' "
+        Proses.ExecuteNonQuery(MsgSQL)
+
+        title = "BUKU BESAR "
+
+        'isi saldo awal -----
+        MsgSQL = "Insert Into Tmp_RPTBukuBesar SELECT '" & TMPRpt & "', " &
+            "'~', 0, '" & Format(Tgl1.Value, "yyyy-MM") & "-01', " &
+            "'', 'Saldo Awal', Coa, Nama, '', '', " &
+            "0, 0, '" & Format(Tgl1.Value, "yyyy-MM") & "-01', '" & UserID & "', Saldo " &
+            " From M_SaldoAwalCompany  " &
+            "Where AktifYN = 'Y' and Saldo < 0 " &
+            "  " & mKondisi2 & " " &
+            "  And Periode = '" & Format(DateAdd("m", -1, Tgl1.Value), "MM-yyyy") & "'"
+        Proses.ExecuteNonQuery(MsgSQL)
+
+        MsgSQL = "Insert Into Tmp_RPTBukuBesar SELECT '" & TMPRpt & "', " &
+        "'~', 0, '" & Format(Tgl1.Value, "yyyy-MM") & "-01', " &
+        "'', 'Saldo Awal', Coa, Nama, '', '', " &
+        "0, 0, '" & Format(Tgl1.Value, "yyyy-MM") & "-01', '" & UserID & "', Saldo " &
+        " From M_SaldoAwalCompany  " &
+        "Where AktifYN = 'Y' and Saldo > 0 " &
+        "  " & mKondisi2 & " " &
+        "  And Periode = '" & Format(DateAdd("m", -1, Tgl1.Value), "MM-yyyy") & "'"
+        Proses.ExecuteNonQuery(MsgSQL)
+        '----- end of isi saldo awal
+
+        'Hitung saldo jika tgl awal <> = 1
+        If Format(Tgl1.Value, "DD") <> "01" Then
+            If AccCode1.Text = "" Then
+                mKondisi3 = ""
+            Else
+                mKondisi3 = " AND TMP_RPTBukuBesar.AccountCode1 = '" & AccCode1.Text & "' "
+            End If
+            MsgSQL = "Select AccountCode1, NM_SUB, Sum(Debet) - Sum(Kredit) SaldoAkhir " &
+                " INTO " & TmpRpt1 & " " &
+                " From TMP_RPTBukuBesar " &
+                "Where Convert(varchar(8), TMP_RPTBukuBesar.Tanggal, 112)  >= '" & Format(Tgl1.Value, "yyyyMM01") & "' " &
+                "  and Convert(varchar(8), TMP_RPTBukuBesar.Tanggal, 112)  < '" & Format(Tgl1.Value, "yyyyMMdd") & "' " &
+                " " & mKondisi3 & " and IDRec <> '~' " &
+                " GROUP BY AccountCode1, NM_SUB "
+            Proses.ExecuteNonQuery(MsgSQL)
+
+            MsgSQL = "Update tmp_RptBukuBesar " &
+            "Set Saldo = Saldo + SaldoAkhir, Uraian = 'Saldo Akhir' " &
+            " From TMP_RPTBukuBesar INNER JOIN " & TmpRpt1 & " b ON " &
+            "      TMP_RPTBukuBesar.AccountCode1 = b.AccountCode1 " &
+            "Where TMP_RPTBukuBesar.IDRec = '~' "
+            Proses.ExecuteNonQuery(MsgSQL)
+
+            MsgSQL = "Drop Table " & TmpRpt1 & " "
+            Proses.ExecuteNonQuery(MsgSQL)
+        End If
+        '-------------end of Hitung saldo jika tgl awal <> = 1
+
+        '--hitung saldo
+        tSaldo = 0
+        tAccount = ""
+        MsgSQL = "SELECT TMP_RPTBukuBesar.IDRpt, TMP_RPTBukuBesar.tanggal, TMP_RPTBukuBesar.IDRec, " &
+            "TMP_RPTBukuBesar.nobukti, TMP_RPTBukuBesar.uraian, TMP_RPTBukuBesar.AccountCode1, TMP_RPTBukuBesar.NoUrut, " &
+            "TMP_RPTBukuBesar.NM_SUB, TMP_RPTBukuBesar.Debet, TMP_RPTBukuBesar.Kredit, TMP_RPTBukuBesar.Saldo " &
+            " FROM TMP_RPTBukuBesar TMP_RPTBukuBesar " &
+            "Where Convert(varchar(8), TMP_RPTBukuBesar.tanggal, 112) " &
+            "       Between '" & Format(Tgl1.Value, "yyyyMMdd") & "' " &
+            "           and '" & Format(Tgl2.Value, "yyyyMMdd") & "' " &
+            "  or IDRec = '~' " & mKondisi & " " &
+            "Order By TMP_RPTBukuBesar.AccountCode1,  " &
+            "      TMP_RPTBukuBesar.Tanggal, TMP_RPTBukuBesar.nobukti, TMP_RPTBukuBesar.NoUrut "
+        RS05 = Proses.ExecuteQuery(MsgSQL)
+
+        For a = 0 To RS05.Rows.Count - 1
+            Application.DoEvents()
+            If tAccount <> Trim(RS05.Rows(a) !accountcode1) Then
+                tSaldo = 0
+            End If
+            If RS05.Rows(a) !IDRec = "~" Then
+                tSaldo = RS05.Rows(a) !Saldo
+            Else
+                tSaldo = tSaldo + RS05.Rows(a) !Debet - RS05.Rows(a) !Kredit
+            End If
+            '        Debug.Print tSaldo
+            tSQL = "UPDATE TMP_RPTBukuBesar Set Saldo = " & tSaldo & " " &
+                    "Where tanggal = '" & RS05.Rows(a) !Tanggal & "' " &
+                    "  And NoBukti = '" & RS05.Rows(a) !NoBukti & "' " &
+                    "  And AccountCode1 = '" & RS05.Rows(a) !accountcode1 & "' " &
+                    "  And IDRec = '" & RS05.Rows(a) !IDRec & "' " &
+                    "  AND NOURUT = " & RS05.Rows(a) !NoUrut & " "
+            If RS05.Rows(a) !IDRec <> "~" Then
+                Proses.ExecuteNonQuery(tSQL)
+            End If
+            tAccount = Trim(RS05.Rows(a) !accountcode1)
+        Next (a)
+        'end of hitung saldo-- 
 
         If Format(Tgl1.Value, "yyMMdd") = Format(Tgl2.Value, "yyMMdd") Then
             Periode = "Periode : " + Format(Tgl1.Value, "dd MMM yyyy")
@@ -49,27 +210,28 @@ Public Class Rpt_GeneralLedger
             Periode = "Periode : " + Format(Tgl1.Value, "dd MMM yyyy") + " s.d " +
                       Format(Tgl2.Value, "dd MMM yyyy")
         End If
-        If cmbJenisLaporan.Text <> "" Then
-            mKondisi = " AND JenisJurnal = '" & cmbJenisLaporan.Text & "' "
-        End If
+
         Call OpenConn()
         dttable = New DataTable
-        SQL = "SELECT * FROM T_JURNAL " &
-            "WHERE AKTIFYN = 'Y' " &
-            " AND Convert(varchar(8), tanggal, 112) Between '" & Format(Tgl1.Value, "yyyyMMdd") & "' " &
-             "      And '" & Format(Tgl2.Value, "yyyyMMdd") & "' " &
-             " " & mKondisi & " " &
-            "ORDER BY tanggal, idrec, NoUrut "
+        SQL = "SELECT TMP_RPTBukuBesar.IDRpt, TMP_RPTBukuBesar.tanggal, " &
+            "TMP_RPTBukuBesar.nobukti, TMP_RPTBukuBesar.uraian, " &
+            "TMP_RPTBukuBesar.AccountCode1, TMP_RPTBukuBesar.NM_SUB, TMP_RPTBukuBesar.debet, " &
+            "TMP_RPTBukuBesar.kredit, TMP_RPTBukuBesar.Saldo " &
+            "From PEKERTI.dbo.TMP_RPTBukuBesar  TMP_RPTBukuBesar " &
+            "Where convert(Char(8), Tanggal,112) between '" & Format(Tgl1.Value, "yyyyMMdd") & "' " &
+            "      And '" & Format(Tgl2.Value, "yyyyMMdd") & "' or idrec = '~' " &
+            "ORDER BY TMP_RPTBukuBesar.AccountCode1,   " &
+            "      TMP_RPTBukuBesar.Tanggal, TMP_RPTBukuBesar.nobukti, TMP_RPTBukuBesar.NoUrut "
         DTadapter = New SqlDataAdapter(SQL, CN)
         Try
             DTadapter.Fill(dttable)
-            objRep = New Rpt_Jurnal_All
+            objRep = New Rpt_BukuBesar
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("Periode", Periode)
             CrystalReportViewer1.ShowGroupTreeButton = True
             CrystalReportViewer1.ShowExportButton = True
-            'CrystalReportViewer1.ToolPanelView = ToolPanelViewType.None
-            CrystalReportViewer1.ToolPanelView = ToolPanelViewType.GroupTree
+            CrystalReportViewer1.ToolPanelView = ToolPanelViewType.None
+            ' CrystalReportViewer1.ToolPanelView = ToolPanelViewType.GroupTree
             CrystalReportViewer1.Refresh()
             CrystalReportViewer1.ReportSource = objRep
             dttable.Dispose()
