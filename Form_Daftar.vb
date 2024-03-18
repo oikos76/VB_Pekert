@@ -433,6 +433,35 @@
                                     Format(.Table.Rows(a) !Kapasitas, "###,##0"))
                 Next (a)
             End With
+        ElseIf Trim(Me.Text) = "Daftar Inventaris" Then
+            DGView.Columns(0).HeaderText = "IdRec"
+            DGView.Columns(0).Width = 5
+            DGView.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(1).HeaderText = "Kode GL"
+            DGView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(1).Width = 150
+            DGView.Columns(2).HeaderText = "Account"
+            DGView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(2).Width = 200
+            DGView.Columns(3).HeaderText = "Tgl.Beli"
+            DGView.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            DGView.Columns(3).Width = 100
+            DGView.Columns(4).HeaderText = "Nilai Perolehan"
+            DGView.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DGView.Columns(4).Width = 150
+            DGView.Columns(5).HeaderText = "% Penyusutan"
+            DGView.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            DGView.Columns(5).Width = 100
+            With tblData.Columns(0)
+                For a = 0 To tblData.Rows.Count - 1
+                    Application.DoEvents()
+                    DGView.Rows.Add(.Table.Rows(a) !idrec, .Table.Rows(a) !kodegl,
+                                    .Table.Rows(a) !namaAccount,
+                                    Format(.Table.Rows(a) !tglBeli, "dd-MM-yyyy"),
+                                    Format(.Table.Rows(a) !hargabeli, "###,##0"),
+                                    Replace(Format(.Table.Rows(a) !penyusutan, "###,##0.00"), ".00", "") & " %")
+                Next (a)
+            End With
         ElseIf Trim(Me.Text) = "Daftar SP" Then
             DGView.Columns(0).HeaderText = "No. SP"
             DGView.Columns(0).Width = 150
@@ -771,7 +800,7 @@
                 "Order By IDRec, Nama "
             ElseIf Trim(Me.Text) = "Daftar Jurnal" Then
                 If Trim(param1.Text) = "" Then
-                    MsgBox("Jenis Jurnal Belum di kirim !", vbCritical + vbOKOnly, ".:Warning !")
+                    MsgBox("Jenis Jurnal Belum di pilih !", vbCritical + vbOKOnly, ".:Warning !")
                     Exit Sub
                 End If
                 Dim tPeriode As String = Format(Now, "yyMM")
@@ -867,6 +896,12 @@
                 "Where AktifYN = 'Y' " &
                 "  And (nama Like '%" & tCari.Text & "%') " &
                 "Order By nama "
+            ElseIf Me.Text = "Daftar Inventaris"
+                txtQuery.Text = "Select * " &
+                " From m_Penyusutan " &
+                "Where AktifYN = 'Y' " &
+                "  And (namaAccount Like '%" & tCari.Text & "%') " &
+                "Order By namaAccount "
             ElseIf Me.Text = "Daftar Produk"
                 txtQuery.Text = "Select * " &
                 " From m_KodeProduk " &

@@ -174,13 +174,18 @@ Public Class Form_SP
                 tJumlah = 0
             End If
 
-            If CEKProdukSP(Kode_Produk.Text, NoPO.Text) Then
-                QTYSP = tJumlah - Proses.QTYProdukSP(Kode_Produk.Text, NoPO.Text)
-                If QTYSP <= 0 Then
-                    MsgBox(Kode_Produk.Text + " Sudah Pernah di input untuk SP ini!", vbCritical, ".:can't be saved!")
-                    Exit Sub
+            If LEdit Then
+
+            Else
+                If CEKProdukSP(Kode_Produk.Text, NoPO.Text) Then
+                    QTYSP = tJumlah - Proses.QTYProdukSP(Kode_Produk.Text, NoPO.Text)
+                    If QTYSP <= 0 Then
+                        MsgBox(Kode_Produk.Text + " Sudah Pernah di input untuk SP ini!", vbCritical, ".:can't be saved!")
+                        Exit Sub
+                    End If
                 End If
             End If
+
         End If
 
         MsgSQL = "Select Nama From m_KodeImportir Where KodeImportir = '" & Kode_Importir.Text & "' "
@@ -207,10 +212,14 @@ Public Class Form_SP
             Jumlah.Focus()
             Exit Sub
         End If
+        If LEdit Then
 
-        If CekDouble(Kode_Produk.Text, NoSP.Text) Then
-            MsgBox(Kode_Produk.Text + " Sudah Pernah di input untuk SP ini!", vbCritical, ".:Kode Ganda!")
-            Exit Sub
+        Else
+            If CekDouble(Kode_Produk.Text, NoSP.Text) Then
+                MsgBox(Kode_Produk.Text + " Sudah Pernah di input untuk SP ini!", vbCritical, ".:Kode Ganda!")
+                Exit Sub
+            End If
+
         End If
         If LAdd Or LTambahKode Then
 
@@ -1350,6 +1359,13 @@ ErrMSG:
 
     End Sub
 
+    Public Function NoteSP(Perajin As String, tGL As String) As String
+        NoteSP = "Barang sudah harus dikirimkan dari Bpk/Ibu " & Perajin &
+        " paling lambat tanggal " & tGL & "." & vbNewLine &
+        "Perhatikan ukuran, harga yang diminta serta spesifikasi lain yang disebutkan. " &
+        "Bilamana ada ketidak jelasan, segera hubungi Pekerti."
+    End Function
+
     Private Sub NoSP_TextChanged(sender As Object, e As EventArgs) Handles NoSP.TextChanged
         Dim MsgSQL As String, RSNav As New DataTable
         MsgSQL = "SELECT top 1 IDrec From T_SP " &
@@ -1648,14 +1664,6 @@ ErrMSG:
         End If
     End Sub
 
-    Private Sub TglKirimPerajin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TglKirimPerajin.KeyPress
-        If e.KeyChar = Chr(13) Then
-            'CatatanSP.Text = NoteSP(Trim(Perajin.Text), Format(TglKirimPerajin, "dd MMMM yyyy"))
-            TglMasukGudang.Value = DateAdd("d", 7, TglKirimPerajin.Value)
-            'If LAdd Or LEdit Or LTambahKode Then cmdSave.SetFocus
-        End If
-    End Sub
-
     Private Sub CatatanProduk_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanProduk.KeyPress
         If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
     End Sub
@@ -1678,4 +1686,16 @@ ErrMSG:
         MaxNoUrut = Microsoft.VisualBasic.Right(RSMax.Rows(0) !recid, 3) + "/" + Jenis + "/" +
             Trim(Str(RSMax.Rows(0) !tGL))
     End Function
+
+    Private Sub TglKirimPerajin_LostFocus(sender As Object, e As EventArgs) Handles TglKirimPerajin.LostFocus
+        CatatanSP.Text = NoteSP(Trim(Perajin.Text), Proses.TglIndo(Format(TglKirimPerajin.Value, "dd-MM-yyyy")))
+        TglMasukGudang.Value = DateAdd("d", 7, TglKirimPerajin.Value)
+    End Sub
+    Private Sub TglKirimPerajin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TglKirimPerajin.KeyPress
+        If e.KeyChar = Chr(13) Then
+            CatatanSP.Text = NoteSP(Trim(Perajin.Text), Proses.TglIndo(Format(TglKirimPerajin.Value, "dd-MM-yyyy")))
+            TglMasukGudang.Value = DateAdd("d", 7, TglKirimPerajin.Value)
+            'If LAdd Or LEdit Or LTambahKode Then cmdSave.SetFocus
+        End If
+    End Sub
 End Class

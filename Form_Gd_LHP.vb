@@ -1480,8 +1480,8 @@ Public Class Form_Gd_LHP
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
-            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = True
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
             dttable.Dispose()

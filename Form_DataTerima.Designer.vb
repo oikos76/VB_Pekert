@@ -27,6 +27,7 @@ Partial Class Form_DataTerima
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdTerima = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnDefaultFolder = New System.Windows.Forms.Button()
         Me.cariFolder = New System.Windows.Forms.Button()
         Me.NamaFile = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -41,6 +42,7 @@ Partial Class Form_DataTerima
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.jenisData = New System.Windows.Forms.Label()
         Me.idRecord = New System.Windows.Forms.Label()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,7 +65,7 @@ Partial Class Form_DataTerima
         Me.cmdBatal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.cmdBatal.Location = New System.Drawing.Point(0, 0)
         Me.cmdBatal.Name = "cmdBatal"
-        Me.cmdBatal.Size = New System.Drawing.Size(80, 40)
+        Me.cmdBatal.Size = New System.Drawing.Size(80, 30)
         Me.cmdBatal.TabIndex = 26
         Me.cmdBatal.Text = "Batal"
         Me.cmdBatal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -79,7 +81,7 @@ Partial Class Form_DataTerima
         Me.cmdTerima.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.cmdTerima.Location = New System.Drawing.Point(383, 0)
         Me.cmdTerima.Name = "cmdTerima"
-        Me.cmdTerima.Size = New System.Drawing.Size(90, 40)
+        Me.cmdTerima.Size = New System.Drawing.Size(90, 30)
         Me.cmdTerima.TabIndex = 25
         Me.cmdTerima.Text = "Terima"
         Me.cmdTerima.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -88,13 +90,27 @@ Partial Class Form_DataTerima
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.btnDefaultFolder)
         Me.Panel1.Controls.Add(Me.cmdTerima)
         Me.Panel1.Controls.Add(Me.cmdBatal)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 217)
+        Me.Panel1.Location = New System.Drawing.Point(0, 175)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(477, 44)
+        Me.Panel1.Size = New System.Drawing.Size(477, 34)
         Me.Panel1.TabIndex = 29
+        '
+        'btnDefaultFolder
+        '
+        Me.btnDefaultFolder.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnDefaultFolder.Image = CType(resources.GetObject("btnDefaultFolder.Image"), System.Drawing.Image)
+        Me.btnDefaultFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDefaultFolder.Location = New System.Drawing.Point(80, 0)
+        Me.btnDefaultFolder.Name = "btnDefaultFolder"
+        Me.btnDefaultFolder.Size = New System.Drawing.Size(100, 30)
+        Me.btnDefaultFolder.TabIndex = 31
+        Me.btnDefaultFolder.Text = "Default Folder"
+        Me.btnDefaultFolder.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDefaultFolder.UseVisualStyleBackColor = True
         '
         'cariFolder
         '
@@ -235,7 +251,7 @@ Partial Class Form_DataTerima
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(477, 261)
+        Me.ClientSize = New System.Drawing.Size(477, 209)
         Me.Controls.Add(Me.idRecord)
         Me.Controls.Add(Me.jenisData)
         Me.Controls.Add(Me.Label3)
@@ -280,4 +296,6 @@ Partial Class Form_DataTerima
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents jenisData As Label
     Friend WithEvents idRecord As Label
+    Friend WithEvents btnDefaultFolder As Button
+    Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
 End Class

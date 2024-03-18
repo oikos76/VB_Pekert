@@ -772,6 +772,7 @@ Partial Class Form_PI
         Me.NoPI.Location = New System.Drawing.Point(219, 5)
         Me.NoPI.Margin = New System.Windows.Forms.Padding(4)
         Me.NoPI.Name = "NoPI"
+        Me.NoPI.ReadOnly = True
         Me.NoPI.Size = New System.Drawing.Size(113, 22)
         Me.NoPI.TabIndex = 312
         '

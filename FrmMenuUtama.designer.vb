@@ -331,6 +331,7 @@ Partial Class FrmMenuUtama
         '
         '_104Inventearis
         '
+        Me._104Inventearis.Image = CType(resources.GetObject("_104Inventearis.Image"), System.Drawing.Image)
         Me._104Inventearis.Name = "_104Inventearis"
         Me._104Inventearis.Size = New System.Drawing.Size(244, 22)
         Me._104Inventearis.Text = "Inventearis"
@@ -388,6 +389,7 @@ Partial Class FrmMenuUtama
         '
         '_111Neraca
         '
+        Me._111Neraca.Image = CType(resources.GetObject("_111Neraca.Image"), System.Drawing.Image)
         Me._111Neraca.Name = "_111Neraca"
         Me._111Neraca.Size = New System.Drawing.Size(244, 22)
         Me._111Neraca.Text = "Neraca"

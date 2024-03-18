@@ -314,7 +314,7 @@ Public Class Form_GD_PackingListInvoice
                 "     t_PackingList.QtyTiapBoks, t_PackingList.HargaFOB, t_PackingList.KodePImportir, " &
                 "     t_PackingList.CatatanPL, m_KodeProduk.Descript, t_PackingList.NoPO, " &
                 "     t_PackingList.jumlahboks, t_PackingList.JumlahTiapBoks, m_KodeImportir.Nama,  " &
-                "     m_KodeImportir.Alamat, ttKoordinator " &
+                "     m_KodeImportir.Alamat, ttKoordinator, t_PackingList.mataUang " &
                 "FROM Pekerti.dbo.t_PackingList t_PackingList INNER JOIN Pekerti.dbo.m_KodeImportir m_KodeImportir ON " &
                 "           t_PackingList.Kode_Importir = m_KodeImportir.KodeImportir  " &
                 "     INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk ON " &
@@ -339,8 +339,8 @@ Public Class Form_GD_PackingListInvoice
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ReportSource = objRep
-            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = True
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
             dttable.Dispose()

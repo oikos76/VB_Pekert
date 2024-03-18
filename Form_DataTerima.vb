@@ -88,7 +88,6 @@ Public Class Form_DataTerima
         jenisData.Text = ""
         idRecord.Text = ""
         Me.Cursor = Cursors.Default
-
     End Sub
 
     Private Sub UpdateBarang(dBase As String)
@@ -478,10 +477,13 @@ Public Class Form_DataTerima
         Dim tNamaFile As String = ""
         Dim myStream As Stream = Nothing
         Dim openFileDialog1 As New OpenFileDialog()
-
-        openFileDialog1.InitialDirectory = My.Settings.LokasiFile
-        openFileDialog1.Filter = "backup files (*.bak)|*.bak|All files (*.*)|*.*"
-        openFileDialog1.FilterIndex = 1
+        If Trim(NamaFile.Text) = "" Then
+            openFileDialog1.InitialDirectory = My.Settings.LokasiFile
+        Else
+            openFileDialog1.InitialDirectory = NamaFile.Text
+        End If
+        openFileDialog1.Filter = "backup files (*.bak)|PKT01*.bak|All files (*.*)|*.*"
+        openFileDialog1.FilterIndex = 0
         openFileDialog1.RestoreDirectory = True
 
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
@@ -533,7 +535,7 @@ Public Class Form_DataTerima
     End Sub
 
     Private Sub Form_DataTerima_Load(sender As Object, e As EventArgs) Handles Me.Load
-        NamaFile.Text = My.Settings.LokasiFile
+        NamaFile.Text = ""
         KodeTokoAsal.Text = ""
         NamaTokoAsal.Text = ""
         Kode_Toko.Text = ""
@@ -541,8 +543,26 @@ Public Class Form_DataTerima
         jenisData.Text = ""
         idRecord.Text = ""
         cmdTerima.Enabled = False
+
+        If Trim(My.Settings.LokasiDownload) = "" Then
+            NamaFile.Text = My.Settings.LokasiFile
+        Else
+            NamaFile.Text = My.Settings.LokasiDownload
+        End If
         CekTable()
     End Sub
+
+    Private Sub btnDefaultFolder_Click(sender As Object, e As EventArgs) Handles btnDefaultFolder.Click
+        If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+            NamaFile.Text = FolderBrowserDialog1.SelectedPath
+            My.Settings.LokasiDownload = NamaFile.Text
+        End If
+    End Sub
+
+    Private Sub cmdBatal_Click(sender As Object, e As EventArgs) Handles cmdBatal.Click
+        Me.Close()
+    End Sub
+
     Private Sub CekTable()
         'SQL = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'm_TokoD' "
         'dbTable = Proses.ExecuteQuery(SQL)

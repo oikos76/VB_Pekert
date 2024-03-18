@@ -241,8 +241,8 @@ Public Class Form_GdPraLHP
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
-            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = True
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
             dttable.Dispose()
@@ -788,7 +788,7 @@ Public Class Form_GdPraLHP
             "  And Kode_Produk = '" & tKode & "' " &
             "  And AktifYN = 'Y' "
         RJ = Proses.ExecuteQuery(msgSQL)
-        If Not RJ.Rows.Count() <> 0 Then
+        If RJ.Rows.Count() <> 0 Then
             JumPack = RJ.Rows(0) !JumlahPack
         Else
             JumPack = 0

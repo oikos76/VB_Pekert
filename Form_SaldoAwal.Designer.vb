@@ -26,9 +26,11 @@ Partial Class Form_SaldoAwal
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelTombol = New System.Windows.Forms.Panel()
         Me.PanelPeriode = New System.Windows.Forms.Panel()
+        Me.tPeriode = New System.Windows.Forms.ComboBox()
+        Me.tCari = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.IDRec = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.tPeriode = New System.Windows.Forms.ComboBox()
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdExit = New System.Windows.Forms.Button()
         Me.cmdPrint = New System.Windows.Forms.Button()
@@ -92,19 +94,50 @@ Partial Class Form_SaldoAwal
         '
         'PanelPeriode
         '
+        Me.PanelPeriode.Controls.Add(Me.tPeriode)
+        Me.PanelPeriode.Controls.Add(Me.tCari)
+        Me.PanelPeriode.Controls.Add(Me.Label7)
         Me.PanelPeriode.Controls.Add(Me.IDRec)
         Me.PanelPeriode.Controls.Add(Me.Label6)
-        Me.PanelPeriode.Controls.Add(Me.tPeriode)
         Me.PanelPeriode.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelPeriode.Location = New System.Drawing.Point(385, 0)
         Me.PanelPeriode.Name = "PanelPeriode"
-        Me.PanelPeriode.Size = New System.Drawing.Size(391, 36)
+        Me.PanelPeriode.Size = New System.Drawing.Size(522, 36)
         Me.PanelPeriode.TabIndex = 66
+        '
+        'tPeriode
+        '
+        Me.tPeriode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tPeriode.Font = New System.Drawing.Font("Courier New", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tPeriode.FormattingEnabled = True
+        Me.tPeriode.Location = New System.Drawing.Point(119, 6)
+        Me.tPeriode.Margin = New System.Windows.Forms.Padding(4)
+        Me.tPeriode.Name = "tPeriode"
+        Me.tPeriode.Size = New System.Drawing.Size(93, 25)
+        Me.tPeriode.TabIndex = 168
+        '
+        'tCari
+        '
+        Me.tCari.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tCari.Location = New System.Drawing.Point(283, 8)
+        Me.tCari.Name = "tCari"
+        Me.tCari.Size = New System.Drawing.Size(187, 22)
+        Me.tCari.TabIndex = 190
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(239, 9)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(44, 16)
+        Me.Label7.TabIndex = 191
+        Me.Label7.Text = "Cari :"
         '
         'IDRec
         '
         Me.IDRec.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.IDRec.Location = New System.Drawing.Point(220, 5)
+        Me.IDRec.Location = New System.Drawing.Point(119, 6)
         Me.IDRec.Margin = New System.Windows.Forms.Padding(4)
         Me.IDRec.Multiline = True
         Me.IDRec.Name = "IDRec"
@@ -122,17 +155,6 @@ Partial Class Form_SaldoAwal
         Me.Label6.Size = New System.Drawing.Size(104, 16)
         Me.Label6.TabIndex = 167
         Me.Label6.Text = "Periode GL :"
-        '
-        'tPeriode
-        '
-        Me.tPeriode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tPeriode.Font = New System.Drawing.Font("Courier New", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tPeriode.FormattingEnabled = True
-        Me.tPeriode.Location = New System.Drawing.Point(119, 6)
-        Me.tPeriode.Margin = New System.Windows.Forms.Padding(4)
-        Me.tPeriode.Name = "tPeriode"
-        Me.tPeriode.Size = New System.Drawing.Size(93, 25)
-        Me.tPeriode.TabIndex = 168
         '
         'cmdBatal
         '
@@ -569,4 +591,6 @@ Partial Class Form_SaldoAwal
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewButtonColumn
     Friend WithEvents eIndex As Label
+    Friend WithEvents tCari As TextBox
+    Friend WithEvents Label7 As Label
 End Class

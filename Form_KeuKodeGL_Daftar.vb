@@ -6,6 +6,17 @@ Public Class Form_KeuKodeGL_Daftar
 
     Private Sub Form_KeuKodeGL_Daftar_Load(sender As Object, e As EventArgs) Handles Me.Load
         FrmMenuUtama.TSKeterangan.Visible = True
+        DGView.ColumnCount = 5
+        DGView.Columns(0).Visible = True
+        Me.Cursor = Cursors.WaitCursor
+
+        DGView.Columns(0).HeaderText = "ID Rec"
+        DGView.Columns(0).Width = 5
+        DGView.Columns(1).HeaderText = "Kode"
+        DGView.Columns(1).Width = 200
+        DGView.Columns(2).HeaderText = "Nama"
+        DGView.Columns(2).Width = 550
+
         DGView.GridColor = Color.Red
         DGView.CellBorderStyle = DataGridViewCellBorderStyle.None
         DGView.BackgroundColor = Color.LightGray
@@ -32,23 +43,32 @@ Public Class Form_KeuKodeGL_Daftar
         Data_Refresh()
         tCari.Visible = True
     End Sub
+    Private Sub CariNamaCoa()
+        Dim dbKel As New DataTable, dbKode As New DataTable,
+            dbSub As New DataTable, dbPerk As New DataTable
+
+        DGView.Rows.Clear()
+        SQL = "SELECT NO_PERKIRAAN, NM_PERKIRAAN  " &
+            " FROM m_Perkiraan " &
+            "WHERE AKTIFYN = 'Y'  " &
+            "  And NM_PERKIRAAN  like '%" & tCari.Text & "%'  " &
+            "ORDER by NO_PERKIRAAN, NM_PERKIRAAN  "
+        dbPerk = Proses.ExecuteQuery(SQL)
+        For e = 0 To dbPerk.Rows.Count - 1
+            Application.DoEvents()
+            DGView.Rows.Add("PERKIRAAN|" + dbPerk.Rows(e) !NO_PERKIRAAN,
+                Space(12) + dbPerk.Rows(e) !NO_PERKIRAAN,
+                Space(12) + dbPerk.Rows(e) !NM_PERKIRAAN)
+        Next e
+    End Sub
     Private Sub Data_Refresh()
         Dim dbKel As New DataTable, dbKode As New DataTable,
             dbSub As New DataTable, dbPerk As New DataTable
 
-
-        DGView.ColumnCount = 5
-        DGView.Columns(0).Visible = True
-        Me.Cursor = Cursors.WaitCursor
         DGView.Rows.Clear()
-        DGView.Columns(0).HeaderText = "ID Rec"
-        DGView.Columns(0).Width = 5
-        DGView.Columns(1).HeaderText = "Kode"
-        DGView.Columns(1).Width = 200
-        DGView.Columns(2).HeaderText = "Nama"
-        DGView.Columns(2).Width = 550
-
-        SQL = "SELECT NO_Gol, NM_Gol FROM m_Golongan WHERE AktifYN = 'Y' ORDER BY NO_Gol "
+        SQL = "SELECT NO_Gol, NM_Gol FROM m_Golongan " &
+            "WHERE AktifYN = 'Y' " &
+            "ORDER BY NO_Gol "
         tblData = Proses.ExecuteQuery(SQL)
         With tblData.Columns(0)
             For a = 0 To tblData.Rows.Count - 1
@@ -92,7 +112,7 @@ Public Class Form_KeuKodeGL_Daftar
 
                             'Perkiraan-----------
                             SQL = "SELECT NO_PERKIRAAN, NM_PERKIRAAN  " &
-                                 "FROM m_Perkiraan  " &
+                                 " FROM m_Perkiraan " &
                                  "WHERE AKTIFYN = 'Y'  " &
                                  "  And NO_SUB = '" & dbSub.Rows(d) !NO_SUB & "'  " &
                                  "ORDER by NO_PERKIRAAN, NM_PERKIRAAN  "
@@ -162,7 +182,11 @@ Public Class Form_KeuKodeGL_Daftar
 
     Private Sub tCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tCari.KeyPress
         If e.KeyChar = Chr(13) Then
-
+            If Trim(tCari.Text) = "" Then
+                Data_Refresh()
+            Else
+                CariNamaCoa()
+            End If
         End If
     End Sub
 End Class

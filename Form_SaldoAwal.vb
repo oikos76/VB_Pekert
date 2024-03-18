@@ -298,12 +298,17 @@ Public Class Form_SaldoAwal
         IDRec.Visible = False
         Me.Cursor = Cursors.WaitCursor
         MsgSQL = "Select * From M_Periode " &
+            "WHERE Right(periode,4) + left(periode,2) = '" & Format(Now, "yyyyMM") & "' " &
             "Order By Right(periode,4) + left(periode,2) "
         RS02 = Proses.ExecuteQuery(MsgSQL)
         If RS02.Rows.Count = 0 Then
             PanelSetupPeriode.Visible = True
             PanelTombol.Enabled = False
         Else
+            MsgSQL = "Select * From M_Periode " &
+                "WHERE Right(periode,4) + left(periode,2) < '" & Format(Now, "yyyyMM") & "' " &
+                "Order By Right(periode,4) + left(periode,2) "
+            RS02 = Proses.ExecuteQuery(MsgSQL)
             For i = 0 To RS02.Rows.Count - 1
                 Application.DoEvents()
                 tPeriode.Items.Add(RS02.Rows(i) !Periode)
@@ -348,10 +353,11 @@ Public Class Form_SaldoAwal
         MsgSQL = " select * From m_Perkiraan " &
             "where aktifYN = 'Y' " &
             "  And no_Perkiraan not in " &
-            "      (select coa " &
-            "         from m_SaldoawalCompany inner join m_Perkiraan " &
+            "      (Select coa " &
+            "         From m_SaldoawalCompany inner join m_Perkiraan " &
             "              on coa = no_Perkiraan " &
-            "        where periode = '" & tPeriode.Text & "' and m_SaldoAwalCompany.aktifYN = 'Y' ) "
+            "        Where periode = '" & tPeriode.Text & "'  " &
+            "          And m_SaldoAwalCompany.aktifYN = 'Y' ) "
         dbTable = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To dbTable.Rows.Count - 1
             Application.DoEvents()
@@ -361,16 +367,20 @@ Public Class Form_SaldoAwal
             MsgSQL = "INSERT INTO m_SaldoAwalCompany(IDRec, " &
                 "Periode, COA, Nama, Saldo, AktifYN, LastUPD, UserId, " &
                 "AREA) VALUES ('" & tIdRec & "', '" & tPeriode.Text & "', " &
-                " '" & dbTable.Rows(0) !no_PERKIRAAN & "', '" & dbTable.Rows(0) !NM_PERKIRAAN & "', " &
+                " '" & Trim(dbTable.Rows(0) !no_PERKIRAAN) & "', '" & dbTable.Rows(0) !NM_PERKIRAAN & "', " &
                 " 0, 'Y', GetDate(), '" & UserID & "', " &
                 " '" & FrmMenuUtama.CompCode.Text & "')"
+            Proses.ExecuteNonQuery(MsgSQL)
         Next (a)
         DGView.Rows.Clear()
         DGView.Visible = False
+
+
         MsgSQL = "Select * " &
             " From M_SaldoAwalCompany " &
             "Where AktifYN = 'Y'   " &
             "  And Periode = '" & tPeriode.Text & "' " &
+            "  And Nama like '%" & tCari.Text & "%' " &
             "Order By COA "
         dbTable = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To dbTable.Rows.Count - 1
@@ -385,6 +395,9 @@ Public Class Form_SaldoAwal
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub tCari_TextChanged(sender As Object, e As EventArgs) Handles tCari.TextChanged
+
+    End Sub
 
     Private Sub IsiKodeGL()
         Dim MsgSQL As String, RS01 As New DataTable
@@ -496,5 +509,17 @@ Public Class Form_SaldoAwal
             .SelectionStart = 0
             .SelectionLength = .TextLength
         End With
+    End Sub
+
+    Private Sub tCari_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tCari.KeyPress
+        If e.KeyChar = Chr(13) Then
+            IsiSaldoAwal()
+        End If
+    End Sub
+
+    Private Sub tPeriode_KeyUp(sender As Object, e As KeyEventArgs) Handles tPeriode.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            IsiSaldoAwal()
+        End If
     End Sub
 End Class

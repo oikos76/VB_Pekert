@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKT240112\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT240306\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>53</ApplicationRevision>
+    <ApplicationRevision>65</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -160,6 +160,12 @@
     <Compile Include="Form_DataTerima.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form_KeuInventaris.Designer.vb">
+      <DependentUpon>Form_KeuInventaris.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_KeuInventaris.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Report\Rpt_BukuBesar.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +182,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RPT_LabaRugiD.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPt_NeracaPL.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPt_NeracaPL.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Rpt_SPContoh.vb">
@@ -739,6 +751,12 @@
     <Compile Include="Rpt_LabaRugi.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Rpt_Neraca.Designer.vb">
+      <DependentUpon>Rpt_Neraca.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_Neraca.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Rpt_Surat_Jalan.designer.vb">
       <DependentUpon>Rpt_Surat_Jalan.vb</DependentUpon>
     </Compile>
@@ -760,6 +778,9 @@
     <EmbeddedResource Include="Form_DataTerima.resx">
       <DependentUpon>Form_DataTerima.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_KeuInventaris.resx">
+      <DependentUpon>Form_KeuInventaris.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_BukuBesar.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Rpt_BukuBesar.vb</LastGenOutput>
@@ -771,6 +792,10 @@
     <EmbeddedResource Include="Report\RPT_LabaRugiD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_LabaRugiD.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPt_NeracaPL.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPt_NeracaPL.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_SPContoh.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1077,6 +1102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Rpt_LabaRugi.resx">
       <DependentUpon>Rpt_LabaRugi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rpt_Neraca.resx">
+      <DependentUpon>Rpt_Neraca.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rpt_Surat_Jalan.resx">
       <DependentUpon>Rpt_Surat_Jalan.vb</DependentUpon>

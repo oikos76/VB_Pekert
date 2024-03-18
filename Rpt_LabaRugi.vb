@@ -65,8 +65,8 @@ Public Class Rpt_LabaRugi
         Dim Laba As Double, Pajak As Double, LabaBersih As Double, X1 As Double, X2 As Double
         Dim LabaAK As Double, PajakAK As Double, LabaBersihAK As Double, Y1 As Double, Y2 As Double
         Dim RS05 As New DataTable, RS04 As New DataTable
-        Periode1 = Format(DateAdd("m", -1, Tgl1.Value), "MM-YYYY")
-        Periode2 = Format(Tgl1.Value, "MM-YYYY")
+        Periode1 = Format(DateAdd("m", -1, Tgl1.Value), "MM-yyyy")
+        Periode2 = Format(Tgl1.Value, "MM-yyyy")
         NoUrut = 1
         Randomize()
         Me.Cursor = Cursors.WaitCursor
@@ -77,7 +77,6 @@ Public Class Rpt_LabaRugi
         Proses.ExecuteNonQuery(MsgSQL)
         MsgSQL = "SELECT Urut, Description, KodeGL, ParentYN, Spasi, TUrut, GarisYN " &
         "From TMP_RPT_Laba_Rugi order by urut "
-
         RS05 = Proses.ExecuteQuery(MsgSQL)
 
         For a = 0 To RS05.Rows.Count - 1
@@ -159,7 +158,7 @@ Public Class Rpt_LabaRugi
             " From TMP_RPT_LabaRugi " &
             "Where NoUrut = 200 And idrpt = '" & IDRpt & "' "
         RS04 = Proses.ExecuteQuery(MsgSQL)
-        If Not RS04.Rows.Count <> 0 Then
+        If RS04.Rows.Count <> 0 Then
             PenjualanAW = RS04.Rows(0) !awal
             PenjualanAK = RS04.Rows(0) !akhir
         Else
@@ -353,5 +352,13 @@ Public Class Rpt_LabaRugi
         MsgSQL = "Delete tmp_RPT_LabaRugi " &
             "Where IdRPT = '" & IDRpt & "'"
         Proses.ExecuteNonQuery(MsgSQL)
+    End Sub
+
+    Private Sub Rpt_LabaRugi_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Tgl1.Value = Now
+        Tgl2.Value = Now
+        CrystalReportViewer1.Zoom(1)
+        CrystalReportViewer1.Refresh()
+        CrystalReportViewer1.ReportSource = Nothing
     End Sub
 End Class

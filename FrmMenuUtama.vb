@@ -115,11 +115,11 @@ Public Class FrmMenuUtama
             Application.Exit()
         End If
 
-        Dim version As String = My.Application.Info.Version.Major.ToString +
-           My.Application.Info.Version.Minor.ToString +
+        Dim version As String = My.Application.Info.Version.Major.ToString + "." +
+           My.Application.Info.Version.Minor.ToString + "." +
            My.Application.Info.Version.Build.ToString + "-" +
            My.Application.Info.Version.Revision.ToString
-        Me.Text = CompCode.Text + "-" + version
+        Me.Text = CompCode.Text + "-" + version + "#240318"
         If dVersion <> version Then
             MsgBox("Program ini masih menggunakan versi lama (" & dVersion & ")" & vbCrLf & "Versi yang terbaru : " & version, vbCritical + vbOKOnly, "Perbaharui Program Anda... !")
             If UCase(UserID) = "EKO_K" Or UCase(UserID) = "ADMIN" Then
@@ -228,13 +228,24 @@ Public Class FrmMenuUtama
         '    Proses.ExecuteNonQuery(SQL)
         'End If
 
-        'SQL = "Select Menu From m_UserMenu " &
-        '    "Where Menu = 'M_BARANG_UPD_HARGA'"
-        'dbTable = Proses.ExecuteQuery(SQL)
-        'If dbTable.Rows.Count = 0 Then
-        '    SQL = "Insert into m_UserMenu (Menu) values  ('M_BARANG_UPD_HARGA') "
-        '    Proses.ExecuteNonQuery(SQL)
-        'End If
+        SQL = "Select Menu From m_UserMenu " &
+            "Where Menu = '104_INVENTARIS'"
+        dbTable = Proses.ExecuteQuery(SQL)
+        If dbTable.Rows.Count = 0 Then
+            SQL = "Insert into m_UserMenu (Menu) values  ('104_INVENTARIS') "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "Insert into m_UserAkses(User_ID, menu, Akses, Baru, " &
+                "Edit, Hapus, Laporan, AktifYN, area) Values ('ADMIN', " &
+                "'104_INVENTARIS', 1, 1, 1, 1, 1, 'Y', " &
+                "'" & Kode_Toko.Text & "') "
+            Proses.ExecuteNonQuery(SQL)
+            SQL = "Insert into m_UserAkses(User_ID, menu, Akses, Baru, " &
+                "Edit, Hapus, Laporan, AktifYN, area) Values ('EKO_K', " &
+                "'104_INVENTARIS', 1, 1, 1, 1, 1, 'Y', " &
+                "'" & Kode_Toko.Text & "') "
+            Proses.ExecuteNonQuery(SQL)
+        End If
+
         'SQL = "select * from m_userakses
         '  where User_ID = 'HER'
         '    and menu = 'DAFTAR_HARGA_UPDATE' "
@@ -623,6 +634,17 @@ Public Class FrmMenuUtama
         Form_ExploreFoto.MdiParent = Me
         Form_ExploreFoto.Show()
     End Sub
+
+    Private Sub _111Neraca_Click(sender As Object, e As EventArgs) Handles _111Neraca.Click
+        Rpt_Neraca.MdiParent = Me
+        Rpt_Neraca.Show()
+    End Sub
+
+    Private Sub _104Inventearis_Click(sender As Object, e As EventArgs) Handles _104Inventearis.Click
+        Form_KeuInventaris.MdiParent = Me
+        Form_KeuInventaris.Show()
+    End Sub
+
 End Class
 
 

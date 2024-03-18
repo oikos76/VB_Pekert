@@ -140,6 +140,14 @@ Public Class Form_PI
         cmdExit.Visible = tAktif
         TabPageDaftar_.Enabled = True
         TabPageFormEntry_.Enabled = True
+
+        Nopo.Enabled = True
+        Kode_Importir.Enabled = True
+        Importir.Enabled = True
+        tglPO.Enabled = True
+        TglKirim.Enabled = True
+        Pelabuhan.Enabled = True
+        cmbCaraKirim.Enabled = True
         If LAdd Then
             KodeProduk.Visible = False
             Produk.Visible = False
@@ -156,8 +164,6 @@ Public Class Form_PI
             Pemenuhan1.Visible = False
             Pemenuhan2.Visible = False
         ElseIf LTambahKode Then
-
-            NoPI.Enabled = False
             Nopo.Enabled = False
             Kode_Importir.Enabled = False
             Importir.Enabled = False
@@ -167,19 +173,19 @@ Public Class Form_PI
             cmbCaraKirim.Enabled = False
             KodeProduk.BackColor = Color.LightSeaGreen
         Else
-            KodeProduk.Visible = tAktif
-            Produk.Visible = tAktif
-            KodePImportir.Visible = tAktif
-            Jumlah.Visible = tAktif
-            QTYOSO.Visible = tAktif
-            cmbMataUang.Visible = tAktif
-            HargaFOB.Visible = tAktif
-            chk3Digit.Visible = tAktif
-            ShipmentDate.Visible = tAktif
-            PermintaanPO1.Visible = tAktif
-            PermintaanPO2.Visible = tAktif
-            PermintaanPO3.Visible = tAktif
-            Pemenuhan1.Visible = tAktif
+            KodeProduk.Visible = True
+            Produk.Visible = True
+            KodePImportir.Visible = True
+            Jumlah.Visible = True
+            QTYOSO.Visible = True
+            cmbMataUang.Visible = True
+            HargaFOB.Visible = True
+            chk3Digit.Visible = True
+            ShipmentDate.Visible = True
+            PermintaanPO1.Visible = True
+            PermintaanPO2.Visible = True
+            PermintaanPO3.Visible = True
+            Pemenuhan1.Visible = True
             Pemenuhan2.Visible = True
         End If
     End Sub
@@ -484,6 +490,7 @@ Public Class Form_PI
             mKodeBrg = " and Kode_Produk like '%" & Trim(tKodeBrg.Text) & "%' "
         End If
         DGView.Rows.Clear()
+        DGView.Visible = False
         MsgSQL = "Select Distinct NoPI, Right(NoPI,2), TglPI, NoPO, Importir, ShipmentDate " &
             "From t_PI " &
             "Where AktifYN = 'Y' " & mKondisi & mNoPI & mNoPO & mKodeBrg & " " &
@@ -496,6 +503,7 @@ Public Class Form_PI
                 rsDaf.Rows(a) !nopo, rsDaf.Rows(a) !importir,
                 rsDaf.Rows(a) !ShipmentDate)
         Next a
+        DGView.Visible = True
         If DGView.Rows.Count <> 0 Then
             DGView.Columns(1).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
             DGView.Columns(4).DefaultCellStyle.Format = "dd'-'MM'-'yyyy"
@@ -659,8 +667,8 @@ Public Class Form_PI
             ElseIf LEdit Then
                 MsgSQL = "Update t_PI Set " &
                     "       NoPO = '" & Nopo.Text & "', matauang = '" & Trim(cmbMataUang.Text) & "', " &
-                    " ShipmentDate = '" & Format(TglKirim.Value, "YYYY-MM-DD") & "', " &
-                    "      TglPI = '" & Format(tglPI.Value, "YYYY-MM-DD") & "', " &
+                    " ShipmentDate = '" & Format(TglKirim.Value, "yyyy-MM-dd") & "', " &
+                    "      TglPI = '" & Format(tglPI.Value, "yyyy-MM-dd") & "', " &
                     "  Pelabuhan = '" & Trim(Pelabuhan.Text) & "', " &
                     "  CaraKirim = '" & cmbCaraKirim.Text & "', " &
                     "  CatatanPI = '" & Trim(CatatanPI.Text) & "', " &
@@ -676,7 +684,7 @@ Public Class Form_PI
                 'update by mbak UUk, untuk repot analisa tgl shipment date diambil dari
                 'shipment date per kode
                 MsgSQL = "Update t_PI Set " &
-                    " ShipmentDateKode = '" & Format(ShipmentDate.Value, "YYYY-MM-DD") & "', " &
+                    " ShipmentDateKode = '" & Format(ShipmentDate.Value, "yyyy-MM-dd") & "', " &
                     "Kode_Produk = '" & Trim(KodeProduk.Text) & "', " &
                     "     Produk = '" & Trim(Replace(Produk.Text, "'", "`")) & "', " &
                     "Kode_PImport = '" & KodePImportir.Text & "', " &
@@ -1463,6 +1471,10 @@ Public Class Form_PI
         CekDouble = Hasil
     End Function
 
+    Private Sub Pelabuhan_TextChanged(sender As Object, e As EventArgs) Handles Pelabuhan.TextChanged
+
+    End Sub
+
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         Dim MsgSQL As String, RSNav As New DataTable
         MsgSQL = "SELECT top 1 IDrec From t_PI " &
@@ -1474,6 +1486,10 @@ Public Class Form_PI
         If RSNav.Rows.Count <> 0 Then
             Call IsiPI(RSNav.Rows(0) !IdRec)
         End If
+    End Sub
+
+    Private Sub NoPI_TextChanged(sender As Object, e As EventArgs) Handles NoPI.TextChanged
+
     End Sub
 
     Private Sub btnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
@@ -1519,6 +1535,7 @@ Public Class Form_PI
         Dim JMacam As Integer = 0, JTotal As Double = 0, JNilai As Double = 0
         If DGView.Rows.Count = 0 Then Exit Sub
         DGView2.Rows.Clear()
+        DGView2.Visible = False
         tCari = DGView.Rows(DGView.CurrentCell.RowIndex).Cells(0).Value
         MsgSQL = "SELECT  IDrec, Kode_Produk, Produk, Kode_PImport, Jumlah, QTYOSO, MataUang, HargaFOB " &
             " FROM t_PI " &
@@ -1544,6 +1561,7 @@ Public Class Form_PI
             xQTY = xQTY + rsP.Rows(a) !Jumlah
             xTotNilai = xTotNilai + (rsP.Rows(a) !Jumlah * rsP.Rows(a) !HargaFOB)
         Next a
+        DGView2.Visible = True
         If DGView2.Rows.Count <> 0 Then
             IsiPI(tCari)
             JumMacam.Text = 0
@@ -1576,5 +1594,13 @@ Public Class Form_PI
 
     Private Sub CatatanPI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CatatanPI.KeyPress
         If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+    End Sub
+
+    Private Sub Pelabuhan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Pelabuhan.KeyPress
+        If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
+    End Sub
+
+    Private Sub NoPI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoPI.KeyPress
+
     End Sub
 End Class
