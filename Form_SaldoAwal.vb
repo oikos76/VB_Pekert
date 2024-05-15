@@ -44,11 +44,14 @@ Public Class Form_SaldoAwal
         cmdBatal.Visible = Not tAktif
         cmdPrint.Enabled = tAktif
         cmdExit.Visible = tAktif
+        cmdImport.Visible = tAktif
 
         DGView.ReadOnly = tAktif
         DGView.Columns(0).ReadOnly = True
         DGView.Columns(1).ReadOnly = True
         DGView.Columns(2).ReadOnly = tAktif
+
+
 
     End Sub
 
@@ -133,7 +136,9 @@ Public Class Form_SaldoAwal
                         "  And AktifYN = 'Y' "
                 End If
                 Proses.ExecuteNonQuery(SQL)
+                tCari.Text = Format(i, "###,##0") & " / " & Format(DGView.Rows.Count - 1, "###,##0")
             Next i
+            tCari.Text = ""
             Me.Cursor = Cursors.Default
             DGView.Enabled = True
         End If
@@ -212,6 +217,8 @@ Public Class Form_SaldoAwal
             DTadapter.Fill(dttable)
             objRep = New Rpt_SaldoAkhir
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak Saldo"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
@@ -361,16 +368,27 @@ Public Class Form_SaldoAwal
         dbTable = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To dbTable.Rows.Count - 1
             Application.DoEvents()
-            MsgSQL = "Select isnull(Max(right(IDRec,6)),0) + 100000001 IDRec " &
-                " From m_SaldoAwalCompany Where left(idrec,4) = '" & Format(Now(), "YYYY") & "' "
-            tIdRec = Proses.ExecuteSingleStrQuery(MsgSQL)
-            MsgSQL = "INSERT INTO m_SaldoAwalCompany(IDRec, " &
+            tCari.Text = Format(a, "###,##0") & " / " & Format(DGView.Rows.Count - 1, "###,##0")
+            SQL = "Select IDRec From m_SaldoAwalCompany " &
+                    "where Periode = '" & tPeriode.Text & "' " &
+                    "  And COA = '" & Trim(dbTable.Rows(a) !no_PERKIRAAN) & "' " &
+                    "  And AktifYN = 'Y' "
+            tIdRec = Proses.ExecuteSingleStrQuery(SQL)
+            If Trim(tIdRec) = "" Then
+                MsgSQL = "Select isnull(Max(right(IDRec,6)),0) + 100000001 IDRec " &
+                    " From m_SaldoAwalCompany Where left(idrec,4) = '" & Format(Now(), "YYYY") & "' "
+                tIdRec = Proses.ExecuteSingleStrQuery(MsgSQL)
+                MsgSQL = "INSERT INTO m_SaldoAwalCompany(IDRec, " &
                 "Periode, COA, Nama, Saldo, AktifYN, LastUPD, UserId, " &
                 "AREA) VALUES ('" & tIdRec & "', '" & tPeriode.Text & "', " &
-                " '" & Trim(dbTable.Rows(0) !no_PERKIRAAN) & "', '" & dbTable.Rows(0) !NM_PERKIRAAN & "', " &
+                " '" & Trim(dbTable.Rows(a) !no_PERKIRAAN) & "', " &
+                " '" & dbTable.Rows(a) !NM_PERKIRAAN & "', " &
                 " 0, 'Y', GetDate(), '" & UserID & "', " &
                 " '" & FrmMenuUtama.CompCode.Text & "')"
-            Proses.ExecuteNonQuery(MsgSQL)
+                Proses.ExecuteNonQuery(MsgSQL)
+            Else
+
+            End If
         Next (a)
         DGView.Rows.Clear()
         DGView.Visible = False
@@ -385,10 +403,12 @@ Public Class Form_SaldoAwal
         dbTable = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To dbTable.Rows.Count - 1
             Application.DoEvents()
+            tCari.Text = Format(a, "###,##0") & " / " & Format(DGView.Rows.Count - 1, "###,##0")
             DGView.Rows.Add(dbTable.Rows(a) !COA,
                     dbTable.Rows(a) !Nama,
                     Format(dbTable.Rows(a) !Saldo, "###,##0"), "EDIT")
         Next (a)
+        tCari.Text = ""
         DGView.Visible = True
         DGView.Columns(3).Visible = True
         Proses.CloseConn()
@@ -411,10 +431,12 @@ Public Class Form_SaldoAwal
         RS01 = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To RS01.Rows.Count - 1
             Application.DoEvents()
+            tCari.Text = Format(a, "###,##0") & " / " & Format(DGView.Rows.Count - 1, "###,##0")
             DGView.Rows.Add(RS01.Rows(a) !no_PERKIRAAN,
                     RS01.Rows(a) !NM_PERKIRAAN,
                     Format(0, "###,##0"))
         Next (a)
+        tCari.Text = ""
         Proses.CloseConn()
         DGView.Visible = True
         Me.Cursor = Cursors.Default
@@ -425,6 +447,114 @@ Public Class Form_SaldoAwal
         If e.KeyChar = Chr(13) Then
             cmdSimpan.Focus()
         End If
+    End Sub
+
+    Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+        OpenFileDialog1.Filter = "Excel Files (*.xls, *.xlsx)|*.xlsx; *.xls"
+        OpenFileDialog1.FileName = ""
+        OpenFileDialog1.DefaultExt() = "*.xlsx"
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            tCari.Text = OpenFileDialog1.FileName
+            cmdImport.Enabled = False
+            ImportSaldo()
+        Else
+            tCari.Text = ""
+        End If
+    End Sub
+
+    Private Sub importSaldo()
+        Dim i As Integer
+        Dim dbCOA As New DataTable, dbCek As New DataTable
+        'Dim APP As New excel.Application
+        'Dim worksheet As Excel.Worksheet
+        'Dim workbook As Excel.Workbook
+
+        Dim dbTable As New DataTable
+        Dim oExcel As New Object
+        Dim oBook As New Object
+        Dim oSheet As New Object
+        oExcel = CreateObject("Excel.Application")
+        tCari.Enabled = False
+        If Trim(tCari.Text) <> "" Then
+            DGView.Rows.Clear()
+            oBook = oExcel.Workbooks.Open(tCari.Text)
+            oSheet = oBook.Sheets.Item(1)
+            Me.Cursor = Cursors.WaitCursor
+            Dim xlRange
+            xlRange = oSheet.UsedRange
+
+            Dim mPeriode As String,
+                mKodeGL As String = "", mNamaGL As String = "",
+                mSaldo As Double = 0
+            cmdImport.Enabled = False
+            For i = 1 To xlRange.Rows.Count
+                Application.DoEvents()
+                If i = 1 Then
+                    Try
+                        mPeriode = Trim(Mid(oSheet.Cells(i, 1).Value, 23))
+                        tPeriode.Text = mPeriode
+                    Catch ex As Exception
+                        mPeriode = ""
+                    End Try
+                End If
+                Try
+                    mKodeGL = oSheet.Cells(i, 2).Value
+                Catch ex As Exception
+                    mKodeGL = ""
+                End Try
+                Try
+                    mSaldo = oSheet.Cells(i, 4).Value
+                Catch ex As Exception
+                    mSaldo = 0
+                End Try
+                If i > 2 Then
+                    SQL = " select * From m_Perkiraan " &
+                        "where aktifYN = 'Y' " &
+                        "  And no_Perkiraan = '" & mKodeGL & "' "
+                    dbCOA = Proses.ExecuteQuery(SQL)
+                    If dbCOA.Rows.Count <> 0 Then
+                        mNamaGL = dbCOA.Rows(0) !NM_PERKIRAAN
+                        SQL = "Select IDRec,Saldo From m_SaldoAwalCompany " &
+                            "where Periode = '" & tPeriode.Text & "' " &
+                            "  And COA = '" & Trim(mKodeGL) & "' " &
+                            "  And AktifYN = 'Y' "
+                        dbCek = Proses.ExecuteQuery(SQL)
+                        If dbCek.Rows.Count <> 0 Then
+                            SQL = "Update m_SaldoAwalCompany Set " &
+                                "  Saldo = " & mSaldo & ",  " &
+                                " UserId = '" & UserID & "', " &
+                                "LastUPD = getdate() " &
+                                "where Periode = '" & tPeriode.Text & "' " &
+                                "  And COA = '" & Trim(mKodeGL) & "' " &
+                                "  And AktifYN = 'Y' "
+                        Else
+                            SQL = "Select isnull(Max(right(IDRec,6)),0) + 100000001 IDRec " &
+                                " From m_SaldoAwalCompany Where left(idrec,4) = '" & Format(Now(), "YYYY") & "' "
+                            IDRec.Text = Proses.ExecuteSingleStrQuery(SQL)
+                            SQL = "INSERT INTO m_SaldoAwalCompany(IDRec, Periode, " &
+                               "COA, Nama, Saldo, Area, AktifYN, LastUPD, UserId) " &
+                               "VALUES ('" & IDRec.Text & "', " &
+                               " '" & tPeriode.Text & "', '" & Trim(mKodeGL) & "', " &
+                               " '" & Trim(Replace(mNamaGL, "'", "`")) & "', " & mSaldo & ", " &
+                               " '" & FrmMenuUtama.Kode_Toko.Text & "', " &
+                               " 'Y', GetDate(), '" & UserID & "') "
+                        End If
+                        Proses.ExecuteNonQuery(SQL)
+                        DGView.Rows.Add(mKodeGL,
+                            mNamaGL,
+                            Format(mSaldo, "###,##0"), "EDIT")
+                    End If
+                End If
+                tCari.Text = Format(i, "###,##0") & " / " & Format(xlRange.Rows.Count, "###,##0")
+            Next i
+            oExcel.ActiveWorkbook.Close(False, tCari.Text)
+            oExcel.Quit()
+        End If
+        MsgBox(Format(i, "###,##0") & " record's", vbOKOnly + vbInformation, ".:Success !")
+        Me.Cursor = Cursors.Default
+        tCari.Text = ""
+        tCari.Enabled = True
+        cmdImport.Enabled = True
     End Sub
 
     Private Sub DGView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellEndEdit

@@ -366,6 +366,8 @@ ErrMSG:
             objRep = New Rpt_Retur
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("KabagGudang", KabagGudang)
+            Form_Report.Text = "Cetak Retur"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep

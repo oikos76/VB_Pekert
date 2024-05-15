@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS / PEKERTISERVER\SQLEXPRESS, 1433  g:\FotoProduct")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS  PEKERTISERVER\SQLEXPRESS, 1433  g:\FotoProduct  PKTGudang")>  _
         Public Property ip_server() As String
             Get
                 Return CType(Me("ip_server"),String)
@@ -200,7 +200,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("C:\KirimTerima")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Kirim_Data")>  _
         Public Property LokasiFile() As String
             Get
                 Return CType(Me("LokasiFile"),String)
@@ -212,7 +212,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("c:\")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Terima_Data")>  _
         Public Property LokasiDownload() As String
             Get
                 Return CType(Me("LokasiDownload"),String)

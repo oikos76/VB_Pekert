@@ -399,28 +399,33 @@ Public Class Form_Export2Excel
         Dim oExcel As Excel.Application
         Dim oBook As Excel.Workbook
         Dim oSheet As Excel.Worksheet
+        Cursor = Cursors.WaitCursor
         oExcel = CreateObject("Excel.Application")
         oBook = oExcel.Workbooks.Add(Type.Missing)
         oSheet = oBook.Worksheets(1)
         oSheet.Cells(1, 1) = "LAPORAN HASIL PEMERIKSAAN"
-        oSheet.Cells(3, 1) = "No LHP"
-        oSheet.Cells(3, 2) = "No Pra LHP"
-        oSheet.Cells(3, 3) = "Perajin"
-        oSheet.Cells(3, 4) = "SP"
-        oSheet.Cells(3, 5) = "Kode Produk"
-        oSheet.Cells(3, 6) = "Produk"
-        oSheet.Cells(3, 7) = "Menurut SP"
-        oSheet.Cells(3, 8) = "Tercantum di SPB"
-        oSheet.Cells(3, 9) = "Jumlah yang Ada"
-        oSheet.Cells(3, 10) = "Jumlah yang Baik"
-        oSheet.Cells(3, 11) = "Jumlah Retur"
-        oSheet.Cells(3, 12) = "Keterangan"
-        oSheet.Cells(3, 13) = "Mulai Periksa"
-        oSheet.Cells(3, 14) = "Selesai Periksa"
+        oSheet.Cells(2, 1) = "No LHP"
+        oSheet.Cells(3, 1) = "No Pra LHP"
+        oSheet.Cells(4, 1) = "Perajin"
+        oSheet.Cells(5, 1) = "Surat Pengantar"
+        oSheet.Cells(6, 1) = "Jumlah Koli"
+        oSheet.Cells(7, 1) = "Kargo"
+        oSheet.Range("A1:H1").Merge()
+        oSheet.Range("A1:A7").Font.Bold = True
+        oSheet.Cells(9, 1) = "Kode Produk"
+        oSheet.Cells(9, 2) = "Produk"
+        oSheet.Cells(9, 3) = "Menurut SP"
+        oSheet.Cells(9, 4) = "Tercantum di SPB"
+        oSheet.Cells(9, 5) = "Jumlah yang Ada"
+        oSheet.Cells(9, 6) = "Jumlah yang Baik"
+        oSheet.Cells(9, 7) = "Jumlah Retur"
+        oSheet.Cells(9, 8) = "Keterangan"
+        oSheet.Range("H8").ColumnWidth = 50
+        oSheet.Range("A9:H9").Font.Bold = True
 
         Cursor = Cursors.WaitCursor
-        Dim i As Integer = 4,
-            Perajin As String = ""
+        Dim mulaiPeriksa As String = "", selesaiPeriksa As String = "",
+            i As Integer = 10, NoSP As String = "", Perajin As String = ""
 
         MsgSQL = "SELECT Distinct t_LHP.IDRec, t_LHP.NoLHP, t_LHP.NoPraLHP, t_LHP.Kode_Produk, " &
             "    t_LHP.Produk, t_LHP.JumlahPack, t_LHP.Kirim, t_LHP.JumlahHitung, t_PraLHP.NamaPerajin, " &
@@ -434,29 +439,45 @@ Public Class Form_Export2Excel
             "  And t_LHP.AktifYN = 'Y' And t_PraLHP.AktifYN = 'Y' " &
             "ORDER BY t_LHP.NoSP, t_LHP.IDRec ASC "
         dbTable = Proses.ExecuteQuery(MsgSQL)
-        Cursor = Cursors.WaitCursor
+        If dbTable.Rows.Count <> 0 Then
+            oSheet.Range("B2").Value = dbTable.Rows(0) !NoLHP
+            oSheet.Range("B3").Value = IIf(Trim(dbTable.Rows(0) !NoPraLHP) = "", "PEKERTI", dbTable.Rows(0) !NoPraLHP)
+            oSheet.Range("B4").Value = dbTable.Rows(0) !NamaPerajin
+            oSheet.Range("B5").Value = dbTable.Rows(0) !SuratPengantar
+            oSheet.Range("B6").Value = "'" & Format(dbTable.Rows(0) !JumlahKoli, "##0")
+            oSheet.Range("B7").Value = dbTable.Rows(0) !Kargo
+            mulaiPeriksa = "'" & Format(dbTable.Rows(0) !tglMulaiPeriksa, "dd-MM-yyyy")
+            selesaiPeriksa = "'" & Format(dbTable.Rows(0) !TglSelesaiPeriksa, "dd-MM-yyyy")
+        End If
         For a = 0 To dbTable.Rows.Count - 1
-            oSheet.Range("A" + Format(i, "##0")).Value = dbTable.Rows(a) !NoLHP
-            oSheet.Range("B" + Format(i, "##0")).Value = IIf(Trim(dbTable.Rows(a) !NoPraLHP) = "", "PEKERTI", dbTable.Rows(a) !NoPraLHP)
-            oSheet.Range("C" + Format(i, "##0")).Value = dbTable.Rows(a) !NamaPerajin
-            oSheet.Range("D" + Format(i, "##0")).Value = IIf(Trim(dbTable.Rows(a) !NoSP) = "", "PEKERTI", dbTable.Rows(a) !NoSP)
-            oSheet.Range("E" + Format(i, "##0")).Value = dbTable.Rows(a) !Kode_Produk
-            oSheet.Range("F" + Format(i, "##0")).Value = dbTable.Rows(a) !Produk
-            oSheet.Range("G" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !JumlahPack, "###,##0.000")
-            oSheet.Range("H" + Format(i, "##0")).Value = dbTable.Rows(a) !kirim
-            oSheet.Range("I" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !JumlahHitung, "###,##0.000")
-            oSheet.Range("J" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !jumlahbaik, "###,##0.000")
-            oSheet.Range("K" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !jumlahtolak, "###,##0.000")
-            oSheet.Range("L" + Format(i, "##0")).Value = dbTable.Rows(a) !AlasanDiTolak
-            oSheet.Range("M" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !tglMulaiPeriksa, "dd-MM-yyyy")
-            oSheet.Range("N" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !TglSelesaiPeriksa, "dd-MM-yyyy")
+            If NoSP <> dbTable.Rows(a) !NoSP Then
+                oSheet.Range("A" + Format(i, "##0")).Value = "No.SP : " + dbTable.Rows(a) !NoSP
+                i += 1
+            End If
+            oSheet.Range("A" + Format(i, "##0")).Value = dbTable.Rows(a) !Kode_Produk
+            oSheet.Range("B" + Format(i, "##0")).Value = dbTable.Rows(a) !Produk
+            oSheet.Range("C" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !JumlahPack, "###,##0.000")
+            oSheet.Range("D" + Format(i, "##0")).Value = dbTable.Rows(a) !kirim
+            oSheet.Range("E" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !JumlahHitung, "###,##0.000")
+            oSheet.Range("F" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !jumlahbaik, "###,##0.000")
+            oSheet.Range("G" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !jumlahtolak, "###,##0.000")
+            oSheet.Range("H" + Format(i, "##0")).Value = dbTable.Rows(a) !AlasanDiTolak
+            NoSP = dbTable.Rows(a) !NoSP
             i += 1
         Next (a)
+        i += 1
+        oSheet.Cells(i, 1) = "Mulai Periksa"
+        oSheet.Cells(i, 2) = mulaiPeriksa
+        oSheet.Range("A" + Format(i, "##0")).Font.Bold = True
+        i += 1
+        oSheet.Cells(i, 1) = "Selesai Periksa"
+        oSheet.Cells(i, 2) = selesaiPeriksa
+        oSheet.Range("A" + Format(i, "##0")).Font.Bold = True
 
         Dim fileName As String = locFile.Text & "\LHP" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
-        oSheet.Range("A1:N3").Font.Bold = True
-        oSheet.Range("A1:D1").Merge()
+
         oSheet.Columns.AutoFit()
+        oSheet.Range("A10: H" & Format(i, "##0")).VerticalAlignment = Excel.Constants.xlCenter
         oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
 
         'Release the objects

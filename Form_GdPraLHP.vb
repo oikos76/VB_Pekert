@@ -33,8 +33,7 @@ Public Class Form_GdPraLHP
             "Where AktifYN = 'Y' " & mKondisi & " " &
             "  AND convert(char(8), TglPraLHP, 112)   >= convert(char(8),  DATEADD(m, -18, getdate()) , 112) " &
             "Group By NoPraLHP, TglPraLHP, NamaPerajin  " &
-            "ORDER BY TglPraLHP DESC, " &
-            "         Right(NoPraLHP,2) + LEFT(nOpRALHP,3) Desc "
+            "ORDER BY Right(NoPraLHP,2) + LEFT(nOpRALHP,3) Desc,  TglPraLHP DESC  "
         rsdaftar = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To rsdaftar.Rows.Count - 1
             Application.DoEvents()
@@ -238,6 +237,8 @@ Public Class Form_GdPraLHP
             DTadapter.Fill(dttable)
             objRep = New Rpt_PraLHP
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak LHP"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
@@ -613,7 +614,7 @@ Public Class Form_GdPraLHP
 
     Private Sub Keterangan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Keterangan.KeyPress
         If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
-        If e.KeyChar = Chr(13) Then InstruksiPacking.Focus()
+        'If e.KeyChar = Chr(13) Then InstruksiPacking.Focus()
     End Sub
 
     Private Sub Kirim_TextChanged(sender As Object, e As EventArgs) Handles Kirim.TextChanged

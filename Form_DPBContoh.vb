@@ -33,14 +33,22 @@ Public Class Form_DPBContoh
         Dim MsgSQL As String, dbS As New DataTable
         If Trim(OngKir.Text) = "" Then OngKir.Text = 0
         If LAdd Then
-            MsgSQL = "Select convert(Char(2), GetDate(), 12) thn, 
-                             isnull(Max(substring(NoDPB,8,3)),0) + 10001 RecId  
-                        From t_DPBSample Where right(nodpb,2) = convert(Char(2), GetDate(), 12) "
+            'MsgSQL = "Select convert(Char(2), GetDate(), 12) thn, 
+            '                 isnull(Max(substring(NoDPB,8,3)),0) + 10001 RecId  
+            '            From t_DPBSample Where right(nodpb,2) = convert(Char(2), GetDate(), 12) "
+            'dbS = Proses.ExecuteQuery(MsgSQL)
+            'If Not dbS.Rows.Count <> 0 Then
+            '    nodpb.Text = "DPBSPL-" + Microsoft.VisualBasic.Right(dbS.Rows(0) !recid, 3) + "/" + dbS.Rows(0) !thn
+            'End If
+            MsgSQL = "SELECT UserID, LastUPD FROM t_DPBSample " &
+                "WHERE NoDPB = '" & Trim(nodpb.Text) & "' " &
+                " AND aktifYN='Y' "
             dbS = Proses.ExecuteQuery(MsgSQL)
-            If Not dbS.Rows.Count <> 0 Then
-                nodpb.Text = "DPBSPL-" + Microsoft.VisualBasic.Right(dbS.Rows(0) !recid, 3) + "/" + dbS.Rows(0) !thn
+            If dbS.Rows.Count <> 0 Then
+                MsgBox("No DPB : " & nodpb.Text & " sudah pernah dibuat !", vbCritical + vbOKOnly, ".:Warning!")
+                nodpb.Focus()
+                Exit Sub
             End If
-
             MsgSQL = "Select Kode_Produk, Jumlah, HargaBeli, Deskripsi " &
                 "From T_SPContoh inner join m_KodeProduk on " &
                 "      Kode_Produk = KodeProduk " &
@@ -55,7 +63,7 @@ Public Class Form_DPBContoh
                 MsgSQL = "INSERT INTO t_DPBSample(IDRec, NoDPB, TglDPB, " &
                     "NoSP, KodePerajin, Perajin, KodeProduk, Produk, Jumlah, " &
                     "SatuanHBeli, OngKir, AktifYN, UserID, LastUPD, UserRev, " &
-                    "TglRev, TransferYN, IdCompany) VALUES('" & IDRecord.Text & "', " &
+                    "TglRev, TransferYN, IdCompany) VALUES('" & IDRecord.Text & "', '" & Trim(nodpb.Text) & "', " &
                     "'" & Format(TglDPB.Value, "yyyy-MM-dd") & "', '" & Trim(NoSP.Text) & "', " &
                     "'" & Trim(Kode_Perajin.Text) & "', '" & Trim(Perajin.Text) & "'," &
                     "'" & Trim(dbS.Rows(A) !Kode_Produk) & "', '" & Trim(dbS.Rows(A) !Deskripsi) & "', " &
@@ -165,6 +173,7 @@ Public Class Form_DPBContoh
                 End If
             End If
         Next
+        TglDPB.Value = Now
     End Sub
 
     Private Sub OngKir_TextChanged(sender As Object, e As EventArgs) Handles OngKir.TextChanged
@@ -251,6 +260,7 @@ Public Class Form_DPBContoh
             nodpb.Text = "DPBSPL-" + Microsoft.VisualBasic.Right(dbTable.Rows(0) !recid, 3) + "/" + dbTable.Rows(0) !thn
         End If
         Proses.CloseConn()
+        nodpb.ReadOnly = False
         NoSP.Focus()
 
     End Sub
@@ -266,6 +276,7 @@ Public Class Form_DPBContoh
         LAdd = False
         LEdit = True
         AturTombol(False)
+        nodpb.ReadOnly = True
         cmdSimpan.Visible = tEdit
     End Sub
 
@@ -350,7 +361,13 @@ Public Class Form_DPBContoh
     End Sub
 
     Private Sub SatuanHBeli_TextChanged(sender As Object, e As EventArgs) Handles SatuanHBeli.TextChanged
-
+        If Trim(SatuanHBeli.Text) = "" Then SatuanHBeli.Text = 0
+        If Trim(SatuanHBeli.Text) = "-" Then
+        ElseIf IsNumeric(SatuanHBeli.Text) Then
+            Dim temp As Double = SatuanHBeli.Text
+            SatuanHBeli.Text = Format(temp, "###,##0")
+            SatuanHBeli.SelectionStart = SatuanHBeli.TextLength
+        End If
     End Sub
 
     Private Sub NoSP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoSP.KeyPress
@@ -638,11 +655,13 @@ Public Class Form_DPBContoh
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("tanggal", tanggal)
             objRep.SetParameterValue("Terbilang", Terbilang)
+            Form_Report.Text = "Cetak DPB Contoh"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
             Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
 

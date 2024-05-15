@@ -90,6 +90,9 @@ Partial Class Form_KodifProduk
         Me.Fungsi = New System.Windows.Forms.TextBox()
         Me.Perajin = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.PanelCariKode = New System.Windows.Forms.Panel()
+        Me.KodeCari = New System.Windows.Forms.TextBox()
+        Me.Label33 = New System.Windows.Forms.Label()
         Me.PanelPicture = New System.Windows.Forms.Panel()
         Me.LocGmb1 = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -120,9 +123,6 @@ Partial Class Form_KodifProduk
         Me.PathFoto = New System.Windows.Forms.TextBox()
         Me.GBoxCatatanTambahan = New System.Windows.Forms.GroupBox()
         Me.TambSP = New System.Windows.Forms.TextBox()
-        Me.PanelCariKode = New System.Windows.Forms.Panel()
-        Me.KodeCari = New System.Windows.Forms.TextBox()
-        Me.Label33 = New System.Windows.Forms.Label()
         Me.Deskripsi = New System.Windows.Forms.TextBox()
         Me.Descript = New System.Windows.Forms.TextBox()
         Me.KodeProduk = New System.Windows.Forms.TextBox()
@@ -200,13 +200,13 @@ Partial Class Form_KodifProduk
         Me.TabRiwayatHarga_.SuspendLayout()
         CType(Me.dgRiwayatHarga, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.PanelCariKode.SuspendLayout()
         Me.PanelPicture.SuspendLayout()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBoxInfoDimensi.SuspendLayout()
         Me.GBoxInfoUmum.SuspendLayout()
         Me.GBoxCatatanTambahan.SuspendLayout()
-        Me.PanelCariKode.SuspendLayout()
         Me.TabPageDaftar_.SuspendLayout()
         CType(Me.DGView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
@@ -558,6 +558,7 @@ Partial Class Form_KodifProduk
         '
         'Prev_Euro
         '
+        Me.Prev_Euro.BackColor = System.Drawing.SystemColors.Window
         Me.Prev_Euro.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Prev_Euro.Location = New System.Drawing.Point(208, 94)
         Me.Prev_Euro.Margin = New System.Windows.Forms.Padding(4)
@@ -643,6 +644,7 @@ Partial Class Form_KodifProduk
         '
         'Prev_USD
         '
+        Me.Prev_USD.BackColor = System.Drawing.SystemColors.Window
         Me.Prev_USD.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Prev_USD.Location = New System.Drawing.Point(208, 42)
         Me.Prev_USD.Margin = New System.Windows.Forms.Padding(4)
@@ -748,6 +750,7 @@ Partial Class Form_KodifProduk
         '
         'Prev_RP
         '
+        Me.Prev_RP.BackColor = System.Drawing.SystemColors.Window
         Me.Prev_RP.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Prev_RP.Location = New System.Drawing.Point(208, 177)
         Me.Prev_RP.Margin = New System.Windows.Forms.Padding(4)
@@ -923,6 +926,37 @@ Partial Class Form_KodifProduk
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(986, 241)
         Me.Panel2.TabIndex = 234
+        '
+        'PanelCariKode
+        '
+        Me.PanelCariKode.Controls.Add(Me.KodeCari)
+        Me.PanelCariKode.Controls.Add(Me.Label33)
+        Me.PanelCariKode.Location = New System.Drawing.Point(214, 8)
+        Me.PanelCariKode.Name = "PanelCariKode"
+        Me.PanelCariKode.Size = New System.Drawing.Size(324, 133)
+        Me.PanelCariKode.TabIndex = 234
+        Me.PanelCariKode.Visible = False
+        '
+        'KodeCari
+        '
+        Me.KodeCari.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KodeCari.Location = New System.Drawing.Point(183, 15)
+        Me.KodeCari.Margin = New System.Windows.Forms.Padding(4)
+        Me.KodeCari.Name = "KodeCari"
+        Me.KodeCari.Size = New System.Drawing.Size(126, 22)
+        Me.KodeCari.TabIndex = 21
+        Me.KodeCari.Text = "0003-20-5000A"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.Location = New System.Drawing.Point(13, 18)
+        Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(160, 16)
+        Me.Label33.TabIndex = 194
+        Me.Label33.Text = "Kode yang di cari :"
         '
         'PanelPicture
         '
@@ -1264,37 +1298,6 @@ Partial Class Form_KodifProduk
         Me.TambSP.Size = New System.Drawing.Size(255, 60)
         Me.TambSP.TabIndex = 33
         Me.TambSP.Text = "note's SP"
-        '
-        'PanelCariKode
-        '
-        Me.PanelCariKode.Controls.Add(Me.KodeCari)
-        Me.PanelCariKode.Controls.Add(Me.Label33)
-        Me.PanelCariKode.Location = New System.Drawing.Point(214, 8)
-        Me.PanelCariKode.Name = "PanelCariKode"
-        Me.PanelCariKode.Size = New System.Drawing.Size(324, 133)
-        Me.PanelCariKode.TabIndex = 234
-        Me.PanelCariKode.Visible = False
-        '
-        'KodeCari
-        '
-        Me.KodeCari.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KodeCari.Location = New System.Drawing.Point(183, 15)
-        Me.KodeCari.Margin = New System.Windows.Forms.Padding(4)
-        Me.KodeCari.Name = "KodeCari"
-        Me.KodeCari.Size = New System.Drawing.Size(126, 22)
-        Me.KodeCari.TabIndex = 21
-        Me.KodeCari.Text = "0003-20-5000A"
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(13, 18)
-        Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(160, 16)
-        Me.Label33.TabIndex = 194
-        Me.Label33.Text = "Kode yang di cari :"
         '
         'Deskripsi
         '
@@ -1954,6 +1957,8 @@ Partial Class Form_KodifProduk
         Me.TabRiwayatHarga_.ResumeLayout(False)
         CType(Me.dgRiwayatHarga, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.PanelCariKode.ResumeLayout(False)
+        Me.PanelCariKode.PerformLayout()
         Me.PanelPicture.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1963,8 +1968,6 @@ Partial Class Form_KodifProduk
         Me.GBoxInfoUmum.PerformLayout()
         Me.GBoxCatatanTambahan.ResumeLayout(False)
         Me.GBoxCatatanTambahan.PerformLayout()
-        Me.PanelCariKode.ResumeLayout(False)
-        Me.PanelCariKode.PerformLayout()
         Me.TabPageDaftar_.ResumeLayout(False)
         CType(Me.DGView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)

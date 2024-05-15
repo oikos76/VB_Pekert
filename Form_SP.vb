@@ -859,7 +859,7 @@ ErrMSG:
             "     t_SP.Jumlah, t_SP.HargaBeliRP, t_SP.CatatanSP, m_KodeProduk.Panjang, " &
             "     m_KodeProduk.Lebar, m_KodeProduk.Tinggi,  m_KodeProduk.diameter, " &
             "     m_KodeProduk.tebal, m_KodeProduk.Satuan, m_KodeProduk.KodePerajin2, " &
-            "     t_SP.Importir, CatatanProduk, CatatanTambahan, CatatanSP, direksi, ttDireksi " &
+            "     t_SP.Importir, CatatanProduk, CatatanTambahan, CatatanSP, direksi, m_Company.BagianContoh " &
             "FROM Pekerti.dbo.t_SP t_SP INNER JOIN Pekerti.dbo.m_KodeProduk m_KodeProduk On " &
             "   t_SP.KodeProduk = m_KodeProduk.KodeProduk  " &
             " INNER JOIN m_Company on idCompany = CompCode " &
@@ -893,12 +893,14 @@ ErrMSG:
             objRep.SetParameterValue("terbilang", terbilang)
             objRep.SetParameterValue("tglCetak", TCetak)
             objRep.SetParameterValue("pernyataan2", pernyataan2)
+            Form_Report.Text = "Cetak SP"
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
-            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
-            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = True
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
+            Form_Report.CrystalReportViewer1.ShowParameterPanelButton = True
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.ShowDialog()
             dttable.Dispose()
             DTadapter.Dispose()

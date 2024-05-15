@@ -54,8 +54,18 @@ Public Class Form_DPB
                 Exit Sub
             End If
         End If
+        'If LAdd Then
+        '    GetMaxIdDPB()
+        'End If
         If LAdd Then
-            GetMaxIdDPB
+            MsgSQL = "Select NoDPB From t_DPB " &
+                    "Where NoDPB = '" & nodpb.Text & "' " &
+                    "  and aktifYN = 'Y' "
+            rs04 = Proses.ExecuteQuery(MsgSQL)
+            If rs04.Rows.Count <> 0 Then
+                MsgBox("Hi " & Trim(UserID) & "... No DPB " & nodpb.Text & " sudah pernah di buat", vbCritical, ".:Error!")
+                Exit Sub
+            End If
         End If
 
         If LAdd Or LEdit Or LTambahKode Then
@@ -67,66 +77,67 @@ Public Class Form_DPB
             If Trim(OngKir.Text) = "" Then OngKir.Text = 0
             If Trim(Jumlah.Text) = "" Then Jumlah.Text = 0
             If LAdd Or LTambahKode Then
+
                 MsgSQL = "Select NoLHP From t_DPB " &
                     "Where NoLHP = '" & NoLHP.Text & "' " &
                     "  and aktifYN = 'Y' "
-                rs04 = Proses.ExecuteQuery(MsgSQL)
-                If rs04.Rows.Count <> 0 Then
-                    MsgBox("Hi " & Trim(UserID) & "... No LHP " & NoLHP.Text & " sudah pernah di buat", vbCritical, ".:Error!")
-                    Exit Sub
-                End If
-                MsgSQL = "Select * From T_LHP " &
+                    rs04 = Proses.ExecuteQuery(MsgSQL)
+                    If rs04.Rows.Count <> 0 Then
+                        MsgBox("Hi " & Trim(UserID) & "... No LHP " & NoLHP.Text & " sudah pernah di buat", vbCritical, ".:Error!")
+                        Exit Sub
+                    End If
+                    MsgSQL = "Select * From T_LHP " &
                     "Where NoLHP = '" & NoLHP.Text & "' " &
                     "  And AktifYN = 'Y' " &
                     "Order By LastUPD "
-                rs05 = Proses.ExecuteQuery(MsgSQL)
-                For a = 0 To rs05.Rows.Count - 1
-                    Application.DoEvents()
-                    IDRecord.Text = Proses.MaxNoUrut("IDRec", "t_DPB", "PB")
-                    Produk.Text = rs05.Rows(0) !Produk
-                    KodePerajin.Text = rs05.Rows(0) !KodePerajin
-                    Jumlah.Text = rs05.Rows(0) !JumlahBaik
-                    MsgSQL = "select KodePerajin, Jumlah, CatatanProduk, CatatanSP, TglMasukGudang " &
+                    rs05 = Proses.ExecuteQuery(MsgSQL)
+                    For a = 0 To rs05.Rows.Count - 1
+                        Application.DoEvents()
+                        IDRecord.Text = Proses.MaxNoUrut("IDRec", "t_DPB", "PB")
+                        Produk.Text = rs05.Rows(a) !Produk
+                        KodePerajin.Text = rs05.Rows(a) !KodePerajin
+                        Jumlah.Text = rs05.Rows(a) !JumlahBaik
+                        MsgSQL = "select KodePerajin, Jumlah, CatatanProduk, CatatanSP, TglMasukGudang " &
                         "From t_SP " &
                         "Where NoSP = '" & rs05.Rows(0) !NoSP & "' " &
                         " And KodeProduk = '" & rs05.Rows(0) !Kode_Produk & "' "
-                    rs04 = Proses.ExecuteQuery(MsgSQL)
-                    If rs04.Rows.Count <> 0 Then
-                        SpecProduk.Text = rs04.Rows(0) !CatatanProduk
-                        Keterangan.Text = rs04.Rows(0) !CatatanSP
-                        DeadlineSP.Value = rs04.Rows(0) !TglMasukGudang
-                    Else
-                        SpecProduk.Text = ""
-                        Keterangan.Text = ""
-                        DeadlineSP.Value = rs05.Rows(0) !TglSelesaiPeriksa
-                    End If
-                    NoSP.Text = rs05.Rows(0) !NoSP
-                    KodeProduk.Text = rs05.Rows(0) !Kode_Produk
-                    '                DeadlineSP.Value = RS05!TglSelesaiPeriksa
-                    HargaBeli.Text = rs05.Rows(0) !HargaBeli
-                    MsgSQL = "INSERT INTO t_DPB(IdRec, NoDPB, TglDPB, NoSP, NoLHP, " &
+                        rs04 = Proses.ExecuteQuery(MsgSQL)
+                        If rs04.Rows.Count <> 0 Then
+                            SpecProduk.Text = rs04.Rows(0) !CatatanProduk
+                            Keterangan.Text = rs04.Rows(0) !CatatanSP
+                            DeadlineSP.Value = rs04.Rows(0) !TglMasukGudang
+                        Else
+                            SpecProduk.Text = ""
+                            Keterangan.Text = ""
+                            DeadlineSP.Value = rs05.Rows(a) !TglSelesaiPeriksa
+                        End If
+                        NoSP.Text = rs05.Rows(a) !NoSP
+                        KodeProduk.Text = rs05.Rows(a) !Kode_Produk
+                        '                DeadlineSP.Value = RS05!TglSelesaiPeriksa
+                        HargaBeli.Text = rs05.Rows(a) !HargaBeli
+                        MsgSQL = "INSERT INTO t_DPB(IdRec, NoDPB, TglDPB, NoSP, NoLHP, " &
                         " Kode_Produk, NamaProduk, KodePerajin, Jumlah, HargaBeli, " &
                         " DeadlineSP, Ongkir, SpecProduk,Keterangan, Pengirim, SPB, " &
                         " TglTerima, Kargo, AktifYN, LastUPD, UserID, tglcetak,ID," &
                         " StatusDPB, TransferYN, IdCompany) VALUES('" & IDRecord.Text & "', " &
                         " '" & nodpb.Text & "', '" & Format(TglDPB.Value, "yyyy-MM-dd") & "', " &
-                        "'" & rs05.Rows(0) !NoSP & "', '" & NoLHP.Text & "', '" & rs05.Rows(0) !Kode_Produk & "', " &
-                        "'" & rs05.Rows(0) !Produk & "','" & KodePerajin.Text & "'," & Jumlah.Text * 1 & ", " &
-                        "" & rs05.Rows(0) !HargaBeli & ", '" & Format(DeadlineSP.Value, "yyyy-MM-dd") & "', " &
+                        "'" & rs05.Rows(a) !NoSP & "', '" & NoLHP.Text & "', '" & rs05.Rows(a) !Kode_Produk & "', " &
+                        "'" & rs05.Rows(a) !Produk & "','" & KodePerajin.Text & "'," & Jumlah.Text * 1 & ", " &
+                        "" & rs05.Rows(a) !HargaBeli & ", '" & Format(DeadlineSP.Value, "yyyy-MM-dd") & "', " &
                         "" & OngKir.Text * 1 & ", '" & Trim(SpecProduk.Text) & "', " &
-                        "'" & Trim(Keterangan.Text) & "','" & Trim(rs05.Rows(0) !NamaPerajin) & "', " &
-                        "'" & Trim(rs05.Rows(0) !NoSPB) & "', '" & rs05.Rows(0) !TglTerima & "', " &
-                        "'" & Trim(rs05.Rows(0) !Kargo) & "', 'Y', GetDate(), '" & UserID & "', " &
+                        "'" & Trim(Keterangan.Text) & "','" & Trim(rs05.Rows(a) !NamaPerajin) & "', " &
+                        "'" & Trim(rs05.Rows(a) !NoSPB) & "', '" & rs05.Rows(a) !TglTerima & "', " &
+                        "'" & Trim(rs05.Rows(a) !Kargo) & "', 'Y', GetDate(), '" & UserID & "', " &
                         "'', '','', 'N', 'Pekerti') "
-                    Proses.ExecuteNonQuery(MsgSQL)
-                Next a
-                NoLHP.Text = ""
-                Pengirim.Text = ""
-                Keterangan.Text = ""
-                OngKir.Text = 0
-                tambahDPB()
-            ElseIf LEdit Then
-                MsgSQL = "Delete t_DPB " &
+                        Proses.ExecuteNonQuery(MsgSQL)
+                    Next a
+                    NoLHP.Text = ""
+                    Pengirim.Text = ""
+                    Keterangan.Text = ""
+                    OngKir.Text = 0
+                    tambahDPB()
+                ElseIf LEdit Then
+                    MsgSQL = "Delete t_DPB " &
                     "Where NoDPB = '" & nodpb.Text & "' " &
                     "  And NoLHP = '" & NoLHP.Text & "' "
                 Proses.ExecuteNonQuery(MsgSQL)
@@ -138,13 +149,13 @@ Public Class Form_DPB
                 For a = 0 To rs05.Rows.Count - 1
                     Application.DoEvents()
                     IDRecord.Text = Proses.MaxNoUrut("IDRec", "t_DPB", "PB")
-                    Produk.Text = rs05.Rows(0) !Produk
-                    KodePerajin.Text = rs05.Rows(0) !KodePerajin
-                    Jumlah.Text = rs05.Rows(0) !JumlahBaik
+                    Produk.Text = rs05.Rows(a) !Produk
+                    KodePerajin.Text = rs05.Rows(a) !KodePerajin
+                    Jumlah.Text = rs05.Rows(a) !JumlahBaik
                     MsgSQL = "select KodePerajin, Jumlah, CatatanProduk, CatatanSP, TglMasukGudang " &
                         "From t_SP " &
-                        "Where NoSP = '" & rs05.Rows(0) !NoSP & "' " &
-                        " And KodeProduk = '" & rs05.Rows(0) !Kode_Produk & "' "
+                        "Where NoSP = '" & rs05.Rows(a) !NoSP & "' " &
+                        " And KodeProduk = '" & rs05.Rows(a) !Kode_Produk & "' "
                     rs04 = Proses.ExecuteQuery(MsgSQL)
                     If rs04.Rows.Count <> 0 Then
                         SpecProduk.Text = rs04.Rows(0) !CatatanProduk
@@ -153,25 +164,25 @@ Public Class Form_DPB
                     Else
                         SpecProduk.Text = ""
                         Keterangan.Text = ""
-                        DeadlineSP.Value = rs05.Rows(0) !TglSelesaiPeriksa
+                        DeadlineSP.Value = rs05.Rows(a) !TglSelesaiPeriksa
                     End If
-                    NoSP.Text = rs05.Rows(0) !NoSP
-                    KodeProduk.Text = rs05.Rows(0) !Kode_Produk
+                    NoSP.Text = rs05.Rows(a) !NoSP
+                    KodeProduk.Text = rs05.Rows(a) !Kode_Produk
                     'DeadlineSP.Value = RS05!TglSelesaiPeriksa
-                    HargaBeli.Text = rs05.Rows(0) !HargaBeli
+                    HargaBeli.Text = rs05.Rows(a) !HargaBeli
                     MsgSQL = "INSERT INTO t_DPB(IdRec, NoDPB, TglDPB, StatusDPB, " &
                         "NoSP, NoLHP, Kode_Produk, NamaProduk, KodePerajin, " &
                         "Jumlah, HargaBeli, DeadlineSP, Ongkir, SpecProduk, " &
                         "Keterangan, Pengirim, SPB, TglTerima, Kargo, AktifYN, " &
                         "LastUPD, UserID, tglcetak,ID, TransferYN) VALUES('" & IDRecord.Text & "', " &
                         "'" & nodpb.Text & "', '" & Format(TglDPB.Value, "yyyy-MM-dd") & "', '', " &
-                        "'" & rs05.Rows(0) !NoSP & "', '" & NoLHP.Text & "', '" & rs05.Rows(0) !Kode_Produk & "', " &
-                        "'" & rs05.Rows(0) !Produk & "','" & KodePerajin.Text & "'," & Jumlah.Text * 1 & ", " &
-                        "" & rs05.Rows(0) !HargaBeli & ", '" & Format(DeadlineSP.Value, "yyyy-MM-dd") & "', " &
+                        "'" & rs05.Rows(a) !NoSP & "', '" & NoLHP.Text & "', '" & rs05.Rows(a) !Kode_Produk & "', " &
+                        "'" & rs05.Rows(a) !Produk & "','" & KodePerajin.Text & "'," & Jumlah.Text * 1 & ", " &
+                        "" & rs05.Rows(a) !HargaBeli & ", '" & Format(DeadlineSP.Value, "yyyy-MM-dd") & "', " &
                         "" & OngKir.Text * 1 & ", '" & Trim(SpecProduk.Text) & "', " &
-                        "'" & Trim(Keterangan.Text) & "','" & Trim(rs05.Rows(0) !NamaPerajin) & "', " &
-                        "'" & Trim(rs05.Rows(0) !NoSPB) & "', '" & rs05.Rows(0) !TglTerima & "', " &
-                        "'" & Trim(rs05.Rows(0) !Kargo) & "', 'Y', GetDate(), '" & UserID & "','', '', 'N') "
+                        "'" & Trim(Keterangan.Text) & "','" & Trim(rs05.Rows(a) !NamaPerajin) & "', " &
+                        "'" & Trim(rs05.Rows(a) !NoSPB) & "', '" & rs05.Rows(a) !TglTerima & "', " &
+                        "'" & Trim(rs05.Rows(a) !Kargo) & "', 'Y', GetDate(), '" & UserID & "','', '', 'N') "
                     Proses.ExecuteNonQuery(MsgSQL)
                 Next (a)
                 AturTombol(True)
@@ -486,6 +497,7 @@ Public Class Form_DPB
         LEdit = True
         LTambahKode = False
         AturTombol(False)
+        nodpb.ReadOnly = True
         NoLHP.Focus()
     End Sub
     Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
@@ -597,11 +609,12 @@ Public Class Form_DPB
         If Trim(mKondisi) = "" Then
             mKondisi = " and convert(char(8), TglDPB, 112)   >= convert(char(8),  DATEADD(m, -12, getdate()) , 112)  "
         End If
-        MsgSQL = "Select distinct NoDPB, TglDPB, pengirim as NamaPerajin, right(nodpb,2) + substring(nodpb, 5, 1) + left(nodpb,3) " &
+        MsgSQL = "Select NoDPB, TglDPB, pengirim as NamaPerajin, right(nodpb,2) + substring(nodpb, 5, 1) + left(nodpb,3) " &
             " From t_DPB  " &
             "Where t_DPB.AktifYN = 'Y' " &
             "  and right(nodpb,2) not in ('s/', '99') " &
             "  " & mKondisi & " " &
+            "Group By NoDPB, TglDPB, pengirim, right(nodpb,2) + substring(nodpb, 5, 1) + left(nodpb,3) " &
             "Order By TglDPB Desc, right(nodpb,2) + substring(nodpb, 5, 1) + left(nodpb,3) Desc, nodpb Desc "
         RSDaf = Proses.ExecuteQuery(MsgSQL)
         For a = 0 To RSDaf.Rows.Count - 1
@@ -719,10 +732,11 @@ Public Class Form_DPB
         mRevisi = StatusDPB.Text
         Proses.OpenConn(CN)
         dttable = New DataTable
-        SQL = "SELECT t_DPB.NoDPB, t_DPB.TglDPB, t_DPB.NoSP, t_DPB.NoLHP, " &
-            " t_DPB.Kode_Produk, t_DPB.NamaProduk, t_DPB.KodePerajin, " &
-            " t_DPB.Jumlah, t_DPB.HargaBeli, t_DPB.DeadlineSP, t_DPB.Pengirim, t_DPB.ongkir, " &
-            " t_DPB.TglTerima , t_DPB.tglCetak, m_KodeProduk.Satuan, m_KodeProduk.KodePerajin2 " &
+        SQL = "SELECT t_DPB.NoDPB, t_DPB.TglDPB, t_DPB.NoSP, t_DPB.NoLHP, t_DPB.Kode_Produk, " &
+            "      t_DPB.NamaProduk, t_DPB.KodePerajin, t_DPB.Jumlah, t_DPB.HargaBeli, " &
+            "      t_DPB.DeadlineSP, t_DPB.Pengirim, t_DPB.ongkir, t_DPB.TglTerima," &
+            "      t_DPB.tglCetak, m_KodeProduk.Satuan, m_KodeProduk.KodePerajin2, " &
+            "      m_Company.Direksi, m_Company.BagianContoh " &
             " FROM Pekerti.dbo.t_DPB INNER JOIN Pekerti.dbo.m_KodeProduk ON " &
             "        t_DPB.Kode_Produk = m_KodeProduk.KodeProduk " &
             "     INNER JOIN Pekerti.dbo.m_Company m_Company ON " &
@@ -730,6 +744,7 @@ Public Class Form_DPB
             "Where t_DPB.NoDPB = '" & nodpb.Text & "' and t_DPB.Jumlah <> 0 " &
             "  And t_DPB.AktifYN = 'Y' order by t_DPB.NoSP, t_DPB.NoLHP, " &
             " t_DPB.IDREC, t_DPB.KODE_PRODUK "
+
         DTadapter = New SqlDataAdapter(SQL, CN)
         Try
             DTadapter.Fill(dttable)
@@ -738,12 +753,13 @@ Public Class Form_DPB
             objRep.SetParameterValue("tExpedisi", tExpedisi)
             objRep.SetParameterValue("tgl", tanggal)
             objRep.SetParameterValue("MRevisi", mRevisi)
-
+            Form_Report.Text = "Cetak DPB"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
-            Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowRefreshButton = True
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
 

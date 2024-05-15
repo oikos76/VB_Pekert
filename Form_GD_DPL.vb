@@ -117,6 +117,8 @@ Public Class Form_GD_DPL
             DTadapter.Fill(dttable)
             objRep = New Rpt_DPLDaftarTotalJumlahProduk
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak DPL"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
@@ -167,6 +169,8 @@ Public Class Form_GD_DPL
                 objRep = New Rpt_DPL
             End If
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak DPL"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
@@ -303,7 +307,66 @@ Public Class Form_GD_DPL
     End Sub
 
     Private Sub Isi_DPL()
-        Dim MsgSQL As String, rsc As New DataTable
+        Dim MsgSQL As String, rsc As New DataTable,
+            HitVol As Double = 0, RsHIT As New DataTable,
+            totVolDPL As Double = 0
+        Me.Cursor = Cursors.WaitCursor
+        MsgSQL = "Select NoDPL From T_DPL " &
+            "Where idrec = '" & Trim(idRec.Text) & "' "
+        NoDPL.Text = Proses.ExecuteSingleStrQuery(MsgSQL)
+
+        'MsgSQL = "Select isnull(Sum(TotalVolBoks),0) TotVolDPL, " &
+        '  "isnull(Sum(JumlahBoks),0) TotJumBoks " &
+        '  " From t_DPL " &
+        '  "Where aktifYN = 'Y' AND NoDPL = '" & NoDPL.Text & "' "
+        'RSHIT = Proses.ExecuteQuery(MsgSQL)
+        'If RSHIT.Rows.Count <> 0 Then
+        'If (RsHIT.Rows(0) !totvoldpl) = 0 Then
+        totVolDPL = 0
+        MsgSQL = "Select * " &
+                " From t_DPL " &
+                "Where aktifYN = 'Y' AND NoDPL = '" & NoDPL.Text & "' " &
+                "ORDER BY idRec "
+        rsc = Proses.ExecuteQuery(MsgSQL)
+        For a = 0 To rsc.Rows.Count - 1
+            Application.DoEvents()
+            HitVol = 0
+            OptLaut.Checked = rsc.Rows(a) !CargoLaut
+            OptUdara.Checked = rsc.Rows(a) !CargoUdara
+
+            JumlahBoks.Text = rsc.Rows(a) !JumlahBoks
+            Panjang.Text = rsc.Rows(a) !Panjang
+            Lebar.Text = rsc.Rows(a) !Lebar
+            Tinggi.Text = rsc.Rows(a) !Tinggi
+
+            If OptLaut.Checked = True Then
+                HitVol = (Panjang.Text * 1) * (Tinggi.Text * 1) * (Lebar.Text * 1) * (JumlahBoks.Text * 1) / 1000000
+            ElseIf OptUdara.Checked = True Then
+                HitVol = (Panjang.Text * 1) * (Tinggi.Text * 1) * (Lebar.Text * 1) * (JumlahBoks.Text * 1) / 6000
+            ElseIf OptUdara.Checked = False And OptLaut.Checked = False Then
+                HitVol = (Panjang.Text * 1) * (Tinggi.Text * 1) * (Lebar.Text * 1) * (JumlahBoks.Text * 1)
+            End If
+            TotalVolumeBoks.Text = Format(HitVol, "###,##0.000")
+            totVolDPL += HitVol
+            MsgSQL = "UPDATE t_DPL SET TotalVolBoks = " & HitVol & " " &
+                "Where aktifYN = 'Y' " &
+                "  AND idrec = '" & rsc.Rows(a) !idrec & "' " &
+                "  AND NoDPL = '" & NoDPL.Text & "' "
+            Proses.ExecuteNonQuery(MsgSQL)
+            MsgSQL = "UPDATE t_DPL SET TotalVolDPL = " & totVolDPL & " " &
+                "Where aktifYN = 'Y' " &
+                 " AND idrec = '" & rsc.Rows(a) !idrec & "' " &
+                "  AND NoDPL = '" & NoDPL.Text & "' "
+            Proses.ExecuteNonQuery(MsgSQL)
+        Next a
+        TotalVolDPL.Text = totVolDPL
+        'MsgSQL = "UPDATE t_DPL SET TotalVolDPL = " & totVolDPL & " " &
+        '        "Where aktifYN = 'Y' " &
+        '        "  AND NoDPL = '" & NoDPL.Text & "' "
+        'Proses.ExecuteNonQuery(MsgSQL)
+        ' End If
+        'End If
+
         MsgSQL = "Select * From T_DPL " &
             "Where idrec = '" & Trim(idRec.Text) & "' "
         rsc = Proses.ExecuteQuery(MsgSQL)
@@ -366,7 +429,8 @@ Public Class Form_GD_DPL
         "  And Kode_Produk = '" & KodeProduk.Text & "' "
         TotJumlah = Proses.ExecuteSingleDblQuery(MsgSQL)
         QTYPI.Text = Format(TotJumlah, "###,##0")
-
+        HitungVolume()
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub DGView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView2.CellContentClick
@@ -465,7 +529,6 @@ Public Class Form_GD_DPL
         Next
         Netto.Text = 0
         Bruto.Text = 0
-        VolContainer.Text = 0
         ShipmentDate.Value = Now
         optDPL.Checked = False
         optDaftarIsi.Checked = False
@@ -475,6 +538,16 @@ Public Class Form_GD_DPL
         OptLaut.Checked = False
         OptUdara.Checked = False
         tglDPL.Value = Now
+        VolContainer.Text = 0
+        TotalVolDPL.Text = 0
+        TotalJumlahBoksDPL.Text = 0
+        Panjang.Text = 0
+        Lebar.Text = 0
+        Tinggi.Text = 0
+        TotalVolumeBoks.Text = 0
+        HargaFOB.Text = 0
+        QTYPO.Text = 0
+        QTYPI.Text = 0
         ShowFoto("")
     End Sub
     Private Sub ShowFoto(NamaFileJPG As String)
@@ -538,6 +611,15 @@ Public Class Form_GD_DPL
 
     Private Sub IsiJenisBox()
         Dim MsgSQL As String, Rs As New DataTable
+        cmbJenisBox.Items.Clear()
+
+        cmbJenisBox.Items.Add(Space(50) &
+                Microsoft.VisualBasic.Left("0.00" & Space(20), 20) &
+                Microsoft.VisualBasic.Left("0.00" & Space(20), 20) &
+                Microsoft.VisualBasic.Left("0.00" & Space(20), 20) &
+                Microsoft.VisualBasic.Left("0.00" & Space(20), 20)
+            )
+
         MsgSQL = "Select * From M_DimensiBOX Order By JenisBox"
         Rs = Proses.ExecuteQuery(MsgSQL)
         For i = 0 To Rs.Rows.Count - 1
@@ -651,6 +733,7 @@ Public Class Form_GD_DPL
         If JumlahBoks.Text = "" Then JumlahBoks.Text = 0
         If TotalTiapBoks.Text = "" Then TotalTiapBoks.Text = 0
         If QTYPI.Text = "" Then TotalTiapBoks.Text = 0
+        If TotalVolDPL.Text = "" Then TotalVolDPL.Text = 0
         TMP = QTY_SudahDPL() + ((JumlahTiapBoks.Text * 1) * (JumlahBoks.Text * 1))
         If TMP > (QTYPI.Text * 1) Then
             MsgBox("DPL untuk Produk ini melebihi QTY PI", vbCritical + vbOKOnly, ".:Error!")
@@ -752,6 +835,9 @@ Public Class Form_GD_DPL
         If DGView.Rows.Count = 0 Then Exit Sub
         DGView2.Rows.Clear()
         DGView2.Visible = False
+        DGView.Enabled = False
+        DGView2.Enabled = False
+        TabControl1.Enabled = False
         tCari = DGView.Rows(DGView.CurrentCell.RowIndex).Cells(0).Value
         MsgSQL = "SELECT  * " &
             " FROM t_DPL " &
@@ -772,6 +858,9 @@ Public Class Form_GD_DPL
                     RSL.Rows(a) !KodePImportir, "History")
         Next a
         DGView2.Visible = True
+        DGView.Enabled = True
+        DGView2.Enabled = True
+        TabControl1.Enabled = True
         If DGView2.Rows.Count <> 0 Then
             DGView2_CellClick(sender, e)
         End If
@@ -865,9 +954,22 @@ Public Class Form_GD_DPL
             If (RSHIT.Rows(0) !totvoldpl) = 0 Then
                 TotalVolDPL.Text = Format(0 + (TotalVolumeBoks.Text * 1), "###,##0.0000")
             Else
-                TotalVolDPL.Text = Format(RSHIT.Rows(0) !totvoldpl + (TotalVolumeBoks.Text * 1), "###,##0.000")
+                If LAdd Or LEdit Or LTambahKode Then
+                    TotalVolDPL.Text = Format(RSHIT.Rows(0) !totvoldpl + (TotalVolumeBoks.Text * 1), "###,##0.000")
+                Else
+                    TotalVolDPL.Text = Format(RSHIT.Rows(0) !totvoldpl, "###,##0.000")
+                    'Dim totalVolDPLCurrent As Double = 0
+                    'MsgSQL = "Select isnull(Sum(TotalVolBoks),0) TotVolDPL, " &
+                    '    "isnull(Sum(JumlahBoks),0) TotJumBoks " &
+                    '    " From t_DPL " &
+                    '    "Where aktifYN = 'Y' " &
+                    '    "  And NoDPL = '" & NoDPL.Text & "' " &
+                    '    "  AND idRec = '" & idRec.Text & "' "
+                    'totalVolDPLCurrent = Proses.ExecuteSingleDblQuery(MsgSQL)
+                    'TotalVolDPL.Text = Format(totalVolDPLCurrent, "###,##0.000")
+                End If
             End If
-            If (RSHIT.Rows(0) !totjumboks) = 0 Then
+                If (RSHIT.Rows(0) !totjumboks) = 0 Then
                 TotalJumlahBoksDPL.Text = 1
             Else
                 TotalJumlahBoksDPL.Text = Format(JumProduk(NoDPL.Text), "###")

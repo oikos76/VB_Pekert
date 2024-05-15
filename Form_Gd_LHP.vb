@@ -178,12 +178,13 @@ Public Class Form_Gd_LHP
                 Exit Sub
             End If
         End If
-        If CekJumlahPack() Then
-            MsgBox("Jummlah Pack lebih besar dari yang di SP", vbCritical + vbOKOnly, ".:Warning!")
-            Exit Sub
-        End If
+
 
         If LAdd Or LTambahKode Then
+            If CekJumlahPack() Then
+                MsgBox("Jummlah Pack lebih besar dari yang di SP", vbCritical + vbOKOnly, ".:Warning!")
+                Exit Sub
+            End If
             IDRecord.Text = Proses.MaxNoUrut("IDRec", "t_LHP", "LH")
             MsgSQL = "INSERT INTO t_LHP(IDRec, NoLHP, NoPraLHP, tglLHP, Kode_Produk, " &
                     "Produk, HargaBeli, JumlahPack, Kirim, JumlahHitung,  JumlahBaik, " &
@@ -211,6 +212,12 @@ Public Class Form_Gd_LHP
             Proses.ExecuteNonQuery(MsgSQL)
             TambahKode()
         ElseIf LEdit Then
+            If CekJumlahPack() Then
+                MsgBox("Jummlah Pack lebih besar dari yang di SP", vbCritical + vbOKOnly, ".:Warning!")
+                MsgSQL = "UPDATE T_LHP SET aktifYN='Y' WHERE idrec = '" & IDRecord.Text & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+                Exit Sub
+            End If
             MsgSQL = "Update t_LHP Set " &
                 " TransferYN = 'N', " &
                 " KodePerajin = '" & Trim(Kode_Perajin.Text) & "', NamaPerajin = '" & Trim(Perajin.Text) & "', " &
@@ -236,7 +243,7 @@ Public Class Form_Gd_LHP
                 " Importir = '" & Trim(Importir.Text) & "', Kargo = '" & Trim(Kargo.Text) & "', " &
                 " TglTerima = '" & Format(tglTerima.Value, "yyyy-MM-dd") & "', " &
                 " TglMasukGudang = '" & Format(TglMasukGudang.Value, "yyyy-MM-dd") & "', " &
-                " JumlahKoli = " & JumlahKoli.Text * 1 & ",  " &
+                " JumlahKoli = " & JumlahKoli.Text * 1 & ", aktifYN='Y', " &
                 " TransferYN = 'N', UserID = '" & UserID & "', LastUpd = GetDate() " &
                 "WHERE IdRec = '" & IDRecord.Text & "' "
             Proses.ExecuteNonQuery(MsgSQL)
@@ -736,7 +743,7 @@ Public Class Form_Gd_LHP
         If Trim(Cari) = "" Then
             mKondisi = ""
         Else
-            mKondisi = "And Produk like '%" & Trim(Cari) & "%' "
+            mKondisi = "And Kode_Produk like '%" & Trim(Cari) & "%' "
         End If
         FrmMenuUtama.TSKeterangan.Text = ""
         MsgSQL = "Select NoPraLHP, Importir, NoSP, TglTerima, " &
@@ -972,9 +979,9 @@ Public Class Form_Gd_LHP
     Private Sub AlasanDiTolak_KeyPress(sender As Object, e As KeyPressEventArgs) Handles AlasanDiTolak.KeyPress
         If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
         e.KeyChar = UCase(e.KeyChar)
-        If e.KeyChar = Chr(13) Then
-            Keterangan.Focus()
-        End If
+        'If e.KeyChar = Chr(13) Then
+        '    Keterangan.Focus()
+        'End If
     End Sub
 
     Private Sub cmdHapus_Click(sender As Object, e As EventArgs) Handles cmdHapus.Click
@@ -1024,9 +1031,9 @@ Public Class Form_Gd_LHP
     Private Sub Keterangan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Keterangan.KeyPress
         If e.KeyChar = Chr(39) Then e.KeyChar = Chr(96)
         e.KeyChar = UCase(e.KeyChar)
-        If e.KeyChar = Chr(13) Then
-            cmdSimpan.Focus()
-        End If
+        'If e.KeyChar = Chr(13) Then
+        '    cmdSimpan.Focus()
+        'End If
     End Sub
 
     Private Sub Pemeriksa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Pemeriksa.KeyPress
@@ -1201,6 +1208,18 @@ Public Class Form_Gd_LHP
 
     Private Function CekJumlahPack() As Boolean
         Dim Hasil As Boolean, rsk As New DataTable, JKrgSP As Double
+        If LEdit Then
+            MsgSQL = "UPDATE T_LHP SET aktifYN='N' WHERE idrec = '" & IDRecord.Text & "' "
+            Proses.ExecuteNonQuery(MsgSQL)
+            Dim jSP As Double = 0
+            MsgSQL = "Select isnull(Jumlah,0) Jumlah From t_PraLHP " &
+                "Where NoPraLHP = '" & NoPraLHP.Text & "' " &
+                "  and AktifYN = 'Y' And NoSP = '" & NoSP.Text & "' " &
+                "  and Kode_produk = '" & Kode_Produk.Text & "' "
+            jSP = Proses.ExecuteSingleDblQuery(MsgSQL)
+            JumlahSP.Text = jSP
+        End If
+
         MsgSQL = "Select isnull(Sum(JumlahBaik),0) JB From T_LHP " &
             "Where Kode_Produk = '" & Kode_Produk.Text & "' " &
             " And NoSP = '" & NoSP.Text & "' " &
@@ -1352,6 +1371,10 @@ Public Class Form_Gd_LHP
         End With
     End Sub
 
+    Private Sub Keterangan_TextChanged(sender As Object, e As EventArgs) Handles Keterangan.TextChanged
+
+    End Sub
+
     Private Sub Keterangan_GotFocus(sender As Object, e As EventArgs) Handles Keterangan.GotFocus
         With Keterangan
             .SelectionStart = 0
@@ -1477,6 +1500,8 @@ Public Class Form_Gd_LHP
             DTadapter.Fill(dttable)
             objRep = New Rpt_LHP
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak LHP"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep

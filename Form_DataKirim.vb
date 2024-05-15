@@ -245,7 +245,7 @@ Public Class Form_DataKirim
             SQL = "exec tr_Waru2Klender"
             Proses.ExecuteNonQuery(SQL)
         ElseIf KodeTokoAsal.Text = "PKT02" Then
-            SQL = "exec tr_Waru2Klender"
+            SQL = "exec TR_Gudang2Waru"
             Proses.ExecuteNonQuery(SQL)
         End If
         backup(NamaFile.Text)

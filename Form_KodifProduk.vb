@@ -17,8 +17,9 @@ Public Class Form_KodifProduk
     Dim FotoLoc As String = My.Settings.path_foto
     Dim dttable As New DataTable
     Dim DTadapter As New SqlDataAdapter
-    Dim tdPrev_USD As Date, tPrev_USD As Double,
-        tdPrev_RP As Date, tPrev_RP As Double
+    Dim tdPrev_USD As String, tPrev_USD As Double,
+        tdPrev_RP As String, tPrev_RP As Double,
+        tdPrev_Euro As String, tPrev_Euro As Double
 
     Private Sub cmdSimpan_Click(sender As Object, e As EventArgs) Handles cmdSimpan.Click
         Dim MsgSql As String = ""
@@ -90,7 +91,21 @@ Public Class Form_KodifProduk
                 " " & Prev_Euro.Text * 1 & ", '" & Format(dprev_Euro.Value, "yyyy-MM-dd") & "')"
             Proses.ExecuteNonQuery(MsgSql)
         ElseIf LEdit Then
-
+            If (Cur_USD.Text * 1) <> tPrev_USD Then
+                DCur_USD.Value = Now
+                dprev_usd.Value = tdPrev_USD
+                Prev_USD.Text = tPrev_USD
+            End If
+            If (cur_rp.Text * 1) <> tPrev_RP Then
+                DCur_Euro.Value = Now
+                dprev_Euro.Value = tdPrev_Euro
+                Prev_Euro.Text = tPrev_Euro
+            End If
+            If (cur_Euro.Text * 1) <> tPrev_Euro Then
+                DCur_RP.Value = Now
+                DPrev_RP.Value = tdPrev_RP
+                Prev_RP.Text = tPrev_RP
+            End If
             MsgSql = "Update m_KodeProduk Set " &
                 "FotoLoc = '" & Trim(PathFoto.Text) & "', file_foto = '" & Trim(LocGmb1.Text) & "', " &
                 "Kode_Perajin = '" & Kode_Perajin.Text & "', inisiatif = '" & Trim(cmbInisiatif.Text) & "', " &
@@ -563,6 +578,11 @@ Public Class Form_KodifProduk
         TabPageDaftar_.Enabled = True
         TabPageVariasi_.Enabled = True
         Me.Text = "Kodifikasi Produk"
+
+        Prev_USD.ReadOnly = True
+        Prev_Euro.ReadOnly = True
+        Prev_RP.ReadOnly = True
+
     End Sub
 
     Private Sub Kode_Fungsi_TextChanged(sender As Object, e As EventArgs) Handles Kode_Fungsi.TextChanged
@@ -1687,6 +1707,7 @@ Public Class Form_KodifProduk
             DTadapter.Fill(dttable)
             objRep = New Rpt_KodifProduk
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak Kodifikasi Produk"
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
@@ -1848,13 +1869,16 @@ Public Class Form_KodifProduk
         cmdSimpan.Visible = tEdit
         TabPageDaftar_.Enabled = False
         TabPageVariasi_.Enabled = False
-
-        tdPrev_USD = DCur_USD.Value
+        tdPrev_USD = Format(DCur_USD.Value, "yyyy-MM-dd")
         tPrev_USD = Cur_USD.Text * 1
-        tdPrev_RP = DCur_RP.Value
-        tPrev_RP = cur_rp.Text * 1
-        Kode_Perajin.Focus()
 
+        tdPrev_Euro = Format(DCur_Euro.Value, "yyyy-MM-dd")
+        tPrev_Euro = cur_Euro.Text * 1
+
+        tdPrev_RP = Format(DCur_RP.Value, "yyyy-MM-dd")
+        tPrev_RP = cur_rp.Text * 1
+
+        Kode_Perajin.Focus()
     End Sub
 
     Private Sub Descript_TextChanged(sender As Object, e As EventArgs) Handles Descript.TextChanged
@@ -2125,4 +2149,5 @@ Public Class Form_KodifProduk
             Daftar()
         End If
     End Sub
+
 End Class

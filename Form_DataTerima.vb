@@ -13,6 +13,12 @@ Public Class Form_DataTerima
     Protected db As String = My.Settings.Database
     Private Sub cmdTerima_Click(sender As Object, e As EventArgs) Handles cmdTerima.Click
         'query("RESTORE DATABASE " & cmbdatabase.Text & " FROM disk='" & OpenFileDialog1.FileName & "'")
+
+        If FrmMenuUtama.Kode_Toko.Text = KodeTokoAsal.Text Then
+            MsgBox("FILE asal tidak boleh sama dengan lokasi saat ini program berada...", vbCritical + vbOKOnly, ".:Warning !")
+            cariFolder.Focus()
+            Exit Sub
+        End If
         cmdTerima.Enabled = False
         SQL = "Select * From m_Toko " &
             "Where idrec = '" & KodeTokoAsal.Text & "' "
@@ -38,7 +44,9 @@ Public Class Form_DataTerima
     Private Sub Restore()
         Dim MsgSQL As String = "", RS05 As New DataTable, record As String = ""
         Dim dBase As String = "PekertiTRF", fieldName As String = ""
-        Dim namaFolder As String = My.Settings.LokasiFile
+        Dim namaFolder As String = My.Settings.LokasiFile,
+            mKondisi As String = ""
+
         Panel1.Enabled = False
         Me.Cursor = Cursors.WaitCursor
         SQL = "RESTORE DATABASE " & dBase & "	FROM DISK='" & NamaFile.Text & "' WITH " &
@@ -49,26 +57,87 @@ Public Class Form_DataTerima
         jenisData.Text = "Synchronize SP..."
         idRecord.Text = ""
 
-        MsgSQL = "Select NoSP From PekertiTRF.dbo.T_SP  Group By NoSP "
-        RS05 = Proses.ExecuteQuery(MsgSQL)
-        For a = 0 To RS05.Rows.Count - 1
-            Application.DoEvents()
-            idRecord.Text = RS05.Rows(a) !NoSP
-            MsgSQL = "Delete T_SP where NoSP = '" & RS05.Rows(a) !NoSP & "' "
-            Proses.ExecuteNonQuery(MsgSQL)
-        Next a
+        'MsgSQL = "Select NoSP From PekertiTRF.dbo.T_SP  Group By NoSP "
+        'RS05 = Proses.ExecuteQuery(MsgSQL)
+        'For a = 0 To RS05.Rows.Count - 1
+        '    Application.DoEvents()
+        '    idRecord.Text = RS05.Rows(a) !NoSP
+        '    MsgSQL = "Delete T_SP where NoSP = '" & RS05.Rows(a) !NoSP & "' "
+        '    Proses.ExecuteNonQuery(MsgSQL)
+        'Next a
+        If KodeTokoAsal.Text = "PKT01" And Kode_Toko.Text = "PKT02" Then
+            'terima data Waru di Gudang
+            MsgSQL = "Select NoPI From PekertiTRF.dbo.T_PI  Group By NoPI "
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !NoPI
+                MsgSQL = "Delete T_PI where NoPI = '" & RS05.Rows(a) !NoPI & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+            mKondisi = ""
+        ElseIf KodeTokoAsal.Text = "PKT02" And Kode_Toko.Text = "PKT01" Then
+            'terima data Gudang di Waru
+            MsgSQL = "Select NoPraLHP From PekertiTRF.dbo.t_PraLHP  Group By NoPraLHP "
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !NoPraLHP
+                MsgSQL = "Delete t_PraLHP where NoPraLHP = '" & RS05.Rows(a) !NoPraLHP & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
 
+            MsgSQL = "Select NoLHP From PekertiTRF.dbo.t_LHP  Group By NoLHP "
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !NoLHP
+                MsgSQL = "Delete t_LHP where NoLHP = '" & RS05.Rows(a) !NoLHP & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+            MsgSQL = "Select NoRetur From PekertiTRF.dbo.t_Retur  Group By NoRetur "
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !NoRetur
+                MsgSQL = "Delete t_Retur where NoRetur = '" & RS05.Rows(a) !NoRetur & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+
+            MsgSQL = "Select IdRec From PekertiTRF.dbo.t_PackingList  Group By IdRec "
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !IdRec
+                MsgSQL = "Delete t_PackingList where IdRec = '" & RS05.Rows(a) !IdRec & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+            mKondisi = " AND a.TABLE_NAME in ('t_PackingList', 't_PraLHP', 't_LHP', 't_Retur') "
+
+        Else
+            MsgBox("File yang di terima salah !", vbCritical + vbOKOnly, "Salah file !")
+            Exit Sub
+        End If
         SQL = "SELECT * " &
             " FROM  pekertitrf.INFORMATION_SCHEMA.TABLES a " &
             "WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='PekertiTRF' " &
+            "  " & mKondisi & " " &
             "ORDER BY a.TABLE_NAME "
         dbTable = Proses.ExecuteQuery(SQL)
         For a = 0 To dbTable.Rows.Count - 1
             Application.DoEvents()
             jenisData.Text = dbTable.Rows(a) !TABLE_NAME
-            SQL = "SELECT * FROM  PekertiTRF.dbo." & jenisData.Text & " "
+
+            If jenisData.Text = "m_KodeProdukVariasi" Then
+                mKondisi = ""
+            Else
+                mKondisi = " WHERE aktifYN='Y' "
+            End If
+
+            SQL = "SELECT * FROM  PekertiTRF.dbo." & jenisData.Text & "  " & mKondisi & " "
             RS05 = Proses.ExecuteQuery(SQL)
-            ' fieldName = RS05.Columns(0).ColumnName
+            fieldName = RS05.Columns(0).ColumnName
+
             For b = 0 To RS05.Rows.Count - 1
                 Application.DoEvents()
                 If IsDBNull(RS05.Rows(b)(0)) Then
@@ -77,6 +146,7 @@ Public Class Form_DataTerima
                 Else
                     idRecord.Text = RS05.Rows(b)(0)
                 End If
+
                 SQL = "INSERT INTO " & jenisData.Text & " " &
                     "Select * FROM PekertiTRF.dbo." & jenisData.Text & " " &
                     "WHERE " & RS05.Columns(0).ColumnName & " = '" & RS05.Rows(b)(0) & "' "
@@ -478,11 +548,16 @@ Public Class Form_DataTerima
         Dim myStream As Stream = Nothing
         Dim openFileDialog1 As New OpenFileDialog()
         If Trim(NamaFile.Text) = "" Then
-            openFileDialog1.InitialDirectory = My.Settings.LokasiFile
+            openFileDialog1.InitialDirectory = My.Settings.LokasiDownload
         Else
             openFileDialog1.InitialDirectory = NamaFile.Text
         End If
-        openFileDialog1.Filter = "backup files (*.bak)|PKT01*.bak|All files (*.*)|*.*"
+        If FrmMenuUtama.Kode_Toko.Text = "PKT01" Then
+            openFileDialog1.Filter = "backup files (*.bak)|PKT02*.bak|All files (*.*)|*.*"
+        Else
+            openFileDialog1.Filter = "backup files (*.bak)|PKT01*.bak|All files (*.*)|*.*"
+        End If
+
         openFileDialog1.FilterIndex = 0
         openFileDialog1.RestoreDirectory = True
 
@@ -511,19 +586,35 @@ Public Class Form_DataTerima
             "Where idrec = '" & KodeTokoAsal.Text & "' "
         dbTable = Proses.ExecuteQuery(SQL)
         If dbTable.Rows.Count <> 0 Then
-            KodeTokoAsal.Text = dbTable.Rows(0)!idrec
-            NamaTokoAsal.Text = dbTable.Rows(0)!nama
+            KodeTokoAsal.Text = dbTable.Rows(0) !idrec
+            NamaTokoAsal.Text = dbTable.Rows(0) !nama
+        Else
+            NamaTokoAsal.Text = ""
+            MsgBox("File Yang di pilih Salah", vbCritical + vbOKOnly, ".:Warning!")
+            Exit Sub
         End If
+
 
         SQL = "Select * From m_Toko " &
             "Where idrec = '" & Kode_Toko.Text & "' "
         dbTable = Proses.ExecuteQuery(SQL)
         If dbTable.Rows.Count <> 0 Then
-            Kode_Toko.Text = dbTable.Rows(0)!idrec
-            NamaToko.Text = dbTable.Rows(0)!nama
+            Kode_Toko.Text = dbTable.Rows(0) !idrec
+            NamaToko.Text = dbTable.Rows(0) !nama
+        Else
+            NamaToko.Text = ""
+            MsgBox("File Yang di pilih Salah", vbCritical + vbOKOnly, ".:Warning!")
+            Exit Sub
         End If
         Kode_Toko.ReadOnly = True
         KodeTokoAsal.ReadOnly = True
+
+        If FrmMenuUtama.Kode_Toko.Text = KodeTokoAsal.Text Then
+            MsgBox("FILE asal tidak boleh sama dengan lokasi saat ini program berada...", vbCritical + vbOKOnly, ".:Warning !")
+            cariFolder.Focus()
+            Exit Sub
+        End If
+
         If NamaFile.Text <> "" Then
             cmdTerima.Enabled = True
             cmdTerima.Focus()

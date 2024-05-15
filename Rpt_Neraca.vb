@@ -55,7 +55,12 @@ Public Class Rpt_Neraca
         IDRpt = Microsoft.VisualBasic.Left(Replace(Trim(Rnd(10000) * 100000), ".", UserID), 30)
         MsgSQL = "Delete tmp_RPT_Neraca Where IdRPT = '" & IDRpt & "' "
         Proses.ExecuteNonQuery(MsgSQL)
-
+        '/****** Script for SelectTopNRows command from SSMS  ******/
+        'Select Top 1000 [NO_PERKIRAAN]      ,[NO_SUB]      ,[NM_PERKIRAAN]      ,[AKTIFYN]      ,[LASTUPD]      ,[SAkhir]
+        '      From [Pekerti].[dbo].[m_Perkiraan]
+        'Where no_sub = '10.10.15.03'
+        'order by NO_PERKIRAAN
+        '
         MsgSQL = "SELECT NoUrut, coalesce(Description, '') Description, KodeGL, Level, BoldYN, TotalYN " &
             "From TMP_RPTNeraca order by NoUrut "
         rs05 = Proses.ExecuteQuery(MsgSQL)

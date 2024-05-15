@@ -777,6 +777,7 @@ Public Class Form_KatalogSample
             DTadapter.Fill(dttable)
             objRep = New Rpt_KatalogProduk_InInd
             objRep.SetDataSource(dttable)
+            Form_Report.Text = "Cetak Katalog Sample"
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep

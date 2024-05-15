@@ -21,8 +21,13 @@ Public Class FrmMenuUtama
         ServerName.Text = My.Settings.IPServer
         TsCompany.Text = "IOTA Blessindo"
         TsPengguna.Text = My.Settings.IPServer
+        Dim version As String = My.Application.Info.Version.Major.ToString + "." +
+           My.Application.Info.Version.Minor.ToString + "." +
+           My.Application.Info.Version.Build.ToString + "-" +
+           My.Application.Info.Version.Revision.ToString
+        Dim mVersion As String = version + "#240513"
+        Me.Text = "PIDS-" + mversion
 
-        CompCode.Text = "PK"
         TsTanggal.Text = Format(Now, "dddd, dd/MM/yyyy")
         TSKeterangan.Text = ""
         Form_Login.ShowDialog()
@@ -31,7 +36,7 @@ Public Class FrmMenuUtama
         'mnuBackup.Visible = Proses.UserAksesMenu(UserID, "BACKUP_DB")
         'mnuRestore.Visible = Proses.UserAksesMenu(UserID, "RESTORE_DB")
 
-        _100Keuangan.Visible = Proses.UserAksesMenu(UserID, "100_KEUANGAN")
+        _100Keuangan.Visible = False 'Proses.UserAksesMenu(UserID, "100_KEUANGAN")
         _21KodifikasiBahanBaku.Visible = Proses.UserAksesMenu(UserID, "21_KODIF_BAHAN_BAKU")
         _22KodifikasiFungsiProduk.Visible = Proses.UserAksesMenu(UserID, "22_KODIF_FUNGSI_PRODUK")
         _23KodifikasiDaerah.Visible = Proses.UserAksesMenu(UserID, "23_KODIF_DAERAH")
@@ -96,6 +101,7 @@ Public Class FrmMenuUtama
             Kode_Toko.Text = dbTable.Rows(0) !kode_toko
             tglServer = dbTable.Rows(0) !tglserver
             CompCode.Text = dbTable.Rows(0) !compcode
+            Me.Text = CompCode.Text & "-" + mVersion
             dVersion = dbTable.Rows(0) !version
             SQL = "Select * " &
                 " From M_Toko " &
@@ -115,14 +121,10 @@ Public Class FrmMenuUtama
             Application.Exit()
         End If
 
-        Dim version As String = My.Application.Info.Version.Major.ToString + "." +
-           My.Application.Info.Version.Minor.ToString + "." +
-           My.Application.Info.Version.Build.ToString + "-" +
-           My.Application.Info.Version.Revision.ToString
-        Me.Text = CompCode.Text + "-" + version + "#240318"
+
         If dVersion <> version Then
             MsgBox("Program ini masih menggunakan versi lama (" & dVersion & ")" & vbCrLf & "Versi yang terbaru : " & version, vbCritical + vbOKOnly, "Perbaharui Program Anda... !")
-            If UCase(UserID) = "EKO_K" Or UCase(UserID) = "ADMIN" Then
+            If UCase(UserID) = "EKO_K" Or UCase(UserID) = "UPDATE" Then
                 SQL = "Update m_company set Version = '" & version & "' "
                 Proses.ExecuteNonQuery(SQL)
                 MsgBox("Program ini berhasil di update ke versi " & version, vbInformation + vbOKOnly, "Congratulation !")

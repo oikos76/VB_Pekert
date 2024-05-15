@@ -57,6 +57,7 @@ Public Class Form_SP_Contoh
         LAdd = False
         LEdit = True
         AturTombol(False)
+        NoSP.ReadOnly = True
         cmdSimpan.Visible = tEdit
     End Sub
 
@@ -155,6 +156,18 @@ Public Class Form_SP_Contoh
             Else
                 MsgBox("Importir salah/tidak terdaftar di pilih !", vbCritical + vbOKOnly, ".:Warn!ng...")
                 Kode_Importir.Focus()
+                Exit Sub
+            End If
+        End If
+
+        If LAdd Then
+            Dim rs04 As New DataTable
+            MsgSQL = "Select NoSP From t_SPContoh " &
+                    "Where NoSP = '" & NoSP.Text & "' " &
+                    "  and aktifYN = 'Y' "
+            rs04 = Proses.ExecuteQuery(MsgSQL)
+            If rs04.Rows.Count <> 0 Then
+                MsgBox("Hi " & Trim(UserID) & "... No SP Contoh : " & NoSP.Text & " sudah pernah di buat", vbCritical, ".:Error!")
                 Exit Sub
             End If
         End If
@@ -369,6 +382,7 @@ Public Class Form_SP_Contoh
         ClearTextBoxes()
         AturTombol(False)
         NoSP.Text = Proses.MaxYNoUrut("NoSP", "t_SPContoh", "C")
+        NoSP.ReadOnly = False
         TglSP.Focus()
     End Sub
 
@@ -1086,12 +1100,14 @@ Public Class Form_SP_Contoh
             objRep = New Rpt_SPContoh
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("tanggal", tanggal)
-            objRep.SetParameterValue("Terbilang", Terbilang)
+            objRep.SetParameterValue("Terbilang", terbilang)
+            Form_Report.Text = "Cetak SP Contoh"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ReportSource = objRep
             Form_Report.CrystalReportViewer1.ShowRefreshButton = False
-            Form_Report.CrystalReportViewer1.ShowPrintButton = False
+            Form_Report.CrystalReportViewer1.ShowPrintButton = True
             Form_Report.CrystalReportViewer1.ShowParameterPanelButton = False
             Form_Report.ShowDialog()
 

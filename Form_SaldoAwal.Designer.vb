@@ -25,6 +25,7 @@ Partial Class Form_SaldoAwal
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_SaldoAwal))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelTombol = New System.Windows.Forms.Panel()
+        Me.cmdImport = New System.Windows.Forms.Button()
         Me.PanelPeriode = New System.Windows.Forms.Panel()
         Me.tPeriode = New System.Windows.Forms.ComboBox()
         Me.tCari = New System.Windows.Forms.TextBox()
@@ -63,6 +64,7 @@ Partial Class Form_SaldoAwal
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.PanelTombol.SuspendLayout()
         Me.PanelPeriode.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -78,6 +80,7 @@ Partial Class Form_SaldoAwal
         'PanelTombol
         '
         Me.PanelTombol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelTombol.Controls.Add(Me.cmdImport)
         Me.PanelTombol.Controls.Add(Me.PanelPeriode)
         Me.PanelTombol.Controls.Add(Me.cmdBatal)
         Me.PanelTombol.Controls.Add(Me.cmdExit)
@@ -92,6 +95,19 @@ Partial Class Form_SaldoAwal
         Me.PanelTombol.Size = New System.Drawing.Size(1004, 38)
         Me.PanelTombol.TabIndex = 147
         '
+        'cmdImport
+        '
+        Me.cmdImport.Dock = System.Windows.Forms.DockStyle.Right
+        Me.cmdImport.Image = CType(resources.GetObject("cmdImport.Image"), System.Drawing.Image)
+        Me.cmdImport.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdImport.Location = New System.Drawing.Point(886, 0)
+        Me.cmdImport.Name = "cmdImport"
+        Me.cmdImport.Size = New System.Drawing.Size(46, 36)
+        Me.cmdImport.TabIndex = 193
+        Me.cmdImport.Text = "Import"
+        Me.cmdImport.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdImport.UseVisualStyleBackColor = True
+        '
         'PanelPeriode
         '
         Me.PanelPeriode.Controls.Add(Me.tPeriode)
@@ -102,7 +118,7 @@ Partial Class Form_SaldoAwal
         Me.PanelPeriode.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelPeriode.Location = New System.Drawing.Point(385, 0)
         Me.PanelPeriode.Name = "PanelPeriode"
-        Me.PanelPeriode.Size = New System.Drawing.Size(522, 36)
+        Me.PanelPeriode.Size = New System.Drawing.Size(475, 36)
         Me.PanelPeriode.TabIndex = 66
         '
         'tPeriode
@@ -230,9 +246,9 @@ Partial Class Form_SaldoAwal
         Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
         Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.Location = New System.Drawing.Point(913, 0)
+        Me.cmdSimpan.Location = New System.Drawing.Point(932, 0)
         Me.cmdSimpan.Name = "cmdSimpan"
-        Me.cmdSimpan.Size = New System.Drawing.Size(89, 36)
+        Me.cmdSimpan.Size = New System.Drawing.Size(70, 36)
         Me.cmdSimpan.TabIndex = 60
         Me.cmdSimpan.Text = "&Simpan"
         Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -527,6 +543,10 @@ Partial Class Form_SaldoAwal
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'Form_SaldoAwal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -593,4 +613,6 @@ Partial Class Form_SaldoAwal
     Friend WithEvents eIndex As Label
     Friend WithEvents tCari As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents cmdImport As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

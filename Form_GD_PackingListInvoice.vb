@@ -335,6 +335,8 @@ Public Class Form_GD_PackingListInvoice
             End If
             objRep.SetDataSource(dttable)
             objRep.SetParameterValue("TANGGAL", TCetak)
+            Form_Report.Text = "Cetak Packing List Invoice"
+            Form_Report.CrystalReportViewer1.ShowExportButton = True
             Form_Report.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
             Form_Report.CrystalReportViewer1.Refresh()
             Form_Report.CrystalReportViewer1.ShowExportButton = True
