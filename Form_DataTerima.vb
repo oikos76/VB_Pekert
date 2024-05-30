@@ -75,7 +75,7 @@ Public Class Form_DataTerima
                 MsgSQL = "Delete T_PI where NoPI = '" & RS05.Rows(a) !NoPI & "' "
                 Proses.ExecuteNonQuery(MsgSQL)
             Next a
-            mKondisi = ""
+            mKondisi = " AND a.TABLE_NAME NOT IN ('t_PackingList', 't_PraLHP', 't_LHP', 't_Retur') "
         ElseIf KodeTokoAsal.Text = "PKT02" And Kode_Toko.Text = "PKT01" Then
             'terima data Gudang di Waru
             MsgSQL = "Select NoPraLHP From PekertiTRF.dbo.t_PraLHP  Group By NoPraLHP "

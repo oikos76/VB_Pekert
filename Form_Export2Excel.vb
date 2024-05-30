@@ -31,6 +31,10 @@ Public Class Form_Export2Excel
             ProsesDPB()
         ElseIf JenisTR.Text = "LHP" Then
             ProsesLHP()
+        ElseIf JenisTR.Text = "DPL" Then
+            prosesDPL
+        ElseIf JenisTR.Text = "PRA-LHP" Then
+            ProsesPraLHP()
         ElseIf JenisTR.Text = "PL_PackingList" Then
             ProsesPacking_List()
         ElseIf JenisTR.Text = "PL_Invoice" Then
@@ -105,8 +109,8 @@ Public Class Form_Export2Excel
             End If
             NoBoks = Trim(dbTable.Rows(a) !NoBoks1) + " - " + Trim(dbTable.Rows(a) !NoBoks2)
             oSheet.Cells(i, 1) = "'" + NoBoks
-            oSheet.Cells(i, 2) = dbTable.Rows(a) !Kode_Produk
-            oSheet.Cells(i, 3) = dbTable.Rows(a) !KodePImportir
+            oSheet.Cells(i, 2) = "'" + dbTable.Rows(a) !Kode_Produk
+            oSheet.Cells(i, 3) = "'" + dbTable.Rows(a) !KodePImportir
             oSheet.Cells(i, 4) = dbTable.Rows(a) !Descript
             oSheet.Cells(i, 5) = Format(dbTable.Rows(a) !JumlahBoks * dbTable.Rows(a) !JumlahTiapBoks, "###,##0.00")
             oSheet.Cells(i, 6) = dbTable.Rows(a) !NamaInggris
@@ -124,7 +128,7 @@ Public Class Form_Export2Excel
         'Dim mRange As String = "E" + Format(i, "##0") + ":F" + Format(i, "##0")
         'oSheet.Range(mRange).Merge()
         i = i + 6
-        oSheet.Cells(i, 6) = "RUDIONO"
+        oSheet.Cells(i, 6) = "___________"
         i = i + 1
         oSheet.Cells(i, 6) = "EXPORT DEPT"
 
@@ -241,8 +245,8 @@ Public Class Form_Export2Excel
             End If
 
             oSheet.Cells(i, 1) = Format(NoUrut, "###,##0")
-            oSheet.Cells(i, 2) = dbTable.Rows(a) !Kode_Produk.ToString
-            oSheet.Cells(i, 3) = dbTable.Rows(a) !KodePImportir.ToString
+            oSheet.Cells(i, 2) = "'" & dbTable.Rows(a) !Kode_Produk.ToString
+            oSheet.Cells(i, 3) = "'" & dbTable.Rows(a) !KodePImportir.ToString
             oSheet.Cells(i, 4) = dbTable.Rows(a) !Descript
             oSheet.Cells(i, 5) = Format(dbTable.Rows(a) !qty, "###,##0.00")
             oSheet.Cells(i, 6) = Format(dbTable.Rows(a) !HargaFOB, "###,##0.00")
@@ -285,7 +289,7 @@ Public Class Form_Export2Excel
         oSheet.Range("E" + Format(i, "##0") + ":G" + Format(i, "##0")).Merge()
 
         i = i + 5
-        oSheet.Cells(i, 7) = "MARNO"
+        oSheet.Cells(i, 7) = "____________"
         oSheet.Cells(i, 7).HorizontalAlignment = Excel.Constants.xlRight
         oSheet.Range("E" + Format(i, "##0") + ":G" + Format(i, "##0")).Merge()
 
@@ -393,6 +397,163 @@ Public Class Form_Export2Excel
             o = Nothing
         End Try
     End Sub
+    Private Sub ProsesDPL()
+        Dim dbTable As New Data.DataTable
+        Dim oExcel As Excel.Application
+        Dim oBook As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Cursor = Cursors.WaitCursor
+        oExcel = CreateObject("Excel.Application")
+        oBook = oExcel.Workbooks.Add(Type.Missing)
+        oSheet = oBook.Worksheets(1)
+        oSheet.Cells(1, 1) = "Draft Packing List"
+
+        oSheet.Cells(1, 1).HorizontalAlignment = Excel.Constants.xlCenter
+        oSheet.Range("A1:L1").Font.Size = 14
+        oSheet.Range("A1:H1").Merge()
+
+
+        oSheet.Cells(3, 1) = "No DPL"
+        oSheet.Cells(4, 1) = "Dokumen Intern Bagian Gudang / Bukan Dokumen Resmi"
+
+        oSheet.Range("A1:H1").Merge()
+        oSheet.Range("A4:C4").Merge()
+        oSheet.Range("A1:A7").Font.Bold = True
+        oSheet.Cells(9, 1) = "No."
+        oSheet.Cells(9, 2) = "Kode Produk"
+        oSheet.Cells(9, 3) = "Kode Importir"
+        oSheet.Cells(9, 4) = "Produk"
+        oSheet.Cells(9, 5) = "Jumlah Boks"
+        oSheet.Cells(9, 6) = "Jumlah Produk"
+        oSheet.Cells(9, 7) = "Satuan"
+        oSheet.Cells(9, 8) = "Total"
+        oSheet.Cells(9, 9) = "Netto"
+        oSheet.Cells(9, 10) = "Total"
+        oSheet.Cells(9, 11) = "Dimensi"
+        oSheet.Cells(9, 12) = "Volumme"
+
+        oSheet.Range("D8").ColumnWidth = 50
+        oSheet.Range("A9:L9").Font.Bold = True
+
+        Cursor = Cursors.WaitCursor
+        Dim i As Integer = 10, dimensi As String = "", volume As Double = 0,
+            tJumlahBoks As Double = 0, tJumlahProduk As Double = 0, totalJmlhProduk As Double = 0,
+            totalBruto As Double = 0, totalNeto As Double = 0, totalVolume As Double = 0,
+            noBoksAkhir As Double = 0, tBruto As Double = 0, VolContainer As Double = 0,
+            kelebihanVolume As Double = 0
+
+        MsgSQL = "SELECT NoDPL, t_DPL.NoBoksAwal + ' - ' + NoBoksAkhir noBoks, NoBoksAkhir, t_DPL.JumlahBoks, " &
+            "  '(' +  CONVERT(varchar(10), JumlahBoks)  + ' boxes / ' + CONVERT(varchar(10), TotalTiapBoks) + ' pcs each)' boxes, " &
+            "   t_DPL.TotalTiapBoks, t_DPL.NoPO, t_DPL.KodeImportir, t_DPL.Importir,  " &
+            "   t_DPL.KodeProduk, t_DPL.Produk, t_DPL.Panjang, t_DPL.Lebar, t_DPL.Tinggi,  " &
+            "   t_DPL.Bruto , t_DPL.Netto, t_DPL.TotalJmlBoks, CargoLaut, CargoUdara, VolContainer,  " &
+            "   right('0000000000'+noboksawal,10) + right('0000000000' + noboksakhir, 10) NnoBox " &
+            "FROM Pekerti.dbo.t_DPL t_DPL  " &
+            "Where t_DPL.NoDPL = '" & idRec.Text & "' " &
+            "  And T_DPL.AktifYN = 'Y' " &
+            "order by right('0000000000'+noboksawal,10), right('0000000000' + noboksakhir, 10), KodeProduk, idrec "
+
+        dbTable = Proses.ExecuteQuery(MsgSQL)
+        If dbTable.Rows.Count <> 0 Then
+            oSheet.Range("B3").Value = IIf(Trim(dbTable.Rows(0) !NoDPL) = "", "PEKERTI", dbTable.Rows(0) !NoDPL)
+            oSheet.Range("A5").Value = dbTable.Rows(0) !Importir
+        End If
+        For a = 0 To dbTable.Rows.Count - 1
+            oSheet.Range("A" + Format(i, "##0")).Value = "'" & dbTable.Rows(a) !boxes
+            oSheet.Range("C" + Format(i, "##0")).Value = "No.PO : " + dbTable.Rows(a) !NoPO
+            i += 1
+            oSheet.Range("A" + Format(i, "##0")).Value = "'" & dbTable.Rows(a) !noBoks
+            oSheet.Range("B" + Format(i, "##0")).Value = dbTable.Rows(a) !KodeProduk
+            oSheet.Range("C" + Format(i, "##0")).Value = dbTable.Rows(a) !KodeImportir
+            oSheet.Range("D" + Format(i, "##0")).Value = dbTable.Rows(a) !Produk
+            oSheet.Range("E" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !JumlahBoks, "###,##0")
+            tJumlahProduk = dbTable.Rows(a) !TotalTiapBoks * dbTable.Rows(a) !JumlahBoks
+            oSheet.Range("F" + Format(i, "##0")).Value = Format(tJumlahProduk, "###,##0")
+            oSheet.Range("G" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !Bruto, "###,##0")
+            tBruto = dbTable.Rows(a) !Bruto * dbTable.Rows(a) !JumlahBoks
+            oSheet.Range("H" + Format(i, "##0")).Value = Format(tBruto, "###,##0")
+            oSheet.Range("i" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !Netto, "###,##0")
+            oSheet.Range("J" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !Netto * dbTable.Rows(a) !JumlahBoks, "###,##0")
+
+            dimensi = dbTable.Rows(a) !Panjang & " x " & dbTable.Rows(a) !Lebar & " x " & dbTable.Rows(a) !Tinggi
+            oSheet.Range("K" + Format(i, "##0")).Value = dimensi
+
+            If dbTable.Rows(a) !CargoLaut = True Then
+                volume = (dbTable.Rows(a) !JumlahBoks * dbTable.Rows(a) !Panjang * dbTable.Rows(a) !Tinggi * dbTable.Rows(a) !Lebar) / 1000000
+            ElseIf dbTable.Rows(a) !CargoUdara = True Then
+                volume = (dbTable.Rows(a) !Panjang * dbTable.Rows(a) !Tinggi * dbTable.Rows(a) !Lebar * dbTable.Rows(a) !JumlahBoks * 1) / 6000
+            Else
+                volume = (dbTable.Rows(a) !Panjang * dbTable.Rows(a) !Tinggi * dbTable.Rows(a) !Lebar * dbTable.Rows(a) !JumlahBoks * 1)
+            End If
+            oSheet.Range("L" + Format(i, "##0")).Value = Format(volume, "###,##0.000")
+            tJumlahBoks += dbTable.Rows(a) !JumlahBoks
+            totalJmlhProduk += tJumlahProduk
+            totalBruto += tBruto
+            totalNeto += dbTable.Rows(a) !netto
+            totalVolume += volume
+            noBoksAkhir = dbTable.Rows(a) !NoBoksAkhir
+            VolContainer = dbTable.Rows(a) !VolContainer
+
+            i += 1
+        Next (a)
+        oSheet.Range("A" + Format(i, "##0")).Value = "Total : "
+        oSheet.Range("A" + Format(i, "##0") + ":D" + Format(i, "##0")).Merge()
+        oSheet.Range("E" + Format(i, "##0")).Value = Format(tJumlahBoks, "###,##0")
+        oSheet.Range("F" + Format(i, "##0")).Value = Format(totalJmlhProduk, "###,##0")
+        oSheet.Range("H" + Format(i, "##0")).Value = Format(totalBruto, "###,##0.000")
+        oSheet.Range("J" + Format(i, "##0")).Value = Format(totalNeto, "###,##0.000")
+        oSheet.Range("L" + Format(i, "##0")).Value = Format(totalVolume, "###,##0.000")
+        oSheet.Range("A" + Format(i, "##0") + ":L" + Format(i + 2, "##0")).Font.Bold = True
+        oSheet.Range("A" + Format(i, "##0") + ":L" + Format(i + 2, "##0")).Font.Size = 14
+
+        i += 2
+        oSheet.Cells(i, 1) = "RINGKASAN"
+        i += 1
+        oSheet.Cells(i, 1) = "Total Boks/Koli/Peti"
+        oSheet.Cells(i, 2) = noBoksAkhir
+        i += 1
+        oSheet.Cells(i, 1) = "Total Jumlah Produk"
+        oSheet.Cells(i, 2) = Format(totalJmlhProduk, "###,##0")
+        i += 1
+        oSheet.Cells(i, 1) = "Total Berat Kotor"
+        oSheet.Cells(i, 2) = Format(totalBruto, "###,##0.000")
+        i += 1
+        oSheet.Cells(i, 1) = "Total Volume"
+        oSheet.Cells(i, 2) = Format(totalVolume, "###,##0.000")
+        i += 1
+        oSheet.Cells(i, 1) = "Kontainer Terpakai"
+        oSheet.Cells(i, 2) = Format(VolContainer, "###,##0.000")
+
+        i += 1
+        oSheet.Cells(i, 1) = "Ukuran Kontainer"
+        oSheet.Cells(i, 2) = Format(VolContainer, "###,##0.000")
+
+        i += 1
+        oSheet.Cells(i, 1) = "Kelebihan Volume"
+        'IIf({#TotalVolume}>{Command.VolContainer}, {#TotalVolume}-{Command.VolContainer}, 0)
+        If totalVolume > VolContainer Then
+            kelebihanVolume = totalVolume - VolContainer
+        Else
+            kelebihanVolume = 0
+        End If
+        oSheet.Cells(i, 2) = Format(kelebihanVolume, "###,##0.000")
+        oSheet.Range("A" + Format(i, "##0")).Font.Bold = True
+
+        Dim fileName As String = locFile.Text & "\DPL" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
+
+        oSheet.Columns.AutoFit()
+        oSheet.Range("A10: H" & Format(i, "##0")).VerticalAlignment = Excel.Constants.xlCenter
+        oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+
+        'Release the objects
+        ReleaseObject(oSheet)
+        oBook.Close(False, Type.Missing, Type.Missing)
+        ReleaseObject(oBook)
+        oExcel.Quit()
+        ReleaseObject(oExcel)
+        MsgBox("File Berhasil di simpan di : " & fileName, vbInformation + vbOKOnly, ".:Information ")
+        Cursor = Cursors.Default
+    End Sub
 
     Private Sub ProsesLHP()
         Dim dbTable As New Data.DataTable
@@ -404,6 +565,12 @@ Public Class Form_Export2Excel
         oBook = oExcel.Workbooks.Add(Type.Missing)
         oSheet = oBook.Worksheets(1)
         oSheet.Cells(1, 1) = "LAPORAN HASIL PEMERIKSAAN"
+
+        oSheet.Cells(1, 1).HorizontalAlignment = Excel.Constants.xlCenter
+        oSheet.Range("A1:H1").Font.Size = 14
+        oSheet.Range("A1:H1").Merge()
+
+
         oSheet.Cells(2, 1) = "No LHP"
         oSheet.Cells(3, 1) = "No Pra LHP"
         oSheet.Cells(4, 1) = "Perajin"
@@ -477,6 +644,113 @@ Public Class Form_Export2Excel
         Dim fileName As String = locFile.Text & "\LHP" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
 
         oSheet.Columns.AutoFit()
+        oSheet.Range("A10: H" & Format(i, "##0")).VerticalAlignment = Excel.Constants.xlCenter
+        oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+
+        'Release the objects
+        ReleaseObject(oSheet)
+        oBook.Close(False, Type.Missing, Type.Missing)
+        ReleaseObject(oBook)
+        oExcel.Quit()
+        ReleaseObject(oExcel)
+        MsgBox("File Berhasil di simpan di : " & fileName, vbInformation + vbOKOnly, ".:Information ")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub ProsesPraLHP()
+        Dim dbTable As New Data.DataTable
+        Dim oExcel As Excel.Application
+        Dim oBook As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Cursor = Cursors.WaitCursor
+        oExcel = CreateObject("Excel.Application")
+        oBook = oExcel.Workbooks.Add(Type.Missing)
+        oSheet = oBook.Worksheets(1)
+        oSheet.Cells(1, 1) = "Pra LHP"
+        oSheet.Cells(1, 1).HorizontalAlignment = Excel.Constants.xlCenter
+        oSheet.Range("A1:H1").Font.Size = 14
+        oSheet.Range("A1:H1").Merge()
+
+        oSheet.Cells(2, 1) = "No Pra LHP"
+        oSheet.Cells(3, 1) = "Perajin"
+        oSheet.Cells(4, 1) = "Surat Pengantar"
+        oSheet.Cells(5, 1) = "Tgl.Terima"
+        oSheet.Cells(6, 1) = "Jumlah Koli"
+        oSheet.Cells(7, 1) = "Kargo"
+        oSheet.Range("A1:A7").Font.Bold = True
+
+
+        oSheet.Cells(9, 1) = "Kode Produk"
+        oSheet.Cells(9, 2) = "Produk"
+        oSheet.Cells(9, 3) = "Pack"
+        oSheet.Cells(9, 4) = "Kirim"
+        oSheet.Cells(9, 5) = "Ada"
+        oSheet.Cells(9, 6) = "Baik"
+        oSheet.Cells(9, 7) = "Retur"
+        oSheet.Cells(9, 8) = "Keterangan"
+
+        oSheet.Range("A9:H9").Font.Bold = True
+
+        Cursor = Cursors.WaitCursor
+        Dim i As Integer = 10, NoSP As String = "", Perajin As String = ""
+
+
+        MsgSQL = "SELECT t_PraLHP.IDRec, t_PraLHP.NoPraLHP, t_PraLHP.Kargo, " &
+            "      t_PraLHP.Kode_Produk, t_PraLHP.Produk, t_PraLHP.JumlahPack, " &
+            "      t_PraLHP.Kirim, t_PraLHP.TglTerima, t_PraLHP.SuratPengantar, " &
+            "      t_PraLHP.JumlahKoli, t_PraLHP.Keterangan, t_SP.NoSP, " &
+            "      t_SP.KodeImportir, t_SP.Importir, t_SP.Perajin, t_PraLHP.Koordinator,  " &
+            "      t_PraLHP.NoPO, t_PraLHP.SpecSP, t_pralhp.InstruksiPacking " &
+            " FROM Pekerti.dbo.t_PraLHP t_PraLHP INNER JOIN Pekerti.dbo.t_SP t_SP ON " &
+            "      t_PraLHP.NoSP = t_SP.NoSP  AND t_PraLHP.Kode_Produk = t_SP.KodeProduk " &
+            "Where NoPraLHP = '" & idRec.Text & "' " &
+            "  And T_PraLHP.AktifYN = 'Y' and t_SP.AktifYN = 'Y'  " &
+            "Order by t_PraLHP.IDRec "
+
+        dbTable = Proses.ExecuteQuery(MsgSQL)
+        If dbTable.Rows.Count <> 0 Then
+            oSheet.Range("B2").Value = IIf(Trim(dbTable.Rows(0) !NoPraLHP) = "", "PEKERTI", dbTable.Rows(0) !NoPraLHP)
+            oSheet.Range("B3").Value = dbTable.Rows(0) !Perajin
+            oSheet.Range("B4").Value = dbTable.Rows(0) !SuratPengantar
+            oSheet.Range("B5").Value = "'" & Format(dbTable.Rows(0) !TglTerima, "dd-MM-yyyy")
+            oSheet.Range("B6").Value = "'" & Format(dbTable.Rows(0) !JumlahKoli, "##0").ToString
+            oSheet.Range("B7").Value = dbTable.Rows(0) !Kargo
+        End If
+        For a = 0 To dbTable.Rows.Count - 1
+            If NoSP <> dbTable.Rows(a) !NoSP Then
+                oSheet.Range("A" + Format(i, "##0")).Value = "No.SP : " + dbTable.Rows(a) !NoSP
+                oSheet.Range("A" + Format(i, "##0")).Font.Bold = True
+                i += 1
+            End If
+            oSheet.Range("A" + Format(i, "##0")).Value = dbTable.Rows(a) !Kode_Produk
+            oSheet.Range("B" + Format(i, "##0")).Value = dbTable.Rows(a) !Produk
+            oSheet.Range("B" + Format(i, "##0")).WrapText = True
+            oSheet.Range("C" + Format(i, "##0")).Value = Format(dbTable.Rows(a) !JumlahPack, "###,##0.000")
+            oSheet.Range("D" + Format(i, "##0")).Value = dbTable.Rows(a) !kirim
+            oSheet.Range("E" + Format(i, "##0")).Value = "" 'Format(dbTable.Rows(a) !JumlahHitung, "###,##0.000")
+            oSheet.Range("F" + Format(i, "##0")).Value = "" 'Format(dbTable.Rows(a) !jumlahbaik, "###,##0.000")
+            oSheet.Range("G" + Format(i, "##0")).Value = "" 'Format(dbTable.Rows(a) !jumlahtolak, "###,##0.000")
+            oSheet.Range("H" + Format(i, "##0")).Value = dbTable.Rows(a) !keterangan
+            NoSP = dbTable.Rows(a) !NoSP
+            i += 1
+            oSheet.Range("A" + Format(i, "##0")).Value = dbTable.Rows(a) !KodeImportir + " - " + dbTable.Rows(a) !Importir
+            oSheet.Range("A" + Format(i, "##0")).WrapText = True
+            oSheet.Range("B" + Format(i, "##0")).Value = dbTable.Rows(a) !SpecSP
+            oSheet.Range("B" + Format(i, "##0")).WrapText = True
+            i += 1
+        Next (a)
+        i += 1
+        oSheet.Cells(i, 1) = "Mulai Periksa : ________________"
+        oSheet.Range("A" + Format(i, "##0")).Font.Bold = True
+        oSheet.Cells(i, 2) = "Selesai Periksa: ________________"
+        oSheet.Range("B" + Format(i, "##0")).Font.Bold = True
+
+        Dim fileName As String = locFile.Text & "\PraLHP" + Replace(idRec.Text, "/", "-") + "_" & Format(Now, "yymmdd_HHmmss") + ".xls"
+
+        oSheet.Columns.AutoFit()
+        oSheet.Range("A8").ColumnWidth = 40
+        oSheet.Range("B8").ColumnWidth = 100
+        oSheet.Range("H8").ColumnWidth = 50
         oSheet.Range("A10: H" & Format(i, "##0")).VerticalAlignment = Excel.Constants.xlCenter
         oBook.SaveAs(fileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
 

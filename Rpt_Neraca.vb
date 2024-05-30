@@ -66,7 +66,7 @@ Public Class Rpt_Neraca
         rs05 = Proses.ExecuteQuery(MsgSQL)
         For i = 0 To rs05.Rows.Count - 1
             Application.DoEvents()
-            If rs05.Rows(i) !NoUrut = 175 Then
+            If rs05.Rows(i) !NoUrut = 133 Then
                 Debug.Print(rs05.Rows(i) !Description)
             End If
             COA.Text = IIf(rs05.Rows(i) !Description = "", rs05.Rows(i) !Description + " " + rs05.Rows(i) !KodeGL, rs05.Rows(i) !Description)
@@ -79,7 +79,7 @@ Public Class Rpt_Neraca
                 MsgSQL = "Select coalesce(Sum(Saldo),0) Saldo From M_SaldoAwalCompany " &
                     "Where AktifYN = 'Y' " &
                     "  And Periode = '" & Periode1 & "' " &
-                    "  And COA like '" & rs05.Rows(i) !KodeGL & "%' "
+                    "  And COA like '" & Trim(rs05.Rows(i) !KodeGL) & "%' "
                 SaldoAwal = Proses.ExecuteSingleDblQuery(MsgSQL)
 
                 MsgSQL = "Select coalesce(Sum(Debet),0) as Debet From t_Jurnal " &
@@ -135,12 +135,12 @@ Public Class Rpt_Neraca
             "Where idrpt = '" & IDRpt & "' and KodeGL = '30.10.02.01.002' "
         Proses.ExecuteNonQuery(MsgSQL)
 
-        MsgSQL = "Update tmp_RPT_Neraca Set " &
-            " Awal = Awal * -1, " &
-            "Akhir = Akhir * -1 " &
-            "Where NoUrut between 131 and 134 " &
-            "  and idrpt = '" & IDRpt & "' "
-        Proses.ExecuteNonQuery(MsgSQL)
+        'MsgSQL = "Update tmp_RPT_Neraca Set " &
+        '    " Awal = Awal * -1, " &
+        '    "Akhir = Akhir * -1 " &
+        '    "Where NoUrut between 133 and 135 " &
+        '    "  and idrpt = '" & IDRpt & "' "  
+        'Proses.ExecuteNonQuery(MsgSQL) PENYUSUTAN Wajib Minus
 
         MsgSQL = "SELECT * FROM TMP_RPTNeraca Where TotalYN = 'Y' order by NoUrut "
         rs05 = Proses.ExecuteQuery(MsgSQL)

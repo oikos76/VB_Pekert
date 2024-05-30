@@ -973,6 +973,14 @@ Public Class Form_GdPraLHP
         End If
     End Sub
 
+    Private Sub cmdExcel_Click(sender As Object, e As EventArgs) Handles cmdExcel.Click
+        PanelNavigate.Enabled = False
+        Form_Export2Excel.JenisTR.Text = "PRA-LHP"
+        Form_Export2Excel.idRec.Text = NoPraLHP.Text
+        Form_Export2Excel.ShowDialog()
+        PanelNavigate.Enabled = True
+    End Sub
+
     Private Sub QtyKoli_KeyPress(sender As Object, e As KeyPressEventArgs) Handles QtyKoli.KeyPress
         If e.KeyChar >= "0" And e.KeyChar <= "9" Then 'Allows only numbers
             e.KeyChar = e.KeyChar 'Allows only numbers
@@ -1000,8 +1008,8 @@ Public Class Form_GdPraLHP
                 Koordinator.Text = Proses.ExecuteSingleStrQuery(SQL)
             End If
             If LAdd Or LEdit Or LTambahKode Then Koordinator.Focus()
-            Else
-                e.Handled = True  'Disallows all other characters from being used on txtNights.Text
+        Else
+            e.Handled = True  'Disallows all other characters from being used on txtNights.Text
             Beep()
         End If
     End Sub

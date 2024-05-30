@@ -25,6 +25,7 @@ Public Class Form_GD_PackingListInvoice
         NoPOTidakAda = False
         MsgSQL = "Select * from t_DPL " &
             "Where NoDPL = '" & txtNoDPL.Text & "' " &
+            " And kodeProduk <> '' " &
             " And AktifYN = 'Y' order by idrec "
         Rs = Proses.ExecuteQuery(MsgSQL)
 
@@ -32,13 +33,13 @@ Public Class Form_GD_PackingListInvoice
             Application.DoEvents()
             MsgSQL = "Select * from t_PI " &
             "WHere NoPO = '" & Rs.Rows(i) !NoPO & "' " &
-            "  AND Kode_Produk = '" & Rs.Rows(0) !KodeProduk & "' " &
+            "  AND Kode_Produk = '" & Rs.Rows(i) !KodeProduk & "' " &
             "  And AktifYN = 'Y' "
             rs03 = Proses.ExecuteQuery(MsgSQL)
             If rs03.Rows.Count <> 0 Then 
             Else
-                MsgBox("PO NO : " & Rs.Rows(i) !NoPO & " Kode Produk : " &
-                        Rs.Rows(i) !KodeProduk & " di PI tidak ada!" & vbCrLf & "Harga FOB NOL!!", vbCritical + vbOKOnly, ".:Warning!")
+                MsgBox("PO NO :  " & Rs.Rows(i) !NoPO & vbCrLf & "Kode Produk : '" &
+                        Rs.Rows(i) !KodeProduk & "' di PI tidak ada!" & vbCrLf, vbCritical + vbOKOnly, ".:Warning!")
                 HargaFOB.Text = 0
                 NoPOTidakAda = True
                 Exit For
@@ -74,15 +75,14 @@ Public Class Form_GD_PackingListInvoice
                 Proses.ExecuteNonQuery(MsgSQL)
             End If
             Me.Cursor = Cursors.WaitCursor
-            MsgSQL = "Select * from t_DPL " &
-                "Where NoDPL = '" & txtNoDPL.Text & "' " &
-                " And AktifYN = 'Y' order by idrec "
+            MsgSQL = "SELECT * FROM t_DPL " &
+                "WHERE NoDPL = '" & txtNoDPL.Text & "' " &
+                " AND AktifYN = 'Y' " &
+                " AND kodeProduk <> '' " &
+                "ORDER BY idrec "
             Rs = Proses.ExecuteQuery(MsgSQL)
             For i = 0 To Rs.Rows.Count - 1
                 Application.DoEvents()
-                'If Rs.rows!KodeProduk = "0229-20-4000A" Then
-                '       Debug.Print Rs!KodeProduk
-                'End If
 
                 MsgSQL = "Select * from t_PI " &
                     "WHere NoPO = '" & Rs.Rows(i) !NoPO & "' " &
@@ -92,8 +92,7 @@ Public Class Form_GD_PackingListInvoice
                 If RS05.Rows.Count <> 0 Then
                     HargaFOB.Text = RS05.Rows(0) !HargaFOB
                 Else
-                    MsgBox("PO NO : " & Rs.Rows(i) !NoPO &
-                           " Kode Produk : " & Rs.Rows(i) !KodeProduk & " di PI tidak ada!" & vbCrLf & "Harga FOB NOL!!", vbCritical + vbOKOnly, ".:Warning!")
+                    MsgBox("Harga FOB Kode Produk : " & Rs.Rows(i) !KodeProduk & " di PI tidak ada!" & vbCrLf, vbCritical + vbOKOnly, ".:Warning!")
                     HargaFOB.Text = 0
                 End If
                 IDRec.Text = Proses.MaxNoUrut("IDRec", "t_PackingList", Format(TglPL.Value, "MM"))

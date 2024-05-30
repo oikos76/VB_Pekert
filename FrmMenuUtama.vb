@@ -25,7 +25,7 @@ Public Class FrmMenuUtama
            My.Application.Info.Version.Minor.ToString + "." +
            My.Application.Info.Version.Build.ToString + "-" +
            My.Application.Info.Version.Revision.ToString
-        Dim mVersion As String = version + "#240513"
+        Dim mVersion As String = version + "#240521"
         Me.Text = "PIDS-" + mversion
 
         TsTanggal.Text = Format(Now, "dddd, dd/MM/yyyy")

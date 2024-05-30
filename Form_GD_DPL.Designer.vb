@@ -22,13 +22,13 @@ Partial Class Form_GD_DPL
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GD_DPL))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GD_DPL))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -154,6 +154,7 @@ Partial Class Form_GD_DPL
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.cmdExcel = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPageFormEntry_.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -239,7 +240,7 @@ Partial Class Form_GD_DPL
         Me.cmdTambahDPL.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdTambahDPL.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTambahDPL.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdTambahDPL.Location = New System.Drawing.Point(522, 0)
+        Me.cmdTambahDPL.Location = New System.Drawing.Point(489, 0)
         Me.cmdTambahDPL.Name = "cmdTambahDPL"
         Me.cmdTambahDPL.Size = New System.Drawing.Size(182, 34)
         Me.cmdTambahDPL.TabIndex = 6
@@ -248,15 +249,16 @@ Partial Class Form_GD_DPL
         '
         'PanelNavigate
         '
+        Me.PanelNavigate.Controls.Add(Me.cmdExcel)
         Me.PanelNavigate.Controls.Add(Me.cmdPrint)
         Me.PanelNavigate.Controls.Add(Me.btnButtom)
         Me.PanelNavigate.Controls.Add(Me.btnNext)
         Me.PanelNavigate.Controls.Add(Me.btnPrev)
         Me.PanelNavigate.Controls.Add(Me.btnTop)
         Me.PanelNavigate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelNavigate.Location = New System.Drawing.Point(704, 0)
+        Me.PanelNavigate.Location = New System.Drawing.Point(671, 0)
         Me.PanelNavigate.Name = "PanelNavigate"
-        Me.PanelNavigate.Size = New System.Drawing.Size(191, 34)
+        Me.PanelNavigate.Size = New System.Drawing.Size(224, 34)
         Me.PanelNavigate.TabIndex = 62
         '
         'cmdPrint
@@ -1573,6 +1575,16 @@ Partial Class Form_GD_DPL
         Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
+        'cmdExcel
+        '
+        Me.cmdExcel.Dock = System.Windows.Forms.DockStyle.Left
+        Me.cmdExcel.Image = CType(resources.GetObject("cmdExcel.Image"), System.Drawing.Image)
+        Me.cmdExcel.Location = New System.Drawing.Point(190, 0)
+        Me.cmdExcel.Name = "cmdExcel"
+        Me.cmdExcel.Size = New System.Drawing.Size(38, 34)
+        Me.cmdExcel.TabIndex = 7
+        Me.cmdExcel.UseVisualStyleBackColor = True
+        '
         'Form_GD_DPL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1740,4 +1752,5 @@ Partial Class Form_GD_DPL
     Friend WithEvents Column15 As DataGridViewTextBoxColumn
     Friend WithEvents Column16 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewButtonColumn
+    Friend WithEvents cmdExcel As Button
 End Class

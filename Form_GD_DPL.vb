@@ -1580,6 +1580,14 @@ Public Class Form_GD_DPL
         ClearTextBoxes()
     End Sub
 
+    Private Sub cmdExcel_Click(sender As Object, e As EventArgs) Handles cmdExcel.Click
+        PanelNavigate.Enabled = False
+        Form_Export2Excel.JenisTR.Text = "DPL"
+        Form_Export2Excel.idRec.Text = NoDPL.Text
+        Form_Export2Excel.ShowDialog()
+        PanelNavigate.Enabled = True
+    End Sub
+
     Private Sub TotalVolDPL_GotFocus(sender As Object, e As EventArgs) Handles TotalVolDPL.GotFocus
         With TotalVolDPL
             .SelectionStart = 0
