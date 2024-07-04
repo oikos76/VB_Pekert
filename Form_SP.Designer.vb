@@ -22,7 +22,6 @@ Partial Class Form_SP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_SP))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -30,6 +29,7 @@ Partial Class Form_SP
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_SP))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageFormEntry_ = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -154,6 +154,7 @@ Partial Class Form_SP
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnExcel = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPageFormEntry_.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -220,12 +221,12 @@ Partial Class Form_SP
         Me.Panel4.Controls.Add(Me.cmdRiwayatHarga)
         Me.Panel4.Controls.Add(Me.cmdPenambahanKode)
         Me.Panel4.Controls.Add(Me.PanelNavigate)
+        Me.Panel4.Controls.Add(Me.cmdExit)
         Me.Panel4.Controls.Add(Me.cmdSimpan)
         Me.Panel4.Controls.Add(Me.cmdEdit)
         Me.Panel4.Controls.Add(Me.cmdHapus)
         Me.Panel4.Controls.Add(Me.cmdTambah)
         Me.Panel4.Controls.Add(Me.cmdBatal)
-        Me.Panel4.Controls.Add(Me.cmdExit)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 507)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
@@ -235,37 +236,40 @@ Partial Class Form_SP
         '
         'cmdRiwayatHarga
         '
+        Me.cmdRiwayatHarga.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdRiwayatHarga.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdRiwayatHarga.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(426, 2)
+        Me.cmdRiwayatHarga.Location = New System.Drawing.Point(406, 0)
         Me.cmdRiwayatHarga.Name = "cmdRiwayatHarga"
-        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 28)
+        Me.cmdRiwayatHarga.Size = New System.Drawing.Size(93, 34)
         Me.cmdRiwayatHarga.TabIndex = 5
         Me.cmdRiwayatHarga.Text = "&Riwayat Harga"
         Me.cmdRiwayatHarga.UseVisualStyleBackColor = True
         '
         'cmdPenambahanKode
         '
+        Me.cmdPenambahanKode.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdPenambahanKode.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPenambahanKode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdPenambahanKode.Location = New System.Drawing.Point(525, 3)
+        Me.cmdPenambahanKode.Location = New System.Drawing.Point(499, 0)
         Me.cmdPenambahanKode.Name = "cmdPenambahanKode"
-        Me.cmdPenambahanKode.Size = New System.Drawing.Size(171, 28)
+        Me.cmdPenambahanKode.Size = New System.Drawing.Size(171, 34)
         Me.cmdPenambahanKode.TabIndex = 6
         Me.cmdPenambahanKode.Text = "&Penambahan Kode Untuk SP ini"
         Me.cmdPenambahanKode.UseVisualStyleBackColor = True
         '
         'PanelNavigate
         '
+        Me.PanelNavigate.Controls.Add(Me.btnExcel)
         Me.PanelNavigate.Controls.Add(Me.cmdPrint)
         Me.PanelNavigate.Controls.Add(Me.btnButtom)
         Me.PanelNavigate.Controls.Add(Me.btnNext)
         Me.PanelNavigate.Controls.Add(Me.btnPrev)
         Me.PanelNavigate.Controls.Add(Me.btnTop)
         Me.PanelNavigate.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelNavigate.Location = New System.Drawing.Point(702, 0)
+        Me.PanelNavigate.Location = New System.Drawing.Point(670, 0)
         Me.PanelNavigate.Name = "PanelNavigate"
-        Me.PanelNavigate.Size = New System.Drawing.Size(193, 34)
+        Me.PanelNavigate.Size = New System.Drawing.Size(226, 34)
         Me.PanelNavigate.TabIndex = 62
         '
         'cmdPrint
@@ -323,9 +327,9 @@ Partial Class Form_SP
         Me.cmdSimpan.Dock = System.Windows.Forms.DockStyle.Right
         Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
         Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.Location = New System.Drawing.Point(895, 0)
+        Me.cmdSimpan.Location = New System.Drawing.Point(896, 0)
         Me.cmdSimpan.Name = "cmdSimpan"
-        Me.cmdSimpan.Size = New System.Drawing.Size(89, 34)
+        Me.cmdSimpan.Size = New System.Drawing.Size(88, 34)
         Me.cmdSimpan.TabIndex = 7
         Me.cmdSimpan.Text = "&Simpan"
         Me.cmdSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -334,11 +338,12 @@ Partial Class Form_SP
         '
         'cmdEdit
         '
+        Me.cmdEdit.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdEdit.Image = CType(resources.GetObject("cmdEdit.Image"), System.Drawing.Image)
         Me.cmdEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdEdit.Location = New System.Drawing.Point(88, 3)
+        Me.cmdEdit.Location = New System.Drawing.Point(231, 0)
         Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(77, 28)
+        Me.cmdEdit.Size = New System.Drawing.Size(77, 34)
         Me.cmdEdit.TabIndex = 1
         Me.cmdEdit.Text = "&Ubah"
         Me.cmdEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -346,11 +351,12 @@ Partial Class Form_SP
         '
         'cmdHapus
         '
+        Me.cmdHapus.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdHapus.Image = CType(resources.GetObject("cmdHapus.Image"), System.Drawing.Image)
         Me.cmdHapus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdHapus.Location = New System.Drawing.Point(171, 3)
+        Me.cmdHapus.Location = New System.Drawing.Point(154, 0)
         Me.cmdHapus.Name = "cmdHapus"
-        Me.cmdHapus.Size = New System.Drawing.Size(77, 28)
+        Me.cmdHapus.Size = New System.Drawing.Size(77, 34)
         Me.cmdHapus.TabIndex = 2
         Me.cmdHapus.Text = "&Hapus"
         Me.cmdHapus.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -358,11 +364,12 @@ Partial Class Form_SP
         '
         'cmdTambah
         '
+        Me.cmdTambah.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdTambah.Image = CType(resources.GetObject("cmdTambah.Image"), System.Drawing.Image)
         Me.cmdTambah.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdTambah.Location = New System.Drawing.Point(5, 3)
+        Me.cmdTambah.Location = New System.Drawing.Point(77, 0)
         Me.cmdTambah.Name = "cmdTambah"
-        Me.cmdTambah.Size = New System.Drawing.Size(77, 28)
+        Me.cmdTambah.Size = New System.Drawing.Size(77, 34)
         Me.cmdTambah.TabIndex = 0
         Me.cmdTambah.Text = "&Tambah"
         Me.cmdTambah.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -384,11 +391,12 @@ Partial Class Form_SP
         '
         'cmdExit
         '
+        Me.cmdExit.Dock = System.Windows.Forms.DockStyle.Left
         Me.cmdExit.Image = CType(resources.GetObject("cmdExit.Image"), System.Drawing.Image)
         Me.cmdExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdExit.Location = New System.Drawing.Point(254, 3)
+        Me.cmdExit.Location = New System.Drawing.Point(308, 0)
         Me.cmdExit.Name = "cmdExit"
-        Me.cmdExit.Size = New System.Drawing.Size(77, 28)
+        Me.cmdExit.Size = New System.Drawing.Size(77, 34)
         Me.cmdExit.TabIndex = 3
         Me.cmdExit.Text = "E&xit"
         Me.cmdExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1538,6 +1546,17 @@ Partial Class Form_SP
         Me.Column16.ReadOnly = True
         Me.Column16.Width = 130
         '
+        'btnExcel
+        '
+        Me.btnExcel.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnExcel.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcel.Image = CType(resources.GetObject("btnExcel.Image"), System.Drawing.Image)
+        Me.btnExcel.Location = New System.Drawing.Point(190, 0)
+        Me.btnExcel.Name = "btnExcel"
+        Me.btnExcel.Size = New System.Drawing.Size(34, 34)
+        Me.btnExcel.TabIndex = 10
+        Me.btnExcel.UseVisualStyleBackColor = True
+        '
         'Form_SP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1698,4 +1717,5 @@ Partial Class Form_SP
     Friend WithEvents Column21 As DataGridViewTextBoxColumn
     Friend WithEvents Column19 As DataGridViewTextBoxColumn
     Friend WithEvents NoSPLama As TextBox
+    Friend WithEvents btnExcel As Button
 End Class

@@ -3,6 +3,8 @@ Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.IO
+Imports System.Data.OleDb
+Imports Microsoft.Office.Interop
 Public Class Form_SP
     Protected Dt As DataTable
     Dim FotoLoc As String = My.Settings.path_foto
@@ -1652,6 +1654,17 @@ ErrMSG:
         End If
         Proses.CloseConn()
     End Function
+
+    Private Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click
+
+        PanelNavigate.Enabled = False
+        Form_Export2Excel.JenisTR.Text = "SP"
+        Form_Export2Excel.idRec.Text = NoSP.Text
+        Form_Export2Excel.ShowDialog()
+        PanelNavigate.Enabled = True
+
+    End Sub
+
 
     Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
         If e.TabPageIndex = 0 Then

@@ -71,10 +71,57 @@ Public Class Form_DataTerima
             RS05 = Proses.ExecuteQuery(MsgSQL)
             For a = 0 To RS05.Rows.Count - 1
                 Application.DoEvents()
-                idRecord.Text = RS05.Rows(a) !NoPI
+                idRecord.Text = RS05.Rows(a) !NoPI & " " & Format(a, "##0")
                 MsgSQL = "Delete T_PI where NoPI = '" & RS05.Rows(a) !NoPI & "' "
                 Proses.ExecuteNonQuery(MsgSQL)
             Next a
+
+            MsgSQL = "SELECT KodeProduk FROM  PekertiTRF.dbo.m_KodeProduk GROUP BY KodeProduk"
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !KodeProduk & " " & Format(a, "##0")
+                MsgSQL = "Delete m_KodeProduk where KodeProduk = '" & RS05.Rows(a) !KodeProduk & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+
+            MsgSQL = "Select KodePerajin  FROM PekertiTRF.dbo.m_KodePerajin  GROUP BY KodePerajin "
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !KodePerajin & " " & Format(a, "##0")
+                MsgSQL = "Delete m_KodePerajin where KodePerajin = '" & RS05.Rows(a) !KodePerajin & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+
+            MsgSQL = "SELECT idrec FROM  PekertiTRF.dbo.t_DPB GROUP BY idrec"
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !idrec & " " & Format(a, "##0")
+                MsgSQL = "Delete t_DPB where idrec = '" & RS05.Rows(a) !idrec & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+
+            MsgSQL = "SELECT NoSP FROM PekertiTRF.dbo.t_SP GROUP BY NoSP"
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !NoSP & " " & Format(a, "##0")
+                MsgSQL = "DELETE t_SP WHERE NoSP = '" & RS05.Rows(a) !NoSP & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+
+
+            MsgSQL = "SELECT NoPO FROM PekertiTRF.dbo.t_PO GROUP BY NoPO"
+            RS05 = Proses.ExecuteQuery(MsgSQL)
+            For a = 0 To RS05.Rows.Count - 1
+                Application.DoEvents()
+                idRecord.Text = RS05.Rows(a) !NoPO & " " & Format(a, "##0")
+                MsgSQL = "DELETE t_PO WHERE NoPO = '" & RS05.Rows(a) !NoPO & "' "
+                Proses.ExecuteNonQuery(MsgSQL)
+            Next a
+
             mKondisi = " AND a.TABLE_NAME NOT IN ('t_PackingList', 't_PraLHP', 't_LHP', 't_Retur') "
         ElseIf KodeTokoAsal.Text = "PKT02" And Kode_Toko.Text = "PKT01" Then
             'terima data Gudang di Waru
@@ -146,11 +193,17 @@ Public Class Form_DataTerima
                 Else
                     idRecord.Text = RS05.Rows(b)(0)
                 End If
-
-                SQL = "INSERT INTO " & jenisData.Text & " " &
-                    "Select * FROM PekertiTRF.dbo." & jenisData.Text & " " &
-                    "WHERE " & RS05.Columns(0).ColumnName & " = '" & RS05.Rows(b)(0) & "' "
-                Proses.ExecuteNonQuery(SQL)
+                If UCase(jenisData.Text) = "M_KODEPERAJIN" Then
+                    SQL = "INSERT INTO " & jenisData.Text & " " &
+                        "Select * FROM PekertiTRF.dbo." & jenisData.Text & " " &
+                        "WHERE " & RS05.Columns(1).ColumnName & " = '" & RS05.Rows(b)(1) & "' "
+                    Proses.ExecuteNonQuery(SQL)
+                Else
+                    SQL = "INSERT INTO " & jenisData.Text & " " &
+                        "Select * FROM PekertiTRF.dbo." & jenisData.Text & " " &
+                        "WHERE " & RS05.Columns(0).ColumnName & " = '" & RS05.Rows(b)(0) & "' "
+                    Proses.ExecuteNonQuery(SQL)
+                End If
             Next b
         Next a
         Panel1.Enabled = True

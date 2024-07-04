@@ -53,8 +53,8 @@ Public Class Rpt_LabaRugi
         Panel1.Enabled = False
         Dim Periode1 As String, Periode2 As String, xPeriode As String
         Dim MsgSQL As String, NoUrut As Integer, IDRpt As String
-        Dim SaldoAwal As Double, Debet As Double, Kredit As Double, SaldoAkhir As Double
-        Dim Penjualan As Double, BiayaPenjualan As Double, Spasi As Integer
+        Dim SaldoAwal As Double, Debet As Double, Kredit As Double, SaldoAkhir As Double, Spasi As Integer
+
         Dim BiayaPenjualanAwal As Double, BiayaPenjualanAkhir As Double
         Dim BarangTersediaAwal As Double, BarangTersediaAkhir As Double
         Dim HPPAwal As Double, HPPAkhir As Double
@@ -62,9 +62,10 @@ Public Class Rpt_LabaRugi
         Dim BebanAwal As Double, BebanAkhir As Double
         Dim BiayaAwal As Double, BiayaAkhir As Double
         Dim PendapatanAwal As Double, PendapatanAkhir As Double
-        Dim Laba As Double, Pajak As Double, LabaBersih As Double, X1 As Double, X2 As Double
-        Dim LabaAK As Double, PajakAK As Double, LabaBersihAK As Double, Y1 As Double, Y2 As Double
+        Dim Laba As Double, Pajak As Double, X1 As Double, X2 As Double
+        Dim LabaAK As Double, PajakAK As Double, Y1 As Double, Y2 As Double
         Dim RS05 As New DataTable, RS04 As New DataTable
+
         Periode1 = Format(DateAdd("m", -1, Tgl1.Value), "MM-yyyy")
         Periode2 = Format(Tgl1.Value, "MM-yyyy")
         NoUrut = 1
@@ -82,13 +83,14 @@ Public Class Rpt_LabaRugi
         For a = 0 To RS05.Rows.Count - 1
             Application.DoEvents()
             Spasi = RS05.Rows(a) !Spasi
-            'If RS05.Rows(a) !Urut = "318" Or RS05.Rows(a) !Urut = "301" Then
+            'If RS05.Rows(a) !Urut = "301" Then
             '    Debug.Print(RS05.Rows(a) !Description)
             'End If
+            status.Text = RS05.Rows(a) !KodeGL & " | " & RS05.Rows(a) !Description
             If RS05.Rows(a) !ParentYN = "Y" Then
-                MsgSQL = "INSERT INTO TMP_RPT_LabaRugi(IdRPT, NoUrut, " &
-                    "Description, Awal, Debet, Kredit, Akhir, Spasi, TUrut, GarisYN) VALUES ( " &
-                    "'" & IDRpt & "', " & RS05.Rows(a) !Urut & ", '" & Space(Spasi) + RS05.Rows(a) !Description & "', " &
+                MsgSQL = "INSERT INTO TMP_RPT_LabaRugi(IdRPT, NoUrut, Description, Awal, " &
+                    "Debet, Kredit, Akhir, Spasi, TUrut, GarisYN) VALUES ( '" & IDRpt & "', " &
+                    "" & RS05.Rows(a) !Urut & ", '" & Space(Spasi) + RS05.Rows(a) !Description & "', " &
                     "0, 0, 0, 0, " & Spasi & ", '" & RS05.Rows(a) !tUrut & "', '" & RS05.Rows(a) !GarisYN & "')"
                 Proses.ExecuteNonQuery(MsgSQL)
             Else
@@ -97,6 +99,9 @@ Public Class Rpt_LabaRugi
                     Debet = 0
                     Kredit = 0
                 Else
+                    If Trim(RS05.Rows(a) !kodegl) = "60.10.01.01" Then
+                        Debug.Print(RS05.Rows(a) !kodegl)
+                    End If
                     MsgSQL = "Select isnull(Sum(Saldo),0) Saldo From M_SaldoAwalCompany " &
                         "Where AktifYN = 'Y' " &
                         "  And Periode = '" & Periode1 & "' " &
@@ -115,34 +120,33 @@ Public Class Rpt_LabaRugi
                         "  And Convert(char(8), tanggal,112) Between " &
                         "      '" & Format(Tgl1.Value, "yyyyMMdd") & "' and '" & Format(Tgl2.Value, "yyyyMMdd") & "' " &
                         "  And AccountCode like '" & Trim(RS05.Rows(a) !KodeGL) & "%' "
-
                     Kredit = Proses.ExecuteSingleDblQuery(MsgSQL)
                 End If
                 'If RS05.Rows(a) !Urut = "311" Then
                 '    Debug.Print(RS05.Rows(a) !Description)
                 'End If
                 If RS05.Rows(a) !tUrut = "0700" Or RS05.Rows(a) !Urut = "200" Then
-                    SaldoAkhir = Kredit - Debet
+                    SaldoAkhir = SaldoAwal + Kredit - Debet
                 ElseIf RS05.Rows(a) !Urut = "302" Then
-                    SaldoAkhir = Debet - Kredit
-                ElseIf RS05.Rows(a) !Urut = "318" Or RS05.Rows(a) !Urut = "301" Then
-                    MsgSQL = "Select isnull(Sum(Saldo),0) Saldo From M_SaldoAwalCompany " &
-                        "Where AktifYN = 'Y' " &
-                        "  And Periode = '" & Format(Tgl2.Value, "MM-yyyy") & "' " &
-                        "  And COA like '" & Trim(RS05.Rows(a) !KodeGL) & "%' "
-                    SaldoAkhir = Proses.ExecuteSingleDblQuery(MsgSQL)
+                    SaldoAkhir = SaldoAwal + Debet - Kredit
+                    'ElseIf RS05.Rows(a) !Urut = "318" Then
+                    '    MsgSQL = "Select isnull(Sum(Saldo),0) Saldo From M_SaldoAwalCompany " &
+                    '        "Where AktifYN = 'Y' " &
+                    '        "  And Periode = '" & Format(Tgl2.Value, "MM-yyyy") & "' " &
+                    '        "  And COA like '" & Trim(RS05.Rows(a) !KodeGL) & "%' "
+                    '    SaldoAkhir = Proses.ExecuteSingleDblQuery(MsgSQL)
 
-                    MsgSQL = "Select isnull(Sum(Saldo),0) Saldo From M_SaldoAwalCompany " &
-                        "Where AktifYN = 'Y' " &
-                        "  And Periode = '" & Format(Tgl1.Value, "MM-yyyy") & "' " &
-                        "  And COA like '" & Trim(RS05.Rows(a) !KodeGL) & "%' "
-                    SaldoAwal = Proses.ExecuteSingleDblQuery(MsgSQL)
+                    '    MsgSQL = "Select isnull(Sum(Saldo),0) Saldo From M_SaldoAwalCompany " &
+                    '        "Where AktifYN = 'Y' " &
+                    '        "  And Periode = '" & Format(Tgl1.Value, "MM-yyyy") & "' " &
+                    '        "  And COA like '" & Trim(RS05.Rows(a) !KodeGL) & "%' "
+                    '    SaldoAwal = Proses.ExecuteSingleDblQuery(MsgSQL)
 
-                    Debet = 0
-                    Kredit = 0
+                    '    Debet = 0
+                    '    Kredit = 0
                 Else
-                    ' SaldoAkhir = SaldoAwal + Debet - Kredit
-                    SaldoAkhir = Debet - Kredit
+                    SaldoAkhir = SaldoAwal + Debet - Kredit
+                    'SaldoAkhir = Debet - Kredit
                 End If
                 MsgSQL = "INSERT INTO TMP_RPT_LabaRugi(IdRPT, NoUrut, " &
                     "Description, Awal, Debet, Kredit, Akhir, Spasi, TUrut, GarisYN) VALUES ( " &
@@ -166,30 +170,31 @@ Public Class Rpt_LabaRugi
             PenjualanAK = 0
         End If
 
+        'MsgSQL = "UPDATE TMP_RPT_LabaRugi SET akhir = awal + Debet - Kredit"
+        'Proses.ExecuteNonQuery(MsgSQL)
 
         MsgSQL = "Select isnull(sum(awal),0) Awal From TMP_RPT_LabaRugi " &
             "Where NoUrut > 300 and NoUrut < 317 " &
             "  and idrpt = '" & IDRpt & "' "
         BarangTersediaAwal = Proses.ExecuteSingleDblQuery(MsgSQL)
 
-
         MsgSQL = "Select isnull(sum(Akhir),0) Akhir From TMP_RPT_LabaRugi " &
             "Where NoUrut > 300 and NoUrut < 317 " &
             "  and idrpt = '" & IDRpt & "' "
         BarangTersediaAkhir = Proses.ExecuteSingleDblQuery(MsgSQL)
-
+        If BarangTersediaAkhir = 0 Then BarangTersediaAkhir = BarangTersediaAwal
         MsgSQL = "Update TMP_RPT_LabaRugi Set " &
             "Awal = " & BarangTersediaAwal & ", " &
             "Akhir = " & BarangTersediaAkhir & " " &
             "Where NoUrut = 317 and idrpt = '" & IDRpt & "' "
         Proses.ExecuteNonQuery(MsgSQL)
 
-        MsgSQL = "Update TMP_RPT_LabaRugi Set " &
-        "Awal = Awal * -1, " &
-        "Akhir = Akhir * -1 " &
-        "Where NoUrut = 318  " &
-        "  And idrpt = '" & IDRpt & "' "
-        Proses.ExecuteNonQuery(MsgSQL)
+        'MsgSQL = "Update TMP_RPT_LabaRugi Set " &
+        '    "Awal = Awal * -1, " &
+        '    "Akhir = Akhir * -1 " &
+        '    "Where NoUrut = 318  " &
+        '    "  And idrpt = '" & IDRpt & "' "
+        'Proses.ExecuteNonQuery(MsgSQL)
 
         MsgSQL = "Select isnuLl(sum(awal),0) Awal From TMP_RPT_LabaRugi " &
         "Where NoUrut between 317 and 318 " &
@@ -268,6 +273,8 @@ Public Class Rpt_LabaRugi
             "Where NoUrut between 1700 and 1799 and idrpt = '" & IDRpt & "' "
         BiayaAkhir = Proses.ExecuteSingleDblQuery(MsgSQL)
 
+
+
         MsgSQL = "Update TMP_RPT_LabaRugi Set " &
             "Awal = " & BiayaAwal & ", " &
             "Akhir = " & BiayaAkhir & " " &
@@ -275,14 +282,16 @@ Public Class Rpt_LabaRugi
             "  And idrpt = '" & IDRpt & "' "
         Proses.ExecuteNonQuery(MsgSQL)
         'tambahan request dari bu indri per tgl 28/10/14
-        MsgSQL = "Update TMP_RPT_LabaRugi Set " &
-        "Akhir = kredit " &
-        "Where NoUrut = 200 and idrpt = '" & IDRpt & "' "
-        Proses.ExecuteNonQuery(MsgSQL)
+        'MsgSQL = "Update TMP_RPT_LabaRugi Set " &
+        '"Akhir = kredit " &
+        '"Where NoUrut = 200 and idrpt = '" & IDRpt & "' "
+        'Proses.ExecuteNonQuery(MsgSQL)
         ' end of tambahan request dari bu indri per tgl 28/10/14
 
         Laba = PenjualanAW - (HPPAwal + BiayaPenjualanAwal) - BebanAwal + PendapatanAwal - BiayaAwal
         LabaAK = PenjualanAK - (HPPAkhir + BiayaPenjualanAkhir) - BebanAkhir + PendapatanAkhir - BiayaAkhir
+
+
 
         MsgSQL = "Update TMP_RPT_LabaRugi Set " &
             "Awal = " & Laba & ", " &
@@ -306,6 +315,11 @@ Public Class Rpt_LabaRugi
             PajakAK = (0.5 * 0.25 * Y1) + (0.25 * Y2)
         End If
 
+
+        If Format(Tgl1.Value, "yyyyMM") <= "202301" Then
+            Pajak = 0
+            PajakAK = 0
+        End If
         MsgSQL = "Update TMP_RPT_LabaRugi Set " &
             "Awal = " & Pajak & ", " &
             "Akhir = " & PajakAK & " " &
@@ -321,8 +335,8 @@ Public Class Rpt_LabaRugi
 
         Call OpenConn()
         dttable = New DataTable
-        xPeriode = Format(Tgl1.Value, "dd-mmm-yy") & " s.d. " & Format(Tgl2.Value, "dd-mmm-yy")
-        MsgSQL = "SELECT TMP_RPT_LabaRugi.Description, TMP_RPT_LabaRugi.Akhir " &
+        xPeriode = Format(Tgl1.Value, "dd-MMM-yy") & " s.d. " & Format(Tgl2.Value, "dd-MMM-yy")
+        MsgSQL = "SELECT TMP_RPT_LabaRugi.* " &
             "FROM Pekerti.dbo.TMP_RPT_LabaRugi TMP_RPT_LabaRugi " &
             "Where IDRpt = '" & IDRpt & "' " &
             "Order By NoUrut "
@@ -346,7 +360,7 @@ Public Class Rpt_LabaRugi
             MessageBox.Show(ex.Message, "Error")
         End Try
         Panel1.Enabled = True
-
+        status.Text = ""
         cmdCetak.Enabled = True
         Me.Cursor = Cursors.Default
         MsgSQL = "Delete tmp_RPT_LabaRugi " &
@@ -355,8 +369,17 @@ Public Class Rpt_LabaRugi
     End Sub
 
     Private Sub Rpt_LabaRugi_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Tgl1.Value = Now
-        Tgl2.Value = Now
+        Dim mPeriode As String = ""
+        SQL = " SELECT periode FROM M_SaldoAwalCompany "
+        mPeriode = Proses.ExecuteSingleStrQuery(SQL)
+        If mPeriode <> "" Then
+            mPeriode = Mid(mPeriode, 4, 4) + "-" + Mid(mPeriode, 1, 3) + "01"
+            Dim oDate As DateTime = Convert.ToDateTime(mPeriode)
+            Tgl1.Value = DateAdd(DateInterval.Month, 1, oDate)
+        Else
+            Tgl1.Value = Now
+        End If
+        status.Text = ""
         CrystalReportViewer1.Zoom(1)
         CrystalReportViewer1.Refresh()
         CrystalReportViewer1.ReportSource = Nothing

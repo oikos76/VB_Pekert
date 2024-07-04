@@ -33,12 +33,14 @@ Partial Class Rpt_LabaRugi
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.status = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.status)
         Me.Panel1.Controls.Add(Me.ChkDetail)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Controls.Add(Me.LStrip)
@@ -55,12 +57,13 @@ Partial Class Rpt_LabaRugi
         'ChkDetail
         '
         Me.ChkDetail.AutoSize = True
-        Me.ChkDetail.Location = New System.Drawing.Point(327, 15)
+        Me.ChkDetail.Location = New System.Drawing.Point(86, 37)
         Me.ChkDetail.Name = "ChkDetail"
         Me.ChkDetail.Size = New System.Drawing.Size(53, 17)
         Me.ChkDetail.TabIndex = 203
         Me.ChkDetail.Text = "Detail"
         Me.ChkDetail.UseVisualStyleBackColor = True
+        Me.ChkDetail.Visible = False
         '
         'Panel2
         '
@@ -149,6 +152,15 @@ Partial Class Rpt_LabaRugi
         Me.CrystalReportViewer1.Size = New System.Drawing.Size(1004, 524)
         Me.CrystalReportViewer1.TabIndex = 11
         '
+        'status
+        '
+        Me.status.AutoSize = True
+        Me.status.Location = New System.Drawing.Point(303, 16)
+        Me.status.Name = "status"
+        Me.status.Size = New System.Drawing.Size(37, 13)
+        Me.status.TabIndex = 204
+        Me.status.Text = "Status"
+        '
         'Rpt_LabaRugi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -176,4 +188,5 @@ Partial Class Rpt_LabaRugi
     Friend WithEvents Label1 As Label
     Friend WithEvents CrystalReportViewer1 As CrystalReportViewer
     Friend WithEvents ChkDetail As CheckBox
+    Friend WithEvents status As Label
 End Class

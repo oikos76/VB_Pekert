@@ -111,7 +111,6 @@ Public Class Rpt_Neraca
                 " " & rs05.Rows(i) !Level & ", '" & rs05.Rows(i) !BoldYN & "', " &
                 " '" & rs05.Rows(i) !totalYN & "', '" & rs05.Rows(i) !KodeGL & "') "
             Proses.ExecuteNonQuery(MsgSQL)
-
         Next i
 
         tLaba1 = 0
@@ -131,9 +130,9 @@ Public Class Rpt_Neraca
         '    RS04.Close
         'End If
 
-        MsgSQL = "Update TMP_RPT_Neraca set Awal = " & tLaba1 & ", Akhir = " & tLaba2 & " " &
-            "Where idrpt = '" & IDRpt & "' and KodeGL = '30.10.02.01.002' "
-        Proses.ExecuteNonQuery(MsgSQL)
+        'MsgSQL = "Update TMP_RPT_Neraca set Awal = " & tLaba1 & ", Akhir = " & tLaba2 & " " &
+        '    "Where idrpt = '" & IDRpt & "' and KodeGL = '30.10.02.01.002' "
+        'Proses.ExecuteNonQuery(MsgSQL)
 
         'MsgSQL = "Update tmp_RPT_Neraca Set " &
         '    " Awal = Awal * -1, " &
@@ -168,7 +167,7 @@ Public Class Rpt_Neraca
         Call OpenConn()
         dttable = New DataTable
         xPeriode = Format(Tgl1.Value, "dd-MMM-yy") & " s.d. " & Format(Tgl2.Value, "dd-MMM-yy")
-        MsgSQL = "SELECT NoUrut, KodeGL, Description, Awal, Debet, Kredit, Akhir " &
+        MsgSQL = "SELECT NoUrut, KodeGL, Description, Awal, Debet, Kredit, Akhir, Level, BoldYN " &
             " FROM Pekerti.dbo.TMP_RPT_Neraca TMP_RPT_Neraca " &
             "Where IDRpt = '" & IDRpt & "' " &
             "Order By NoUrut "

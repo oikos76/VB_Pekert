@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\me\Temp\Pekerti\PKTG240521b\</PublishUrl>
+    <PublishUrl>C:\me\Temp\Pekerti\PKT_240701\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Pekerti</ProductName>
     <PublisherName>Pekerti</PublisherName>
-    <ApplicationRevision>96</ApplicationRevision>
+    <ApplicationRevision>106</ApplicationRevision>
     <ApplicationVersion>20.21.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -164,6 +164,12 @@
       <DependentUpon>Form_KeuInventaris.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_KeuInventaris.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProsesAkhirBulan.Designer.vb">
+      <DependentUpon>Form_ProsesAkhirBulan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProsesAkhirBulan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\Rpt_BukuBesar.vb">
@@ -780,6 +786,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_KeuInventaris.resx">
       <DependentUpon>Form_KeuInventaris.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProsesAkhirBulan.resx">
+      <DependentUpon>Form_ProsesAkhirBulan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Rpt_BukuBesar.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -25,7 +25,7 @@ Public Class FrmMenuUtama
            My.Application.Info.Version.Minor.ToString + "." +
            My.Application.Info.Version.Build.ToString + "-" +
            My.Application.Info.Version.Revision.ToString
-        Dim mVersion As String = version + "#240521"
+        Dim mVersion As String = version + "#240621"
         Me.Text = "PIDS-" + mversion
 
         TsTanggal.Text = Format(Now, "dddd, dd/MM/yyyy")
@@ -647,6 +647,9 @@ Public Class FrmMenuUtama
         Form_KeuInventaris.Show()
     End Sub
 
+    Private Sub _112ProsesAkhirBulan_Click(sender As Object, e As EventArgs) Handles _112ProsesAkhirBulan.Click
+        Form_ProsesAkhirBulan.ShowDialog()
+    End Sub
 End Class
 
 
