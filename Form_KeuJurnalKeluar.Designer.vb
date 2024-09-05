@@ -22,11 +22,11 @@ Partial Class Form_KeuJurnalKeluar
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_KeuJurnalKeluar))
         Me.PanelTotal_ = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -57,6 +57,7 @@ Partial Class Form_KeuJurnalKeluar
         Me.cmdBatal = New System.Windows.Forms.Button()
         Me.cmdSimpan = New System.Windows.Forms.Button()
         Me.PanelEntry_ = New System.Windows.Forms.Panel()
+        Me.Uraian = New System.Windows.Forms.TextBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.LMataUang = New System.Windows.Forms.Label()
         Me.NilaiJurnal = New System.Windows.Forms.TextBox()
@@ -78,10 +79,10 @@ Partial Class Form_KeuJurnalKeluar
         Me.AccCode1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Uraian = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TglTr = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Status = New System.Windows.Forms.Label()
         Me.PanelTotal_.SuspendLayout()
         CType(Me.DGView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelTombol_.SuspendLayout()
@@ -97,7 +98,7 @@ Partial Class Form_KeuJurnalKeluar
         Me.PanelTotal_.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelTotal_.Location = New System.Drawing.Point(0, 538)
         Me.PanelTotal_.Name = "PanelTotal_"
-        Me.PanelTotal_.Size = New System.Drawing.Size(994, 29)
+        Me.PanelTotal_.Size = New System.Drawing.Size(1007, 29)
         Me.PanelTotal_.TabIndex = 231
         '
         'Label7
@@ -162,13 +163,13 @@ Partial Class Form_KeuJurnalKeluar
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
         Me.DGView.RowTemplate.ReadOnly = True
-        Me.DGView.Size = New System.Drawing.Size(994, 308)
+        Me.DGView.Size = New System.Drawing.Size(1007, 308)
         Me.DGView.TabIndex = 232
         '
         'Column9
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column9.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column9.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column9.HeaderText = "No."
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
@@ -179,7 +180,7 @@ Partial Class Form_KeuJurnalKeluar
         Me.Column10.HeaderText = "Uraian"
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
-        Me.Column10.Width = 200
+        Me.Column10.Width = 180
         '
         'Column11
         '
@@ -204,8 +205,8 @@ Partial Class Form_KeuJurnalKeluar
         '
         'Column4
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column4.HeaderText = "Kurs"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -213,24 +214,24 @@ Partial Class Form_KeuJurnalKeluar
         '
         'Column5
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column5.HeaderText = "Jumlah"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column13
         '
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column13.HeaderText = "Debet"
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
         '
         'Column1
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column1.HeaderText = "Kredit"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -287,7 +288,7 @@ Partial Class Form_KeuJurnalKeluar
         Me.PanelTombol_.Location = New System.Drawing.Point(0, 567)
         Me.PanelTombol_.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelTombol_.Name = "PanelTombol_"
-        Me.PanelTombol_.Size = New System.Drawing.Size(994, 34)
+        Me.PanelTombol_.Size = New System.Drawing.Size(1007, 34)
         Me.PanelTombol_.TabIndex = 229
         '
         'cmdExit
@@ -396,7 +397,7 @@ Partial Class Form_KeuJurnalKeluar
         Me.cmdSimpan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
         Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.Location = New System.Drawing.Point(903, 0)
+        Me.cmdSimpan.Location = New System.Drawing.Point(916, 0)
         Me.cmdSimpan.Name = "cmdSimpan"
         Me.cmdSimpan.Size = New System.Drawing.Size(89, 32)
         Me.cmdSimpan.TabIndex = 225
@@ -407,6 +408,7 @@ Partial Class Form_KeuJurnalKeluar
         '
         'PanelEntry_
         '
+        Me.PanelEntry_.Controls.Add(Me.Status)
         Me.PanelEntry_.Controls.Add(Me.Uraian)
         Me.PanelEntry_.Controls.Add(Me.btnAdd)
         Me.PanelEntry_.Controls.Add(Me.LMataUang)
@@ -438,8 +440,20 @@ Partial Class Form_KeuJurnalKeluar
         Me.PanelEntry_.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelEntry_.Location = New System.Drawing.Point(0, 0)
         Me.PanelEntry_.Name = "PanelEntry_"
-        Me.PanelEntry_.Size = New System.Drawing.Size(994, 230)
+        Me.PanelEntry_.Size = New System.Drawing.Size(1007, 230)
         Me.PanelEntry_.TabIndex = 230
+        '
+        'Uraian
+        '
+        Me.Uraian.BackColor = System.Drawing.SystemColors.Window
+        Me.Uraian.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Uraian.Location = New System.Drawing.Point(155, 61)
+        Me.Uraian.Margin = New System.Windows.Forms.Padding(4)
+        Me.Uraian.MaxLength = 100
+        Me.Uraian.Name = "Uraian"
+        Me.Uraian.ReadOnly = True
+        Me.Uraian.Size = New System.Drawing.Size(616, 22)
+        Me.Uraian.TabIndex = 216
         '
         'btnAdd
         '
@@ -668,18 +682,6 @@ Partial Class Form_KeuJurnalKeluar
         Me.Label3.TabIndex = 218
         Me.Label3.Text = "No. Perkiraan  :"
         '
-        'Uraian
-        '
-        Me.Uraian.BackColor = System.Drawing.SystemColors.Window
-        Me.Uraian.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Uraian.Location = New System.Drawing.Point(155, 61)
-        Me.Uraian.Margin = New System.Windows.Forms.Padding(4)
-        Me.Uraian.MaxLength = 100
-        Me.Uraian.Name = "Uraian"
-        Me.Uraian.ReadOnly = True
-        Me.Uraian.Size = New System.Drawing.Size(616, 22)
-        Me.Uraian.TabIndex = 216
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -713,11 +715,21 @@ Partial Class Form_KeuJurnalKeluar
         Me.Label2.TabIndex = 176
         Me.Label2.Text = "Tanggal        :"
         '
+        'Status
+        '
+        Me.Status.AutoSize = True
+        Me.Status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Status.Location = New System.Drawing.Point(299, 11)
+        Me.Status.Name = "Status"
+        Me.Status.Size = New System.Drawing.Size(51, 16)
+        Me.Status.TabIndex = 324
+        Me.Status.Text = "Status"
+        '
         'Form_KeuJurnalKeluar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(994, 601)
+        Me.ClientSize = New System.Drawing.Size(1007, 601)
         Me.Controls.Add(Me.DGView)
         Me.Controls.Add(Me.PanelTotal_)
         Me.Controls.Add(Me.PanelTombol_)
@@ -741,16 +753,6 @@ Partial Class Form_KeuJurnalKeluar
     Friend WithEvents TotalDebet As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents DGView As DataGridView
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewButtonColumn
     Friend WithEvents NoUrut As TextBox
     Friend WithEvents KetAccCode1 As Label
     Friend WithEvents IDRecord As TextBox
@@ -789,4 +791,15 @@ Partial Class Form_KeuJurnalKeluar
     Friend WithEvents Jumlah As TextBox
     Friend WithEvents LNilaiJurnal As Label
     Friend WithEvents btnAdd As Button
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column13 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewButtonColumn
+    Friend WithEvents Status As Label
 End Class

@@ -322,4 +322,5 @@ Public Class Rpt_GeneralLedger
             AccCode1.Visible = False
         End If
     End Sub
+
 End Class

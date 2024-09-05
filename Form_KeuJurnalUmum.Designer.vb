@@ -74,6 +74,7 @@ Partial Class Form_KeuJurnalUmum
         Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Status = New System.Windows.Forms.Label()
         Me.PanelTombol_.SuspendLayout()
         Me.PanelEntry_.SuspendLayout()
         Me.PanelTotal_.SuspendLayout()
@@ -95,7 +96,7 @@ Partial Class Form_KeuJurnalUmum
         Me.PanelTombol_.Location = New System.Drawing.Point(0, 567)
         Me.PanelTombol_.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelTombol_.Name = "PanelTombol_"
-        Me.PanelTombol_.Size = New System.Drawing.Size(994, 34)
+        Me.PanelTombol_.Size = New System.Drawing.Size(1007, 34)
         Me.PanelTombol_.TabIndex = 147
         '
         'cmdExit
@@ -204,7 +205,7 @@ Partial Class Form_KeuJurnalUmum
         Me.cmdSimpan.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSimpan.Image = CType(resources.GetObject("cmdSimpan.Image"), System.Drawing.Image)
         Me.cmdSimpan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdSimpan.Location = New System.Drawing.Point(903, 0)
+        Me.cmdSimpan.Location = New System.Drawing.Point(916, 0)
         Me.cmdSimpan.Name = "cmdSimpan"
         Me.cmdSimpan.Size = New System.Drawing.Size(89, 32)
         Me.cmdSimpan.TabIndex = 225
@@ -215,6 +216,7 @@ Partial Class Form_KeuJurnalUmum
         '
         'PanelEntry_
         '
+        Me.PanelEntry_.Controls.Add(Me.Status)
         Me.PanelEntry_.Controls.Add(Me.LMataUang)
         Me.PanelEntry_.Controls.Add(Me.NilaiJurnal)
         Me.PanelEntry_.Controls.Add(Me.Kurs)
@@ -238,7 +240,7 @@ Partial Class Form_KeuJurnalUmum
         Me.PanelEntry_.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelEntry_.Location = New System.Drawing.Point(0, 0)
         Me.PanelEntry_.Name = "PanelEntry_"
-        Me.PanelEntry_.Size = New System.Drawing.Size(994, 194)
+        Me.PanelEntry_.Size = New System.Drawing.Size(1007, 194)
         Me.PanelEntry_.TabIndex = 148
         '
         'LMataUang
@@ -474,7 +476,7 @@ Partial Class Form_KeuJurnalUmum
         Me.PanelTotal_.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelTotal_.Location = New System.Drawing.Point(0, 538)
         Me.PanelTotal_.Name = "PanelTotal_"
-        Me.PanelTotal_.Size = New System.Drawing.Size(994, 29)
+        Me.PanelTotal_.Size = New System.Drawing.Size(1007, 29)
         Me.PanelTotal_.TabIndex = 227
         '
         'Label7
@@ -539,7 +541,7 @@ Partial Class Form_KeuJurnalUmum
         Me.DGView.ReadOnly = True
         Me.DGView.RowHeadersVisible = False
         Me.DGView.RowTemplate.ReadOnly = True
-        Me.DGView.Size = New System.Drawing.Size(994, 344)
+        Me.DGView.Size = New System.Drawing.Size(1007, 344)
         Me.DGView.TabIndex = 228
         '
         'Column9
@@ -556,7 +558,7 @@ Partial Class Form_KeuJurnalUmum
         Me.Column10.HeaderText = "Uraian"
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
-        Me.Column10.Width = 200
+        Me.Column10.Width = 180
         '
         'Column11
         '
@@ -618,11 +620,21 @@ Partial Class Form_KeuJurnalUmum
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
+        'Status
+        '
+        Me.Status.AutoSize = True
+        Me.Status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Status.Location = New System.Drawing.Point(296, 12)
+        Me.Status.Name = "Status"
+        Me.Status.Size = New System.Drawing.Size(51, 16)
+        Me.Status.TabIndex = 306
+        Me.Status.Text = "Status"
+        '
         'Form_KeuJurnalUmum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(994, 601)
+        Me.ClientSize = New System.Drawing.Size(1007, 601)
         Me.Controls.Add(Me.DGView)
         Me.Controls.Add(Me.PanelTotal_)
         Me.Controls.Add(Me.PanelEntry_)
@@ -686,4 +698,5 @@ Partial Class Form_KeuJurnalUmum
     Friend WithEvents Column13 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewButtonColumn
+    Friend WithEvents Status As Label
 End Class

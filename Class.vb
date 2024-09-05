@@ -597,6 +597,25 @@ Public Class ClsKoneksi
         FindSP = tNoSP
     End Function
 
+    Public Function FindDPB(Cari, tKodePerajin) As String
+        Dim tNoDPB As String = "", mKondisi As String = "", MsgSQL As String = ""
+        FrmMenuUtama.TSKeterangan.Text = ""
+        If Trim(Cari) = "" Then
+            mKondisi = ""
+        Else
+            mKondisi = "And NoDPB like '%" & Trim(Cari) & "%' "
+        End If
+        MsgSQL = "Select distinct NoDPB, TglDPB, t_DPB.NoSP, NoLHP, Perajin, right(NoDPB,2) + left(NoDPB,3)  " &
+            " From t_DPB Inner Join T_SP on T_DPB.NoSP = T_SP.NoSP " &
+            "Where t_DPB.AktifYN = 'Y' " & mKondisi & " and year(TglDPB) > 2000 " &
+            "Order By right(NoDPB,2) + left(NoDPB,3) Desc"
+        Form_Daftar.txtQuery.Text = MsgSQL
+        Form_Daftar.Text = "Daftar DPB"
+        Form_Daftar.ShowDialog()
+        tNoDPB = FrmMenuUtama.TSKeterangan.Text
+        FindDPB = tNoDPB
+    End Function
+
     Public Function QTYProdukSP(tKodeProduk As String, tNoSP As String) As Double
         Dim MsgSQL As String, RSCek As New DataTable
         MsgSQL = "Select isnull(Sum(Jumlah),0) QTY From t_SP " &
@@ -665,4 +684,21 @@ Public Class ClsKoneksi
         tKodeProduk = FrmMenuUtama.TSKeterangan.Text
         FindKodeProdukPO_SP = tKodeProduk
     End Function
+
+    Public Function StatusJurnal(MPeriode As String) As Boolean
+        Dim SQL As String = "", dbCek As New DataTable
+        Dim Result As Boolean = False
+        SQL = "SELECT * FROM T_Jurnal " &
+            "WHERE AKTIFYN='Y' AND ClosingYN='Y' " &
+            "  AND convert(varchar(6), tanggal, 112) = '" & MPeriode & "' "
+        dbCek = ExecuteQuery(SQL)
+        If dbCek.Rows.Count() <> 0 Then
+            Result = True
+        Else
+            Result = False
+        End If
+        StatusJurnal = Result
+    End Function
+
+
 End Class

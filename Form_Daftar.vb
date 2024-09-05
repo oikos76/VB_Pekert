@@ -864,6 +864,20 @@
                     "Where AktifYN = 'Y' " &
                     " And Produk like '%" & Trim(tCari.Text) & "%' " &
                     " And NoSP = '" & param1.Text & "' "
+            ElseIf Trim(Me.Text) = "Daftar DPB" Then
+                txtQuery.Text = "Select distinct NoDPB, TglDPB, t_DPB.NoSP, NoLHP, Perajin, right(NoDPB,2) + left(NoDPB,3)  " &
+                    " From t_DPB Inner Join T_SP on T_DPB.NoSP = T_SP.NoSP " &
+                    "Where t_DPB.AktifYN = 'Y' " &
+                    " AND  NoDPB like '%" & Trim(tCari.Text) & "%' " &
+                    " AND year(TglDPB) > 2000 " &
+                    "Order By right(NoDPB,2) + left(NoDPB,3) Desc"
+            ElseIf Trim(Me.Text) = "Daftar PI" Then
+                txtQuery.Text = "Select  nopi, nopo, tglpi, statuspi, Kode_Importir, importir " &
+                    " From t_PI " &
+                    "Where AktifYN = 'Y' " &
+                    "  and NoPI like '%" & tCari.Text & "%' " &
+                    "Group By nopi, nopo, tglpi, statuspi, Kode_Importir, importir " &
+                    "ORDER BY TglPI Desc, NoPI "
             ElseIf Me.Text = "Daftar SP" Then
                 txtQuery.Text = "Select NoSP, Kode_Perajin, Perajin  " &
                     " From T_SP " &

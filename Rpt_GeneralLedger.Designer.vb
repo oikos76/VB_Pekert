@@ -78,7 +78,6 @@ Partial Class Rpt_GeneralLedger
         Me.AccCode1.Margin = New System.Windows.Forms.Padding(4)
         Me.AccCode1.MaxLength = 255
         Me.AccCode1.Name = "AccCode1"
-        Me.AccCode1.ReadOnly = True
         Me.AccCode1.Size = New System.Drawing.Size(134, 22)
         Me.AccCode1.TabIndex = 225
         '

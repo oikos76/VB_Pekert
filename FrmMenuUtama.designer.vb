@@ -98,11 +98,11 @@ Partial Class FrmMenuUtama
         Me.DaftarSPYangBelumDiPraLHPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DaftarPOYangBelumDiBuatSPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me._17AnalisaData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PemasaranToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GudangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PembelianToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BagianContohToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.KeuanganPerajinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me._71AnalisaPemasaran = New System.Windows.Forms.ToolStripMenuItem()
+        Me._72AnalisaGudang = New System.Windows.Forms.ToolStripMenuItem()
+        Me._73AnalisaPembelian = New System.Windows.Forms.ToolStripMenuItem()
+        Me._74AnalisaBagianContoh = New System.Windows.Forms.ToolStripMenuItem()
+        Me._75AnalisaKeuangan = New System.Windows.Forms.ToolStripMenuItem()
         Me._18Utility = New System.Windows.Forms.ToolStripMenuItem()
         Me._81_GANTI_PASSWORD = New System.Windows.Forms.ToolStripMenuItem()
         Me._82_USER_BARU = New System.Windows.Forms.ToolStripMenuItem()
@@ -119,6 +119,7 @@ Partial Class FrmMenuUtama
         Me.mnuExploreFileFoto = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.NilaiKursToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -645,44 +646,44 @@ Partial Class FrmMenuUtama
         '
         '_17AnalisaData
         '
-        Me._17AnalisaData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PemasaranToolStripMenuItem, Me.GudangToolStripMenuItem, Me.PembelianToolStripMenuItem, Me.BagianContohToolStripMenuItem, Me.KeuanganPerajinToolStripMenuItem})
+        Me._17AnalisaData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._71AnalisaPemasaran, Me._72AnalisaGudang, Me._73AnalisaPembelian, Me._74AnalisaBagianContoh, Me._75AnalisaKeuangan})
         Me._17AnalisaData.Name = "_17AnalisaData"
         Me._17AnalisaData.Size = New System.Drawing.Size(84, 26)
         Me._17AnalisaData.Text = "Analisa Data"
         '
-        'PemasaranToolStripMenuItem
+        '_71AnalisaPemasaran
         '
-        Me.PemasaranToolStripMenuItem.Name = "PemasaranToolStripMenuItem"
-        Me.PemasaranToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.PemasaranToolStripMenuItem.Text = "Pemasaran"
+        Me._71AnalisaPemasaran.Name = "_71AnalisaPemasaran"
+        Me._71AnalisaPemasaran.Size = New System.Drawing.Size(166, 22)
+        Me._71AnalisaPemasaran.Text = "Pemasaran"
         '
-        'GudangToolStripMenuItem
+        '_72AnalisaGudang
         '
-        Me.GudangToolStripMenuItem.Name = "GudangToolStripMenuItem"
-        Me.GudangToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.GudangToolStripMenuItem.Text = "Gudang"
+        Me._72AnalisaGudang.Name = "_72AnalisaGudang"
+        Me._72AnalisaGudang.Size = New System.Drawing.Size(166, 22)
+        Me._72AnalisaGudang.Text = "Gudang"
         '
-        'PembelianToolStripMenuItem
+        '_73AnalisaPembelian
         '
-        Me.PembelianToolStripMenuItem.Name = "PembelianToolStripMenuItem"
-        Me.PembelianToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.PembelianToolStripMenuItem.Text = "Pembelian"
+        Me._73AnalisaPembelian.Name = "_73AnalisaPembelian"
+        Me._73AnalisaPembelian.Size = New System.Drawing.Size(166, 22)
+        Me._73AnalisaPembelian.Text = "Pembelian"
         '
-        'BagianContohToolStripMenuItem
+        '_74AnalisaBagianContoh
         '
-        Me.BagianContohToolStripMenuItem.Name = "BagianContohToolStripMenuItem"
-        Me.BagianContohToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.BagianContohToolStripMenuItem.Text = "Bagian Contoh"
+        Me._74AnalisaBagianContoh.Name = "_74AnalisaBagianContoh"
+        Me._74AnalisaBagianContoh.Size = New System.Drawing.Size(166, 22)
+        Me._74AnalisaBagianContoh.Text = "Bagian Contoh"
         '
-        'KeuanganPerajinToolStripMenuItem
+        '_75AnalisaKeuangan
         '
-        Me.KeuanganPerajinToolStripMenuItem.Name = "KeuanganPerajinToolStripMenuItem"
-        Me.KeuanganPerajinToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.KeuanganPerajinToolStripMenuItem.Text = "Keuangan Perajin"
+        Me._75AnalisaKeuangan.Name = "_75AnalisaKeuangan"
+        Me._75AnalisaKeuangan.Size = New System.Drawing.Size(166, 22)
+        Me._75AnalisaKeuangan.Text = "Keuangan Perajin"
         '
         '_18Utility
         '
-        Me._18Utility.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._81_GANTI_PASSWORD, Me._82_USER_BARU, Me._83_PENGATURAN_USER, Me.ToolStripSeparator1, Me._84_COMPANY_SETUP, Me.ToolStripSeparator4, Me._85_KirimData, Me._86_TerimaData, Me.ToolStripSeparator2, Me._8A_BACKUP_DATA, Me._8B_RESTORE_DATA, Me.mnuKosongData, Me.mnuExploreFileFoto})
+        Me._18Utility.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me._81_GANTI_PASSWORD, Me._82_USER_BARU, Me._83_PENGATURAN_USER, Me.ToolStripSeparator1, Me._84_COMPANY_SETUP, Me.NilaiKursToolStripMenuItem, Me.ToolStripSeparator4, Me._85_KirimData, Me._86_TerimaData, Me.ToolStripSeparator2, Me._8A_BACKUP_DATA, Me._8B_RESTORE_DATA, Me.mnuKosongData, Me.mnuExploreFileFoto})
         Me._18Utility.Name = "_18Utility"
         Me._18Utility.Size = New System.Drawing.Size(50, 26)
         Me._18Utility.Text = "Utility"
@@ -784,6 +785,12 @@ Partial Class FrmMenuUtama
         Me.ImageList1.Images.SetKeyName(4, "BG05.jpg")
         Me.ImageList1.Images.SetKeyName(5, "BG06.jpg")
         Me.ImageList1.Images.SetKeyName(6, "BG07.jpg")
+        '
+        'NilaiKursToolStripMenuItem
+        '
+        Me.NilaiKursToolStripMenuItem.Name = "NilaiKursToolStripMenuItem"
+        Me.NilaiKursToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.NilaiKursToolStripMenuItem.Text = "Nilai Kurs"
         '
         'FrmMenuUtama
         '
@@ -899,11 +906,12 @@ Partial Class FrmMenuUtama
     Friend WithEvents DaftarSPYangBelumDiPraLHPToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DaftarPOYangBelumDiBuatSPToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents _17AnalisaData As ToolStripMenuItem
-    Friend WithEvents PemasaranToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GudangToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PembelianToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BagianContohToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents KeuanganPerajinToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents _71AnalisaPemasaran As ToolStripMenuItem
+    Friend WithEvents _72AnalisaGudang As ToolStripMenuItem
+    Friend WithEvents _73AnalisaPembelian As ToolStripMenuItem
+    Friend WithEvents _74AnalisaBagianContoh As ToolStripMenuItem
+    Friend WithEvents _75AnalisaKeuangan As ToolStripMenuItem
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents mnuExploreFileFoto As ToolStripMenuItem
+    Friend WithEvents NilaiKursToolStripMenuItem As ToolStripMenuItem
 End Class

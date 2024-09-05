@@ -92,13 +92,19 @@ Public Class Form_KeuJurnalKeluar
             Exit Sub
         End If
         If TotalDK() = False Then Exit Sub
-        Dim MsgSQL As String, rs05 As New DataTable, tsaldo As Double = 0
+        Dim MsgSQL As String, rs05 As New DataTable, tsaldo As Double = 0,
+            sudahClose As Boolean
+        sudahClose = Proses.StatusJurnal(Format(TglTr.Value, "yyyyMM"))
+        If sudahClose Then
+            MsgBox("Periode transaksi " & Format(TglTr.Value, "dd MMM yyyy") & " SUDAH di closing !", vbCritical + vbOKOnly, ".:Warning")
+            Exit Sub
+        End If
         If LAdd Then
             IDRecord.Text = MaxJurnal()
             For i As Integer = 0 To DGView.Rows.Count - 1
                 MsgSQL = "Select SAkhir from m_Perkiraan " &
                     "Where AktifYN = 'Y' " &
-                    "  And NO_Sub = '" & Trim(DGView.Rows(i).Cells(i).Value) & "' "
+                    "  And NO_Perkiraan = '" & Trim(DGView.Rows(i).Cells(2).Value) & "' "
                 tsaldo = Proses.ExecuteSingleDblQuery(MsgSQL)
                 MsgSQL = "Insert Into T_Jurnal (idrec, NoUrut, tanggal, Uraian, AccountCode, " &
                     "KetAccCode, MataUang, Kurs, NilaiJurnal, Debet, Kredit, Saldo, AktifYN, " &
@@ -180,6 +186,10 @@ Public Class Form_KeuJurnalKeluar
             MsgBox("Data yang akan di edit belum dipilih!", vbCritical + vbOKOnly, ".:Error!")
             Exit Sub
         End If
+        If Status.Text = "Close" Then
+            MsgBox("Jurnal sudah di closing, tidak bisa edit !", vbCritical + vbOKOnly, ".:Warning !")
+            Exit Sub
+        End If
         LAdd = False
         LEdit = True
         AturTombol(False)
@@ -196,6 +206,10 @@ Public Class Form_KeuJurnalKeluar
         Dim MsgSQL As String
         If IDRecord.Text = "" Then
             MsgBox("Data yang akan dihapus belum dipilih!", vbCritical + vbOKOnly, ".:Error!")
+            Exit Sub
+        End If
+        If Status.Text = "Close" Then
+            MsgBox("Jurnal sudah di closing, tidak bisa Hapus !", vbCritical + vbOKOnly, ".:Warning !")
             Exit Sub
         End If
         If MsgBox("Hapus data ini?", vbQuestion + vbYesNo, "Confirmation") = vbYes Then
@@ -223,58 +237,58 @@ Public Class Form_KeuJurnalKeluar
             Uraian.Focus()
             Exit Sub
         End If
-        For i = 0 To DGView.Rows.Count - 1
-            If Trim(AccCode1.Text) = Trim(DGView.Rows(i).Cells(2).Value) Then
-                ada = True
-                Exit For
-            End If
-        Next
-        If ada Then
-            If (MsgBox("Kode GL " & AccCode1.Text & " " & KetAccCode1.Text & " SUDAH ADA, " & vbCrLf &
-                       "Apakah Nilai account " & AccCode1.Text & " mau di ganti ? ",
-                       vbInformation + vbYesNo, ".:Warning !") = vbYes) Then
-                NoUrut.Text = i
-                DGView.Rows(NoUrut.Text).Cells(0).Value = NoUrut.Text
-                DGView.Rows(NoUrut.Text).Cells(1).Value = Trim(Uraian.Text)
-                DGView.Rows(NoUrut.Text).Cells(2).Value = AccCode1.Text
-                DGView.Rows(NoUrut.Text).Cells(3).Value = KetAccCode1.Text
-                DGView.Rows(NoUrut.Text).Cells(4).Value = cmbMataUang.Text
-                DGView.Rows(NoUrut.Text).Cells(5).Value = Kurs.Text
-                DGView.Rows(NoUrut.Text).Cells(6).Value = NilaiJurnal.Text
-                If cmbDK.Text = "DEBET" Then
-                    DGView.Rows(NoUrut.Text).Cells(7).Value = Jumlah.Text
-                    DGView.Rows(NoUrut.Text).Cells(8).Value = 0
-                Else
-                    DGView.Rows(NoUrut.Text).Cells(7).Value = 0
-                    DGView.Rows(NoUrut.Text).Cells(8).Value = Jumlah.Text
-                End If
-            End If
-        Else
-            Dim NilaiDebet As String = "", NilaiKredit As String = ""
+        'For i = 0 To DGView.Rows.Count - 1
+        '    If Trim(AccCode1.Text) = Trim(DGView.Rows(i).Cells(2).Value) Then
+        '        ada = True
+        '        Exit For
+        '    End If
+        'Next
+        'If ada Then
+        'If (MsgBox("Kode GL " & AccCode1.Text & " " & KetAccCode1.Text & " SUDAH ADA, " & vbCrLf &
+        '               "Apakah Nilai account " & AccCode1.Text & " mau di ganti ? ",
+        '               vbInformation + vbYesNo, ".:Warning !") = vbYes) Then
+        '        NoUrut.Text = i
+        '        DGView.Rows(NoUrut.Text).Cells(0).Value = NoUrut.Text
+        '        DGView.Rows(NoUrut.Text).Cells(1).Value = Trim(Uraian.Text)
+        '        DGView.Rows(NoUrut.Text).Cells(2).Value = AccCode1.Text
+        '        DGView.Rows(NoUrut.Text).Cells(3).Value = KetAccCode1.Text
+        '        DGView.Rows(NoUrut.Text).Cells(4).Value = cmbMataUang.Text
+        '        DGView.Rows(NoUrut.Text).Cells(5).Value = Kurs.Text
+        '        DGView.Rows(NoUrut.Text).Cells(6).Value = NilaiJurnal.Text
+        '        If cmbDK.Text = "DEBET" Then
+        '            DGView.Rows(NoUrut.Text).Cells(7).Value = Jumlah.Text
+        '            DGView.Rows(NoUrut.Text).Cells(8).Value = 0
+        '        Else
+        '            DGView.Rows(NoUrut.Text).Cells(7).Value = 0
+        '            DGView.Rows(NoUrut.Text).Cells(8).Value = Jumlah.Text
+        '        End If
+        '    End If
+        'Else
+        Dim NilaiDebet As String = "", NilaiKredit As String = ""
             NoUrut.Text = Format(DGView.Rows.Count + 1, "###,##0")
-            If cmbDK.Text = "DEBET" Then
-                NilaiDebet = Jumlah.Text
-                NilaiKredit = 0
-            Else
-                NilaiDebet = 0
-                NilaiKredit = Jumlah.Text
-            End If
-            DGView.Rows.Add(NoUrut.Text, Trim(Uraian.Text),
-                            AccCode1.Text, KetAccCode1.Text,
-                            cmbMataUang.Text, Kurs.Text, NilaiJurnal.Text,
-                            NilaiDebet,
-                            NilaiKredit, "Hapus")
+        If cmbDK.Text = "DEBET" Then
+            NilaiDebet = Jumlah.Text
+            NilaiKredit = 0
+        Else
+            NilaiDebet = 0
+            NilaiKredit = Jumlah.Text
         End If
+        DGView.Rows.Add(NoUrut.Text, Trim(Uraian.Text),
+                        AccCode1.Text, KetAccCode1.Text,
+                        cmbMataUang.Text, Kurs.Text, NilaiJurnal.Text,
+                        NilaiDebet,
+                        NilaiKredit, "Hapus")
+        'End If
         HitungTotal()
     End Sub
 
     Private Sub cmdDaftar_Click(sender As Object, e As EventArgs) Handles cmdDaftar.Click
-        Dim MsgSQL As String, tPeriode As String = Format(Now, "yyMM")
+        Dim MsgSQL As String, tPeriode As String = Format(DateAdd(DateInterval.Year, -2, Now), "yyMM")
         MsgSQL = "Select * From T_Jurnal " &
             "Where AktifYN = 'Y' " &
-            " And convert(char(4), tanggal, 12) = '" & tPeriode & "' " &
+            " And convert(char(4), tanggal, 12) >= '" & tPeriode & "' " &
             " And JenisJurnal = 'JURNAL KELUAR' " &
-            "Order By IdRec, NoUrut "
+            "Order By tanggal desc,  IdRec, NoUrut "
         Form_Daftar.txtQuery.Text = MsgSQL
         Form_Daftar.Text = "Daftar Jurnal"
         Form_Daftar.param1.Text = "JURNAL KELUAR"
@@ -288,6 +302,11 @@ Public Class Form_KeuJurnalKeluar
         If dbTable.Rows.Count <> 0 Then
             IDRecord.Text = dbTable.Rows(0) !idrec
             TglTr.Text = dbTable.Rows(0) !tanggal
+            If dbTable.Rows(0) !closingyn = "Y" Then
+                Status.Text = "Close"
+            Else
+                Status.Text = ""
+            End If
             For a = 0 To dbTable.Rows.Count - 1
                 Application.DoEvents()
                 DGView.Rows.Add(dbTable.Rows(a) !nourut,
@@ -337,8 +356,8 @@ Public Class Form_KeuJurnalKeluar
 
         Kode_Perajin.ReadOnly = True
         Perajin.ReadOnly = True
-        NoSP.ReadOnly = True
-        NoDPB.ReadOnly = True
+        'NoSP.ReadOnly = True
+        'NoDPB.ReadOnly = True
         AddItem()
         cmbDK.SelectedIndex = -1
         'Uraian.Text = ""
@@ -425,15 +444,17 @@ Public Class Form_KeuJurnalKeluar
     End Sub
 
     Private Sub NilaiJurnal_TextChanged(sender As Object, e As EventArgs) Handles NilaiJurnal.TextChanged
-
         If IsNumeric(NilaiJurnal.Text) Then
-            If Trim(cmbMataUang.Text) = "RP" Then
-                Dim temp As Double = NilaiJurnal.Text
-                NilaiJurnal.Text = Format(temp, "###,##0")
-                NilaiJurnal.SelectionStart = NilaiJurnal.TextLength
+            Dim temp As Double = NilaiJurnal.Text
+            If Trim(NilaiJurnal.Text) = "" Then NilaiJurnal.Text = 0
+            If Trim(Kurs.Text) = "" Then Kurs.Text = 0
+            NilaiJurnal.Text = Format(temp, "###,##0")
+            NilaiJurnal.SelectionStart = NilaiJurnal.TextLength
+            If cmbMataUang.Text = "RP" Then
+                Jumlah.Text = NilaiJurnal.Text
+            Else
+                Jumlah.Text = (NilaiJurnal.Text * 1) * (Kurs.Text * 1)
             End If
-            'Else
-            '    NilaiJurnal.Text = 0
         End If
     End Sub
 
@@ -516,6 +537,7 @@ Public Class Form_KeuJurnalKeluar
         Kurs.Text = 1
         NilaiJurnal.Text = 0
         Jumlah.Text = 0
+        Status.Text = ""
     End Sub
 
     Private Sub DGView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellClick
@@ -529,12 +551,11 @@ Public Class Form_KeuJurnalKeluar
         KetAccCode1.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(3).Value)
         cmbMataUang.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(4).Value)
         Kurs.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(5).Value)
+        NilaiJurnal.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(6).Value)
         Jumlah.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(6).Value)
         If Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(8).Value) = 0 Then
             cmbDK.Text = "DEBET"
-            NilaiJurnal.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(7).Value)
         Else
-            NilaiJurnal.Text = Trim(DGView.Rows(DGView.CurrentCell.RowIndex).Cells(8).Value)
             cmbDK.Text = "KREDIT"
         End If
         If e.ColumnIndex = 9 Then 'Hapus
@@ -591,6 +612,13 @@ Public Class Form_KeuJurnalKeluar
 
     Private Sub DGView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGView.CellContentClick
 
+    End Sub
+
+    Private Sub NoDPB_TextChanged(sender As Object, e As EventArgs) Handles NoDPB.TextChanged
+        If Len(Trim(NoDPB.Text)) < 1 Then
+            NoSP.Text = ""
+            NoDPB.Text = ""
+        End If
     End Sub
 
     Private Sub Uraian_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Uraian.KeyPress
@@ -779,5 +807,44 @@ Public Class Form_KeuJurnalKeluar
             .SelectionStart = 0
             .SelectionLength = Len(.Text)
         End With
+    End Sub
+
+    Private Sub NoDPB_KeyPress(sender As Object, e As KeyPressEventArgs) Handles NoDPB.KeyPress
+        Dim DBSP As New DataTable, mKondisi As String = ""
+        If e.KeyChar = Chr(13) Then
+            If LAdd Or LEdit Then
+                SQL = "select NoDPB from t_DPB WHERE aktifYN = 'Y' and NoDPB = '" & NoDPB.Text & "' "
+                DBSP = Proses.ExecuteQuery(SQL)
+                If DBSP.Rows.Count <> 0 Then
+                    NoSP.Text = DBSP.Rows(0) !nosp
+                    SQL = "select NoSP from t_DPB WHERE aktifYN = 'Y' and NoDPB = '" & NoDPB.Text & "' "
+                    NoDPB.Text = Proses.ExecuteSingleStrQuery(SQL)
+                    AccCode1.Focus()
+                Else
+                    NoDPB.Text = Proses.FindDPB(NoDPB.Text, Kode_Perajin.Text)
+                    'NoSP.Text = FindSP(NoSP.Text, Kode_Perajin.Text)
+                    If Trim(NoDPB.Text) = "" Then
+                        mKondisi = " "
+                    Else
+                        mKondisi = " And NoDPB like '%" & NoDPB.Text & "%' "
+                    End If
+                    MsgSQL = "Select distinct NoDPB, TglDPB, t_DPB.NoSP, NoLHP, Perajin, right(NoDPB,2) + left(NoDPB,3)  " &
+                        " From t_DPB Inner Join T_SP on T_DPB.NoSP = T_SP.NoSP " &
+                        "Where t_DPB.AktifYN = 'Y' " & mKondisi & " and year(TglDPB) > 2000 " &
+                        "Order By right(NoDPB,2) + left(NoDPB,3) Desc"
+                    DBSP = Proses.ExecuteQuery(MsgSQL)
+                    If DBSP.Rows.Count <> 0 Then
+                        NoDPB.Text = DBSP.Rows(0) !NoDPB
+                        SQL = "select NoSP from t_DPB WHERE aktifYN = 'Y' and NoDPB = '" & NoDPB.Text & "' "
+                        NoSP.Text = Proses.ExecuteSingleStrQuery(SQL)
+                        AccCode1.Focus()
+                    Else
+                        NoSP.Text = ""
+                        NoDPB.Text = ""
+                        NoSP.Focus()
+                    End If
+                End If
+            End If
+        End If
     End Sub
 End Class

@@ -83,6 +83,7 @@ Partial Class Form_ProsesAkhirBulan
         Me.chkPersediaan.TabIndex = 177
         Me.chkPersediaan.Text = "Persediaan"
         Me.chkPersediaan.UseVisualStyleBackColor = True
+        Me.chkPersediaan.Visible = False
         '
         'Form_ProsesAkhirBulan
         '

@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("it-ek0\SQLEXPRESS, 1433")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("IT-EK0\SQLEXPRESS")>  _
         Public Property IPServer() As String
             Get
                 Return CType(Me("IPServer"),String)

@@ -57,6 +57,7 @@ Public Class Rpt_Jurnal
             CrystalReportViewer1.ToolPanelView = ToolPanelViewType.GroupTree
             CrystalReportViewer1.Refresh()
             CrystalReportViewer1.ReportSource = objRep
+            CrystalReportViewer1.Zoom(1)
             dttable.Dispose()
             DTadapter.Dispose()
             CloseConn()

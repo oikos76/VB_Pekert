@@ -25,9 +25,8 @@ Public Class FrmMenuUtama
            My.Application.Info.Version.Minor.ToString + "." +
            My.Application.Info.Version.Build.ToString + "-" +
            My.Application.Info.Version.Revision.ToString
-        Dim mVersion As String = version + "#240621"
-        Me.Text = "PIDS-" + mversion
-
+        Dim mVersion As String = version + "#240828"
+        Me.Text = "PIDS-" + mVersion
         TsTanggal.Text = Format(Now, "dddd, dd/MM/yyyy")
         TSKeterangan.Text = ""
         Form_Login.ShowDialog()
@@ -649,6 +648,15 @@ Public Class FrmMenuUtama
 
     Private Sub _112ProsesAkhirBulan_Click(sender As Object, e As EventArgs) Handles _112ProsesAkhirBulan.Click
         Form_ProsesAkhirBulan.ShowDialog()
+    End Sub
+
+    Private Sub _71AnalisaPemasaran_Click(sender As Object, e As EventArgs) Handles _71AnalisaPemasaran.Click
+        Analisa_01Pemasaran.MdiParent = Me
+        Analisa_01Pemasaran.Show()
+    End Sub
+
+    Private Sub NilaiKursToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NilaiKursToolStripMenuItem.Click
+        Form_NilaiKurs.ShowDialog()
     End Sub
 End Class
 
